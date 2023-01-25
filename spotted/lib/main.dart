@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './app/widget/app_widget';
+import 'package:spotted/app/widget/app_widget.dart';
 
 
 main(){

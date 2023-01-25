@@ -1,7 +1,7 @@
 //StateLess = Estatico -> Não pode ser modificado
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:spotted/app/view/cadastro_view.dart';
 
 import '../controller/app_controller.dart';
 import '../view/home_view.dart';
@@ -26,6 +26,7 @@ class AppWidget extends StatelessWidget {
           routes: {
             '/': (context) => LoginPage(),
             '/home': (context) => HomePage(),
+            '/cadastro': (context) => CadastroPage(),
           },
         );
       },
