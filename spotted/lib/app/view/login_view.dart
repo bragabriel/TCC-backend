@@ -29,55 +29,79 @@ class _LoginPageState extends State<LoginPage> {
               height: 20,
             ),
             Card(
+                color: Colors.amber,
                 child: Padding(
-              padding: const EdgeInsets.only(
-                  left: 12, right: 12, top: 20, bottom: 12),
-              child: Column(
-                children: [
-                  TextField(
-                    onChanged: (text) {
-                      email = text;
-                    },
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                        labelText: 'Email', border: OutlineInputBorder()),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    onChanged: (text) {
-                      password = text;
-                    },
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        labelText: 'Password', border: OutlineInputBorder()),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (email == 'teste@teste.com' && password == '123') {
-                        //Login correto
-                        Navigator.of(context).pushReplacementNamed('/home');
-                      } else {
-                        print('login inválido');
-                      }
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      child: Text('Entrar', textAlign: TextAlign.center),
+                  padding: const EdgeInsets.only(
+                      left: 12, right: 12, top: 20, bottom: 12),
+                  child: Column(
+                    children: [
+                      TextField(
+                        onChanged: (text) {
+                          email = text;
+                        },
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                            labelText: 'Email', border: OutlineInputBorder()),
                       ),
-                    style: ElevatedButton.styleFrom(
-                    textStyle: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold,
-                            color: Colors.deepOrangeAccent)
-                    ),
-                  )
-                ],
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        onChanged: (text) {
+                          password = text;
+                        },
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            labelText: 'Password',
+                            border: OutlineInputBorder()),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (email == 'teste@teste.com' && password == '123') {
+                            //Login correto
+                            Navigator.of(context).pushReplacementNamed('/home');
+                          } else {
+                            print('login inválido');
+                          }
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          child: Text('Entrar', textAlign: TextAlign.center),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            textStyle: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.deepOrangeAccent)),
+                      ),
+                    ],
+                  ),
+                )),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+            ),
+            const Text(
+              'Novo aqui? Cadastre-se',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
-            )),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+            ),
+            const Text(
+              'Problemas com login? Clique aqui.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
           ]),
         ),
       ),
