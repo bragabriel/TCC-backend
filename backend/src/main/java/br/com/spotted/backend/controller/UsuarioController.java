@@ -56,7 +56,7 @@ public class UsuarioController {
 
     //Logar Usuario por nome & senha
     @GetMapping(value = "api/usuarioLogar/{nome}/{senha}")
-    public ResponseEntity pesquisarPorId(@PathVariable String nome, @PathVariable String senha) {
+    public ResponseEntity logar(@PathVariable String nome, @PathVariable String senha) {
 
         var retorno = usuarioService.logar(nome, senha);
 
