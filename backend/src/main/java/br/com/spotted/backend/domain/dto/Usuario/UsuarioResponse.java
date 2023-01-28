@@ -13,20 +13,21 @@ import java.util.Date;
 public class UsuarioResponse {
 
     private Long idUsuario;
-
     private String nomeUsuario;
-
+    private String sobrenomeUsuario;
     private String emailUsuario;
-
     private String senhaUsuario;
-
+    private String telefoneUsuario;
     private Date dataNascimento;
 
     // Usado para mapear criar um DTO usando uma entidade
     public UsuarioResponse(Usuario usuario) {
         this.idUsuario = usuario.getIdUsuario();
         this.nomeUsuario = usuario.getNomeUsuario();
+        this.sobrenomeUsuario = usuario.getSobrenomeUsuario();
         this.emailUsuario = usuario.getEmailUsuario();
+        this.senhaUsuario = usuario.getSenhaUsuario();
+        this.telefoneUsuario = usuario.getTelefoneUsuario();
         this.dataNascimento = usuario.getDataNascimento();
     }
 }

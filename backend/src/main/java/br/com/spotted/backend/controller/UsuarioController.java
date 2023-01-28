@@ -54,5 +54,14 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+    //Logar Usuario por nome & senha
+    @GetMapping(value = "api/usuarioLogar/{nome}/{senha}")
+    public ResponseEntity pesquisarPorId(@PathVariable String nome, @PathVariable String senha) {
+
+        var retorno = usuarioService.logar(nome, senha);
+
+        return ResponseEntity.ok(retorno);
+    }
+
 }
 

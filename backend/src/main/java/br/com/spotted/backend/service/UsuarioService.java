@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,8 +28,10 @@ public class UsuarioService {
 
         Usuario modeloDb = new Usuario();
         modeloDb.setNomeUsuario(novo.getNome());
+        modeloDb.setSobrenomeUsuario(novo.getSobrenome());
         modeloDb.setEmailUsuario(novo.getEmail());
-        modeloDb.setSenhaUsuario(novo.getSenha());
+        modeloDb.setSenhaUsuario(Criptografia.encriptografar(novo.getSenha()));
+        modeloDb.setTelefoneUsuario(novo.getTelefone());
         modeloDb.setDataNascimento(novo.getDataNascimento());
 
         //Salvando
@@ -88,9 +91,28 @@ public class UsuarioService {
         return new UsuarioResponse(
                 usuario.getIdUsuario(),
                 usuario.getNomeUsuario(),
+                usuario.getSobrenomeUsuario(),
                 usuario.getEmailUsuario(),
                 usuario.getSenhaUsuario(),
+                usuario.getTelefoneUsuario(),
                 usuario.getDataNascimento()
         );
+    }
+
+    public UsuarioResponse logar(String nome, String senha) {
+
+        var senhaCriptografada = Criptografia.encriptografar(senha);
+
+        // Consulta o repositorio para procurar por um custumer pelo nome e senha
+        var retorno = usuarioRepository.login(nome, senhaCriptografada);
+
+        if (retorno == null) {
+            throw new UsuarioNaoEncontradoException("Usuário ou senha inválida.");
+        }
+
+        // Mapeia de entidade para dto
+        UsuarioResponse usuarioResponse = new UsuarioResponse(retorno);
+
+        return usuarioResponse;
     }
 }

@@ -22,17 +22,23 @@ public class Usuario {
     @Column(name = "nomeUsuario", nullable = false)
     private String nomeUsuario;
 
+    @Column(name = "sobrenomeUsuario", nullable = false)
+    private String sobrenomeUsuario;
+
     @Column(name = "emailUsuario", nullable = false)
     private String emailUsuario;
 
     @Column(name = "senhaUsuario", nullable = false)
     private String senhaUsuario;
 
+    @Column(name = "telefoneUsuario", nullable = false)
+    private String telefoneUsuario;
+
     @Column(name = "dataNascimento", nullable = false)
     private Date dataNascimento;
 
 //    //Um 'User' pode ter N 'Comidas'
-//    @OneToMany(mappedBy = "idResponsavel", targetEntity = Video.class, orphanRemoval = true)
+//    @OneToMany(mappedBy = "idUsuario", targetEntity = Comida.class, orphanRemoval = true)
 //    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-//    private List<Video> listaVideos = new ArrayList<Video>();
+//    private List<Comida> listaComidas = new ArrayList<Comida>();
 }

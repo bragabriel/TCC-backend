@@ -7,15 +7,15 @@
    http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet author="v2" id="CRIA_TABELAS">
-        <comment>Cria Tabelas</comment>
-        <sqlFile path="create_table.sql" relativeToChangelogFile="true" />
-    </changeSet>
+<!--    <changeSet author="v2" id="CRIA_TABELAS">-->
+<!--        <comment>Cria Tabelas</comment>-->
+<!--        <sqlFile path="create_table.sql" relativeToChangelogFile="true" />-->
+<!--    </changeSet>-->
 
-    <changeSet author="v3" id="INSERE-DADOS">
-        <comment>Insere Dados</comment>
-        <!-- Verificar se seu banco está em PT/BR ou em EN e usar o script correto aqui -->
-        <sqlFile path="insert_data.sql" relativeToChangelogFile="true" />
-    </changeSet>
+<!--    <changeSet author="v3" id="INSERE-DADOS">-->
+<!--        <comment>Insere Dados</comment>-->
+<!--        &lt;!&ndash; Verificar se seu banco está em PT/BR ou em EN e usar o script correto aqui &ndash;&gt;-->
+<!--        <sqlFile path="insert_data.sql" relativeToChangelogFile="true" />-->
+<!--    </changeSet>-->
 
 </databaseChangeLog>

@@ -17,5 +17,14 @@ public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, L
                     "WHERE (:nome IS NULL OR nomeUsuario = :nome)"
     )
     List<Usuario> listarComFiltroNativo(@Param("nome") String nome);
+
+    @Query(
+            nativeQuery = true,
+            value = "SELECT * FROM Usuario " +
+                    "WHERE (nomeUsuario = :nome) " +
+                    "AND (senhaUsuario = :senha)"
+    )
+    Usuario login(@Param("nome") String nomeUsuario,
+                        @Param("senha") String senhaUsuario);
 }
 
