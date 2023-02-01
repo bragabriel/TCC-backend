@@ -41,7 +41,7 @@ class EditEmailFormPageState extends State<EditEmailFormPage> {
                 SizedBox(
                     width: 320,
                     child: const Text(
-                      "What's your email?",
+                      "Qual seu e-mail?",
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.left,
@@ -55,12 +55,12 @@ class EditEmailFormPageState extends State<EditEmailFormPage> {
                           // Handles Form Validation
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your email.';
+                              return 'Por favor, insira seu e-mail.';
                             }
                             return null;
                           },
                           decoration: const InputDecoration(
-                              labelText: 'Your email address'),
+                              labelText: 'Seu e-mail'),
                           controller: emailController,
                         ))),
                 Padding(
@@ -81,7 +81,7 @@ class EditEmailFormPageState extends State<EditEmailFormPage> {
                               }
                             },
                             child: const Text(
-                              'Update',
+                              'Atualizar',
                               style: TextStyle(fontSize: 15),
                             ),
                           ),

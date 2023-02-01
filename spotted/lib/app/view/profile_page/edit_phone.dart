@@ -47,7 +47,7 @@ class EditPhoneFormPageState extends State<EditPhoneFormPage> {
                 SizedBox(
                     width: 320,
                     child: const Text(
-                      "What's Your Phone Number?",
+                      "Qual o número do seu celular?",
                       style:
                           TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     )),
@@ -60,9 +60,9 @@ class EditPhoneFormPageState extends State<EditPhoneFormPage> {
                           // Handles Form Validation
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your phone number';
+                              return 'Por favor, insira o número do seu celular';
                             } else if (isAlpha(value)) {
-                              return 'Only Numbers Please';
+                              return 'Apenas números, por favor!';
                             } else if (value.length < 10) {
                               return 'Please enter a VALID phone number';
                             }
@@ -70,7 +70,7 @@ class EditPhoneFormPageState extends State<EditPhoneFormPage> {
                           },
                           controller: phoneController,
                           decoration: const InputDecoration(
-                            labelText: 'Your Phone Number',
+                            labelText: 'Seu número de celular',
                           ),
                         ))),
                 Padding(
@@ -90,7 +90,7 @@ class EditPhoneFormPageState extends State<EditPhoneFormPage> {
                               }
                             },
                             child: const Text(
-                              'Update',
+                              'Atualizar',
                               style: TextStyle(fontSize: 15),
                             ),
                           ),

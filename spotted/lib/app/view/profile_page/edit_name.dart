@@ -42,7 +42,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
               SizedBox(
                   width: 330,
                   child: const Text(
-                    "What's Your Name?",
+                    "Qual seu nome?",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -61,14 +61,14 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                             // Handles Form Validation for First Name
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your first name';
+                                return 'Por favor, insira seu primeiro nome';
                               } else if (!isAlpha(value)) {
-                                return 'Only Letters Please';
+                                return 'Apenas letras, por favor!';
                               }
                               return null;
                             },
                             decoration:
-                                InputDecoration(labelText: 'First Name'),
+                                InputDecoration(labelText: 'Primeiro nome'),
                             controller: firstNameController,
                           ))),
                   Padding(
@@ -80,14 +80,14 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                             // Handles Form Validation for Last Name
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your last name';
+                                return 'Por favor, insira seu sobrenome';
                               } else if (!isAlpha(value)) {
-                                return 'Only Letters Please';
+                                return 'Apenas letras, por favor!';
                               }
                               return null;
                             },
                             decoration:
-                                const InputDecoration(labelText: 'Last Name'),
+                                const InputDecoration(labelText: 'Sobrenome'),
                             controller: secondNameController,
                           )))
                 ],
@@ -112,7 +112,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                             }
                           },
                           child: const Text(
-                            'Update',
+                            'Atualizar',
                             style: TextStyle(fontSize: 15),
                           ),
                         ),

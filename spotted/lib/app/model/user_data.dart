@@ -10,11 +10,11 @@ class UserData {
   static UsuarioModel myUser = UsuarioModel(
     image:
         "https://upload.wikimedia.org/wikipedia/en/0/0b/Darth_Vader_in_The_Empire_Strikes_Back.jpg",
-    name: 'Test Test',
-    email: 'test.test@gmail.com',
-    phone: '(208) 206-5039',
+    name: 'puxar-da-api',
+    email: 'puxar-da-api',
+    phone: '1999999 puxar da api',
     aboutMeDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...',
+        'puxar-da-api puxar-da-api puxar-da-api puxar-da-api puxar-da-api puxar-da-api puxar-da-api puxar-da-api puxar-da-api',
   );
 
   static Future init() async =>

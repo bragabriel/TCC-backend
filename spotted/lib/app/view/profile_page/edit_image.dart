@@ -28,7 +28,7 @@ class _EditImagePageState extends State<EditImagePage> {
           SizedBox(
               width: 330,
               child: const Text(
-                "Upload a photo of yourself:",
+                "Carregar uma foto sua:",
                 style: TextStyle(
                   fontSize: 23,
                   fontWeight: FontWeight.bold,
@@ -65,7 +65,7 @@ class _EditImagePageState extends State<EditImagePage> {
                     child: ElevatedButton(
                       onPressed: () {},
                       child: const Text(
-                        'Update',
+                        'Atualizar',
                         style: TextStyle(fontSize: 15),
                       ),
                     ),

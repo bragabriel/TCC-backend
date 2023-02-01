@@ -37,7 +37,7 @@ class _EditDescriptionFormPageState extends State<EditDescriptionFormPage> {
                 SizedBox(
                     width: 350,
                     child: const Text(
-                      "What type of passenger\nare you?",
+                      "Que tipo de pessoa\nvocê é?",
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     )),
@@ -52,7 +52,7 @@ class _EditDescriptionFormPageState extends State<EditDescriptionFormPage> {
                             if (value == null ||
                                 value.isEmpty ||
                                 value.length > 200) {
-                              return 'Please describe yourself but keep it under 200 characters.';
+                              return 'Por favor, descreva-se em até 200 caracteres.';
                             }
                             return null;
                           },
@@ -64,7 +64,7 @@ class _EditDescriptionFormPageState extends State<EditDescriptionFormPage> {
                                   EdgeInsets.fromLTRB(10, 15, 10, 100),
                               hintMaxLines: 3,
                               hintText:
-                                  'Write a little bit about yourself. Do you like chatting? Are you a smoker? Do you bring pets with you? Etc.'),
+                                  'Conte-nos um pouco sobre você. Do que você gosta? Qual curso faz? Quais seus hobbies? Etc.'),
                         ))),
                 Padding(
                     padding: EdgeInsets.only(top: 50),
@@ -82,7 +82,7 @@ class _EditDescriptionFormPageState extends State<EditDescriptionFormPage> {
                               }
                             },
                             child: const Text(
-                              'Update',
+                              'Atualizar',
                               style: TextStyle(fontSize: 15),
                             ),
                           ),

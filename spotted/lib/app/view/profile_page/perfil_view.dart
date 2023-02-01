@@ -50,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 imagePath: user.image,
                 onPressed: () {},
               )),
-          buildUserInfoDisplay(user.name, 'Name', EditNameFormPage()),
+          buildUserInfoDisplay(user.name, 'Nome', EditNameFormPage()),
           buildUserInfoDisplay(user.phone, 'Phone', EditPhoneFormPage()),
           buildUserInfoDisplay(user.email, 'Email', EditEmailFormPage()),
           Expanded(
@@ -115,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Tell Us About Yourself',
+            'Sobre você',
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w500,
