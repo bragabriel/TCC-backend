@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:spotted/app/view/cadastro_view.dart';
+import 'package:spotted/app/view/profile_page/perfil_view.dart';
 
 import '../controller/app_controller.dart';
 import '../view/home_view.dart';
@@ -27,6 +28,7 @@ class AppWidget extends StatelessWidget {
             '/': (context) => LoginPage(),
             '/home': (context) => HomePage(),
             '/cadastro': (context) => CadastroPage(),
+            '/perfil': (context) => ProfilePage(),
           },
         );
       },

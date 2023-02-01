@@ -43,6 +43,14 @@ class HomePageState extends State<HomePage>{
               }
             ),
             ListTile(
+              leading: Icon(Icons.verified_user),
+              title: Text('Perfil'),
+              subtitle: Text('seu perfil'),
+              onTap: (){
+                Navigator.of(context).pushReplacementNamed('/perfil');
+              }
+            ),
+            ListTile(
               leading: Icon(Icons.logout),
               title: Text('Logout'),
               subtitle: Text('Finalizar sessão'),
