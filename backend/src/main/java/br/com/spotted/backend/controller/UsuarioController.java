@@ -4,10 +4,12 @@ import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioCreateRequest;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioResponse;
+import br.com.spotted.backend.domain.dto.Usuario.UsuarioUpdateRequest_NomeSobrenome;
 import br.com.spotted.backend.domain.entity.Usuario;
 import br.com.spotted.backend.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,14 +46,14 @@ public class UsuarioController {
 
         ResponseBase<UsuarioResponse> retorno = usuarioService.cadastrar(postModel);
 
-        return ResponseEntity.ok(retorno);
+        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
     }
 
     //Deletar Usuario por Id
     @DeleteMapping(value = "api/usuario/{idUsuario}")
     public ResponseEntity<UsuarioResponse> deletar(@PathVariable Long idUsuario) {
         var usuario = usuarioService.deletar(idUsuario);
-        return ResponseEntity.ok(usuario);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuario);
     }
 
     //Logar Usuario por nome & senha
@@ -61,6 +63,15 @@ public class UsuarioController {
         var retorno = usuarioService.logar(nome, senha);
 
         return ResponseEntity.ok(retorno);
+    }
+
+    @PutMapping(value = "api/usuarioAtualizar/{idUsuario}")
+    public ResponseEntity<UsuarioResponse> atualizarNomeSobrenome(
+            @PathVariable Long idUsuario,
+            @RequestBody @Valid UsuarioUpdateRequest_NomeSobrenome usuarioUpdateRequest
+    ){
+        var usuario = usuarioService.atualizarNomeSobrenome(idUsuario, usuarioUpdateRequest);
+        return ResponseEntity.ok(usuario);
     }
 
 }

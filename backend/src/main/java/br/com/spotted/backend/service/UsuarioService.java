@@ -5,6 +5,7 @@ import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioCreateRequest;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioResponse;
+import br.com.spotted.backend.domain.dto.Usuario.UsuarioUpdateRequest_NomeSobrenome;
 import br.com.spotted.backend.domain.entity.Usuario;
 import br.com.spotted.backend.exception.UsuarioNaoEncontradoException;
 import br.com.spotted.backend.repository.UsuarioRepository;
@@ -15,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,6 +33,7 @@ public class UsuarioService {
         modeloDb.setSenhaUsuario(Criptografia.encriptografar(novo.getSenha()));
         modeloDb.setTelefoneUsuario(novo.getTelefone());
         modeloDb.setDataNascimento(novo.getDataNascimento());
+        modeloDb.setImagemUsuario(novo.getImagemUsuario());
 
         //Salvando
         Usuario usuarioSalvo = usuarioRepository.save(modeloDb);
@@ -95,7 +96,8 @@ public class UsuarioService {
                 usuario.getEmailUsuario(),
                 usuario.getSenhaUsuario(),
                 usuario.getTelefoneUsuario(),
-                usuario.getDataNascimento()
+                usuario.getDataNascimento(),
+                usuario.getImagemUsuario()
         );
     }
 
@@ -114,5 +116,31 @@ public class UsuarioService {
         UsuarioResponse usuarioResponse = new UsuarioResponse(retorno);
 
         return usuarioResponse;
+    }
+
+    public UsuarioResponse atualizarNomeSobrenome(Long idUsuario, UsuarioUpdateRequest_NomeSobrenome usuarioUpdateRequest){
+
+        var usuarioEncontrado = usuarioRepository.findById(idUsuario);
+
+        if(usuarioEncontrado.isEmpty()){
+            throw new UsuarioNaoEncontradoException("Usuário não encontrado");
+        }
+
+        var usuario = usuarioEncontrado.get();
+        usuario.setNomeUsuario(usuarioUpdateRequest.getNomeUsuario());
+        usuario.setSobrenomeUsuario(usuarioUpdateRequest.getSobrenomeUsuario());
+
+        var usuarioSalvo = usuarioRepository.save(usuario);
+
+        return new UsuarioResponse(
+                usuarioSalvo.getIdUsuario(),
+                usuarioSalvo.getNomeUsuario(),
+                usuarioSalvo.getSobrenomeUsuario(),
+                usuarioSalvo.getEmailUsuario(),
+                usuarioSalvo.getSenhaUsuario(),
+                usuarioSalvo.getTelefoneUsuario(),
+                usuarioSalvo.getDataNascimento(),
+                usuarioSalvo.getImagemUsuario()
+        );
     }
 }

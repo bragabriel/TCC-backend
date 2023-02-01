@@ -1,12 +1,10 @@
 package br.com.spotted.backend.domain.dto.Usuario;
 
-
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-
 
 @Data
 public class UsuarioCreateRequest {
@@ -28,6 +26,8 @@ public class UsuarioCreateRequest {
 
     @NotNull
     private Date dataNascimento;
+
+    private byte[] imagemUsuario = null;
 }
 
 

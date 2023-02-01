@@ -20,6 +20,8 @@ public class UsuarioResponse {
     private String telefoneUsuario;
     private Date dataNascimento;
 
+    private byte[] imagemUsuario;
+
     // Usado para mapear criar um DTO usando uma entidade
     public UsuarioResponse(Usuario usuario) {
         this.idUsuario = usuario.getIdUsuario();
@@ -29,5 +31,6 @@ public class UsuarioResponse {
         this.senhaUsuario = usuario.getSenhaUsuario();
         this.telefoneUsuario = usuario.getTelefoneUsuario();
         this.dataNascimento = usuario.getDataNascimento();
+        this.imagemUsuario = usuario.getImagemUsuario();
     }
 }

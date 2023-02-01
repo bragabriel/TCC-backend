@@ -37,6 +37,9 @@ public class Usuario {
     @Column(name = "dataNascimento", nullable = false)
     private Date dataNascimento;
 
+    @Column(name = "imagemUsuario")
+    private byte[] imagemUsuario;
+
 //    //Um 'User' pode ter N 'Comidas'
 //    @OneToMany(mappedBy = "idUsuario", targetEntity = Comida.class, orphanRemoval = true)
 //    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
