@@ -26,7 +26,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
   }
 
   void updateUserValue(String name) {
-    user.name = name;
+    user.nomeUsuario = name;
   }
 
   @override

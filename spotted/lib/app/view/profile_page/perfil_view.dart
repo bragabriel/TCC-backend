@@ -50,9 +50,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 imagePath: user.image,
                 onPressed: () {},
               )),
-          buildUserInfoDisplay(user.name, 'Nome', EditNameFormPage()),
-          buildUserInfoDisplay(user.phone, 'Phone', EditPhoneFormPage()),
-          buildUserInfoDisplay(user.email, 'Email', EditEmailFormPage()),
+          buildUserInfoDisplay(user.nomeUsuario, 'Nome', EditNameFormPage()),
+          buildUserInfoDisplay(user.telefoneUsuario, 'Phone', EditPhoneFormPage()),
+          buildUserInfoDisplay(user.emailUsuario, 'Email', EditEmailFormPage()),
           Expanded(
             child: buildAbout(user),
             flex: 4,
@@ -143,7 +143,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
-                                  user.aboutMeDescription,
+                                  user.descricaoUsuario,
                                   style: TextStyle(
                                     fontSize: 16,
                                     height: 1.4,

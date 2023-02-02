@@ -8,12 +8,15 @@ class UserData {
   static const _keyUser = 'user';
 
   static UsuarioModel myUser = UsuarioModel(
+    idUsuario: 1,
     image:
         "https://upload.wikimedia.org/wikipedia/en/0/0b/Darth_Vader_in_The_Empire_Strikes_Back.jpg",
-    name: 'puxar-da-api',
-    email: 'puxar-da-api',
-    phone: '1999999 puxar da api',
-    aboutMeDescription:
+    nomeUsuario: 'puxar-da-api',
+    sobrenomeUsuario: 'puardaaspdiasodi',
+    senhaUsuario: 'asjdhasjkdh',
+    emailUsuario: 'puxar-da-api',
+    telefoneUsuario: '1999999 puxar da api',
+    descricaoUsuario:
         'puxar-da-api puxar-da-api puxar-da-api puxar-da-api puxar-da-api puxar-da-api puxar-da-api puxar-da-api puxar-da-api',
   );
 

@@ -25,7 +25,7 @@ class EditEmailFormPageState extends State<EditEmailFormPage> {
   }
 
   void updateUserValue(String email) {
-    user.email = email;
+    user.emailUsuario = email;
   }
 
   @override

@@ -1,59 +1,69 @@
+import 'dart:ffi';
+
 class UsuarioModel {
+  int idUsuario;
+  String nomeUsuario;
+  String sobrenomeUsuario;
+  String emailUsuario;
+  String senhaUsuario;
+  String telefoneUsuario;
+  String descricaoUsuario;
   String image;
-  String name;
-  String email;
-  String phone;
-  String aboutMeDescription;
 
   // Constructor
   UsuarioModel({
+    
+    required this.idUsuario,
+    required this.nomeUsuario,
+    required this.sobrenomeUsuario,
+    required this.emailUsuario,
+    required this.senhaUsuario,
+    required this.telefoneUsuario,
+    required this.descricaoUsuario,
     required this.image,
-    required this.name,
-    required this.email,
-    required this.phone,
-    required this.aboutMeDescription,
   });
 
   UsuarioModel copy({
+    
+    int? idUsuario,
+    String? nomeUsuario,
+    String? sobrenomeUsuario,
+    String? emailUsuario,
+    String? senhaUsuario,
+    String? telefoneUsuario,
+    String? descricaoUsuario,
     String? imagePath,
-    String? name,
-    String? phone,
-    String? email,
-    String? about,
   }) =>
       UsuarioModel(
+        idUsuario: idUsuario ?? this.idUsuario,
+        nomeUsuario: nomeUsuario ?? this.nomeUsuario,
+        sobrenomeUsuario: sobrenomeUsuario ?? this.sobrenomeUsuario,
+        emailUsuario: emailUsuario ?? this.emailUsuario,
+        senhaUsuario: senhaUsuario ?? this.senhaUsuario,
+        telefoneUsuario: telefoneUsuario ?? this.telefoneUsuario,
+        descricaoUsuario: descricaoUsuario ?? this.descricaoUsuario,
         image: imagePath ?? this.image,
-        name: name ?? this.name,
-        email: email ?? this.email,
-        phone: phone ?? this.phone,
-        aboutMeDescription: about ?? this.aboutMeDescription,
       );
 
   static UsuarioModel fromJson(Map<String, dynamic> json) => UsuarioModel(
+        idUsuario: json['idUsuario'],
+        nomeUsuario: json['nomeUsuario'],
+        sobrenomeUsuario: json['sobrenomeUsuario'],
+        emailUsuario: json['emailUsuario'],
+        senhaUsuario: json['senhaUsuario'],
+        descricaoUsuario: json['descricaoUsuario'],
+        telefoneUsuario: json['telefoneUsuario'],
         image: json['imagePath'],
-        name: json['name'],
-        email: json['email'],
-        aboutMeDescription: json['about'],
-        phone: json['phone'],
       );
 
   Map<String, dynamic> toJson() => {
+        'idUsuario': idUsuario,
+        'nomeUsuario': nomeUsuario,
+        'sobrenomeUsuario': sobrenomeUsuario,
+        'emailUsuario': emailUsuario,
+        'senhaUsuario': senhaUsuario,
+        'descricaoUsuario': descricaoUsuario,
+        'telefoneUsuario': telefoneUsuario,
         'imagePath': image,
-        'name': name,
-        'email': email,
-        'about': aboutMeDescription,
-        'phone': phone,
       };
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['idUsuario'] = this.idUsuario;
-    data['nomeUsuario'] = this.nomeUsuario;
-    data['sobrenomeUsuario'] = this.sobrenomeUsuario;
-    data['emailUsuario'] = this.emailUsuario;
-    data['senhaUsuario'] = this.senhaUsuario;
-    data['telefoneUsuario'] = this.telefoneUsuario;
-    data['dataNascimento'] = this.dataNascimento;
-    data['imagemUsuario'] = this.imagemUsuario;
-    return data;
-  }
 }

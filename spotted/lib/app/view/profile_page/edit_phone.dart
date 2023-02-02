@@ -31,7 +31,7 @@ class EditPhoneFormPageState extends State<EditPhoneFormPage> {
         phone.substring(3, 6) +
         "-" +
         phone.substring(6, phone.length);
-    user.phone = formattedPhoneNumber;
+    user.telefoneUsuario = formattedPhoneNumber;
   }
 
   @override
