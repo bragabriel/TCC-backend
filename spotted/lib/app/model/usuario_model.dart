@@ -1,34 +1,49 @@
 class UsuarioModel {
-  int? idUsuario;
-  String? nomeUsuario;
-  String? sobrenomeUsuario;
-  String? emailUsuario;
-  String? senhaUsuario;
-  String? telefoneUsuario;
-  String? dataNascimento;
-  Null? imagemUsuario;
+  String image;
+  String name;
+  String email;
+  String phone;
+  String aboutMeDescription;
 
-  UsuarioModel(
-      {this.idUsuario,
-      this.nomeUsuario,
-      this.sobrenomeUsuario,
-      this.emailUsuario,
-      this.senhaUsuario,
-      this.telefoneUsuario,
-      this.dataNascimento,
-      this.imagemUsuario});
+  // Constructor
+  UsuarioModel({
+    required this.image,
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.aboutMeDescription,
+  });
 
-  UsuarioModel.fromJson(Map<String, dynamic> json) {
-    idUsuario = json['idUsuario'];
-    nomeUsuario = json['nomeUsuario'];
-    sobrenomeUsuario = json['sobrenomeUsuario'];
-    emailUsuario = json['emailUsuario'];
-    senhaUsuario = json['senhaUsuario'];
-    telefoneUsuario = json['telefoneUsuario'];
-    dataNascimento = json['dataNascimento'];
-    imagemUsuario = json['imagemUsuario'];
-  }
+  UsuarioModel copy({
+    String? imagePath,
+    String? name,
+    String? phone,
+    String? email,
+    String? about,
+  }) =>
+      UsuarioModel(
+        image: imagePath ?? this.image,
+        name: name ?? this.name,
+        email: email ?? this.email,
+        phone: phone ?? this.phone,
+        aboutMeDescription: about ?? this.aboutMeDescription,
+      );
 
+  static UsuarioModel fromJson(Map<String, dynamic> json) => UsuarioModel(
+        image: json['imagePath'],
+        name: json['name'],
+        email: json['email'],
+        aboutMeDescription: json['about'],
+        phone: json['phone'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'imagePath': image,
+        'name': name,
+        'email': email,
+        'about': aboutMeDescription,
+        'phone': phone,
+      };
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['idUsuario'] = this.idUsuario;
