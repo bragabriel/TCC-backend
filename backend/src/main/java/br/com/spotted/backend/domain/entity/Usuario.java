@@ -37,6 +37,9 @@ public class Usuario {
     @Column(name = "dataNascimento", nullable = false)
     private Date dataNascimento;
 
+    @Column(name = "dataNascimento", nullable = false)
+    private String descricaoUsuario;
+
     @Column(name = "imagemUsuario")
     private byte[] imagemUsuario;
 
