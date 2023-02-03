@@ -97,6 +97,7 @@ public class UsuarioService {
                 usuario.getSenhaUsuario(),
                 usuario.getTelefoneUsuario(),
                 usuario.getDataNascimento(),
+                usuario.getDescricaoUsuario(),
                 usuario.getImagemUsuario()
         );
     }
@@ -140,6 +141,7 @@ public class UsuarioService {
                 usuarioSalvo.getSenhaUsuario(),
                 usuarioSalvo.getTelefoneUsuario(),
                 usuarioSalvo.getDataNascimento(),
+                usuarioSalvo.getDescricaoUsuario(),
                 usuarioSalvo.getImagemUsuario()
         );
     }

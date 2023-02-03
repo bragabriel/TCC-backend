@@ -37,7 +37,7 @@ public class Usuario {
     @Column(name = "dataNascimento", nullable = false)
     private Date dataNascimento;
 
-    @Column(name = "dataNascimento", nullable = false)
+    @Column(name = "descricaoUsuario", nullable = false)
     private String descricaoUsuario;
 
     @Column(name = "imagemUsuario")

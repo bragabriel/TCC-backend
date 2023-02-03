@@ -1,12 +1,12 @@
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Usuario]    Script Date: 01/02/2023 11:07:18 ******/
+/****** Object:  Table [dbo].[Usuario]    Script Date: 02/02/2023 21:19:31 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Usuario]') AND type in (N'U'))
 DROP TABLE [dbo].[Usuario]
 GO
 
-/****** Object:  Table [dbo].[Usuario]    Script Date: 01/02/2023 11:07:18 ******/
+/****** Object:  Table [dbo].[Usuario]    Script Date: 02/02/2023 21:19:31 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -21,6 +21,7 @@ CREATE TABLE [dbo].[Usuario](
 	[senhaUsuario] [varchar](255) NOT NULL,
 	[telefoneUsuario] [varchar](255) NOT NULL,
 	[dataNascimento] [date] NOT NULL,
+	[descricaoUsuario] [varchar](255) NULL,
 	[imagemUsuario] [varbinary](max) NULL,
  CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED
 (
