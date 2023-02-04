@@ -45,6 +45,13 @@ class HomePageState extends State<HomePage> {
                 Navigator.of(context).pushNamed('/perfil');
               }),
           ListTile(
+              leading: Icon(Icons.ads_click),
+              title: Text('Teste'),
+              subtitle: Text('teste req get api'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/comida');
+              }),
+          ListTile(
               leading: Icon(Icons.logout),
               title: Text('Logout'),
               subtitle: Text('Finalizar sessão'),

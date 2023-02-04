@@ -1,4 +1,4 @@
-//StatefulWidget = Dinamico -> Pode ser modificado
+/* //StatefulWidget = Dinamico -> Pode ser modificado
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,17 +32,24 @@ class HomePageState extends State<HomePage> {
               accountEmail: Text('teste@teste.com')),
           ListTile(
               leading: Icon(Icons.home),
-              title: Text('Inicio'),
+              title: Text('Iniciaaaaao'),
               subtitle: Text('tela de inicio'),
               onTap: () {
                 print('home');
+              }),
+          ListTile(
+              leading: Icon(Icons.verified_user),
+              title: Text('Perfil'),
+              subtitle: Text('seu perfil'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/perfil');
               }),
           ListTile(
               leading: Icon(Icons.abc_outlined),
               title: Text('Teste'),
               subtitle: Text('tela teste get req'),
               onTap: () {
-                print('home');
+                Navigator.of(context).pushReplacementNamed('/comida');
               }),
           ListTile(
               leading: Icon(Icons.logout),
@@ -122,3 +129,4 @@ class CustomSwitch extends StatelessWidget {
         });
   }
 }
+ */
