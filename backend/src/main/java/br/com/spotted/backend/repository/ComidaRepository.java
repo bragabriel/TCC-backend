@@ -15,7 +15,7 @@ public interface ComidaRepository extends PagingAndSortingRepository<Comida, Lon
     @Query(
             nativeQuery = true,
             value = "SELECT * FROM Comida " +
-                    "WHERE (:comida IS NULL OR nomeComida = :nome)"
+                    "WHERE (:comida IS NULL OR nomeComida = :comida)"
     )
-    List<Comida> listarComFiltroNativo(@Param("nome") String nome);
+    List<Comida> listarComFiltroNativo(@Param("comida") String comida);
 }

@@ -18,7 +18,7 @@ public class Comida {
     @Column(name = "idComida")
     private Long idComida;
 
-    @Column(name = "nomeUsuario", nullable = false)
+    @Column(name = "nomeComida", nullable = false)
     private String nomeComida;
 
     @Column(name = "tipoComida", nullable = false)

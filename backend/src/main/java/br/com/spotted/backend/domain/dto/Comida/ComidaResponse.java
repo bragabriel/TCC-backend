@@ -1,7 +1,6 @@
 package br.com.spotted.backend.domain.dto.Comida;
 
 import br.com.spotted.backend.domain.entity.Comida;
-import br.com.spotted.backend.domain.entity.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

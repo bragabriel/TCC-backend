@@ -5,13 +5,9 @@ import br.com.spotted.backend.domain.dto.Comida.ComidaResponse;
 import br.com.spotted.backend.domain.dto.Comida.ComidaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
-import br.com.spotted.backend.domain.dto.Usuario.UsuarioCreateRequest;
-import br.com.spotted.backend.domain.dto.Usuario.UsuarioResponse;
-import br.com.spotted.backend.domain.dto.Usuario.UsuarioUpdateRequest_NomeSobrenome;
 import br.com.spotted.backend.domain.entity.Comida;
 import br.com.spotted.backend.domain.entity.Usuario;
 import br.com.spotted.backend.exception.ComidaNaoEncontradaException;
-import br.com.spotted.backend.exception.UsuarioNaoEncontradoException;
 import br.com.spotted.backend.repository.ComidaRepository;
 import br.com.spotted.backend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,8 +33,7 @@ public class ComidaService {
         modeloDb.setTipoComida(novo.getTipo());
         modeloDb.setImagemComida(novo.getImagemComida());
 
-
-        //Ir no repo de USUARIO e recuperar o Usuario desta Comida
+        //Buscar no repo de USUARIO e recuperar o Usuario desta Comida
         Optional<Usuario> usuarioOptinal = usuarioRepository.findById(novo.getIdUsuario());
 
         //Verifica se o responsável foi encontrado, caso o contratario lança exception
@@ -73,7 +68,7 @@ public class ComidaService {
         // pesquisa no repositorio de customer usando a consulta paginada
         Page<Comida> comidaPage = comidaRepository.findAll(pageRequest);
 
-        // Mapeia da entidade(Customer) para o DTO(CustomerResponse)
+        // Mapeia da entidade(Comida) para o DTO(ComidaResponse)
         Page<ComidaResponse> comidaResponsePage = comidaPage.map(ComidaResponse::new);
         return new ResponseBase<>(comidaResponsePage);
     }
@@ -92,8 +87,8 @@ public class ComidaService {
         return new ResponseBase<>(comidaResponse);
     }
 
-    public ComidaResponse deletar(Long idUsuario) {
-        var comidaEncontrada = comidaRepository.findById(idUsuario);
+    public ComidaResponse deletar(Long idComida) {
+        var comidaEncontrada = comidaRepository.findById(idComida);
 
         if (comidaEncontrada.isEmpty()) {
             throw new ComidaNaoEncontradaException("Comida não encontrada.");
