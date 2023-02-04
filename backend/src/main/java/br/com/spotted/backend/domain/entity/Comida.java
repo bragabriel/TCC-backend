@@ -25,7 +25,7 @@ public class Comida {
     private String tipoComida;
 
     @Column(name = "imagemComida")
-    private byte[] imagemUsuario;
+    private byte[] imagemComida;
 
     @Column(name= "idUsuario", insertable = false, updatable = false)
     private Long idUsuario;
