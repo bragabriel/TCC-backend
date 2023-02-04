@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'http_service.dart';
+import '../../controller/food_controller.dart';
+import '../../repository/http_service.dart';
 import 'post_model.dart';
 
 class PostsPage extends StatelessWidget {
-  final HttpService httpService = HttpService();
 
-  @override
-  Widget build(BuildContext context) {
+  final FoodRepository foodRepository = FoodRepository();
+
+  _success(){
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.orange,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: Scaffold(
           appBar: AppBar(
-            title: Text("Posts"),
+            title: Text("Comidas"),
           ),
           body: FutureBuilder(
-            future: httpService.getPosts(),
+            future: foodRepository.getPosts(),
             builder:
                 (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
               if (snapshot.hasData) {
@@ -39,5 +40,55 @@ class PostsPage extends StatelessWidget {
             },
           ),
         ));
+  }
+
+  _error(){
+    return Center(
+      child: ElevatedButton(onPressed: () {
+        
+      },
+      child: Text('Tente novamente'),),
+    );
+  }
+
+  _loading(){
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  _start(){
+    return Container();
+  }
+
+  //Método para a troca de estado
+  stateManagement(HomeState state){
+      switch (state) {
+      case HomeState.start:
+        return _start();
+      case HomeState.loading:
+        return _loading();
+      case HomeState.error:
+        return _error();
+      case HomeState.success:
+        return _success();
+      default: _start();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.orange,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text("Comidas"),
+          ),
+          body: stateManagement(HomeState.start),
+    ));
   }
 }
