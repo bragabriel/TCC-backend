@@ -3,9 +3,12 @@ package br.com.spotted.backend.domain.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -43,8 +46,8 @@ public class Usuario {
     @Column(name = "imagemUsuario")
     private byte[] imagemUsuario;
 
-//    //Um 'User' pode ter N 'Comidas'
-//    @OneToMany(mappedBy = "idUsuario", targetEntity = Comida.class, orphanRemoval = true)
-//    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-//    private List<Comida> listaComidas = new ArrayList<Comida>();
+    //Um USUARIO pode ter 1-N COMIDAS
+    @OneToMany(mappedBy = "idUsuario", targetEntity = Comida.class, orphanRemoval = true)
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    private List<Comida> listaComidas = new ArrayList<Comida>();
 }
