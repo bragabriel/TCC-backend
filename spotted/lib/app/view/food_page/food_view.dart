@@ -3,28 +3,39 @@ import '../../controller/food_controller.dart';
 import '../../repository/http_service.dart';
 import 'post_model.dart';
 
-class PostsPage extends StatelessWidget {
+class PostsPage extends StatefulWidget {
 
+  @override
+  State<PostsPage> createState() => _PostsPageState();
+}
+
+class _PostsPageState extends State<PostsPage> {
+
+  final controller = FoodController();
   final FoodRepository foodRepository = FoodRepository();
 
-  _success(){
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.orange,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text("Comidas"),
-          ),
+    _success(){
+    return Scaffold(
+   
           body: FutureBuilder(
             future: foodRepository.getPosts(),
             builder:
                 (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
               if (snapshot.hasData) {
                 List<Post>? posts = snapshot.data;
-                return ListView(
+             
+                /* return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                   SizedBox(
+                    width: double.infinity,
+                    height: 100,
+                    child: Text('TEXTOOOOO'),
+                  ), */
+                
+                return
+
+                   ListView(
                   children: posts!
                       .map(
                         (Post post) => ListTile(
@@ -34,19 +45,35 @@ class PostsPage extends StatelessWidget {
                       )
                       .toList(),
                 );
+                 /* ListView.separated(
+                  
+                  shrinkWrap: true, 
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text('asd da lista $index'),
+                      subtitle: Text(''),
+                      trailing: const Icon(Icons.chevron_right),
+                    );
+                  }, 
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemCount:5
+                  ),
+                                    
+                ],); */
               } else {
                 return Center(child: CircularProgressIndicator());
               }
             },
           ),
-        ));
+        );
   }
 
   _error(){
     return Center(
-      child: ElevatedButton(onPressed: () {
-        
-      },
+      child: ElevatedButton(
+        onPressed: () {
+          controller.start();
+        },
       child: Text('Tente novamente'),),
     );
   }
@@ -77,6 +104,15 @@ class PostsPage extends StatelessWidget {
   }
 
   @override
+  void initState() {
+ 
+    super.initState();
+
+    //Iniciou o Widget, chama o 'estado' .start()
+    controller.start();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
@@ -87,8 +123,21 @@ class PostsPage extends StatelessWidget {
         home: Scaffold(
           appBar: AppBar(
             title: Text("Comidas"),
+            actions: [
+              IconButton(
+                onPressed:(){
+                  controller.start();
+                },
+                icon: const Icon(Icons.refresh_outlined),
+                )
+            ],
           ),
-          body: stateManagement(HomeState.start),
+          //Reatividade dos nossos estados:
+          body: AnimatedBuilder(
+            animation: controller.state, 
+            builder: (context, child) {
+              return stateManagement(controller.state.value);
+            }),
     ));
   }
 }
