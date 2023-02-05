@@ -49,6 +49,13 @@ class HomePageState extends State<HomePage> {
               title: Text('Teste'),
               subtitle: Text('teste req get api'),
               onTap: () {
+                Navigator.of(context).pushNamed('/teste');
+              }),
+               ListTile(
+              leading: Icon(Icons.food_bank_outlined),
+              title: Text('Comida'),
+              subtitle: Text('encontre vendedores de gostosuras pelo campus'),
+              onTap: () {
                 Navigator.of(context).pushNamed('/comida');
               }),
           ListTile(

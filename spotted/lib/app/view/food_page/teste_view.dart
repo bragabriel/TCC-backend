@@ -1,41 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:spotted/app/model/food_model.dart';
-import '../../controller/food_controller.dart';
-import '../../repository/food_repository.dart';
+import '../../controller/teste_controller.dart';
+import '../../repository/teste_repository.dart';
+import 'post_model.dart';
 
-class FoodPage extends StatefulWidget {
+class PostsPage extends StatefulWidget {
 
   @override
-  State<FoodPage> createState() => _FoodPageState();
+  State<PostsPage> createState() => _PostsPageState();
 }
 
-class _FoodPageState extends State<FoodPage> {
+class _PostsPageState extends State<PostsPage> {
 
-  final controller = FoodController();
-  final FoodRepository foodRepository = FoodRepository();
+  final controller = TesteController();
+  final TesteRepository foodRepository = TesteRepository();
 
     _success(){
     return Scaffold(
    
           body: FutureBuilder(
-            future: foodRepository.getFood(),
+            future: foodRepository.getPosts(),
             builder:
-                (BuildContext context, AsyncSnapshot<List<Food>> snapshot) {
+                (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
               if (snapshot.hasData) {
-                List<Food>? foodList = snapshot.data;
+                List<Post>? posts = snapshot.data;
              
+                /* return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                   SizedBox(
+                    width: double.infinity,
+                    height: 100,
+                    child: Text('TEXTOOOOO'),
+                  ), */
+                
                 return
+
                    ListView(
-                  children: foodList!
+                  children: posts!
                       .map(
-                        (Food food) => ListTile(
-                          title: Text(food.nomeComida),
-                          subtitle: Text(food.tipoComida + 
-                                          '\n Usuário vendendo está comida:' + food.idUsuario.toString()),
+                        (Post post) => ListTile(
+                          title: Text(post.title),
+                          subtitle: Text("${post.userId}"),
                         ),
                       )
                       .toList(),
                 );
+                 /* ListView.separated(
+                  
+                  shrinkWrap: true, 
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text('asd da lista $index'),
+                      subtitle: Text(''),
+                      trailing: const Icon(Icons.chevron_right),
+                    );
+                  }, 
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemCount:5
+                  ),
+                                    
+                ],); */
               } else {
                 return Center(child: CircularProgressIndicator());
               }
@@ -98,7 +122,7 @@ class _FoodPageState extends State<FoodPage> {
         ),
         home: Scaffold(
           appBar: AppBar(
-            title: Text("Comidas"),
+            title: Text("Teste Consumindo API"),
             actions: [
               IconButton(
                 onPressed:(){
@@ -112,9 +136,7 @@ class _FoodPageState extends State<FoodPage> {
           body: AnimatedBuilder(
             animation: controller.state, 
             builder: (context, child) {
-
-              return _success();
-              //return stateManagement(controller.state.value);
+              return stateManagement(controller.state.value);
             }),
     ));
   }
