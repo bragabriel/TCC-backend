@@ -63,6 +63,23 @@ class _LoginPageState extends State<LoginPage> {
                           if (email == 'teste@teste.com' && password == '123') {
                             //Login correto
                             Navigator.of(context).pushReplacementNamed('/home');
+
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text("Atenção"),
+                                    content:
+                                        Text("Login realizado com sucesso!"),
+                                    actions: [
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("OK"))
+                                    ],
+                                  );
+                                });
                           } else {
                             print('login inválido');
                           }
