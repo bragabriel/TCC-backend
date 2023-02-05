@@ -1,5 +1,5 @@
 //StatefulWidget = Dinamico -> Pode ser modificado
-
+import 'dart:ui' as ui;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +51,7 @@ class HomePageState extends State<HomePage> {
               onTap: () {
                 Navigator.of(context).pushNamed('/teste');
               }),
-               ListTile(
+          ListTile(
               leading: Icon(Icons.food_bank_outlined),
               title: Text('Comida'),
               subtitle: Text('encontre vendedores de gostosuras pelo campus'),
@@ -78,71 +78,180 @@ class HomePageState extends State<HomePage> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: PageView(
           children: [
-            Text('Contador: $counter'),
             Container(
-              height: 10,
-            ),
-            Container(
-              height: 50,
-            ),
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text('Seção de blablabla'),
-            ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              height: 150,
+              color: Colors.redAccent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Text('Contador: $counter'),
                   Container(
-                    width: 50,
-                    height: 50,
-                    color: Color.fromARGB(255, 250, 149, 149),
-                    child: Text('Crush'),
+                    height: 10,
                   ),
                   Container(
-                    width: 50,
                     height: 50,
-                    color: Color.fromARGB(255, 250, 149, 149),
-                    child: Text('Doces'),
                   ),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    color: Color.fromARGB(255, 250, 149, 149),
-                    child: Text('Apê'),
+                  Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Bem-Vindo!',
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontSize: 50,
+                        foreground: Paint()
+                          ..style = PaintingStyle.stroke
+                          ..strokeWidth = 6
+                          ..color = Colors.blue[700]!,
+                      ),
+                    ),
                   ),
-                ]),
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text('Seção de vendas de blablabla'),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 100,
+                          height: 50,
+                          color: Colors.cyan,
+                          child: Text(
+                            'ARRASTA',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey[300],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 100,
+                          height: 50,
+                          color: Colors.green,
+                          child: Text(
+                            'PARA',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey[300],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 100,
+                          height: 50,
+                          color: Colors.orange,
+                          child: Text(
+                            'O',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey[300],
+                            ),
+                          ),
+                        ),
+                      ]),
+                  Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'O melhor TCC da FHO!',
+                      style: TextStyle(
+                          fontSize: 40,
+                          foreground: Paint()
+                            ..shader = ui.Gradient.linear(
+                              const Offset(0, 20),
+                              const Offset(150, 20),
+                              <Color>[
+                                Colors.red,
+                                Colors.yellow,
+                              ],
+                            )),
+                    ),
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 100,
+                          height: 50,
+                          color: Color.fromARGB(255, 110, 110, 110),
+                          child: Text(
+                            'LADO',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey[300],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 100,
+                          height: 50,
+                          color: Colors.pink,
+                          child: Text(
+                            'E',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey[300],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 100,
+                          height: 50,
+                          color: Colors.purple,
+                          child: Text(
+                            'DIVIRTA-SE',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey[300],
+                            ),
+                          ),
+                        ),
+                      ]),
+                ],
+              ),
             ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    color: Color.fromARGB(255, 250, 149, 149),
-                    child: Text('Crush'),
-                  ),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    color: Color.fromARGB(255, 250, 149, 149),
-                    child: Text('Doces'),
-                  ),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    color: Color.fromARGB(255, 250, 149, 149),
-                    child: Text('Apê'),
-                  ),
-                ]),
+            Container(
+              height: 150,
+              color: Colors.orange,
+              child: Container(
+                padding: EdgeInsets.all(25.0),
+                child: Text('COMIDAS',
+                style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.black,
+                )),
+              ), 
+            ),
+            Container(
+              height: 150,
+              color: Colors.green,
+              child: Text('APÊS'),
+            ),
+            Container(
+              height: 150,
+              color: Colors.blue,
+              child: Text('CARONAS'),
+            ),
+            Container(
+              height: 150,
+              color: Colors.pink,
+              child: Text('COMIDAS'),
+            ),
+            Container(
+              height: 150,
+              color: Colors.purple,
+              child: Text('ESTÁGIOS'),
+            ),
+            Container(
+              height: 150,
+              color: Colors.yellow,
+              child: Text('FESTAS'),
+            ),
+            Container(
+              height: 150,
+              color: Colors.blue,
+              child: Text('ACHADOS/PERDIDOS'),
+            ),
           ],
         ),
       ),
