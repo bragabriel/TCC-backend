@@ -17,34 +17,39 @@
         <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_usuario.sql" relativeToChangelogFile="true" />
     </changeSet>
 
-<!--    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-CARONA">-->
-<!--        <comment>Insere Dados - Carona</comment>-->
-<!--        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_carona.sql" relativeToChangelogFile="true" />-->
-<!--    </changeSet>-->
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-APE">
+        <comment>Insere Dados - Ape</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_ape.sql" relativeToChangelogFile="true" />
+    </changeSet>
+
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-CARONA">
+        <comment>Insere Dados - Carona</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_carona.sql" relativeToChangelogFile="true" />
+    </changeSet>
 
     <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-COMIDA">
         <comment>Insere Dados - Comida</comment>
         <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_comida.sql" relativeToChangelogFile="true" />
     </changeSet>
 
-<!--    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-CRUSH">-->
-<!--        <comment>Insere Dados - Crush</comment>-->
-<!--        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_crush.sql" relativeToChangelogFile="true" />-->
-<!--    </changeSet>-->
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-CRUSH">
+        <comment>Insere Dados - Crush</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_crush.sql" relativeToChangelogFile="true" />
+    </changeSet>
 
-<!--    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-ESTAGIO">-->
-<!--        <comment>Insere Dados - Estagio</comment>-->
-<!--        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_estagio.sql" relativeToChangelogFile="true" />-->
-<!--    </changeSet>-->
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-ESTAGIO">
+        <comment>Insere Dados - Estagio</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_estagio.sql" relativeToChangelogFile="true" />
+    </changeSet>
 
-<!--    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-FESTA">-->
-<!--        <comment>Insere Dados - Festa</comment>-->
-<!--        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_festa.sql" relativeToChangelogFile="true" />-->
-<!--    </changeSet>-->
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-FESTA">
+        <comment>Insere Dados - Festa</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_festa.sql" relativeToChangelogFile="true" />
+    </changeSet>
 
-<!--    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-OBJETO">-->
-<!--        <comment>Insere Dados - Objeto</comment>-->
-<!--        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_objeto.sql" relativeToChangelogFile="true" />-->
-<!--    </changeSet>-->
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-OBJETO">
+        <comment>Insere Dados - Objeto</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_objeto.sql" relativeToChangelogFile="true" />
+    </changeSet>
 
 </databaseChangeLog>
