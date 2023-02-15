@@ -7,15 +7,49 @@
    http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet author="v1" id="CRIA_TABELAS">
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="CRIA_TABELAS">
         <comment>Cria Tabelas</comment>
-        <sqlFile path="create_table.sql" relativeToChangelogFile="true" />
+        <sqlFile  path="create_tables.sql" relativeToChangelogFile="true" />
     </changeSet>
 
-    <changeSet author="v1" id="INSERE-DADOS">
-        <comment>Insere Dados</comment>
-        <!-- Verificar se seu banco está em PT/BR ou em EN e usar o script correto aqui -->
-        <sqlFile path="insert_data.sql" relativeToChangelogFile="true" />
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-USUARIO">
+        <comment>Insere Dados - Usuario</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_usuario.sql" relativeToChangelogFile="true" />
+    </changeSet>
+
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-APE">
+        <comment>Insere Dados - Ape</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_ape.sql" relativeToChangelogFile="true" />
+    </changeSet>
+
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-CARONA">
+        <comment>Insere Dados - Carona</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_carona.sql" relativeToChangelogFile="true" />
+    </changeSet>
+
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-COMIDA">
+        <comment>Insere Dados - Comida</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_comida.sql" relativeToChangelogFile="true" />
+    </changeSet>
+
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-CRUSH">
+        <comment>Insere Dados - Crush</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_crush.sql" relativeToChangelogFile="true" />
+    </changeSet>
+
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-ESTAGIO">
+        <comment>Insere Dados - Estagio</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_estagio.sql" relativeToChangelogFile="true" />
+    </changeSet>
+
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-FESTA">
+        <comment>Insere Dados - Festa</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_festa.sql" relativeToChangelogFile="true" />
+    </changeSet>
+
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-OBJETO">
+        <comment>Insere Dados - Objeto</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_objeto.sql" relativeToChangelogFile="true" />
     </changeSet>
 
 </databaseChangeLog>

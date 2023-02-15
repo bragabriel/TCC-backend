@@ -19,34 +19,34 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUsuario")
+    @Column(name = "id_usuario")
     private Long idUsuario;
 
-    @Column(name = "nomeUsuario", nullable = false)
+    @Column(name = "nome_usuario", nullable = false)
     private String nomeUsuario;
 
-    @Column(name = "sobrenomeUsuario", nullable = false)
+    @Column(name = "sobrenome_usuario", nullable = false)
     private String sobrenomeUsuario;
 
-    @Column(name = "emailUsuario", nullable = false)
+    @Column(name = "email_usuario", nullable = false)
     private String emailUsuario;
 
-    @Column(name = "senhaUsuario", nullable = false)
+    @Column(name = "senha_usuario", nullable = false)
     private String senhaUsuario;
 
-    @Column(name = "telefoneUsuario", nullable = false)
+    @Column(name = "telefone_usuario", nullable = false)
     private String telefoneUsuario;
 
-    @Column(name = "dataNascimento", nullable = false)
+    @Column(name = "dataNascimento_usuario", nullable = false)
     private Date dataNascimento;
 
-    @Column(name = "descricaoUsuario", nullable = false)
+    @Column(name = "descricao_usuario")
     private String descricaoUsuario;
 
-    @Column(name = "imagemUsuario")
+    @Column(name = "imagem_usuario")
     private byte[] imagemUsuario;
 
-    //Um USUARIO pode ter 1-N COMIDAS
+//    Um USUARIO pode ter 1-N COMIDAS
     @OneToMany(mappedBy = "idUsuario", targetEntity = Comida.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private List<Comida> listaComidas = new ArrayList<Comida>();

@@ -29,7 +29,7 @@ public class ComidaService {
     public ResponseBase<ComidaResponse> cadastrar(ComidaCreateRequest novo) {
 
         Comida modeloDb = new Comida();
-        modeloDb.setNomeComida(novo.getNome());
+        modeloDb.setTituloComida(novo.getNome());
         modeloDb.setTipoComida(novo.getTipo());
         modeloDb.setImagemComida(novo.getImagemComida());
 
@@ -99,7 +99,7 @@ public class ComidaService {
 
         return new ComidaResponse(
                 comida.getIdComida(),
-                comida.getNomeComida(),
+                comida.getTituloComida(),
                 comida.getTipoComida(),
                 comida.getImagemComida(),
                 comida.getIdUsuario()
@@ -116,7 +116,7 @@ public class ComidaService {
         }
 
         var comida = comidaEncontrada.get();
-        comida.setNomeComida(comidaUpdateRequest.getNomeComida());
+        comida.setTituloComida(comidaUpdateRequest.getNomeComida());
         comida.setTipoComida(comidaUpdateRequest.getTipoComida());
         comida.setImagemComida(comidaUpdateRequest.getImagemComida());
 
@@ -124,7 +124,7 @@ public class ComidaService {
 
         return new ComidaResponse(
                 comidaSalva.getIdComida(),
-                comidaSalva.getNomeComida(),
+                comidaSalva.getTituloComida(),
                 comidaSalva.getTipoComida(),
                 comidaSalva.getImagemComida(),
                 comidaSalva.getIdUsuario()

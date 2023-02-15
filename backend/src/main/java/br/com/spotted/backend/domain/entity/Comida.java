@@ -15,23 +15,32 @@ public class Comida {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idComida")
+    @Column(name = "id_comida")
     private Long idComida;
 
-    @Column(name = "nomeComida", nullable = false)
-    private String nomeComida;
+    @Column(name = "titulo_comida", nullable = false)
+    private String tituloComida;
 
-    @Column(name = "tipoComida", nullable = false)
+    @Column(name = "descricao_comida", nullable = false)
+    private String descricaoComida;
+
+    @Column(name = "tipo_comida", nullable = false)
     private String tipoComida;
 
-    @Column(name = "imagemComida")
+    @Column(name = "marca_comida")
+    private String marcaComida;
+
+    @Column(name = "oferta_comida")
+    private String ofertaComida;
+
+    @Column(name = "imagem_comida")
     private byte[] imagemComida;
 
     @Column(name= "idUsuario", insertable = false, updatable = false)
     private Long idUsuario;
 
     @ManyToOne //Muitas COMIDAS podem ter apenas 1 USUARIO
-    @JoinColumn(name="idUsuario", referencedColumnName = "idUsuario", nullable = false) //Fk IdUsuario na tabela Comida
+    @JoinColumn(name="idUsuario", referencedColumnName = "id_usuario", nullable = false) //Fk IdUsuario na tabela Comida
     private Usuario usuario;
 
 }
