@@ -16,7 +16,6 @@ public class UsuarioResponse {
     private String nomeUsuario;
     private String sobrenomeUsuario;
     private String emailUsuario;
-    private String senhaUsuario;
     private String telefoneUsuario;
     private Date dataNascimento;
     private String descricaoUsuario;
@@ -28,7 +27,6 @@ public class UsuarioResponse {
         this.nomeUsuario = usuario.getNomeUsuario();
         this.sobrenomeUsuario = usuario.getSobrenomeUsuario();
         this.emailUsuario = usuario.getEmailUsuario();
-        this.senhaUsuario = usuario.getSenhaUsuario();
         this.telefoneUsuario = usuario.getTelefoneUsuario();
         this.dataNascimento = usuario.getDataNascimento();
         this.imagemUsuario = usuario.getImagemUsuario();
