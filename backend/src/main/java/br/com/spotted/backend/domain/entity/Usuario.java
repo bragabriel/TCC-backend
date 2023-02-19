@@ -46,8 +46,12 @@ public class Usuario {
     @Column(name = "imagem_usuario")
     private byte[] imagemUsuario;
 
-//    Um USUARIO pode ter 1-N COMIDAS
+    //Um USUARIO pode ter 1-N COMIDAS
     @OneToMany(mappedBy = "idUsuario", targetEntity = Comida.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private List<Comida> listaComidas = new ArrayList<Comida>();
+
+    @OneToMany(mappedBy = "idUsuario", targetEntity = Estagio.class, orphanRemoval = true)
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    private List<Estagio> listaEstagio = new ArrayList<Estagio>();
 }
