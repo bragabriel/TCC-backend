@@ -8,11 +8,20 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class ComidaUpdateRequest {
 
-    @NotEmpty(message = "Nome é obrigatório!")
-    private String nomeComida;
+    @NotEmpty(message = "Campo nome é obrigatório!")
+    private String tituloComida;
 
-    @NotEmpty(message = "Tipo é obrigatório!")
+    @NotEmpty(message = "Campo 'descrição' é obrigatório!")
+    private String descricaoComida;
+
+    @NotEmpty(message = "Campo 'tipo' é obrigatório!")
     private String tipoComida;
+
+    @NotEmpty(message = "Campo 'marca' é obrigatório!")
+    private String marcaComida;
+
+    @NotEmpty(message = "Campo 'oferta' é obrigatório!")
+    private String ofertaComida;
 
     private byte[] imagemComida;
 

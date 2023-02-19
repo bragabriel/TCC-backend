@@ -1,4 +1,4 @@
-package br.com.spotted.backend.service;
+package br.com.spotted.backend.domain.dto;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

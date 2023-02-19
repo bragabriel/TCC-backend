@@ -36,11 +36,11 @@ public class Comida {
     @Column(name = "imagem_comida")
     private byte[] imagemComida;
 
-    @Column(name= "idUsuario", insertable = false, updatable = false)
+    @Column(name= "id_usuario", insertable = false, updatable = false)
     private Long idUsuario;
 
     @ManyToOne //Muitas COMIDAS podem ter apenas 1 USUARIO
-    @JoinColumn(name="idUsuario", referencedColumnName = "id_usuario", nullable = false) //Fk IdUsuario na tabela Comida
+    @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", nullable = false) //Fk IdUsuario na tabela Comida
     private Usuario usuario;
 
 }

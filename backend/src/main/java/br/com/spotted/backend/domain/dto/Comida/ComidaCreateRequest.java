@@ -9,10 +9,19 @@ import javax.validation.constraints.NotNull;
 public class ComidaCreateRequest {
 
     @NotEmpty
-    private String nome;
+    private String tituloComida;
 
     @NotEmpty
-    private String tipo;
+    private String descricaoComida;
+
+    @NotEmpty
+    private String tipoComida;
+
+    @NotEmpty
+    private String marcaComida;
+
+    @NotEmpty
+    private String ofertaComida;
 
     private byte[] imagemComida = null;
 
