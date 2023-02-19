@@ -49,11 +49,11 @@ public class Ape {
     @Column(name = "imagem_ape")
     private byte[] imagemApe;
 
-    @Column(name= "idUsuario", insertable = false, updatable = false)
+    @Column(name= "id_usuario", insertable = false, updatable = false)
     private Long idUsuario;
 
     @ManyToOne
-    @JoinColumn(name="idUsuario", referencedColumnName = "id_usuario", nullable = false) //Fk IdUsuario na tabela Ape
+    @JoinColumn(name="id_Usuario", referencedColumnName = "id_usuario", nullable = false) //Fk IdUsuario na tabela Ape
     private Usuario usuario;
 
 }

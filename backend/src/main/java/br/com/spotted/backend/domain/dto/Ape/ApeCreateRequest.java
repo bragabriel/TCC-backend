@@ -23,10 +23,10 @@ public class ApeCreateRequest {
     @NotNull(message = "O campo quantidade de moradores atuais é obrigatório!")
     private Integer qtdMoradoresAtuaisApe;
 
-    @NotEmpty(message = "O campo preço total do aluguel é obrigatório!")
+    @NotNull(message = "O campo preço total do aluguel é obrigatório!")
     private Double precoAluguelTotalApe;
 
-    @NotEmpty(message = "O campo preço do aluguel por pessoa é obrigatório!")
+    @NotNull(message = "O campo preço do aluguel por pessoa é obrigatório!")
     private Double precoAluguelPorPessoaApe;
 
     @NotEmpty(message = "O campo vaga garagem é obrigatório!")
@@ -35,7 +35,7 @@ public class ApeCreateRequest {
     @NotEmpty(message = "O campo animais de estimação é obrigatório!")
     private String animaisEstimacaoApe;
 
-    private byte[] imagemComida;
+    private byte[] imagemApe;
 
     @NotNull
     private Long idUsuario;

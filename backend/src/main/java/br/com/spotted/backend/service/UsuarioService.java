@@ -25,6 +25,39 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
+    public ResponseBase<Page<UsuarioResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
+
+        // a Pagina atual não pode ser menor que 1
+        if (searchRequest.getPaginaAtual() < 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");
+        }
+
+        // a quantidade de itens por página deve ser entre 1 e 50
+        if (searchRequest.getQtdPorPagina() < 1 || searchRequest.getQtdPorPagina() > 50) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantidade de itens por página deve ser entre 1 e 50 itens");
+        }
+
+        // pesquisa no repositorio de customer usando a consulta paginada
+        Page<Usuario> responsavelPage = usuarioRepository.findAll(searchRequest.parseToPageRequest());
+
+        // Mapeia da entidade(Customer) para o DTO(CustomerResponse)
+        Page<UsuarioResponse> responsavelResponsePage = responsavelPage.map(UsuarioResponse::new);
+        return new ResponseBase<>(responsavelResponsePage);
+    }
+
+    public ResponseBase<UsuarioResponse> pesquisarPorId(Long id) {
+        // Consulta o repositorio para procurar por um custumer pelo 'id'
+        Optional<Usuario> responsavelOptional = usuarioRepository.findById(id);
+
+        // Verifica se o custimer foi encontrado, caso o contratrio retorna um erro
+        Usuario usuario = responsavelOptional
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Responsável não encontrado"));
+
+        // Mapeia de entidade para dto
+        UsuarioResponse usuarioResponse = new UsuarioResponse(usuario);
+
+        return new ResponseBase<>(usuarioResponse);
+    }
     public ResponseBase<UsuarioResponse> cadastrar(UsuarioCreateRequest novo) {
 
         Usuario modeloDb = new Usuario();
@@ -43,43 +76,6 @@ public class UsuarioService {
         UsuarioResponse usuarioResponse = new UsuarioResponse(usuarioSalvo);
         return new ResponseBase<>(usuarioResponse);
     }
-
-    public ResponseBase<Page<UsuarioResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
-
-        // a Pagina atual não pode ser menor que 0
-        if (searchRequest.getPaginaAtual() < 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 0");
-        }
-        // a quantidade de itens por pagina deve ser entre 1 e 50
-        if (searchRequest.getQtdPorPagina() < 1 || searchRequest.getQtdPorPagina() > 50) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantidade de itens por página deve ser entre 1 e 50 itens");
-        }
-
-        // cria um objeto de consulta paginada(PageRequest) a partir dos parametros informados
-        PageRequest pageRequest = PageRequest.of(searchRequest.getPaginaAtual(), searchRequest.getQtdPorPagina());
-
-        // pesquisa no repositorio de customer usando a consulta paginada
-        Page<Usuario> responsavelPage = usuarioRepository.findAll(pageRequest);
-
-        // Mapeia da entidade(Customer) para o DTO(CustomerResponse)
-        Page<UsuarioResponse> responsavelResponsePage = responsavelPage.map(UsuarioResponse::new);
-        return new ResponseBase<>(responsavelResponsePage);
-    }
-
-    public ResponseBase<UsuarioResponse> pesquisarPorId(Long id) {
-        // Consulta o repositorio para procurar por um custumer pelo id
-        Optional<Usuario> responsavelOptional = usuarioRepository.findById(id);
-
-        // Verifica se o custimer foi encontrado, caso o contratrio retorna um erro
-        Usuario usuario = responsavelOptional
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Responsável não encontrado"));
-
-        // Mapeia de entidade para dto
-        UsuarioResponse usuarioResponse = new UsuarioResponse(usuario);
-
-        return new ResponseBase<>(usuarioResponse);
-    }
-
     public UsuarioResponse deletar(Long idUsuario) throws UsuarioNaoEncontradoException {
         var usuarioEncontrado = usuarioRepository.findById(idUsuario);
 

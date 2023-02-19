@@ -3,7 +3,6 @@ package br.com.spotted.backend.controller;
 import br.com.spotted.backend.domain.dto.Ape.ApeCreateRequest;
 import br.com.spotted.backend.domain.dto.Ape.ApeResponse;
 import br.com.spotted.backend.domain.dto.Ape.ApeUpdateRequest;
-import br.com.spotted.backend.domain.dto.Comida.ComidaResponse;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.service.ApeService;

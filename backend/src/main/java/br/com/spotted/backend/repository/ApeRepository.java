@@ -9,5 +9,4 @@ import java.util.Optional;
 @Repository
 public interface ApeRepository extends PagingAndSortingRepository<Ape, Long> {
 
-    Optional<Ape> findByName (String name);
 }

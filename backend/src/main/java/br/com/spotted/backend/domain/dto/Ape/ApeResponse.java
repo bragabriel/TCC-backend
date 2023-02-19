@@ -42,15 +42,15 @@ public class ApeResponse {
     public ApeResponse(Ape ape) {
         this.idApe = ape.getIdApe();
         this.tituloApe = ape.getTituloApe();
-        this.descricaoApe = getDescricaoApe();
-        this.localizacaoApe = getLocalizacaoApe();
-        this.qtdMoradoresPermitidoApe = getQtdMoradoresPermitidoApe();
-        this.qtdMoradoresAtuaisApe = getQtdMoradoresAtuaisApe();
-        this.precoAluguelTotalApe = getPrecoAluguelTotalApe();
-        this.precoAluguelPorPessoaApe = getPrecoAluguelPorPessoaApe();
-        this.vagaGaragemApe = getVagaGaragemApe();
-        this.animaisEstimacaoApe = getAnimaisEstimacaoApe();
-        this.imagemComida = getImagemComida();
-        this.idUsuario = getIdUsuario();
+        this.descricaoApe = ape.getDescricaoApe();
+        this.localizacaoApe = ape.getLocalizacaoApe();
+        this.qtdMoradoresPermitidoApe = ape.getQtdMoradoresPermitidoApe();
+        this.qtdMoradoresAtuaisApe = ape.getQtdMoradoresAtuaisApe();
+        this.precoAluguelTotalApe = ape.getPrecoAluguelTotalApe();
+        this.precoAluguelPorPessoaApe = ape.getPrecoAluguelPorPessoaApe();
+        this.vagaGaragemApe = ape.getVagaGaragemApe();
+        this.animaisEstimacaoApe = ape.getAnimaisEstimacaoApe();
+        this.imagemComida = ape.getImagemApe();
+        this.idUsuario = ape.getIdUsuario();
     }
 }
