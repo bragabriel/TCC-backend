@@ -1,6 +1,7 @@
 package br.com.spotted.backend.service;
 
 
+import br.com.spotted.backend.domain.dto.Criptografia;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioCreateRequest;

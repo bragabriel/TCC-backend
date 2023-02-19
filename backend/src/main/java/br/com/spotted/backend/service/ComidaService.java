@@ -106,7 +106,6 @@ public class ComidaService {
         );
     }
 
-
     public ComidaResponse atualizarComida(Long idComida, ComidaUpdateRequest comidaUpdateRequest){
 
         var comidaEncontrada = comidaRepository.findById(idComida);

@@ -29,16 +29,16 @@ public class Ape {
     private String localizacaoApe;
 
     @Column(name = "qtdMoradoresPermitido_ape")
-    private String qtdMoradoresPermitidoApe;
+    private Integer qtdMoradoresPermitidoApe;
 
     @Column(name = "qtdMoradoresAtuais_ape")
-    private String qtdMoradoresAtuaisApe;
+    private Integer qtdMoradoresAtuaisApe;
 
     @Column(name = "precoAluguelTotal_ape")
-    private String precoAluguelTotalApe;
+    private Double precoAluguelTotalApe;
 
     @Column(name = "precoAluguelPorPessoa_ape")
-    private String precoAluguelPorPessoaApe;
+    private Double precoAluguelPorPessoaApe;
 
     @Column(name = "vagaGaragem_ape")
     private String vagaGaragemApe;
