@@ -34,11 +34,11 @@ public class Objeto {
     @Column(name = "imagem_objeto")
     private byte[] imagemObjeto;
 
-    @Column(name= "idUsuario", insertable = false, updatable = false)
+    @Column(name= "id_usuario")
     private Long idUsuario;
 
     @ManyToOne
-    @JoinColumn(name="idUsuario", referencedColumnName = "id_usuario", nullable = false) //Fk IdUsuario na tabela Objeto
+    @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false)
     private Usuario usuario;
 
 }

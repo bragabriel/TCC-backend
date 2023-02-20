@@ -32,10 +32,10 @@ public class Carona {
     private String informacoesCondutorCarona;
 
     @Column(name = "qtdAssentosTotal_carona")
-    private String qtdAssentosTotalCarona;
+    private Integer qtdAssentosTotalCarona;
 
     @Column(name = "qtdAssentosAtual_carona")
-    private String qtdAssentosAtualCarona;
+    private Integer qtdAssentosAtualCarona;
 
     @Column(name = "cidade_carona")
     private String cidadeCarona;
@@ -46,11 +46,11 @@ public class Carona {
     @Column(name = "imagem_carona")
     private byte[] imagemCarona;
 
-    @Column(name= "idUsuario", insertable = false, updatable = false)
+    @Column(name= "id_usuario")
     private Long idUsuario;
 
     @ManyToOne
-    @JoinColumn(name="idUsuario", referencedColumnName = "id_usuario", nullable = false) //Fk IdUsuario na tabela Carona
+    @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false) //Fk IdUsuario na tabela Carona
     private Usuario usuario;
 
 }

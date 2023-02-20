@@ -2,7 +2,6 @@ package br.com.spotted.backend.domain.dto.Comida;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 

@@ -20,6 +20,7 @@ public class ComidaResponse {
 
     private String marcaComida;
 
+    private Double precoComida;
     private String ofertaComida;
 
     private byte[] imagemComida = null;
@@ -31,6 +32,7 @@ public class ComidaResponse {
         this.idComida = comida.getIdComida();
         this.tituloComida = comida.getTituloComida();
         this.descricaoComida = comida.getTipoComida();
+        this.precoComida = comida.getPrecoComida();
         this.tipoComida = comida.getDescricaoComida();
         this.marcaComida = comida.getTipoComida();
         this.ofertaComida = comida.getTipoComida();

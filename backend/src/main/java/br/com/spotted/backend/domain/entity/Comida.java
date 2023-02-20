@@ -31,7 +31,7 @@ public class Comida {
     private String marcaComida;
 
     @Column(name = "preco_comida")
-    private Double preco_comida;
+    private Double precoComida;
 
     @Column(name = "oferta_comida")
     private String ofertaComida;

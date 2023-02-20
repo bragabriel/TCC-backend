@@ -39,11 +39,11 @@ public class Estagio {
     @Column(name = "imagem_estagio")
     private byte[] imagemEstagio;
 
-    @Column(name= "idUsuario", insertable = false, updatable = false)
+    @Column(name= "id_usuario")
     private Long idUsuario;
 
-    @ManyToOne //Muitos posts de ESTAGIO podem pertencer à apenas 1 USUARIO
-    @JoinColumn(name="idUsuario", referencedColumnName = "id_usuario", nullable = false) //Fk IdUsuario na tabela Comida
+    @ManyToOne
+    @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false)
     private Usuario usuario;
 
 }

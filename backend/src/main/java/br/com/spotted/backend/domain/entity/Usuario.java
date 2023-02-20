@@ -51,7 +51,15 @@ public class Usuario {
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private List<Comida> listaComidas = new ArrayList<Comida>();
 
+    @OneToMany(mappedBy = "idUsuario", targetEntity = Ape.class, orphanRemoval = true)
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    private List<Ape> listaApes = new ArrayList<Ape>();
+
+    @OneToMany(mappedBy = "idUsuario", targetEntity = Ape.class, orphanRemoval = true)
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    private List<Carona> listaCaronas = new ArrayList<Carona>();
+
     @OneToMany(mappedBy = "idUsuario", targetEntity = Estagio.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<Estagio> listaEstagio = new ArrayList<Estagio>();
+    private List<Estagio> listaEstagios = new ArrayList<Estagio>();
 }
