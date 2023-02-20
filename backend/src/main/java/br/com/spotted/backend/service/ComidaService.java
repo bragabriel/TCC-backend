@@ -6,13 +6,10 @@ import br.com.spotted.backend.domain.dto.Comida.ComidaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Comida;
-import br.com.spotted.backend.domain.entity.Usuario;
 import br.com.spotted.backend.exception.ComidaNaoEncontradaException;
 import br.com.spotted.backend.repository.ComidaRepository;
-import br.com.spotted.backend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,7 +21,7 @@ import java.util.Optional;
 public class ComidaService {
 
     private final ComidaRepository comidaRepository;
-    private final UsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioService;
 
     public ResponseBase<Page<ComidaResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
 
@@ -59,18 +56,13 @@ public class ComidaService {
         modeloDb.setDescricaoComida(novo.getDescricaoComida());
         modeloDb.setTipoComida(novo.getTipoComida());
         modeloDb.setMarcaComida(novo.getMarcaComida());
+        modeloDb.setPreco_comida(novo.getPrecoComida());
         modeloDb.setOfertaComida(novo.getOfertaComida());
         modeloDb.setImagemComida(novo.getImagemComida());
+        modeloDb.setIdUsuario(novo.getIdUsuario());
 
-        //Buscar no repo de USUARIO e recuperar o Usuario desta Comida
-        Optional<Usuario> usuarioOptinal = usuarioRepository.findById(novo.getIdUsuario());
-
-        //Verifica se o responsável foi encontrado, caso o contratario lança exception
-        Usuario usuarioSalvo = usuarioOptinal
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado."));
-
-        //Setando o responsável (FK) na tabela de Video
-        modeloDb.setUsuario(usuarioSalvo);
+        //Validação de usuário no banco de dados
+        usuarioService.pesquisarPorId(novo.getIdUsuario());
 
         //Salvando
         Comida comidaSalva = comidaRepository.save(modeloDb);
