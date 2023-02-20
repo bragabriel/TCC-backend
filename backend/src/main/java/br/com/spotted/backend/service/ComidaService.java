@@ -104,7 +104,11 @@ public class ComidaService {
 
         var comida = comidaEncontrada.get();
         comida.setTituloComida(comidaUpdateRequest.getTituloComida());
+        comida.setDescricaoComida(comidaUpdateRequest.getDescricaoComida());
         comida.setTipoComida(comidaUpdateRequest.getTipoComida());
+        comida.setMarcaComida(comidaUpdateRequest.getMarcaComida());
+        comida.setPreco_comida(comidaUpdateRequest.getPreco_comida());
+        comida.setOfertaComida(comidaUpdateRequest.getOfertaComida());
         comida.setImagemComida(comidaUpdateRequest.getImagemComida());
 
         var comidaSalva = comidaRepository.save(comida);

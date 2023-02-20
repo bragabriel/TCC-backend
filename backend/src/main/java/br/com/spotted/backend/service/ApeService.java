@@ -6,11 +6,9 @@ import br.com.spotted.backend.domain.dto.Ape.ApeUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Ape;
-import br.com.spotted.backend.domain.entity.Usuario;
 import br.com.spotted.backend.exception.ApeNaoEncontradoException;
 import br.com.spotted.backend.exception.ComidaNaoEncontradaException;
 import br.com.spotted.backend.repository.ApeRepository;
-import br.com.spotted.backend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -24,7 +22,7 @@ import java.util.Optional;
 public class ApeService {
 
     private final ApeRepository apeRepository;
-    private final UsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioService;
 
     public ResponseBase<Page<ApeResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
 
@@ -65,15 +63,9 @@ public class ApeService {
         modeloDb.setVagaGaragemApe(novo.getVagaGaragemApe());
         modeloDb.setAnimaisEstimacaoApe(novo.getAnimaisEstimacaoApe());
         modeloDb.setImagemApe(novo.getImagemApe());
+        modeloDb.setIdUsuario(novo.getIdUsuario());
 
-        //Buscar no repo de USUARIO e recuperar o Usuario deste APE
-        Optional<Usuario> usuarioOptinal = usuarioRepository.findById(novo.getIdUsuario());
-
-        //Verifica se o responsável foi encontrado, caso o contratario lança exception
-        Usuario usuarioSalvo = usuarioOptinal.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado."));
-
-        //Setando o responsável (FK) na tabela de APE
-        modeloDb.setUsuario(usuarioSalvo);
+        usuarioService.pesquisarPorId(novo.getIdUsuario());
 
         //Salvando
         Ape apeSalvo = apeRepository.save(modeloDb);

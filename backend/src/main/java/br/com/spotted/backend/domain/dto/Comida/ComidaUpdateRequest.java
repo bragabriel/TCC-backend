@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class ComidaUpdateRequest {
@@ -20,9 +21,11 @@ public class ComidaUpdateRequest {
     @NotEmpty(message = "Campo 'marca' é obrigatório!")
     private String marcaComida;
 
+    @NotNull(message = "Campo 'preço' é obrigatório!")
+    private Double preco_comida;
+
     @NotEmpty(message = "Campo 'oferta' é obrigatório!")
     private String ofertaComida;
 
     private byte[] imagemComida;
-
 }
