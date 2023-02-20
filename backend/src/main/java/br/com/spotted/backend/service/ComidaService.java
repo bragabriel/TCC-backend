@@ -56,7 +56,7 @@ public class ComidaService {
         modeloDb.setDescricaoComida(novo.getDescricaoComida());
         modeloDb.setTipoComida(novo.getTipoComida());
         modeloDb.setMarcaComida(novo.getMarcaComida());
-        modeloDb.setPreco_comida(novo.getPrecoComida());
+        modeloDb.setPrecoComida(novo.getPrecoComida());
         modeloDb.setOfertaComida(novo.getOfertaComida());
         modeloDb.setImagemComida(novo.getImagemComida());
         modeloDb.setIdUsuario(novo.getIdUsuario());
@@ -88,6 +88,7 @@ public class ComidaService {
                 comida.getDescricaoComida(),
                 comida.getTipoComida(),
                 comida.getMarcaComida(),
+                comida.getPrecoComida(),
                 comida.getOfertaComida(),
                 comida.getImagemComida(),
                 comida.getIdUsuario()
@@ -107,7 +108,7 @@ public class ComidaService {
         comida.setDescricaoComida(comidaUpdateRequest.getDescricaoComida());
         comida.setTipoComida(comidaUpdateRequest.getTipoComida());
         comida.setMarcaComida(comidaUpdateRequest.getMarcaComida());
-        comida.setPreco_comida(comidaUpdateRequest.getPreco_comida());
+        comida.setPrecoComida(comidaUpdateRequest.getPreco_comida());
         comida.setOfertaComida(comidaUpdateRequest.getOfertaComida());
         comida.setImagemComida(comidaUpdateRequest.getImagemComida());
 
@@ -119,6 +120,7 @@ public class ComidaService {
                 comida.getDescricaoComida(),
                 comida.getTipoComida(),
                 comida.getMarcaComida(),
+                comida.getPrecoComida(),
                 comida.getOfertaComida(),
                 comida.getImagemComida(),
                 comida.getIdUsuario()

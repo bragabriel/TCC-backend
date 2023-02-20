@@ -86,8 +86,8 @@ CREATE TABLE [dbo].[Carona](
 	[informacoesVeiculo_carona] [varchar](255) NOT NULL,
 	[informacoesCondutor_carona] [varchar](255) NOT NULL,
 	[qtdAssentosAtual_carona] [int] NOT NULL,
-	[qtdAssentosPreenchidos_carona] [int] NOT NULL,
-	[imagemAutomovel_carona] [varbinary](max) NULL,
+	[qtdAssentosTotal_carona] [int] NOT NULL,
+	[imagem_carona] [varbinary](max) NULL,
 	[id_usuario] [int] NOT NULL,
  CONSTRAINT [PK_Carona] PRIMARY KEY CLUSTERED
 (
