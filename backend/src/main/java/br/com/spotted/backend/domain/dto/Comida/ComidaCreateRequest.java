@@ -20,6 +20,9 @@ public class ComidaCreateRequest {
     @NotEmpty
     private String marcaComida;
 
+    @NotNull
+    private Double precoComida;
+
     @NotEmpty
     private String ofertaComida;
 
