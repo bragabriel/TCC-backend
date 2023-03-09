@@ -8,6 +8,7 @@ import br.com.spotted.backend.domain.dto.Usuario.UsuarioCreateRequest;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioResponse;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioUpdateRequest_NomeSobrenome;
 import br.com.spotted.backend.domain.entity.Usuario;
+import br.com.spotted.backend.exception.EmailDuplicadoException;
 import br.com.spotted.backend.exception.UsuarioNaoEncontradoException;
 import br.com.spotted.backend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -59,6 +60,8 @@ public class UsuarioService {
         return new ResponseBase<>(usuarioResponse);
     }
     public ResponseBase<UsuarioResponse> cadastrar(UsuarioCreateRequest novo) {
+
+        validateEmail(novo.getEmail());
 
         Usuario modeloDb = new Usuario();
         modeloDb.setNomeUsuario(novo.getNome());
@@ -140,4 +143,11 @@ public class UsuarioService {
                 usuarioSalvo.getImagemUsuario()
         );
     }
+
+    private void validateEmail(String email) {
+        if (usuarioRepository.findByEmailUsuario(email).isPresent()) {
+            throw new EmailDuplicadoException("E-mail já cadastrado!");
+        }
+    }
+
 }
