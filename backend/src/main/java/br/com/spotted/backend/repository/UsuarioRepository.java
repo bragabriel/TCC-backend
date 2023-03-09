@@ -21,10 +21,10 @@ public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, L
     @Query(
             nativeQuery = true,
             value = "SELECT * FROM Usuario " +
-                    "WHERE (nomeUsuario = :nome) " +
-                    "AND (senhaUsuario = :senha)"
+                    "WHERE (email_usuario = :email) " +
+                    "AND (senha_usuario = :senha)"
     )
-    Usuario login(@Param("nome") String nomeUsuario,
+    Usuario login(@Param("email") String emailUsuario,
                         @Param("senha") String senhaUsuario);
 }
 
