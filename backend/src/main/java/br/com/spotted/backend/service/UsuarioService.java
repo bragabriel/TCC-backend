@@ -98,12 +98,12 @@ public class UsuarioService {
         );
     }
 
-    public UsuarioResponse logar(String nome, String senha) {
+    public UsuarioResponse logar(String email, String senha) {
 
         var senhaCriptografada = Criptografia.encriptografar(senha);
 
         // Consulta o repositorio para procurar por um custumer pelo nome e senha
-        var retorno = usuarioRepository.login(nome, senhaCriptografada);
+        var retorno = usuarioRepository.login(email, senhaCriptografada);
 
         if (retorno == null) {
             throw new UsuarioNaoEncontradoException("Usuário ou senha inválida.");
