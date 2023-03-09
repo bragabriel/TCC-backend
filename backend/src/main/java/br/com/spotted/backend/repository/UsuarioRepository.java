@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, Long> {
@@ -26,5 +27,6 @@ public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, L
     )
     Usuario login(@Param("email") String emailUsuario,
                         @Param("senha") String senhaUsuario);
+    Optional<Usuario> findByEmailUsuario (String email);
 }
 
