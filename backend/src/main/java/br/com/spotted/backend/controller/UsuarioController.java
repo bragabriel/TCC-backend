@@ -3,6 +3,7 @@ package br.com.spotted.backend.controller;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioCreateRequest;
+import br.com.spotted.backend.domain.dto.Usuario.UsuarioLoginRequest;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioResponse;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioUpdateRequest_NomeSobrenome;
 import br.com.spotted.backend.domain.entity.Usuario;
@@ -49,18 +50,10 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
     }
 
-    //Deletar Usuario por Id
-    @DeleteMapping(value = "api/usuario/{idUsuario}")
-    public ResponseEntity<UsuarioResponse> deletar(@PathVariable Long idUsuario) {
-        var usuario = usuarioService.deletar(idUsuario);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuario);
-    }
+    @PostMapping("api/usuarioLogar")
+    public ResponseEntity logar(@Valid @RequestBody UsuarioLoginRequest usuarioLoginRequest) {
 
-    //Logar Usuario por nome & senha
-    @GetMapping(value = "api/usuarioLogar/{nome}/{senha}")
-    public ResponseEntity logar(@PathVariable String nome, @PathVariable String senha) {
-
-        var retorno = usuarioService.logar(nome, senha);
+        var retorno = usuarioService.logar(usuarioLoginRequest.getEmail(), usuarioLoginRequest.getSenha());
 
         return ResponseEntity.ok(retorno);
     }
@@ -74,5 +67,11 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+    //Deletar Usuario por Id
+    @DeleteMapping(value = "api/usuario/{idUsuario}")
+    public ResponseEntity<UsuarioResponse> deletar(@PathVariable Long idUsuario) {
+        var usuario = usuarioService.deletar(idUsuario);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuario);
+    }
 }
 
