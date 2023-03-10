@@ -278,3 +278,36 @@ GO
 
 ALTER TABLE [dbo].[Objeto] CHECK CONSTRAINT [FK_Usuario_Objeto]
 GO
+
+
+--TABLE IMAGES
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[Image]    Script Date: 10/03/2023 11:43:47 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Image](
+	[id_image] [int] IDENTITY(1,1) NOT NULL,
+	[url] [nvarchar](255) NOT NULL,
+	[sequence] [int] NOT NULL,
+	[fileName] [nvarchar](255) NOT NULL,
+	[id_item] [int] NOT NULL,
+ CONSTRAINT [PK_ProductImage] PRIMARY KEY CLUSTERED
+(
+	[id_productImage] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ProductImage]  WITH CHECK ADD  CONSTRAINT [FK_ProductImage_Product] FOREIGN KEY([id_product])
+REFERENCES [dbo].[Product] ([Id])
+GO
+
+ALTER TABLE [dbo].[ProductImage] CHECK CONSTRAINT [FK_ProductImage_Product]
+GO
+

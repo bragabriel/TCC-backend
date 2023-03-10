@@ -36,7 +36,8 @@ public class UsuarioController {
     @GetMapping(value = "api/usuario/{idUsuario}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idUsuario) {
 
-        ResponseBase<UsuarioResponse> retorno = usuarioService.pesquisarPorId(idUsuario);
+//        ResponseBase<UsuarioResponse> retorno = usuarioService.pesquisarPorId(idUsuario);
+        ResponseBase<Usuario> retorno = usuarioService.pesquisarPorId(idUsuario);
 
         return ResponseEntity.ok(retorno);
     }

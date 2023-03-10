@@ -9,25 +9,28 @@ import javax.persistence.*;
 public class Image {
 
     @Id
+    @Column(name = "id_image")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idImage;
 
-    @Column(name = "URL")
+    @Column(name = "url")
     private String url;
 
-    @Column(name = "Sequence")
+    @Column(name = "sequence")
     private int sequence;
 
-    //PRODUCT ID, no caso, o id do item que queremos relacionar
-    @Column(name = "ProductId")
-    private Long itemId;
-
-    @Column(name = "ImageName")
+    @Column(name = "image_name")
     private String imageName;
 
+    //PRODUCT ID, no caso, o id do item que queremos relacionar
+    @Column(name = "id_item")
+    private Long idItem;
+
+
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ProductId", updatable = false, insertable = false)
-    private Product product;
+    @JoinColumn(name = "id_image", updatable = false, insertable = false) //FK
+    private Usuario usuario;
 
 
 }

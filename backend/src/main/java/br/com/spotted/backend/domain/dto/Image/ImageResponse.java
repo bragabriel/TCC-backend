@@ -13,7 +13,6 @@ public class ImageResponse {
     private Long idImage;
     private String url;
     private Integer sequence;
-
     private Long idItem;
     private String finalUrl;
 

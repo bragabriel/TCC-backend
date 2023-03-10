@@ -34,10 +34,9 @@ public class ImageService {
     @Autowired
     private AmazonS3 amazonS3;
 
-    public ResponseBase<List<ImageResponse>> createProductImage(MultipartFile[] file, Long idItem) throws IOException {
-//        var product = productRepository.findById(idItem)
-//                .orElseThrow(() -> new ProductNotFoundException("Produto não encontrado"));
-        //VER SE O ITEM EXISTE (USUARIO, COMIDA, APE...)
+    public ResponseBase<List<ImageResponse>> createUsuarioImage(MultipartFile[] file, Long idItem) throws IOException {
+
+        var usuario = usuarioService.pesquisarPorId(idItem);
 
         var retorno = storageService.uploadFile(file, idItem);
 
@@ -45,7 +44,7 @@ public class ImageService {
 
         for(int i = 0; i<retorno.size(); i++){
             Image image = new Image();
-            image.setItemId(idItem);
+            image.setIdItem(idItem);
             image.setSequence(i);
             image.setUrl(retorno.get(i));
 
@@ -59,24 +58,24 @@ public class ImageService {
         return new ResponseBase<>(productImageResponseList);
     }
 
-    public ResponseBase<List<ImageResponse>> findProductImageByIdUser(Long id){
+    public ResponseBase<List<ImageResponse>> findProductImageByIdUser(Long idItem){
 
-        var result = usuarioService.pesquisarPorId(id);
+        var result = usuarioService.pesquisarPorId(idItem);
 
         List<ImageResponse> productImageList = new ArrayList<>();
 
-        for(int i=0; i<result.getProductImageList().size(); i++){
+        for(int i=0; i<result.getObjetoRetorno().getListaImagens().size(); i++){
 
-            var key = result.getProductImageList().get(i).getUrl();
+            var key = result.getObjetoRetorno().getListaImagens().get(i).getUrl();
 
             String signedUrl = generateUrl(key, HttpMethod.GET);
 
             ImageResponse userImageResponse = new ImageResponse();
 
-            userImageResponse.setIdImage(id);
-            userImageResponse.setUrl(result.getProductImageList().get(i).getUrl());
-            userImageResponse.setSequence(result.getProductImageList().get(i).getSequence());
-            userImageResponse.setIdProductImage(result.getProductImageList().get(i).getIdProductImage());
+            userImageResponse.setIdItem(idItem);
+            userImageResponse.setUrl(result.getObjetoRetorno().getListaImagens().get(i).getUrl());
+            userImageResponse.setSequence(result.getObjetoRetorno().getListaImagens().get(i).getSequence());
+            userImageResponse.setIdImage(result.getObjetoRetorno().getListaImagens().get(i).getIdImage());
             userImageResponse.setFinalUrl(signedUrl);
 
             productImageList.add(userImageResponse);

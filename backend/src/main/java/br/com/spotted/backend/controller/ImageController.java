@@ -7,6 +7,7 @@ import br.com.iteris.minishop.domain.dto.productImage.ProductImageUpdateRequest;
 import br.com.iteris.minishop.domain.entity.Product;
 import br.com.iteris.minishop.domain.entity.ProductImage;
 import br.com.iteris.minishop.service.ProductImageService;
+import br.com.spotted.backend.service.ImageService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,12 @@ import java.nio.file.StandardCopyOption;
 public class ImageController {
 
     @Autowired
-    private ProductImageService productImageService;
+    private ImageService productImageService;
 
     @PostMapping(value = "/upload/{idProduto}", consumes = "multipart/form-data")
     @CrossOrigin()
     public ResponseEntity uploadImage(@RequestPart("files") MultipartFile[] file, @Valid @PathVariable Long idProduto) throws IOException {
-        return ResponseEntity.ok(productImageService.createProductImage(file, idProduto));
+        return ResponseEntity.ok(productImageService.createUsuarioImage(file, idProduto));
     }
 
     @GetMapping("/productImage/{id}")

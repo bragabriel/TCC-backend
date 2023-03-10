@@ -1,5 +1,18 @@
 version: '3'
 services:
+  localstack:
+    image: localstack/localstack:0.14.5
+    environment:
+      - SERVICES=s3
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - DATA_DIR=/tmp/localstack/data
+
+    ports:
+      - "4566:4566" # s3
+    volumes:
+      - localstack:/tmp/localstack
+    container_name: aws_minishop
+
   sqlserver:
     image: mcr.microsoft.com/mssql/server
     environment:
@@ -13,3 +26,4 @@ services:
 
 volumes:
   sqlserver:
+  localstack:
