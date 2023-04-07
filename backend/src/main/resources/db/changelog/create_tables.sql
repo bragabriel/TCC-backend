@@ -49,7 +49,6 @@ CREATE TABLE [dbo].[Ape](
 	[animaisEstimacao_ape] [varchar](255) NOT NULL,
 	[titulo_ape] [varchar](255) NOT NULL,
 	[descricao_ape] [varchar](255) NOT NULL,
-	[imagem_ape] [varbinary](max) NULL,
 	[id_usuario] [int] NOT NULL,
  CONSTRAINT [PK_Ape] PRIMARY KEY CLUSTERED
 (

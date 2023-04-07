@@ -1,10 +1,8 @@
 package br.com.spotted.backend.domain.dto.Image;
 
-import br.com.spotted.backend.domain.entity.Image;
+import br.com.spotted.backend.domain.entity.image.ComidaImage;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,11 +14,11 @@ public class ImageResponse {
     private Long idItem;
     private String finalUrl;
 
-    public ImageResponse(Image image, String fileName) {
-        this.idImage = image.getId();
-        this.url = image.getUrl();
-        this.sequence = image.getSequence();
-        this.idItem = image.getItemId();
+    public ImageResponse(ComidaImage comidaImage, String fileName) {
+        this.idImage = comidaImage.getIdImage();
+        this.url = comidaImage.getUrl();
+        this.sequence = comidaImage.getSequence();
+        this.idItem = comidaImage.getIdItem();
         this.finalUrl = fileName;
     }
 }

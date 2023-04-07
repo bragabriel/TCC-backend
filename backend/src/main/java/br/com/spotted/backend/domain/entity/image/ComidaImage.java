@@ -1,12 +1,13 @@
-package br.com.spotted.backend.domain.entity;
+package br.com.spotted.backend.domain.entity.image;
 
+import br.com.spotted.backend.domain.entity.Comida;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
 @Data
-public class Image {
+public class ComidaImage {
 
     @Id
     @Column(name = "id_image")
@@ -23,14 +24,12 @@ public class Image {
     private String imageName;
 
     //PRODUCT ID, no caso, o id do item que queremos relacionar
-    @Column(name = "id_item")
-    private Long idItem;
-
-
+    @Column(name = "id_comida", nullable = false)
+    private Long idComida;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_image", updatable = false, insertable = false) //FK
-    private Usuario usuario;
+    @JoinColumn(name = "id_comidaImage", updatable = false, insertable = false) //FK
+    private Comida comida;
 
 
 }

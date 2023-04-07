@@ -62,8 +62,4 @@ public class Usuario {
     @OneToMany(mappedBy = "idUsuario", targetEntity = Estagio.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private List<Estagio> listaEstagios = new ArrayList<Estagio>();
-
-    @OneToMany(mappedBy = "idUsuario", targetEntity = Image.class, orphanRemoval = true)
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<Image> listaImagens = new ArrayList<Image>();;
 }
