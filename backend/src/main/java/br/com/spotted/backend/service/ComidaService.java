@@ -58,7 +58,6 @@ public class ComidaService {
         modeloDb.setMarcaComida(novo.getMarcaComida());
         modeloDb.setPrecoComida(novo.getPrecoComida());
         modeloDb.setOfertaComida(novo.getOfertaComida());
-        modeloDb.setImagemComida(novo.getImagemComida());
         modeloDb.setIdUsuario(novo.getIdUsuario());
 
         //Validação de usuário no banco de dados
@@ -90,7 +89,7 @@ public class ComidaService {
                 comida.getMarcaComida(),
                 comida.getPrecoComida(),
                 comida.getOfertaComida(),
-                comida.getImagemComida(),
+                comida.getListaImagensComida(),
                 comida.getIdUsuario()
         );
     }
@@ -110,7 +109,6 @@ public class ComidaService {
         comida.setMarcaComida(comidaUpdateRequest.getMarcaComida());
         comida.setPrecoComida(comidaUpdateRequest.getPreco_comida());
         comida.setOfertaComida(comidaUpdateRequest.getOfertaComida());
-        comida.setImagemComida(comidaUpdateRequest.getImagemComida());
 
         var comidaSalva = comidaRepository.save(comida);
 
@@ -122,7 +120,7 @@ public class ComidaService {
                 comida.getMarcaComida(),
                 comida.getPrecoComida(),
                 comida.getOfertaComida(),
-                comida.getImagemComida(),
+                comida.getListaImagensComida(),
                 comida.getIdUsuario()
         );
     }

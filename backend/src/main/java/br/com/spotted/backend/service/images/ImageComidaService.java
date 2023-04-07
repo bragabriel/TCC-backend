@@ -1,14 +1,15 @@
 package br.com.spotted.backend.service.images;
 
 import br.com.spotted.backend.domain.dto.Image.ImageResponse;
+import br.com.spotted.backend.domain.dto.Image.ImageUpdateRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.image.ComidaImage;
-import br.com.spotted.backend.exception.ComidaNaoEncontradaException;
-import br.com.spotted.backend.repository.ComidaRepository;
+import br.com.spotted.backend.exception.ImagemNaoEncontradaException;
 import br.com.spotted.backend.repository.ImageRepository;
 import br.com.spotted.backend.service.ComidaService;
 import br.com.spotted.backend.service.StorageService;
 import com.amazonaws.HttpMethod;
+import com.amazonaws.services.ecr.model.ImageNotFoundException;
 import com.amazonaws.services.s3.AmazonS3;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,6 @@ import java.util.List;
 
 @Service
 public class ImageComidaService {
-
-    @Autowired
-    private ComidaRepository comidaRepository;
 
     @Autowired
     private ImageRepository imageRepository;
@@ -48,13 +46,15 @@ public class ImageComidaService {
 
         for (int i = 0; i < retorno.size(); i++) {
             ComidaImage comidaImage = new ComidaImage();
-            comidaImage.setIdItem(idItem);
-            comidaImage.setSequence(i);
-            comidaImage.setUrl(retorno.get(i));
 
             String finalUrl = concatenarUrl(comidaImage.getUrl());
 
-            comidaImageResponseList.add(new ImageResponse(comidaImage, finalUrl));
+            comidaImage.setIdComida(idItem);
+            comidaImage.setSequence(i);
+            comidaImage.setFileName(retorno.get(i));
+            comidaImage.setUrl(finalUrl);
+
+            comidaImageResponseList.add(new ImageResponse(comidaImage, retorno.get(i)));
 
             var comidaImageCreated = imageRepository.save(comidaImage);
         }
@@ -64,24 +64,26 @@ public class ImageComidaService {
 
     public ResponseBase<List<ImageResponse>> findComidaImageByIdComida(Long idItem) {
 
-        //var comida = comidaService.pesquisarPorId(idItem);
-        var comida = comidaRepository.findById(idItem)
-                .orElseThrow(() -> new ComidaNaoEncontradaException("Comida não encontrado"));
+        var comida = comidaService.pesquisarPorId(idItem);
+
+        if(comida.getObjetoRetorno().getListaImagensComida().isEmpty()){
+            throw new ImagemNaoEncontradaException("Este item não tem imagem cadastrada.");
+        }
 
         List<ImageResponse> comidaImageList = new ArrayList<>();
 
-        for (int i = 0; i < comida.getListaImagensComida().size(); i++) {
+        for (int i = 0; i < comida.getObjetoRetorno().getListaImagensComida().size(); i++) {
 
-            var key = comida.getListaImagensComida().get(i).getUrl();
+            var key = comida.getObjetoRetorno().getListaImagensComida().get(i).getUrl();
 
             String signedUrl = generateUrl(key, HttpMethod.GET);
 
             ImageResponse userImageResponse = new ImageResponse();
 
-            userImageResponse.setIdItem(idItem);
-            userImageResponse.setUrl(comida.getObjetoRetorno().getListaImagens().get(i).getUrl());
-            userImageResponse.setSequence(comida.getObjetoRetorno().getListaImagens().get(i).getSequence());
-            userImageResponse.setIdImage(comida.getObjetoRetorno().getListaImagens().get(i).getIdImage());
+            userImageResponse.setIdComida(idItem);
+            userImageResponse.setLocalUrl(comida.getObjetoRetorno().getListaImagensComida().get(i).getUrl());
+            userImageResponse.setSequence(comida.getObjetoRetorno().getListaImagensComida().get(i).getSequence());
+            userImageResponse.setIdImage(comida.getObjetoRetorno().getListaImagensComida().get(i).getIdImage());
             userImageResponse.setFinalUrl(signedUrl);
 
             comidaImageList.add(userImageResponse);
@@ -90,17 +92,17 @@ public class ImageComidaService {
         return new ResponseBase<>(comidaImageList);
     }
 
-    public ResponseBase<ImageResponse> updateImageSequence(Long productImageId, ProductImageUpdateRequest productImageUpdateRequest) {
+    public ResponseBase<ImageResponse> updateComidaImageSequence(Long comidaImageId, ImageUpdateRequest imageUpdateRequest) {
 
-        var productImageEncontrado = imageRepository.findById(productImageId);
+        var imagemEncontrada = imageRepository.findById(comidaImageId);
 
-        if (productImageEncontrado.isEmpty()) {
+        if (imagemEncontrada.isEmpty()) {
             throw new ImageNotFoundException("Imagem não encontrada");
         }
 
-        var image = productImageEncontrado.get();
+        var image = imagemEncontrada.get();
 
-        image.setSequence(productImageUpdateRequest.getSequence());
+        image.setSequence(imageUpdateRequest.getSequence());
 
         var imagemSalva = imageRepository.save(image);
 
@@ -112,7 +114,7 @@ public class ImageComidaService {
         ));
     }
 
-    public ImageResponse deleteImage(Long productImageId) {
+    public ImageResponse deleteComidaImage(Long productImageId) {
         var imagemEncontrada = imageRepository.findById(productImageId);
 
         if (imagemEncontrada.isEmpty()) {
@@ -134,7 +136,7 @@ public class ImageComidaService {
     }
 
     public String concatenarUrl(String url) {
-        String urlFinal = "http://localhost:4566/minishop-imagens/" + url;
+        String urlFinal = "http://localhost:4566/tcc-imagens/" + url;
         return urlFinal;
     }
 
@@ -142,6 +144,6 @@ public class ImageComidaService {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(Calendar.DATE, 1); // Generated URL will be valid for 24 hours
-        return amazonS3.generatePresignedUrl("minishop-imagens", fileName, calendar.getTime(), httpMethod).toString();
+        return amazonS3.generatePresignedUrl("tcc-imagens", fileName, calendar.getTime(), httpMethod).toString();
     }
 }

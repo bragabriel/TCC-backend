@@ -10,25 +10,25 @@ import javax.persistence.*;
 public class ComidaImage {
 
     @Id
-    @Column(name = "id_image")
+    @Column(name = "id_imageComida")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idImage;
 
-    @Column(name = "url")
+    @Column(name = "url_imageComida")
     private String url;
 
-    @Column(name = "sequence")
+    @Column(name = "sequence_imageComida")
     private int sequence;
 
-    @Column(name = "image_name")
-    private String imageName;
+    @Column(name = "fileName_imageComida")
+    private String fileName;
 
     //PRODUCT ID, no caso, o id do item que queremos relacionar
     @Column(name = "id_comida", nullable = false)
     private Long idComida;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_comidaImage", updatable = false, insertable = false) //FK
+    @JoinColumn(name = "id_imageComida", updatable = false, insertable = false) //FK
     private Comida comida;
 
 

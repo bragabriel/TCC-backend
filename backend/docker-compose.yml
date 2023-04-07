@@ -11,7 +11,7 @@ services:
       - "4566:4566" # s3
     volumes:
       - localstack:/tmp/localstack
-    container_name: aws_minishop
+    container_name: aws_tcc
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server

@@ -9,16 +9,16 @@ import lombok.NoArgsConstructor;
 public class ImageResponse {
 
     private Long idImage;
-    private String url;
+    private String localUrl;
     private Integer sequence;
-    private Long idItem;
+    private Long idComida;
     private String finalUrl;
 
     public ImageResponse(ComidaImage comidaImage, String fileName) {
         this.idImage = comidaImage.getIdImage();
-        this.url = comidaImage.getUrl();
+        this.localUrl = comidaImage.getUrl();
         this.sequence = comidaImage.getSequence();
-        this.idItem = comidaImage.getIdItem();
+        this.idComida = comidaImage.getIdComida();
         this.finalUrl = fileName;
     }
 }

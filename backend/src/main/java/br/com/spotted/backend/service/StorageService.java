@@ -31,7 +31,7 @@ public class StorageService {
             //horário atual (timestamp) + o id do produto + o nome do arquivo = garantindo que não sobrescreveremos imagens com o mesmo nome,
             String fileName = dataFormatada + productId.toString() + multipartFile[i].getOriginalFilename();
 
-            amazonS3.putObject(new PutObjectRequest("minishop-imagens", fileName, multipartFile[i].getInputStream(), new ObjectMetadata()));
+            amazonS3.putObject(new PutObjectRequest("tcc-imagens", fileName, multipartFile[i].getInputStream(), new ObjectMetadata()));
 
             listaImagens.add(fileName);
         }
@@ -40,13 +40,13 @@ public class StorageService {
     };
 
     public void remove(String key){
-        amazonS3.deleteObject("minishop-imagens", key);
+        amazonS3.deleteObject("tcc-imagens", key);
     }
 
     private String generateUrl(String fileName, HttpMethod httpMethod) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(Calendar.DATE, 1); // Generated URL will be valid for 24 hours
-        return amazonS3.generatePresignedUrl("minishop-imagens", fileName, calendar.getTime(), httpMethod).toString();
+        return amazonS3.generatePresignedUrl("tcc-imagens", fileName, calendar.getTime(), httpMethod).toString();
     }
 }

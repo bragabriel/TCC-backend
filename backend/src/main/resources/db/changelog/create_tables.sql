@@ -31,7 +31,7 @@ GO
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Ape]    Script Date: 14/02/2023 20:57:43 ******/
+/****** Object:  Table [dbo].[Ape]    Script Date: 4/7/2023 6:16:11 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -54,7 +54,7 @@ CREATE TABLE [dbo].[Ape](
 (
 	[id_ape] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
 ALTER TABLE [dbo].[Ape]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Ape] FOREIGN KEY([id_usuario])
@@ -86,13 +86,12 @@ CREATE TABLE [dbo].[Carona](
 	[informacoesCondutor_carona] [varchar](255) NOT NULL,
 	[qtdAssentosAtual_carona] [int] NOT NULL,
 	[qtdAssentosTotal_carona] [int] NOT NULL,
-	[imagem_carona] [varbinary](max) NULL,
 	[id_usuario] [int] NOT NULL,
  CONSTRAINT [PK_Carona] PRIMARY KEY CLUSTERED
 (
 	[id_carona] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
 ALTER TABLE [dbo].[Carona]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Carona] FOREIGN KEY([id_usuario])
@@ -107,7 +106,7 @@ GO
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Comida]    Script Date: 12/02/2023 22:07:01 ******/
+/****** Object:  Table [dbo].[Comida]    Script Date: 4/7/2023 6:06:19 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -124,13 +123,12 @@ CREATE TABLE [dbo].[Comida](
 	[marca_comida] [varchar](255) NULL,
 	[unidade_comida] [varchar](255) NULL,
 	[preco_comida] [varchar](255) NOT NULL,
-	[imagem_comida] [varbinary](max) NULL,
 	[id_usuario] [int] NOT NULL,
  CONSTRAINT [PK_Comida] PRIMARY KEY CLUSTERED
 (
 	[id_comida] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
 ALTER TABLE [dbo].[Comida]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Comida] FOREIGN KEY([id_usuario])
@@ -159,13 +157,12 @@ CREATE TABLE [dbo].[Crush](
 	[curso_crush] [varchar](255) NULL,
 	[localizacao_crush] [varchar](255) NULL,
 	[periodo_crush] [varchar](255) NOT NULL,
-	[imagem_crush] [varbinary](max) NULL,
 	[id_usuario] [int] NOT NULL,
  CONSTRAINT [PK_Crush] PRIMARY KEY CLUSTERED
 (
 	[id_crush] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
 ALTER TABLE [dbo].[Crush]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Crush] FOREIGN KEY([id_usuario])
@@ -195,13 +192,12 @@ CREATE TABLE [dbo].[Estagio](
 	[requisitos_estagio] [varchar](255) NULL,
 	[beneficios_estagio] [varchar](255) NULL,
 	[salario_estagio] [float] NULL,
-	[imagem_estagio] [varbinary](max) NULL,
 	[id_usuario] [int] NOT NULL,
  CONSTRAINT [PK_Estagio] PRIMARY KEY CLUSTERED
 (
 	[id_estagio] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
 ALTER TABLE [dbo].[Estagio]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Estagio] FOREIGN KEY([id_usuario])
@@ -228,13 +224,12 @@ CREATE TABLE [dbo].[Festa](
 	[titulo_festa] [varchar](255) NOT NULL,
 	[descricao_festa] [varchar](255) NOT NULL,
 	[localizacao_festa] [varchar](255) NULL,
-	[imagem_festa] [varbinary](max) NULL,
 	[id_usuario] [int] NOT NULL,
  CONSTRAINT [PK_Festa] PRIMARY KEY CLUSTERED
 (
 	[id_festa] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
 ALTER TABLE [dbo].[Festa]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Festa] FOREIGN KEY([id_usuario])
@@ -262,13 +257,12 @@ CREATE TABLE [dbo].[Objeto](
 	[descricao_objeto] [varchar](255) NULL,
 	[localizacaoAchado_objeto] [varchar](255) NOT NULL,
 	[localizacaoAtual_objeto] [varchar](255) NOT NULL,
-	[imagem_objeto] [varbinary](max) NULL,
 	[id_usuario] [int] NOT NULL,
  CONSTRAINT [PK_Objeto] PRIMARY KEY CLUSTERED
 (
 	[id_objeto] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 GO
 
 ALTER TABLE [dbo].[Objeto]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Objeto] FOREIGN KEY([id_usuario])
@@ -278,35 +272,32 @@ GO
 ALTER TABLE [dbo].[Objeto] CHECK CONSTRAINT [FK_Usuario_Objeto]
 GO
 
+--IMAGES
 
---TABLE IMAGES
-USE [TCC]
-GO
-
-/****** Object:  Table [dbo].[Image]    Script Date: 10/03/2023 11:43:47 ******/
+--TABLE COMIDA IMAGES
+/****** Object:  Table [dbo].[ComidaImage]    Script Date: 4/7/2023 6:27:31 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Image](
-	[id_image] [int] IDENTITY(1,1) NOT NULL,
-	[url] [nvarchar](255) NOT NULL,
-	[sequence] [int] NOT NULL,
-	[fileName] [nvarchar](255) NOT NULL,
-	[id_item] [int] NOT NULL,
- CONSTRAINT [PK_ProductImage] PRIMARY KEY CLUSTERED
+CREATE TABLE [dbo].[ComidaImage](
+	[id_imageComida] [int] IDENTITY(1,1) NOT NULL,
+	[url_imageComida] [varchar](255) NOT NULL,
+	[sequence_imageComida] [int] NULL,
+	[fileName_imageComida] [varchar](255) NOT NULL,
+	[id_comida] [int] NOT NULL,
+ CONSTRAINT [PK_Images] PRIMARY KEY CLUSTERED
 (
-	[id_productImage] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	[id_imageComida] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[ProductImage]  WITH CHECK ADD  CONSTRAINT [FK_ProductImage_Product] FOREIGN KEY([id_product])
-REFERENCES [dbo].[Product] ([Id])
+ALTER TABLE [dbo].[ComidaImage]  WITH CHECK ADD  CONSTRAINT [FK_ComidaImage_Comida] FOREIGN KEY([id_comida])
+REFERENCES [dbo].[Comida] ([id_comida])
 GO
 
-ALTER TABLE [dbo].[ProductImage] CHECK CONSTRAINT [FK_ProductImage_Product]
+ALTER TABLE [dbo].[ComidaImage] CHECK CONSTRAINT [FK_ComidaImage_Comida]
 GO
-

@@ -1,9 +1,12 @@
 package br.com.spotted.backend.domain.dto.Comida;
 
 import br.com.spotted.backend.domain.entity.Comida;
+import br.com.spotted.backend.domain.entity.image.ComidaImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +26,7 @@ public class ComidaResponse {
     private Double precoComida;
     private String ofertaComida;
 
-    private byte[] imagemComida = null;
+    private List<ComidaImage> listaImagensComida;
 
     private Long idUsuario;
 
@@ -36,7 +39,7 @@ public class ComidaResponse {
         this.tipoComida = comida.getDescricaoComida();
         this.marcaComida = comida.getTipoComida();
         this.ofertaComida = comida.getTipoComida();
-        this.imagemComida = comida.getImagemComida();
+        this.listaImagensComida = comida.getListaImagensComida();
         this.idUsuario = comida.getIdUsuario();
     }
 }
