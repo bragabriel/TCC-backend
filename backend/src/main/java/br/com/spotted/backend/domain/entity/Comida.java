@@ -1,10 +1,14 @@
 package br.com.spotted.backend.domain.entity;
 
+import br.com.spotted.backend.domain.entity.image.ComidaImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -36,9 +40,6 @@ public class Comida {
     @Column(name = "oferta_comida")
     private String ofertaComida;
 
-    @Column(name = "imagem_comida")
-    private byte[] imagemComida;
-
     @Column(name= "id_usuario")
     private Long idUsuario;
 
@@ -46,4 +47,7 @@ public class Comida {
     @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false) //Fk IdUsuario na tabela Comida
     private Usuario usuario;
 
+    @OneToMany(mappedBy = "idComida", targetEntity = ComidaImage.class, orphanRemoval = true) //idComida relacionamento na outra table
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    private List<ComidaImage> listaImagensComida = new ArrayList<ComidaImage>();;
 }

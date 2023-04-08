@@ -46,7 +46,7 @@ public class UsuarioService {
         return new ResponseBase<>(responsavelResponsePage);
     }
 
-    public ResponseBase<UsuarioResponse> pesquisarPorId(Long id) {
+    public ResponseBase<Usuario> pesquisarPorId(Long id) {
         // Consulta o repositorio para procurar por um custumer pelo 'id'
         Optional<Usuario> responsavelOptional = usuarioRepository.findById(id);
 
@@ -55,9 +55,9 @@ public class UsuarioService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Responsável não encontrado"));
 
         // Mapeia de entidade para dto
-        UsuarioResponse usuarioResponse = new UsuarioResponse(usuario);
+        //UsuarioResponse usuarioResponse = new UsuarioResponse(usuario);
 
-        return new ResponseBase<>(usuarioResponse);
+        return new ResponseBase<>(usuario);
     }
     public ResponseBase<UsuarioResponse> cadastrar(UsuarioCreateRequest novo) {
 
