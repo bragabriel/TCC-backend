@@ -1,11 +1,16 @@
 package br.com.spotted.backend.domain.entity;
 
 
+import br.com.spotted.backend.domain.entity.image.ApeImage;
+import br.com.spotted.backend.domain.entity.image.CrushImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -44,4 +49,7 @@ public class Crush {
     @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false)
     private Usuario usuario;
 
+    @OneToMany(mappedBy = "idCrush", targetEntity = CrushImage.class, orphanRemoval = true) //idApe relacionamento na outra table
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    private List<CrushImage> listaImagensCrush = new ArrayList<CrushImage>();;
 }

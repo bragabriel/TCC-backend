@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ImageResponse {
+public class ImageComidaResponse {
 
     private Long idImage;
     private String localUrl;
@@ -14,7 +14,7 @@ public class ImageResponse {
     private Long idComida;
     private String finalUrl;
 
-    public ImageResponse(ComidaImage comidaImage, String fileName) {
+    public ImageComidaResponse(ComidaImage comidaImage, String fileName) {
         this.idImage = comidaImage.getIdImage();
         this.localUrl = comidaImage.getUrl();
         this.sequence = comidaImage.getSequence();

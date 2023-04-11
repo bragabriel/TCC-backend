@@ -273,6 +273,69 @@ ALTER TABLE [dbo].[Objeto] CHECK CONSTRAINT [FK_Usuario_Objeto]
 GO
 
 --IMAGES
+--TABLE APE IMAGES
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[ApeImage]    Script Date: 4/10/2023 9:52:32 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ApeImage](
+	[id_image] [int] IDENTITY(1,1) NOT NULL,
+	[url_image] [varchar](255) NOT NULL,
+	[sequence_image] [int] NULL,
+	[fileName_image] [varchar](255) NOT NULL,
+	[id_ape] [int] NOT NULL,
+ CONSTRAINT [PK_ApeImage] PRIMARY KEY CLUSTERED
+(
+	[id_image] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ApeImage]  WITH CHECK ADD  CONSTRAINT [FK_ApeImage_Ape] FOREIGN KEY([id_ape])
+REFERENCES [dbo].[Ape] ([id_ape])
+GO
+
+ALTER TABLE [dbo].[ApeImage] CHECK CONSTRAINT [FK_ApeImage_Ape]
+GO
+
+
+--TABLE CARONA IMAGES
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[CaronaImage]    Script Date: 4/10/2023 9:51:39 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CaronaImage](
+	[id_image] [int] IDENTITY(1,1) NOT NULL,
+	[url_image] [varchar](255) NOT NULL,
+	[sequence_image] [int] NULL,
+	[fileName_image] [varchar](255) NOT NULL,
+	[id_carona] [int] NOT NULL,
+ CONSTRAINT [PK_CaronaImage] PRIMARY KEY CLUSTERED
+(
+	[id_image] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[CaronaImage]  WITH CHECK ADD  CONSTRAINT [FK_CaronaImage_Carona] FOREIGN KEY([id_carona])
+REFERENCES [dbo].[Carona] ([id_carona])
+GO
+
+ALTER TABLE [dbo].[CaronaImage] CHECK CONSTRAINT [FK_CaronaImage_Carona]
+GO
+
 
 --TABLE COMIDA IMAGES
 /****** Object:  Table [dbo].[ComidaImage]    Script Date: 4/7/2023 6:27:31 PM ******/
@@ -300,4 +363,132 @@ REFERENCES [dbo].[Comida] ([id_comida])
 GO
 
 ALTER TABLE [dbo].[ComidaImage] CHECK CONSTRAINT [FK_ComidaImage_Comida]
+GO
+
+
+--TABLE CRUSH IMAGES
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[CrushImage]    Script Date: 4/10/2023 9:51:59 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CrushImage](
+	[id_image] [int] IDENTITY(1,1) NOT NULL,
+	[url_image] [varchar](255) NOT NULL,
+	[sequence_image] [int] NULL,
+	[fileName_image] [varchar](255) NOT NULL,
+	[id_crush] [int] NOT NULL,
+ CONSTRAINT [PK_CrushImage] PRIMARY KEY CLUSTERED
+(
+	[id_crush] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[CrushImage]  WITH CHECK ADD  CONSTRAINT [FK_CrushImage_Crush] FOREIGN KEY([id_crush])
+REFERENCES [dbo].[Crush] ([id_crush])
+GO
+
+ALTER TABLE [dbo].[CrushImage] CHECK CONSTRAINT [FK_CrushImage_Crush]
+GO
+
+
+--TABLE ESTAGIO IMAGES
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[EstagioImage]    Script Date: 4/10/2023 9:52:03 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[EstagioImage](
+	[id_image] [int] IDENTITY(1,1) NOT NULL,
+	[url_image] [varchar](255) NOT NULL,
+	[sequence_image] [int] NULL,
+	[fileName_image] [varchar](255) NOT NULL,
+	[id_estagio] [int] NOT NULL,
+ CONSTRAINT [PK_EstagioImage] PRIMARY KEY CLUSTERED
+(
+	[id_estagio] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[EstagioImage]  WITH CHECK ADD  CONSTRAINT [FK_EstagioImage_Estagio] FOREIGN KEY([id_estagio])
+REFERENCES [dbo].[Estagio] ([id_estagio])
+GO
+
+ALTER TABLE [dbo].[EstagioImage] CHECK CONSTRAINT [FK_EstagioImage_Estagio]
+GO
+
+
+--TABLE FESTA IMAGES
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[FestaImage]    Script Date: 4/10/2023 9:52:08 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FestaImage](
+	[id_image] [int] IDENTITY(1,1) NOT NULL,
+	[url_image] [varchar](255) NOT NULL,
+	[sequence_image] [int] NULL,
+	[fileName_image] [varchar](255) NOT NULL,
+	[id_festa] [int] NOT NULL,
+ CONSTRAINT [PK_FestaImage] PRIMARY KEY CLUSTERED
+(
+	[id_festa] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[FestaImage]  WITH CHECK ADD  CONSTRAINT [FK_FestaImage_Festa] FOREIGN KEY([id_festa])
+REFERENCES [dbo].[Festa] ([id_festa])
+GO
+
+ALTER TABLE [dbo].[FestaImage] CHECK CONSTRAINT [FK_FestaImage_Festa]
+GO
+
+
+--TABLE FESTA IMAGES
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[ObjetoImage]    Script Date: 4/10/2023 9:52:12 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ObjetoImage](
+	[id_image] [int] IDENTITY(1,1) NOT NULL,
+	[url_image] [varchar](255) NOT NULL,
+	[sequence_image] [int] NULL,
+	[fileName_image] [varchar](255) NOT NULL,
+	[id_objeto] [int] NOT NULL,
+ CONSTRAINT [PK_ObjetoImage] PRIMARY KEY CLUSTERED
+(
+	[id_objeto] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ObjetoImage]  WITH CHECK ADD  CONSTRAINT [FK_ObjetoImage_Objeto] FOREIGN KEY([id_objeto])
+REFERENCES [dbo].[Objeto] ([id_objeto])
+GO
+
+ALTER TABLE [dbo].[ObjetoImage] CHECK CONSTRAINT [FK_ObjetoImage_Objeto]
 GO
