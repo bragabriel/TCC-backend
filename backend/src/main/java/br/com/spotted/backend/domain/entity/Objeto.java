@@ -1,11 +1,16 @@
 package br.com.spotted.backend.domain.entity;
 
 
+import br.com.spotted.backend.domain.entity.image.FestaImage;
+import br.com.spotted.backend.domain.entity.image.ObjetoImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -41,4 +46,7 @@ public class Objeto {
     @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false)
     private Usuario usuario;
 
+    @OneToMany(mappedBy = "idObjeto", targetEntity = ObjetoImage.class, orphanRemoval = true)
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    private List<ObjetoImage> listaImagensObjeto = new ArrayList<ObjetoImage>();;
 }

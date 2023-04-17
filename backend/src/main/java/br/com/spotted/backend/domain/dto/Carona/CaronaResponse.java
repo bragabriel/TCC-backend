@@ -2,9 +2,13 @@ package br.com.spotted.backend.domain.dto.Carona;
 
 import br.com.spotted.backend.domain.entity.Carona;
 import br.com.spotted.backend.domain.entity.Usuario;
+import br.com.spotted.backend.domain.entity.image.ApeImage;
+import br.com.spotted.backend.domain.entity.image.CaronaImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,7 +33,7 @@ public class CaronaResponse {
 
     private String periodoCarona;
 
-    private byte[] imagemCarona;
+    private List<CaronaImage> listaImagensCarona;
 
     private Long idUsuario;
 
@@ -43,7 +47,7 @@ public class CaronaResponse {
         this.qtdAssentosAtualCarona = carona.getQtdAssentosAtualCarona();
         this.cidadeCarona = carona.getCidadeCarona();
         this.periodoCarona = carona.getPeriodoCarona();
-        this.imagemCarona = carona.getImagemCarona();
+        this.listaImagensCarona = carona.getListaImagensCarona();
         this.idUsuario = carona.getIdUsuario();
     }
 }

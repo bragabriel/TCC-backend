@@ -1,7 +1,6 @@
 package br.com.spotted.backend.domain.dto.Image;
 
 import br.com.spotted.backend.domain.entity.image.ApeImage;
-import br.com.spotted.backend.domain.entity.image.ComidaImage;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

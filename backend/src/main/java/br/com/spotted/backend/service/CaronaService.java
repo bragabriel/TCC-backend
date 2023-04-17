@@ -60,7 +60,6 @@ public class CaronaService {
         modeloDb.setQtdAssentosTotalCarona(novo.getQtdAssentosTotalCarona());
         modeloDb.setCidadeCarona(novo.getCidadeCarona());
         modeloDb.setPeriodoCarona(novo.getPeriodoCarona());
-        modeloDb.setImagemCarona(novo.getImagemCarona());
         modeloDb.setIdUsuario(novo.getIdUsuario());
 
         //Validação de usuário no banco de dados
@@ -94,7 +93,7 @@ public class CaronaService {
                 carona.getQtdAssentosTotalCarona(),
                 carona.getCidadeCarona(),
                 carona.getPeriodoCarona(),
-                carona.getImagemCarona(),
+                carona.getListaImagensCarona(),
                 carona.getIdUsuario()
         );
     }
@@ -116,7 +115,6 @@ public class CaronaService {
         carona.setQtdAssentosTotalCarona(caronaUpdateRequest.getQtdAssentosTotalCarona());
         carona.setCidadeCarona(caronaUpdateRequest.getCidadeCarona());
         carona.setPeriodoCarona(caronaUpdateRequest.getPeriodoCarona());
-        carona.setImagemCarona(caronaUpdateRequest.getImagemCarona());
 
         var caronaSalva = caronaRepository.save(carona);
 
@@ -130,7 +128,7 @@ public class CaronaService {
                 carona.getQtdAssentosTotalCarona(),
                 carona.getCidadeCarona(),
                 carona.getPeriodoCarona(),
-                carona.getImagemCarona(),
+                carona.getListaImagensCarona(),
                 carona.getIdUsuario()
         );
     }
