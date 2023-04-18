@@ -48,9 +48,6 @@ public class Carona {
     @Column(name = "periodo_carona")
     private String periodoCarona;
 
-    @Column(name = "imagem_carona")
-    private byte[] imagemCarona;
-
     @Column(name= "id_usuario")
     private Long idUsuario;
 

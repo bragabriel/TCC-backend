@@ -1,9 +1,12 @@
 package br.com.spotted.backend.domain.dto.Crush;
 
 import br.com.spotted.backend.domain.entity.Crush;
+import br.com.spotted.backend.domain.entity.image.CrushImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +24,7 @@ public class CrushResponse {
 
     private String periodoCrush;
 
-    private byte[] imagemCrush;
+    private List<CrushImage> listaImagensCrush;
 
     private Long idUsuario;
 
@@ -32,7 +35,7 @@ public class CrushResponse {
         this.localizacaoCrush = crush.getLocalizacaoCrush();
         this.cursoCrush = crush.getCursoCrush();
         this.periodoCrush = crush.getPeriodoCrush();
-        this.imagemCrush = crush.getImagemCrush();
+        this.listaImagensCrush = crush.getListaImagensCrush();
         this.idUsuario = crush.getIdUsuario();
     }
 }

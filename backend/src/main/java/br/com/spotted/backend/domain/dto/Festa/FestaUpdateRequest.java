@@ -16,6 +16,4 @@ public class FestaUpdateRequest {
 
     @NotEmpty
     private String localizacaoFesta;
-
-    private byte[] imagemFesta;
 }

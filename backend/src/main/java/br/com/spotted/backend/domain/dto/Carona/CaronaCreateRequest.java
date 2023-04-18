@@ -32,8 +32,6 @@ public class CaronaCreateRequest {
     @NotEmpty
     private String periodoCarona;
 
-    private byte[] imagemCarona;
-
     @NotNull
     private Long idUsuario;
 }

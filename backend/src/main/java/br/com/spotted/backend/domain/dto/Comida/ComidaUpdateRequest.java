@@ -25,6 +25,4 @@ public class ComidaUpdateRequest {
 
     @NotEmpty(message = "Campo 'oferta' é obrigatório!")
     private String ofertaComida;
-
-    private byte[] imagemComida;
 }

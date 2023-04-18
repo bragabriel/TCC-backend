@@ -1,9 +1,13 @@
 package br.com.spotted.backend.domain.dto.Festa;
 
 import br.com.spotted.backend.domain.entity.Festa;
+import br.com.spotted.backend.domain.entity.image.ApeImage;
+import br.com.spotted.backend.domain.entity.image.FestaImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +23,7 @@ public class FestaResponse {
 
     private String localizacaoFesta;
 
-    private byte[] imagemFesta;
+    private List<FestaImage> listaImagensFesta;
 
     private Long idUsuario;
 
@@ -28,7 +32,7 @@ public class FestaResponse {
         this.tituloFesta = festa.getTituloFesta();
         this.descricaoFesta = festa.getDescricaoFesta();
         this.localizacaoFesta = festa.getLocalizacaoFesta();
-        this.imagemFesta = festa.getImagemFesta();
+        this.listaImagensFesta = festa.getListaImagensFesta();
         this.idUsuario = festa.getIdUsuario();
     }
 }

@@ -57,7 +57,6 @@ public class ObjetoService {
         modeloDb.setDescricaoObjeto(novo.getDescricaoObjeto());
         modeloDb.setLocalizacaoAchadoObjeto(novo.getLocalizacaoAchadoObjeto());
         modeloDb.setLocalizacaoAtualObjeto(novo.getLocalizacaoAtualObjeto());
-        modeloDb.setImagemObjeto(novo.getImagemObjeto());
         modeloDb.setIdUsuario(novo.getIdUsuario());
 
         usuarioService.pesquisarPorId(novo.getIdUsuario());
@@ -86,7 +85,7 @@ public class ObjetoService {
                 objeto.getDescricaoObjeto(),
                 objeto.getLocalizacaoAchadoObjeto(),
                 objeto.getLocalizacaoAtualObjeto(),
-                objeto.getImagemObjeto(),
+                objeto.getListaImagensObjeto(),
                 objeto.getIdUsuario()
         );
     }
@@ -105,7 +104,6 @@ public class ObjetoService {
         objeto.setDescricaoObjeto(objetoUpdateRequest.getDescricaoObjeto());
         objeto.setLocalizacaoAchadoObjeto(objetoUpdateRequest.getLocalizacaoAchadoObjeto());
         objeto.setLocalizacaoAtualObjeto(objetoUpdateRequest.getLocalizacaoAtualObjeto());
-        objeto.setImagemObjeto(objetoUpdateRequest.getImagemObjeto());
 
         var objetoSalvo = objetoRepository.save(objeto);
 
@@ -115,7 +113,7 @@ public class ObjetoService {
                 objeto.getDescricaoObjeto(),
                 objeto.getLocalizacaoAchadoObjeto(),
                 objeto.getLocalizacaoAtualObjeto(),
-                objeto.getImagemObjeto(),
+                objeto.getListaImagensObjeto(),
                 objeto.getIdUsuario()
         );
     }

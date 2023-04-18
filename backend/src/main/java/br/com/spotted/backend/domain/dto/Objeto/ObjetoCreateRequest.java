@@ -21,8 +21,6 @@ public class ObjetoCreateRequest {
     @NotEmpty
     private String localizacaoAtualObjeto;
 
-    private byte[] imagemObjeto;
-
     @NotNull
     private Long idUsuario;
 }

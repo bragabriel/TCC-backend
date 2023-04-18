@@ -1,6 +1,5 @@
 package br.com.spotted.backend.domain.entity.image;
 
-import br.com.spotted.backend.domain.entity.Crush;
 import br.com.spotted.backend.domain.entity.Estagio;
 import lombok.Data;
 
