@@ -32,9 +32,6 @@ public class Festa {
     @Column(name = "localizacao_festa")
     private String localizacaoFesta;
 
-    @Column(name = "imagem_festa")
-    private byte[] imagemFesta;
-
     @Column(name= "id_usuario")
     private Long idUsuario;
 

@@ -24,7 +24,7 @@ public class FestaImage {
     private String fileName;
 
     //PRODUCT ID, no caso, o id do item que queremos relacionar
-    @Column(name = "id_estagio", nullable = false)
+    @Column(name = "id_festa", nullable = false)
     private Long idFesta;
 
     @ManyToOne(fetch = FetchType.LAZY)

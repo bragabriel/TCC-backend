@@ -38,9 +38,6 @@ public class Crush {
     @Column(name = "periodo_crush")
     private String periodoCrush;
 
-    @Column(name = "imagem_crush")
-    private byte[] imagemCrush;
-
     @Column(name= "id_usuario")
     private Long idUsuario;
 
