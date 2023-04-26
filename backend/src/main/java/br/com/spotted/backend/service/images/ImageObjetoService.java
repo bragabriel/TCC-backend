@@ -122,9 +122,9 @@ public class ImageObjetoService {
 
         var image = imagemEncontrada.get();
 
-        imageObjetoRepository.delete(image);
+        storageService.remove(imagemEncontrada.get().getFileName());
 
-        storageService.remove(imagemEncontrada.get().getUrl());
+        imageObjetoRepository.delete(image);
 
         String finalUrl = concatenarUrl(image.getUrl());
 

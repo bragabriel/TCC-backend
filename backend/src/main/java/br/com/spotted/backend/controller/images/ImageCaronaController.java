@@ -20,24 +20,24 @@ public class ImageCaronaController {
     @Autowired
     private ImageCaronaService imageCaronaService;
 
-    @PostMapping(value = "/upload/{idCarona}", consumes = "multipart/form-data")
+    @PostMapping(value = "/caronaUploadImage/{idCarona}", consumes = "multipart/form-data")
     @CrossOrigin()
     public ResponseEntity uploadImage(@RequestPart("files") MultipartFile[] file, @Valid @PathVariable Long idCarona) throws IOException {
         return ResponseEntity.ok(imageCaronaService.createCaronaImage(file, idCarona));
     }
 
-    @GetMapping("/caronaImage/{id}")
+    @GetMapping("/caronaImage/{idCarona}")
     @CrossOrigin()
-    public ResponseEntity findCaronaImageByIdImage(@PathVariable Long id){
-        return ResponseEntity.ok(imageCaronaService.findCaronaImageByIdCarona(id));
+    public ResponseEntity findCaronaImageByIdImage(@PathVariable Long idCarona){
+        return ResponseEntity.ok(imageCaronaService.findCaronaImageByIdCarona(idCarona));
     }
 
-    @DeleteMapping("/deleteCaronaImage/{caronaImageId}")
+    @DeleteMapping("/caronaDeleteImage/{caronaImageId}")
     public ResponseEntity deleteCaronaImage(@PathVariable Long caronaImageId){
         return ResponseEntity.ok(imageCaronaService.deleteCaronaImage(caronaImageId));
     }
 
-    @PutMapping("/updateCaronaImage/{caronaImageId}")
+    @PutMapping("/caronaUpdateImage/{caronaImageId}")
     public ResponseEntity updateCaronaImageSequence(@PathVariable Long caronaImageId, @RequestBody @NotNull ImageUpdateRequest imageUpdateRequest){
         return ResponseEntity.ok(imageCaronaService.updateCaronaImageSequence(caronaImageId, imageUpdateRequest));
     }

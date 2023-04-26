@@ -123,9 +123,9 @@ public class ImageCaronaService {
 
         var image = imagemEncontrada.get();
 
-        imageCaronaRepository.delete(image);
+        storageService.remove(imagemEncontrada.get().getFileName());
 
-        storageService.remove(imagemEncontrada.get().getUrl());
+        imageCaronaRepository.delete(image);
 
         String finalUrl = concatenarUrl(image.getUrl());
 

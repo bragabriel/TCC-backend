@@ -123,9 +123,9 @@ public class ImageApeService {
 
         var image = imagemEncontrada.get();
 
-        imageApeRepository.delete(image);
+        storageService.remove(imagemEncontrada.get().getFileName());
 
-        storageService.remove(imagemEncontrada.get().getUrl());
+        imageApeRepository.delete(image);
 
         String finalUrl = concatenarUrl(image.getUrl());
 
