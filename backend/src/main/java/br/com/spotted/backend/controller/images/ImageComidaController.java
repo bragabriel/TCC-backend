@@ -20,28 +20,26 @@ public class ImageComidaController {
     @Autowired
     private ImageComidaService imageComidaService;
 
-    @PostMapping(value = "/upload/{idComida}", consumes = "multipart/form-data")
+    @PostMapping(value = "/comidaUploadImage/{idComida}", consumes = "multipart/form-data")
     @CrossOrigin()
     public ResponseEntity uploadImage(@RequestPart("files") MultipartFile[] file, @Valid @PathVariable Long idComida) throws IOException {
         return ResponseEntity.ok(imageComidaService.createComidaImage(file, idComida));
     }
 
-    @GetMapping("/comidaImage/{id}")
+    @GetMapping("/comidaImage/{idComida}")
     @CrossOrigin()
-    public ResponseEntity findComidaImageByIdImage(@PathVariable Long id){
-        return ResponseEntity.ok(imageComidaService.findComidaImageByIdComida(id));
+    public ResponseEntity findComidaImageByIdImage(@PathVariable Long idComida){
+        return ResponseEntity.ok(imageComidaService.findComidaImageByIdComida(idComida));
     }
 
-    @DeleteMapping("/deleteComidaImage/{comidaImageId}")
+    @DeleteMapping("/comidaDeleteImage/{comidaImageId}")
     public ResponseEntity deleteComidaImage(@PathVariable Long comidaImageId){
         return ResponseEntity.ok(imageComidaService.deleteComidaImage(comidaImageId));
     }
 
-    @PutMapping("/updateComidaImage/{comidaImageId}")
+    @PutMapping("/comidaUpdateImage/{comidaImageId}")
     public ResponseEntity updateComidaImageSequence(@PathVariable Long comidaImageId, @RequestBody @NotNull ImageUpdateRequest imageUpdateRequest){
         return ResponseEntity.ok(imageComidaService.updateComidaImageSequence(comidaImageId, imageUpdateRequest));
     }
-
-
 }
 

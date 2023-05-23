@@ -124,9 +124,9 @@ public class ImageCrushService {
 
         var image = imagemEncontrada.get();
 
-        imageCrushRepository.delete(image);
+        storageService.remove(imagemEncontrada.get().getFileName());
 
-        storageService.remove(imagemEncontrada.get().getUrl());
+        imageCrushRepository.delete(image);
 
         String finalUrl = concatenarUrl(image.getUrl());
 

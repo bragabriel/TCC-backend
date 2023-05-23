@@ -18,24 +18,24 @@ public class ImageApeController {
     @Autowired
     private ImageApeService imageApeService;
 
-    @PostMapping(value = "/upload/{idApe}", consumes = "multipart/form-data")
+    @PostMapping(value = "/apeUploadImage/{idApe}", consumes = "multipart/form-data")
     @CrossOrigin()
     public ResponseEntity uploadImage(@RequestPart("files") MultipartFile[] file, @Valid @PathVariable Long idApe) throws IOException {
         return ResponseEntity.ok(imageApeService.createApeImage(file, idApe));
     }
 
-    @GetMapping("/apeImage/{id}")
+    @GetMapping("/apeImage/{idApe}")
     @CrossOrigin()
-    public ResponseEntity findApeImageByIdImage(@PathVariable Long id){
-        return ResponseEntity.ok(imageApeService.findApeImageByIdApe(id));
+    public ResponseEntity findApeImageByIdImage(@PathVariable Long idApe){
+        return ResponseEntity.ok(imageApeService.findApeImageByIdApe(idApe));
     }
 
-    @DeleteMapping("/deleteApeImage/{apeImageId}")
+    @DeleteMapping("/apeDeleteImage/{apeImageId}")
     public ResponseEntity deleteApeImage(@PathVariable Long apeImageId){
         return ResponseEntity.ok(imageApeService.deleteApeImage(apeImageId));
     }
 
-    @PutMapping("/updateApeImage/{apeImageId}")
+    @PutMapping("/apeUpdateImage/{apeImageId}")
     public ResponseEntity updateApeImageSequence(@PathVariable Long apeImageId, @RequestBody @NotNull ImageUpdateRequest imageUpdateRequest){
         return ResponseEntity.ok(imageApeService.updateApeImageSequence(apeImageId, imageUpdateRequest));
     }

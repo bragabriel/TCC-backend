@@ -123,9 +123,9 @@ public class ImageComidaService {
 
         var image = imagemEncontrada.get();
 
-        imageComidaRepository.delete(image);
+        storageService.remove(imagemEncontrada.get().getFileName());
 
-        storageService.remove(imagemEncontrada.get().getUrl());
+        imageComidaRepository.delete(image);
 
         String finalUrl = concatenarUrl(image.getUrl());
 
