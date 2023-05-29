@@ -24,6 +24,7 @@ public class ComidaResponse {
     private String marcaComida;
 
     private Double precoComida;
+
     private String ofertaComida;
 
     private List<ComidaImage> listaImagensComida;

@@ -46,18 +46,18 @@ public class UsuarioService {
         return new ResponseBase<>(responsavelResponsePage);
     }
 
-    public ResponseBase<Usuario> pesquisarPorId(Long id) {
+    public ResponseBase<UsuarioResponse> pesquisarPorId(Long id) {
         // Consulta o repositorio para procurar por um custumer pelo 'id'
         Optional<Usuario> responsavelOptional = usuarioRepository.findById(id);
 
-        // Verifica se o custimer foi encontrado, caso o contratrio retorna um erro
+        // Verifica se o customer foi encontrado, caso o contratrio retorna um erro
         Usuario usuario = responsavelOptional
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Responsável não encontrado"));
 
         // Mapeia de entidade para dto
-        //UsuarioResponse usuarioResponse = new UsuarioResponse(usuario);
+        UsuarioResponse usuarioResponse = new UsuarioResponse(usuario);
 
-        return new ResponseBase<>(usuario);
+        return new ResponseBase<>(usuarioResponse);
     }
     public ResponseBase<UsuarioResponse> cadastrar(UsuarioCreateRequest novo) {
 
@@ -70,7 +70,6 @@ public class UsuarioService {
         modeloDb.setSenhaUsuario(Criptografia.encriptografar(novo.getSenha()));
         modeloDb.setTelefoneUsuario(novo.getTelefone());
         modeloDb.setDataNascimento(novo.getDataNascimento());
-        modeloDb.setImagemUsuario(novo.getImagemUsuario());
 
         //Salvando
         Usuario usuarioSalvo = usuarioRepository.save(modeloDb);
@@ -97,7 +96,9 @@ public class UsuarioService {
                 usuario.getTelefoneUsuario(),
                 usuario.getDataNascimento(),
                 usuario.getDescricaoUsuario(),
-                usuario.getImagemUsuario()
+                usuario.getUrl(),
+                usuario.getSequence(),
+                usuario.getFileName()
         );
     }
 
@@ -140,7 +141,9 @@ public class UsuarioService {
                 usuarioSalvo.getTelefoneUsuario(),
                 usuarioSalvo.getDataNascimento(),
                 usuarioSalvo.getDescricaoUsuario(),
-                usuarioSalvo.getImagemUsuario()
+                usuarioSalvo.getUrl(),
+                usuarioSalvo.getSequence(),
+                usuarioSalvo.getFileName()
         );
     }
 
@@ -149,5 +152,4 @@ public class UsuarioService {
             throw new EmailDuplicadoException("E-mail já cadastrado!");
         }
     }
-
 }

@@ -1,6 +1,7 @@
 package br.com.spotted.backend.domain.entity.image;
 
 import br.com.spotted.backend.domain.entity.Ape;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class ApeImage {
     @Column(name = "id_ape", nullable = false)
     private Long idApe;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_imageApe", updatable = false, insertable = false) //FK
     private Ape ape;

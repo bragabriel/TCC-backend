@@ -2,7 +2,10 @@ USE [TCC]
 GO
 
 --TABLE USUARIO
-/****** Object:  Table [dbo].[Usuario]    Script Date: 12/02/2023 22:06:36 ******/
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[Usuario]    Script Date: 5/28/2023 12:18:37 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -18,13 +21,16 @@ CREATE TABLE [dbo].[Usuario](
 	[telefone_usuario] [varchar](255) NOT NULL,
 	[dataNascimento_usuario] [date] NOT NULL,
 	[descricao_usuario] [varchar](255) NULL,
-	[imagem_usuario] [varbinary](max) NULL,
+	[url_imageUsuario] [varchar](255) NULL,
+	[sequence_imageUsuario] [int] NULL,
+	[fileName_imageUsuario] [varchar](255) NULL,
  CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED
 (
 	[id_usuario] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 GO
+
 
 
 --TABLE APE

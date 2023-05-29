@@ -2,6 +2,7 @@ package br.com.spotted.backend.domain.entity.image;
 
 import br.com.spotted.backend.domain.entity.Comida;
 import br.com.spotted.backend.domain.entity.Crush;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class CrushImage {
     @Column(name = "id_crush", nullable = false)
     private Long idCrush;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_imageCrush", updatable = false, insertable = false) //FK
     private Crush crush;

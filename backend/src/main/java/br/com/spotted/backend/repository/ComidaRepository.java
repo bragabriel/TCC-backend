@@ -11,10 +11,4 @@ import java.util.List;
 @Repository
 public interface ComidaRepository extends PagingAndSortingRepository<Comida, Long> {
 
-    @Query(
-            nativeQuery = true,
-            value = "SELECT * FROM Comida " +
-                    "WHERE (:comida IS NULL OR nomeComida = :comida)"
-    )
-    List<Comida> listarComFiltroNativo(@Param("comida") String comida);
 }

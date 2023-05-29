@@ -36,9 +36,6 @@ public class Objeto {
     @Column(name = "localizacaoAtual_objeto")
     private String localizacaoAtualObjeto;
 
-    @Column(name = "imagem_objeto")
-    private byte[] imagemObjeto;
-
     @Column(name= "id_usuario")
     private Long idUsuario;
 

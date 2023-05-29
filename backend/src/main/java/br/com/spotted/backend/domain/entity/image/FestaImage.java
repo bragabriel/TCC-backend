@@ -1,6 +1,7 @@
 package br.com.spotted.backend.domain.entity.image;
 
 import br.com.spotted.backend.domain.entity.Festa;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class FestaImage {
     @Column(name = "id_festa", nullable = false)
     private Long idFesta;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_imageFesta", updatable = false, insertable = false) //FK
     private Festa festa;

@@ -1,6 +1,7 @@
 package br.com.spotted.backend.domain.entity.image;
 
 import br.com.spotted.backend.domain.entity.Estagio;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class EstagioImage {
     @Column(name = "id_estagio", nullable = false)
     private Long idEstagio;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_imageEstagio", updatable = false, insertable = false) //FK
     private Estagio estagio;
