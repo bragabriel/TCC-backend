@@ -17,8 +17,6 @@ public class FestaCreateRequest {
     @NotEmpty
     private String localizacaoFesta;
 
-    private byte[] imagemFesta;
-
     @NotNull
     private Long idUsuario;
 }

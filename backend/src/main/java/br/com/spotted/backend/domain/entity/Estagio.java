@@ -1,10 +1,14 @@
 package br.com.spotted.backend.domain.entity;
 
+import br.com.spotted.backend.domain.entity.image.EstagioImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,7 +26,7 @@ public class Estagio {
     private String tituloEstagio;
 
     @Column(name = "descricao_estagio", nullable = false)
-    private String descricaoComida;
+    private String descricaoEstagio;
 
     @Column(name = "localizacao_estagio", nullable = false)
     private String localizacaoEstagio;
@@ -36,9 +40,6 @@ public class Estagio {
     @Column(name = "beneficios_estagio")
     private String beneficiosEstagio;
 
-    @Column(name = "imagem_estagio")
-    private byte[] imagemEstagio;
-
     @Column(name= "id_usuario")
     private Long idUsuario;
 
@@ -46,4 +47,7 @@ public class Estagio {
     @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false)
     private Usuario usuario;
 
+    @OneToMany(mappedBy = "idEstagio", targetEntity = EstagioImage.class, orphanRemoval = true)
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    private List<EstagioImage> listaImagensEstagio = new ArrayList<EstagioImage>();;
 }

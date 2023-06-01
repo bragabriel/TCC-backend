@@ -1,5 +1,6 @@
 package br.com.spotted.backend.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,8 +44,14 @@ public class Usuario {
     @Column(name = "descricao_usuario")
     private String descricaoUsuario;
 
-    @Column(name = "imagem_usuario")
-    private byte[] imagemUsuario;
+    @Column(name = "url_imageUsuario")
+    private String url;
+
+    @Column(name = "sequence_imageUsuario")
+    private Long sequence;
+
+    @Column(name = "fileName_imageUsuario")
+    private String fileName;
 
     //Um USUARIO pode ter 1-N COMIDAS
     @OneToMany(mappedBy = "idUsuario", targetEntity = Comida.class, orphanRemoval = true)

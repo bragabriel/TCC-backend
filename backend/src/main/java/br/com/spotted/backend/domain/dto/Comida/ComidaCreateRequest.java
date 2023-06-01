@@ -26,8 +26,6 @@ public class ComidaCreateRequest {
     @NotEmpty
     private String ofertaComida;
 
-    private byte[] imagemComida = null;
-
     @NotNull
     private Long idUsuario;
 }

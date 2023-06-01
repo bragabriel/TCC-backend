@@ -2,12 +2,12 @@ package br.com.spotted.backend.domain.dto.Ape;
 
 
 import br.com.spotted.backend.domain.entity.Ape;
+import br.com.spotted.backend.domain.entity.image.ApeImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,7 +34,7 @@ public class ApeResponse {
 
     private String animaisEstimacaoApe;
 
-    private byte[] imagemComida;
+    private List<ApeImage> listaImagensApe;
 
     private Long idUsuario;
 
@@ -50,7 +50,7 @@ public class ApeResponse {
         this.precoAluguelPorPessoaApe = ape.getPrecoAluguelPorPessoaApe();
         this.vagaGaragemApe = ape.getVagaGaragemApe();
         this.animaisEstimacaoApe = ape.getAnimaisEstimacaoApe();
-        this.imagemComida = ape.getImagemApe();
+        this.listaImagensApe = ape.getListaImagensApe();
         this.idUsuario = ape.getIdUsuario();
     }
 }

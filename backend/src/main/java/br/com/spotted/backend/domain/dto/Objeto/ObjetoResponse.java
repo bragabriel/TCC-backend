@@ -1,9 +1,13 @@
 package br.com.spotted.backend.domain.dto.Objeto;
 
 import br.com.spotted.backend.domain.entity.Objeto;
+import br.com.spotted.backend.domain.entity.image.ApeImage;
+import br.com.spotted.backend.domain.entity.image.ObjetoImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +24,7 @@ public class ObjetoResponse {
 
     private String localizacaoAtualObjeto;
 
-    private byte[] imagemObjeto;
+    private List<ObjetoImage> listaImagensObjeto;
 
     private Long idUsuario;
 
@@ -30,7 +34,7 @@ public class ObjetoResponse {
         this.descricaoObjeto = objeto.getDescricaoObjeto();
         this.localizacaoAchadoObjeto = objeto.getLocalizacaoAchadoObjeto();
         this.localizacaoAtualObjeto = objeto.getLocalizacaoAtualObjeto();
-        this.imagemObjeto = objeto.getImagemObjeto();
+        this.listaImagensObjeto = objeto.getListaImagensObjeto();
         this.idUsuario = objeto.getIdUsuario();
     }
 }

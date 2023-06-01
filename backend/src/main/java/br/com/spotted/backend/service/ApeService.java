@@ -62,7 +62,6 @@ public class ApeService {
         modeloDb.setPrecoAluguelPorPessoaApe(novo.getPrecoAluguelPorPessoaApe());
         modeloDb.setVagaGaragemApe(novo.getVagaGaragemApe());
         modeloDb.setAnimaisEstimacaoApe(novo.getAnimaisEstimacaoApe());
-        modeloDb.setImagemApe(novo.getImagemApe());
         modeloDb.setIdUsuario(novo.getIdUsuario());
 
         usuarioService.pesquisarPorId(novo.getIdUsuario());
@@ -96,7 +95,7 @@ public class ApeService {
             ape.getPrecoAluguelPorPessoaApe(),
             ape.getVagaGaragemApe(),
             ape.getAnimaisEstimacaoApe(),
-            ape.getImagemApe(),
+            ape.getListaImagensApe(),
             ape.getIdUsuario()
         );
     }
@@ -119,7 +118,6 @@ public class ApeService {
         ape.setPrecoAluguelPorPessoaApe(apeUpdateRequest.getPrecoAluguelPorPessoaApe());
         ape.setVagaGaragemApe(apeUpdateRequest.getVagaGaragemApe());
         ape.setAnimaisEstimacaoApe(apeUpdateRequest.getAnimaisEstimacaoApe());
-        ape.setImagemApe(apeUpdateRequest.getImagemComida());
 
         var apeSalvo = apeRepository.save(ape);
 
@@ -134,7 +132,7 @@ public class ApeService {
                 ape.getPrecoAluguelPorPessoaApe(),
                 ape.getVagaGaragemApe(),
                 ape.getAnimaisEstimacaoApe(),
-                ape.getImagemApe(),
+                ape.getListaImagensApe(),
                 ape.getIdUsuario()
         );
     }

@@ -35,8 +35,6 @@ public class ApeCreateRequest {
     @NotEmpty(message = "O campo animais de estimação é obrigatório!")
     private String animaisEstimacaoApe;
 
-    private byte[] imagemApe;
-
     @NotNull
     private Long idUsuario;
 }

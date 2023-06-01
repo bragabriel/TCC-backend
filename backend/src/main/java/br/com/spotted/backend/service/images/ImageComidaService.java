@@ -1,11 +1,11 @@
 package br.com.spotted.backend.service.images;
 
-import br.com.spotted.backend.domain.dto.Image.ImageResponse;
+import br.com.spotted.backend.domain.dto.Image.ImageComidaResponse;
 import br.com.spotted.backend.domain.dto.Image.ImageUpdateRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.image.ComidaImage;
 import br.com.spotted.backend.exception.ImagemNaoEncontradaException;
-import br.com.spotted.backend.repository.ImageRepository;
+import br.com.spotted.backend.repository.images.ImageComidaRepository;
 import br.com.spotted.backend.service.ComidaService;
 import br.com.spotted.backend.service.StorageService;
 import com.amazonaws.HttpMethod;
@@ -25,7 +25,7 @@ import java.util.List;
 public class ImageComidaService {
 
     @Autowired
-    private ImageRepository imageRepository;
+    private ImageComidaRepository imageComidaRepository;
 
     @Autowired
     private StorageService storageService;
@@ -36,13 +36,13 @@ public class ImageComidaService {
     @Autowired
     private AmazonS3 amazonS3;
 
-    public ResponseBase<List<ImageResponse>> createComidaImage(MultipartFile[] file, Long idItem) throws IOException {
+    public ResponseBase<List<ImageComidaResponse>> createComidaImage(MultipartFile[] file, Long idItem) throws IOException {
 
         var comida = comidaService.pesquisarPorId(idItem);
 
         var retorno = storageService.uploadFile(file, idItem);
 
-        List<ImageResponse> comidaImageResponseList = new ArrayList<>();
+        List<ImageComidaResponse> comidaImageComidaResponseList = new ArrayList<>();
 
         for (int i = 0; i < retorno.size(); i++) {
             ComidaImage comidaImage = new ComidaImage();
@@ -54,15 +54,15 @@ public class ImageComidaService {
             comidaImage.setFileName(retorno.get(i));
             comidaImage.setUrl(finalUrl);
 
-            comidaImageResponseList.add(new ImageResponse(comidaImage, retorno.get(i)));
+            comidaImageComidaResponseList.add(new ImageComidaResponse(comidaImage, retorno.get(i)));
 
-            var comidaImageCreated = imageRepository.save(comidaImage);
+            var comidaImageCreated = imageComidaRepository.save(comidaImage);
         }
 
-        return new ResponseBase<>(comidaImageResponseList);
+        return new ResponseBase<>(comidaImageComidaResponseList);
     }
 
-    public ResponseBase<List<ImageResponse>> findComidaImageByIdComida(Long idItem) {
+    public ResponseBase<List<ImageComidaResponse>> findComidaImageByIdComida(Long idItem) {
 
         var comida = comidaService.pesquisarPorId(idItem);
 
@@ -70,7 +70,7 @@ public class ImageComidaService {
             throw new ImagemNaoEncontradaException("Este item não tem imagem cadastrada.");
         }
 
-        List<ImageResponse> comidaImageList = new ArrayList<>();
+        List<ImageComidaResponse> comidaImageList = new ArrayList<>();
 
         for (int i = 0; i < comida.getObjetoRetorno().getListaImagensComida().size(); i++) {
 
@@ -78,23 +78,23 @@ public class ImageComidaService {
 
             String signedUrl = generateUrl(key, HttpMethod.GET);
 
-            ImageResponse userImageResponse = new ImageResponse();
+            ImageComidaResponse userImageComidaResponse = new ImageComidaResponse();
 
-            userImageResponse.setIdComida(idItem);
-            userImageResponse.setLocalUrl(comida.getObjetoRetorno().getListaImagensComida().get(i).getUrl());
-            userImageResponse.setSequence(comida.getObjetoRetorno().getListaImagensComida().get(i).getSequence());
-            userImageResponse.setIdImage(comida.getObjetoRetorno().getListaImagensComida().get(i).getIdImage());
-            userImageResponse.setFinalUrl(signedUrl);
+            userImageComidaResponse.setIdComida(idItem);
+            userImageComidaResponse.setLocalUrl(comida.getObjetoRetorno().getListaImagensComida().get(i).getUrl());
+            userImageComidaResponse.setSequence(comida.getObjetoRetorno().getListaImagensComida().get(i).getSequence());
+            userImageComidaResponse.setIdImage(comida.getObjetoRetorno().getListaImagensComida().get(i).getIdImage());
+            userImageComidaResponse.setFinalUrl(signedUrl);
 
-            comidaImageList.add(userImageResponse);
+            comidaImageList.add(userImageComidaResponse);
         }
 
         return new ResponseBase<>(comidaImageList);
     }
 
-    public ResponseBase<ImageResponse> updateComidaImageSequence(Long comidaImageId, ImageUpdateRequest imageUpdateRequest) {
+    public ResponseBase<ImageComidaResponse> updateComidaImageSequence(Long comidaImageId, ImageUpdateRequest imageUpdateRequest) {
 
-        var imagemEncontrada = imageRepository.findById(comidaImageId);
+        var imagemEncontrada = imageComidaRepository.findById(comidaImageId);
 
         if (imagemEncontrada.isEmpty()) {
             throw new ImageNotFoundException("Imagem não encontrada");
@@ -104,18 +104,18 @@ public class ImageComidaService {
 
         image.setSequence(imageUpdateRequest.getSequence());
 
-        var imagemSalva = imageRepository.save(image);
+        var imagemSalva = imageComidaRepository.save(image);
 
         String finalUrl = concatenarUrl(image.getUrl());
 
-        return new ResponseBase<>(new ImageResponse(
+        return new ResponseBase<>(new ImageComidaResponse(
                 image,
                 finalUrl
         ));
     }
 
-    public ImageResponse deleteComidaImage(Long productImageId) {
-        var imagemEncontrada = imageRepository.findById(productImageId);
+    public ImageComidaResponse deleteComidaImage(Long productImageId) {
+        var imagemEncontrada = imageComidaRepository.findById(productImageId);
 
         if (imagemEncontrada.isEmpty()) {
             throw new ImageNotFoundException("Imagem não encontrada");
@@ -123,13 +123,13 @@ public class ImageComidaService {
 
         var image = imagemEncontrada.get();
 
-        imageRepository.delete(image);
+        storageService.remove(imagemEncontrada.get().getFileName());
 
-        storageService.remove(imagemEncontrada.get().getUrl());
+        imageComidaRepository.delete(image);
 
         String finalUrl = concatenarUrl(image.getUrl());
 
-        return new ImageResponse(
+        return new ImageComidaResponse(
                 image,
                 finalUrl
         );

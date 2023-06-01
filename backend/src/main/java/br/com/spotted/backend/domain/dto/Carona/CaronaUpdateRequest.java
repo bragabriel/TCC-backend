@@ -30,6 +30,4 @@ public class CaronaUpdateRequest {
 
     @NotEmpty
     private String periodoCarona;
-
-    private byte[] imagemCarona;
 }

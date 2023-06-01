@@ -34,6 +34,4 @@ public class ApeUpdateRequest {
 
     @NotEmpty(message = "O campo animais de estimação é obrigatório!")
     private String animaisEstimacaoApe;
-
-    private byte[] imagemComida;
 }

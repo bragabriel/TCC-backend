@@ -58,7 +58,6 @@ public class CrushService {
         modeloDb.setCursoCrush(novo.getCursoCrush());
         modeloDb.setLocalizacaoCrush(novo.getLocalizacaoCrush());
         modeloDb.setPeriodoCrush(novo.getPeriodoCrush());
-        modeloDb.setImagemCrush(novo.getImagemCrush());
         modeloDb.setIdUsuario(novo.getIdUsuario());
 
         usuarioService.pesquisarPorId(novo.getIdUsuario());
@@ -88,7 +87,7 @@ public class CrushService {
                 crush.getCursoCrush(),
                 crush.getLocalizacaoCrush(),
                 crush.getPeriodoCrush(),
-                crush.getImagemCrush(),
+                crush.getListaImagensCrush(),
                 crush.getIdUsuario()
         );
     }
@@ -108,7 +107,6 @@ public class CrushService {
         crush.setCursoCrush(crushUpdateRequest.getCursoCrush());
         crush.setLocalizacaoCrush(crushUpdateRequest.getLocalizacaoCrush());
         crush.setPeriodoCrush(crushUpdateRequest.getPeriodoCrush());
-        crush.setImagemCrush(crushUpdateRequest.getImagemCrush());
 
         var crushSalvo = crushRepository.save(crush);
 
@@ -119,7 +117,7 @@ public class CrushService {
                 crush.getCursoCrush(),
                 crush.getLocalizacaoCrush(),
                 crush.getPeriodoCrush(),
-                crush.getImagemCrush(),
+                crush.getListaImagensCrush(),
                 crush.getIdUsuario()
         );
     }

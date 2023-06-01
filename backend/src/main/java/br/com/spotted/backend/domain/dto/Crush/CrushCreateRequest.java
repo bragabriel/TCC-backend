@@ -23,8 +23,6 @@ public class CrushCreateRequest {
     @NotEmpty
     private String periodoCrush;
 
-    private byte[] imagemCrush;
-
     @NotNull
     private Long idUsuario;
 }

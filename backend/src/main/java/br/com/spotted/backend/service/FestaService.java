@@ -56,7 +56,6 @@ public class FestaService {
         modeloDb.setTituloFesta(novo.getTituloFesta());
         modeloDb.setDescricaoFesta(novo.getDescricaoFesta());
         modeloDb.setLocalizacaoFesta(novo.getLocalizacaoFesta());
-        modeloDb.setImagemFesta(novo.getImagemFesta());
         modeloDb.setIdUsuario(novo.getIdUsuario());
 
         usuarioService.pesquisarPorId(novo.getIdUsuario());
@@ -84,7 +83,7 @@ public class FestaService {
                 festa.getTituloFesta(),
                 festa.getDescricaoFesta(),
                 festa.getLocalizacaoFesta(),
-                festa.getImagemFesta(),
+                festa.getListaImagensFesta(),
                 festa.getIdUsuario()
         );
     }
@@ -102,7 +101,6 @@ public class FestaService {
         festa.setTituloFesta(festaUpdateRequest.getTituloFesta());
         festa.setDescricaoFesta(festaUpdateRequest.getDescricaoFesta());
         festa.setLocalizacaoFesta(festaUpdateRequest.getLocalizacaoFesta());
-        festa.setImagemFesta(festaUpdateRequest.getImagemFesta());
 
         var festaSalva = festaRepository.save(festa);
 
@@ -111,7 +109,7 @@ public class FestaService {
                 festa.getTituloFesta(),
                 festa.getDescricaoFesta(),
                 festa.getLocalizacaoFesta(),
-                festa.getImagemFesta(),
+                festa.getListaImagensFesta(),
                 festa.getIdUsuario()
         );
     }

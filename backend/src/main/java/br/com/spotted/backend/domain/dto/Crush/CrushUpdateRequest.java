@@ -21,6 +21,4 @@ public class CrushUpdateRequest {
 
     @NotEmpty
     private String periodoCrush;
-
-    private byte[] imagemCrush;
 }

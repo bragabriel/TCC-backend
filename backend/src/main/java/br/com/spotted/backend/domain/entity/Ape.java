@@ -1,11 +1,15 @@
 package br.com.spotted.backend.domain.entity;
 
 
+import br.com.spotted.backend.domain.entity.image.ApeImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -46,9 +50,6 @@ public class Ape {
     @Column(name = "animaisEstimacao_ape")
     private String animaisEstimacaoApe;
 
-    @Column(name = "imagem_ape")
-    private byte[] imagemApe;
-
     @Column(name= "id_usuario")
     private Long idUsuario;
 
@@ -56,4 +57,7 @@ public class Ape {
     @JoinColumn(name="id_Usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false) //Fk IdUsuario na tabela Ape
     private Usuario usuario;
 
+    @OneToMany(mappedBy = "idApe", targetEntity = ApeImage.class, orphanRemoval = true) //idApe relacionamento na outra table
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    private List<ApeImage> listaImagensApe = new ArrayList<ApeImage>();;
 }

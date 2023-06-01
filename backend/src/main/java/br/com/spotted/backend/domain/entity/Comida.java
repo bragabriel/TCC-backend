@@ -1,6 +1,7 @@
 package br.com.spotted.backend.domain.entity;
 
 import br.com.spotted.backend.domain.entity.image.ComidaImage;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,6 +44,7 @@ public class Comida {
     @Column(name= "id_usuario")
     private Long idUsuario;
 
+    @JsonIgnore
     @ManyToOne //Muitas COMIDAS podem ter apenas 1 USUARIO
     @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false) //Fk IdUsuario na tabela Comida
     private Usuario usuario;
