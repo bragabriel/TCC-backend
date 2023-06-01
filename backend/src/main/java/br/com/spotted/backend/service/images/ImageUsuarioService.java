@@ -20,7 +20,9 @@ import java.util.Date;
 @Service
 public class ImageUsuarioService {
 
+    @Autowired
     private UsuarioRepository usuarioRepository;
+
     @Autowired
     private ImageApeRepository imageApeRepository;
 

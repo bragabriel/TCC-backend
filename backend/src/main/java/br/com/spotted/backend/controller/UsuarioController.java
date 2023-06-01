@@ -42,7 +42,6 @@ public class UsuarioController {
     public ResponseEntity pesquisarPorId(@PathVariable Long idUsuario) {
 
         ResponseBase<UsuarioResponse> retorno = usuarioService.pesquisarPorId(idUsuario);
-        //ResponseBase<Usuario> retorno = usuarioService.pesquisarPorId(idUsuario);
 
         return ResponseEntity.ok(retorno);
     }
