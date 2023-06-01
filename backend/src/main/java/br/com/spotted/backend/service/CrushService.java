@@ -7,7 +7,7 @@ import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Crush;
 import br.com.spotted.backend.exception.CrushNaoEncontradoException;
-import br.com.spotted.backend.exception.ComidaNaoEncontradaException;
+import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
 import br.com.spotted.backend.repository.CrushRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -97,7 +97,7 @@ public class CrushService {
         var crushEncontrado = crushRepository.findById(idCrush);
 
         if (crushEncontrado.isEmpty()) {
-            throw new ComidaNaoEncontradaException("Crush não encontrado.");
+            throw new AlimentoNaoEncontradoException("Crush não encontrado.");
         }
 
         var crush = crushEncontrado.get();

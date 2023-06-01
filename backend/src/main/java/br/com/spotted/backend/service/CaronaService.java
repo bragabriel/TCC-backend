@@ -6,7 +6,8 @@ import br.com.spotted.backend.domain.dto.Carona.CaronaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Carona;
-import br.com.spotted.backend.exception.ComidaNaoEncontradaException;
+import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
+import br.com.spotted.backend.exception.CaronaNaoEncontradaException;
 import br.com.spotted.backend.repository.CaronaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -77,7 +78,7 @@ public class CaronaService {
         var caronaEncontrada = caronaRepository.findById(idCarona);
 
         if (caronaEncontrada.isEmpty()) {
-            throw new ComidaNaoEncontradaException("Carona não encontrada.");
+            throw new CaronaNaoEncontradaException("Transporte não encontrado.");
         }
 
         var carona = caronaEncontrada.get();
@@ -103,7 +104,7 @@ public class CaronaService {
         var comidaEncontrada = caronaRepository.findById(idCarona);
 
         if(comidaEncontrada.isEmpty()){
-            throw new ComidaNaoEncontradaException("Comida não encontrada.");
+            throw new CaronaNaoEncontradaException("Transporte não encontrado.");
         }
 
         var carona = comidaEncontrada.get();

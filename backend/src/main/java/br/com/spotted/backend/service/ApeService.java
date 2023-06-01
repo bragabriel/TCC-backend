@@ -6,8 +6,8 @@ import br.com.spotted.backend.domain.dto.Ape.ApeUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Ape;
-import br.com.spotted.backend.exception.ApeNaoEncontradoException;
-import br.com.spotted.backend.exception.ComidaNaoEncontradaException;
+import br.com.spotted.backend.exception.MoradiaNaoEncontradaException;
+import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
 import br.com.spotted.backend.repository.ApeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -78,7 +78,7 @@ public class ApeService {
         var apeEncontrado = apeRepository.findById(idApe);
 
         if (apeEncontrado.isEmpty()) {
-            throw new ApeNaoEncontradoException("Apê não encontrado.");
+            throw new MoradiaNaoEncontradaException("Apê não encontrado.");
         }
 
         var ape = apeEncontrado.get();
@@ -105,7 +105,7 @@ public class ApeService {
         var apeEncontrado = apeRepository.findById(idApe);
 
         if (apeEncontrado.isEmpty()) {
-            throw new ComidaNaoEncontradaException("Ape não encontrado.");
+            throw new MoradiaNaoEncontradaException("Moradia não encontrado.");
         }
 
         var ape = apeEncontrado.get();

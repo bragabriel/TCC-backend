@@ -32,6 +32,42 @@ CREATE TABLE [dbo].[Usuario](
 GO
 
 
+--TABLE ALIMENTO
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[Alimento]    Script Date: 5/31/2023 10:23:01 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Alimento](
+	[id_alimento] [int] IDENTITY(1,1) NOT NULL,
+	[titulo_alimento] [varchar](255) NOT NULL,
+	[descricao_alimento] [varchar](255) NOT NULL,
+	[tipo_alimento] [varchar](255) NOT NULL,
+	[sabor_alimento] [varchar](255) NULL,
+	[oferta_alimento] [varchar](255) NULL,
+	[marca_alimento] [varchar](255) NULL,
+	[unidade_alimento] [varchar](255) NULL,
+	[preco_alimento] [varchar](255) NOT NULL,
+	[id_usuario] [int] NOT NULL,
+ CONSTRAINT [PK_Alimento] PRIMARY KEY CLUSTERED
+(
+	[id_alimento] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Alimento]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Alimento] FOREIGN KEY([id_usuario])
+REFERENCES [dbo].[Usuario] ([id_usuario])
+GO
+
+ALTER TABLE [dbo].[Alimento] CHECK CONSTRAINT [FK_Usuario_Alimento]
+GO
+
 
 --TABLE APE
 USE [TCC]
@@ -105,43 +141,6 @@ REFERENCES [dbo].[Usuario] ([id_usuario])
 GO
 
 ALTER TABLE [dbo].[Carona] CHECK CONSTRAINT [FK_Usuario_Carona]
-GO
-
-
---TABLE COMIDA
-USE [TCC]
-GO
-
-/****** Object:  Table [dbo].[Comida]    Script Date: 4/7/2023 6:06:19 PM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[Comida](
-	[id_comida] [int] IDENTITY(1,1) NOT NULL,
-	[titulo_comida] [varchar](255) NOT NULL,
-	[descricao_comida] [varchar](255) NOT NULL,
-	[tipo_comida] [varchar](255) NOT NULL,
-	[sabor_comida] [varchar](255) NULL,
-	[oferta_comida] [varchar](255) NULL,
-	[marca_comida] [varchar](255) NULL,
-	[unidade_comida] [varchar](255) NULL,
-	[preco_comida] [varchar](255) NOT NULL,
-	[id_usuario] [int] NOT NULL,
- CONSTRAINT [PK_Comida] PRIMARY KEY CLUSTERED
-(
-	[id_comida] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-ALTER TABLE [dbo].[Comida]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Comida] FOREIGN KEY([id_usuario])
-REFERENCES [dbo].[Usuario] ([id_usuario])
-GO
-
-ALTER TABLE [dbo].[Comida] CHECK CONSTRAINT [FK_Usuario_Comida]
 GO
 
 
@@ -338,32 +337,35 @@ ALTER TABLE [dbo].[CaronaImage] CHECK CONSTRAINT [FK_CaronaImage_Carona]
 GO
 
 
---TABLE COMIDA IMAGES
-/****** Object:  Table [dbo].[ComidaImage]    Script Date: 4/21/2023 6:47:56 PM ******/
+--TABLE ALIMENTO IMAGES
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[AlimentoImage]    Script Date: 5/31/2023 10:23:57 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[ComidaImage](
-	[id_imageComida] [int] IDENTITY(1,1) NOT NULL,
-	[url_imageComida] [varchar](255) NOT NULL,
-	[sequence_imageComida] [int] NULL,
-	[fileName_imageComida] [varchar](255) NOT NULL,
-	[id_comida] [int] NOT NULL,
+CREATE TABLE [dbo].[AlimentoImage](
+	[id_imageAlimento] [int] IDENTITY(1,1) NOT NULL,
+	[url_imageAlimento] [varchar](255) NOT NULL,
+	[sequence_imageAlimento] [int] NULL,
+	[fileName_imageAlimento] [varchar](255) NOT NULL,
+	[id_alimento] [int] NOT NULL,
  CONSTRAINT [PK_Images] PRIMARY KEY CLUSTERED
 (
-	[id_imageComida] ASC
+	[id_imageAlimento] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[ComidaImage]  WITH CHECK ADD  CONSTRAINT [FK_ComidaImage_Comida] FOREIGN KEY([id_comida])
-REFERENCES [dbo].[Comida] ([id_comida])
+ALTER TABLE [dbo].[AlimentoImage]  WITH CHECK ADD  CONSTRAINT [FK_AlimentoImage_Alimento] FOREIGN KEY([id_alimento])
+REFERENCES [dbo].[Alimento] ([id_alimento])
 GO
 
-ALTER TABLE [dbo].[ComidaImage] CHECK CONSTRAINT [FK_ComidaImage_Comida]
+ALTER TABLE [dbo].[AlimentoImage] CHECK CONSTRAINT [FK_AlimentoImage_Alimento]
 GO
 
 

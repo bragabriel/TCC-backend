@@ -1,14 +1,10 @@
 package br.com.spotted.backend.controller;
 
-import br.com.spotted.backend.domain.dto.Comida.ComidaCreateRequest;
-import br.com.spotted.backend.domain.dto.Comida.ComidaResponse;
-import br.com.spotted.backend.domain.dto.Comida.ComidaUpdateRequest;
 import br.com.spotted.backend.domain.dto.Festa.FestaCreateRequest;
 import br.com.spotted.backend.domain.dto.Festa.FestaResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
-import br.com.spotted.backend.service.ComidaService;
 import br.com.spotted.backend.service.FestaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
