@@ -1,7 +1,6 @@
 package br.com.spotted.backend.domain.dto.Objeto;
 
 import br.com.spotted.backend.domain.entity.Objeto;
-import br.com.spotted.backend.domain.entity.image.ApeImage;
 import br.com.spotted.backend.domain.entity.image.ObjetoImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;

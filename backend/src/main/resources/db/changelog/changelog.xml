@@ -22,9 +22,9 @@
         <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_alimento.sql" relativeToChangelogFile="true" />
     </changeSet>
 
-    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-APE">
-        <comment>Insere Dados - Ape</comment>
-        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_ape.sql" relativeToChangelogFile="true" />
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-MORADIA">
+        <comment>Insere Dados - Moradia</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_moradia.sql" relativeToChangelogFile="true" />
     </changeSet>
 
     <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-CARONA">

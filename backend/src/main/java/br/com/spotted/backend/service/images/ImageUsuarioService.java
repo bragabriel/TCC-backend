@@ -4,7 +4,7 @@ import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioResponse;
 import br.com.spotted.backend.exception.UsuarioNaoEncontradoException;
 import br.com.spotted.backend.repository.UsuarioRepository;
-import br.com.spotted.backend.repository.images.ImageApeRepository;
+import br.com.spotted.backend.repository.images.ImageMoradiaRepository;
 import br.com.spotted.backend.service.StorageService;
 import br.com.spotted.backend.service.UsuarioService;
 import com.amazonaws.HttpMethod;
@@ -24,7 +24,7 @@ public class ImageUsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private ImageApeRepository imageApeRepository;
+    private ImageMoradiaRepository imageMoradiaRepository;
 
     @Autowired
     private StorageService storageService;

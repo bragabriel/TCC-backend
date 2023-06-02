@@ -69,41 +69,42 @@ ALTER TABLE [dbo].[Alimento] CHECK CONSTRAINT [FK_Usuario_Alimento]
 GO
 
 
---TABLE APE
+--TABLE MORADIA
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Ape]    Script Date: 4/7/2023 6:16:11 PM ******/
+/****** Object:  Table [dbo].[Moradia]    Script Date: 6/1/2023 9:27:50 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Ape](
-	[id_ape] [int] IDENTITY(1,1) NOT NULL,
-	[qtdMoradoresPermitido_ape] [int] NOT NULL,
-	[qtdMoradoresAtuais_ape] [int] NOT NULL,
-	[precoAluguelTotal_ape] [float] NULL,
-	[precoAluguelPorPessoa_ape] [float] NOT NULL,
-	[localizacao_ape] [varchar](255) NOT NULL,
-	[vagaGaragem_ape] [varchar](255) NOT NULL,
-	[animaisEstimacao_ape] [varchar](255) NOT NULL,
-	[titulo_ape] [varchar](255) NOT NULL,
-	[descricao_ape] [varchar](255) NOT NULL,
+CREATE TABLE [dbo].[Moradia](
+	[id_moradia] [int] IDENTITY(1,1) NOT NULL,
+	[qtdMoradoresPermitido_moradia] [int] NOT NULL,
+	[qtdMoradoresAtuais_moradia] [int] NOT NULL,
+	[precoAluguelTotal_moradia] [float] NULL,
+	[precoAluguelPorPessoa_moradia] [float] NOT NULL,
+	[localizacao_moradia] [varchar](255) NOT NULL,
+	[vagaGaragem_moradia] [varchar](255) NOT NULL,
+	[animaisEstimacao_moradia] [varchar](255) NOT NULL,
+	[titulo_moradia] [varchar](255) NOT NULL,
+	[descricao_moradia] [varchar](255) NOT NULL,
+	[imagem_moradia] [varbinary](max) NULL,
 	[id_usuario] [int] NOT NULL,
- CONSTRAINT [PK_Ape] PRIMARY KEY CLUSTERED
+ CONSTRAINT [PK_Moradia] PRIMARY KEY CLUSTERED
 (
-	[id_ape] ASC
+	[id_moradia] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Ape]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Ape] FOREIGN KEY([id_usuario])
+ALTER TABLE [dbo].[Moradia]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Moradia] FOREIGN KEY([id_usuario])
 REFERENCES [dbo].[Usuario] ([id_usuario])
 GO
 
-ALTER TABLE [dbo].[Ape] CHECK CONSTRAINT [FK_Usuario_Ape]
+ALTER TABLE [dbo].[Moradia] CHECK CONSTRAINT [FK_Usuario_Moradia]
 GO
 
 
@@ -278,34 +279,36 @@ ALTER TABLE [dbo].[Objeto] CHECK CONSTRAINT [FK_Usuario_Objeto]
 GO
 
 --IMAGES
---TABLE APE IMAGES
-/****** Object:  Table [dbo].[ApeImage]    Script Date: 4/21/2023 6:47:21 PM ******/
+--TABLE MORADIA IMAGES
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[MoradiaImage]    Script Date: 6/1/2023 9:29:19 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[ApeImage](
-	[id_imageApe] [int] IDENTITY(1,1) NOT NULL,
-	[url_imageApe] [varchar](255) NOT NULL,
-	[sequence_imageApe] [int] NULL,
-	[fileName_imageApe] [varchar](255) NOT NULL,
-	[id_ape] [int] NOT NULL,
- CONSTRAINT [PK_ApeImage] PRIMARY KEY CLUSTERED
+CREATE TABLE [dbo].[MoradiaImage](
+	[id_imageMoradia] [int] IDENTITY(1,1) NOT NULL,
+	[url_imageMoradia] [varchar](255) NOT NULL,
+	[sequence_imageMoradia] [int] NULL,
+	[fileName_imageMoradia] [varchar](255) NOT NULL,
+	[id_moradia] [int] NOT NULL,
+ CONSTRAINT [PK_MoradiaImage] PRIMARY KEY CLUSTERED
 (
-	[id_imageApe] ASC
+	[id_imageMoradia] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[ApeImage]  WITH CHECK ADD  CONSTRAINT [FK_ApeImage_Ape] FOREIGN KEY([id_ape])
-REFERENCES [dbo].[Ape] ([id_ape])
+ALTER TABLE [dbo].[MoradiaImage]  WITH CHECK ADD  CONSTRAINT [FK_MoradiaImage_Moradia] FOREIGN KEY([id_moradia])
+REFERENCES [dbo].[Moradia] ([id_moradia])
 GO
 
-ALTER TABLE [dbo].[ApeImage] CHECK CONSTRAINT [FK_ApeImage_Ape]
+ALTER TABLE [dbo].[MoradiaImage] CHECK CONSTRAINT [FK_MoradiaImage_Moradia]
 GO
-
 
 
 --TABLE CARONA IMAGES

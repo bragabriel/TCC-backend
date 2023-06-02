@@ -1,8 +1,6 @@
 package br.com.spotted.backend.domain.dto.Carona;
 
 import br.com.spotted.backend.domain.entity.Carona;
-import br.com.spotted.backend.domain.entity.Usuario;
-import br.com.spotted.backend.domain.entity.image.ApeImage;
 import br.com.spotted.backend.domain.entity.image.CaronaImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;

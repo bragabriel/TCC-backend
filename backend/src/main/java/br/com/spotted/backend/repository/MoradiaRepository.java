@@ -1,10 +1,10 @@
 package br.com.spotted.backend.repository;
 
-import br.com.spotted.backend.domain.entity.Ape;
+import br.com.spotted.backend.domain.entity.Moradia;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ApeRepository extends PagingAndSortingRepository<Ape, Long> {
+public interface MoradiaRepository extends PagingAndSortingRepository<Moradia, Long> {
 
 }
