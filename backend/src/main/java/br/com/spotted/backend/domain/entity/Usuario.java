@@ -61,9 +61,9 @@ public class Usuario {
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private List<Moradia> listaMoradias = new ArrayList<Moradia>();
 
-    @OneToMany(mappedBy = "idUsuario", targetEntity = Carona.class, orphanRemoval = true)
+    @OneToMany(mappedBy = "idUsuario", targetEntity = Transporte.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<Carona> listaCaronas = new ArrayList<Carona>();
+    private List<Transporte> listaTransportes = new ArrayList<Transporte>();
 
     @OneToMany(mappedBy = "idUsuario", targetEntity = Estagio.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)

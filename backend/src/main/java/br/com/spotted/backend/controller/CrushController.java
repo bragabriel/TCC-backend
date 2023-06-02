@@ -54,7 +54,7 @@ public class CrushController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(crush);
     }
 
-    //Atualizar Carona
+    //Atualizar Transporte
     @PutMapping(value = "api/crushAtualizar/{idCrush}")
     public ResponseEntity<CrushResponse> atualizarCrush(
             @PathVariable Long idCrush,

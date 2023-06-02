@@ -108,41 +108,49 @@ ALTER TABLE [dbo].[Moradia] CHECK CONSTRAINT [FK_Usuario_Moradia]
 GO
 
 
---TABLE CARONA
+--TABLE TRANSPORTE
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Carona]    Script Date: 14/02/2023 20:58:24 ******/
+/****** Object:  Table [dbo].[Transporte]    Script Date: 6/1/2023 9:47:20 PM ******/
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[Transporte]    Script Date: 6/1/2023 9:47:20 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Carona](
-	[id_carona] [int] IDENTITY(1,1) NOT NULL,
-	[titulo_carona] [varchar](255) NOT NULL,
-	[descricao_carona] [varchar](255) NULL,
-	[cidade_carona] [varchar](255) NOT NULL,
-	[periodo_carona] [varchar](255) NOT NULL,
-	[informacoesVeiculo_carona] [varchar](255) NOT NULL,
-	[informacoesCondutor_carona] [varchar](255) NOT NULL,
-	[qtdAssentosAtual_carona] [int] NOT NULL,
-	[qtdAssentosTotal_carona] [int] NOT NULL,
+CREATE TABLE [dbo].[Transporte](
+	[id_transporte] [int] IDENTITY(1,1) NOT NULL,
+	[titulo_transporte] [varchar](255) NOT NULL,
+	[descricao_transporte] [varchar](255) NULL,
+	[cidade_transporte] [varchar](255) NOT NULL,
+	[periodo_transporte] [varchar](255) NOT NULL,
+	[informacoesVeiculo_transporte] [varchar](255) NOT NULL,
+	[informacoesCondutor_transporte] [varchar](255) NOT NULL,
+	[qtdAssentosTotal_transporte] [int] NOT NULL,
+	[qtdAssentosPreenchidos_transporte] [int] NOT NULL,
+	[imagem_transporte] [varbinary](max) NULL,
 	[id_usuario] [int] NOT NULL,
- CONSTRAINT [PK_Carona] PRIMARY KEY CLUSTERED
+ CONSTRAINT [PK_Transporte] PRIMARY KEY CLUSTERED
 (
-	[id_carona] ASC
+	[id_transporte] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Carona]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Carona] FOREIGN KEY([id_usuario])
+ALTER TABLE [dbo].[Transporte]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Transporte] FOREIGN KEY([id_usuario])
 REFERENCES [dbo].[Usuario] ([id_usuario])
 GO
 
-ALTER TABLE [dbo].[Carona] CHECK CONSTRAINT [FK_Usuario_Carona]
+ALTER TABLE [dbo].[Transporte] CHECK CONSTRAINT [FK_Usuario_Transporte]
 GO
+
+
+
 
 
 --TABLE CRUSH
@@ -311,32 +319,35 @@ ALTER TABLE [dbo].[MoradiaImage] CHECK CONSTRAINT [FK_MoradiaImage_Moradia]
 GO
 
 
---TABLE CARONA IMAGES
-/****** Object:  Table [dbo].[CaronaImage]    Script Date: 4/21/2023 6:47:51 PM ******/
+--TABLE TRANSPORTE IMAGES
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[TransporteImage]    Script Date: 6/1/2023 9:47:23 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[CaronaImage](
-	[id_imageCarona] [int] IDENTITY(1,1) NOT NULL,
-	[url_imageCarona] [varchar](255) NOT NULL,
-	[sequence_imageCarona] [int] NULL,
-	[fileName_imageCarona] [varchar](255) NOT NULL,
-	[id_carona] [int] NOT NULL,
- CONSTRAINT [PK_CaronaImage] PRIMARY KEY CLUSTERED
+CREATE TABLE [dbo].[TransporteImage](
+	[id_imageTransporte] [int] IDENTITY(1,1) NOT NULL,
+	[url_imageTransporte] [varchar](255) NOT NULL,
+	[sequence_imageTransporte] [int] NULL,
+	[fileName_imageTransporte] [varchar](255) NOT NULL,
+	[id_transporte] [int] NOT NULL,
+ CONSTRAINT [PK_TransporteImage] PRIMARY KEY CLUSTERED
 (
-	[id_imageCarona] ASC
+	[id_imageTransporte] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[CaronaImage]  WITH CHECK ADD  CONSTRAINT [FK_CaronaImage_Carona] FOREIGN KEY([id_carona])
-REFERENCES [dbo].[Carona] ([id_carona])
+ALTER TABLE [dbo].[TransporteImage]  WITH CHECK ADD  CONSTRAINT [FK_TransporteImage_Transporte] FOREIGN KEY([id_transporte])
+REFERENCES [dbo].[Transporte] ([id_transporte])
 GO
 
-ALTER TABLE [dbo].[CaronaImage] CHECK CONSTRAINT [FK_CaronaImage_Carona]
+ALTER TABLE [dbo].[TransporteImage] CHECK CONSTRAINT [FK_TransporteImage_Transporte]
 GO
 
 

@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-public class CaronaNaoEncontradaException extends RuntimeException {
-    public CaronaNaoEncontradaException(String message) {
+public class TransporteNaoEncontradoException extends RuntimeException {
+    public TransporteNaoEncontradoException(String message) {
         super(message);
     }
 }
