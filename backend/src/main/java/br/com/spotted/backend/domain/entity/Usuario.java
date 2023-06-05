@@ -1,6 +1,5 @@
 package br.com.spotted.backend.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -54,17 +53,17 @@ public class Usuario {
     private String fileName;
 
     //Um USUARIO pode ter 1-N COMIDAS
-    @OneToMany(mappedBy = "idUsuario", targetEntity = Comida.class, orphanRemoval = true)
+    @OneToMany(mappedBy = "idUsuario", targetEntity = Alimento.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<Comida> listaComidas = new ArrayList<Comida>();
+    private List<Alimento> listaAlimentos = new ArrayList<Alimento>();
 
-    @OneToMany(mappedBy = "idUsuario", targetEntity = Ape.class, orphanRemoval = true)
+    @OneToMany(mappedBy = "idUsuario", targetEntity = Moradia.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<Ape> listaApes = new ArrayList<Ape>();
+    private List<Moradia> listaMoradias = new ArrayList<Moradia>();
 
-    @OneToMany(mappedBy = "idUsuario", targetEntity = Ape.class, orphanRemoval = true)
+    @OneToMany(mappedBy = "idUsuario", targetEntity = Transporte.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<Carona> listaCaronas = new ArrayList<Carona>();
+    private List<Transporte> listaTransportes = new ArrayList<Transporte>();
 
     @OneToMany(mappedBy = "idUsuario", targetEntity = Estagio.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)

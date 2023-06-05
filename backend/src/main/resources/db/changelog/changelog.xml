@@ -17,19 +17,19 @@
         <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_usuario.sql" relativeToChangelogFile="true" />
     </changeSet>
 
-    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-APE">
-        <comment>Insere Dados - Ape</comment>
-        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_ape.sql" relativeToChangelogFile="true" />
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-ALIMENTO">
+        <comment>Insere Dados - Alimento</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_alimento.sql" relativeToChangelogFile="true" />
     </changeSet>
 
-    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-CARONA">
-        <comment>Insere Dados - Carona</comment>
-        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_carona.sql" relativeToChangelogFile="true" />
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-MORADIA">
+        <comment>Insere Dados - Moradia</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_moradia.sql" relativeToChangelogFile="true" />
     </changeSet>
 
-    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-COMIDA">
-        <comment>Insere Dados - Comida</comment>
-        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_comida.sql" relativeToChangelogFile="true" />
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-TRANSPORTE">
+        <comment>Insere Dados - Transporte</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_transporte.sql" relativeToChangelogFile="true" />
     </changeSet>
 
     <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-CRUSH">

@@ -7,7 +7,7 @@ import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Objeto;
 import br.com.spotted.backend.exception.ObjetoNaoEncontradoException;
-import br.com.spotted.backend.exception.ComidaNaoEncontradaException;
+import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
 import br.com.spotted.backend.repository.ObjetoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -95,7 +95,7 @@ public class ObjetoService {
         var objetoEncontrado = objetoRepository.findById(idObjeto);
 
         if (objetoEncontrado.isEmpty()) {
-            throw new ComidaNaoEncontradaException("Objeto não encontrado.");
+            throw new ObjetoNaoEncontradoException("Objeto não encontrado.");
         }
 
         var objeto = objetoEncontrado.get();

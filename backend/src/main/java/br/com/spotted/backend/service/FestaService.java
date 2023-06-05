@@ -6,7 +6,7 @@ import br.com.spotted.backend.domain.dto.Festa.FestaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Festa;
-import br.com.spotted.backend.exception.ComidaNaoEncontradaException;
+import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
 import br.com.spotted.backend.exception.FestaNaoEncontradaException;
 import br.com.spotted.backend.repository.FestaRepository;
 import lombok.RequiredArgsConstructor;
@@ -93,7 +93,7 @@ public class FestaService {
         var festaEncontrada = festaRepository.findById(idFesta);
 
         if (festaEncontrada.isEmpty()) {
-            throw new ComidaNaoEncontradaException("Festa não encontrada.");
+            throw new FestaNaoEncontradaException("Festa não encontrada.");
         }
 
         var festa = festaEncontrada.get();

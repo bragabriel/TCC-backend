@@ -32,117 +32,125 @@ CREATE TABLE [dbo].[Usuario](
 GO
 
 
-
---TABLE APE
+--TABLE ALIMENTO
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Ape]    Script Date: 4/7/2023 6:16:11 PM ******/
+/****** Object:  Table [dbo].[Alimento]    Script Date: 5/31/2023 10:23:01 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Ape](
-	[id_ape] [int] IDENTITY(1,1) NOT NULL,
-	[qtdMoradoresPermitido_ape] [int] NOT NULL,
-	[qtdMoradoresAtuais_ape] [int] NOT NULL,
-	[precoAluguelTotal_ape] [float] NULL,
-	[precoAluguelPorPessoa_ape] [float] NOT NULL,
-	[localizacao_ape] [varchar](255) NOT NULL,
-	[vagaGaragem_ape] [varchar](255) NOT NULL,
-	[animaisEstimacao_ape] [varchar](255) NOT NULL,
-	[titulo_ape] [varchar](255) NOT NULL,
-	[descricao_ape] [varchar](255) NOT NULL,
+CREATE TABLE [dbo].[Alimento](
+	[id_alimento] [int] IDENTITY(1,1) NOT NULL,
+	[titulo_alimento] [varchar](255) NOT NULL,
+	[descricao_alimento] [varchar](255) NOT NULL,
+	[tipo_alimento] [varchar](255) NOT NULL,
+	[sabor_alimento] [varchar](255) NULL,
+	[oferta_alimento] [varchar](255) NULL,
+	[marca_alimento] [varchar](255) NULL,
+	[unidade_alimento] [varchar](255) NULL,
+	[preco_alimento] [varchar](255) NOT NULL,
 	[id_usuario] [int] NOT NULL,
- CONSTRAINT [PK_Ape] PRIMARY KEY CLUSTERED
+ CONSTRAINT [PK_Alimento] PRIMARY KEY CLUSTERED
 (
-	[id_ape] ASC
+	[id_alimento] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Ape]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Ape] FOREIGN KEY([id_usuario])
+ALTER TABLE [dbo].[Alimento]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Alimento] FOREIGN KEY([id_usuario])
 REFERENCES [dbo].[Usuario] ([id_usuario])
 GO
 
-ALTER TABLE [dbo].[Ape] CHECK CONSTRAINT [FK_Usuario_Ape]
+ALTER TABLE [dbo].[Alimento] CHECK CONSTRAINT [FK_Usuario_Alimento]
 GO
 
 
---TABLE CARONA
+--TABLE MORADIA
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Carona]    Script Date: 14/02/2023 20:58:24 ******/
+/****** Object:  Table [dbo].[Moradia]    Script Date: 6/1/2023 9:27:50 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Carona](
-	[id_carona] [int] IDENTITY(1,1) NOT NULL,
-	[titulo_carona] [varchar](255) NOT NULL,
-	[descricao_carona] [varchar](255) NULL,
-	[cidade_carona] [varchar](255) NOT NULL,
-	[periodo_carona] [varchar](255) NOT NULL,
-	[informacoesVeiculo_carona] [varchar](255) NOT NULL,
-	[informacoesCondutor_carona] [varchar](255) NOT NULL,
-	[qtdAssentosAtual_carona] [int] NOT NULL,
-	[qtdAssentosTotal_carona] [int] NOT NULL,
+CREATE TABLE [dbo].[Moradia](
+	[id_moradia] [int] IDENTITY(1,1) NOT NULL,
+	[qtdMoradoresPermitido_moradia] [int] NOT NULL,
+	[qtdMoradoresAtuais_moradia] [int] NOT NULL,
+	[precoAluguelTotal_moradia] [float] NULL,
+	[precoAluguelPorPessoa_moradia] [float] NOT NULL,
+	[localizacao_moradia] [varchar](255) NOT NULL,
+	[vagaGaragem_moradia] [varchar](255) NOT NULL,
+	[animaisEstimacao_moradia] [varchar](255) NOT NULL,
+	[titulo_moradia] [varchar](255) NOT NULL,
+	[descricao_moradia] [varchar](255) NOT NULL,
+	[imagem_moradia] [varbinary](max) NULL,
 	[id_usuario] [int] NOT NULL,
- CONSTRAINT [PK_Carona] PRIMARY KEY CLUSTERED
+ CONSTRAINT [PK_Moradia] PRIMARY KEY CLUSTERED
 (
-	[id_carona] ASC
+	[id_moradia] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Carona]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Carona] FOREIGN KEY([id_usuario])
+ALTER TABLE [dbo].[Moradia]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Moradia] FOREIGN KEY([id_usuario])
 REFERENCES [dbo].[Usuario] ([id_usuario])
 GO
 
-ALTER TABLE [dbo].[Carona] CHECK CONSTRAINT [FK_Usuario_Carona]
+ALTER TABLE [dbo].[Moradia] CHECK CONSTRAINT [FK_Usuario_Moradia]
 GO
 
 
---TABLE COMIDA
+--TABLE TRANSPORTE
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Comida]    Script Date: 4/7/2023 6:06:19 PM ******/
+/****** Object:  Table [dbo].[Transporte]    Script Date: 6/1/2023 9:47:20 PM ******/
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[Transporte]    Script Date: 6/1/2023 9:47:20 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Comida](
-	[id_comida] [int] IDENTITY(1,1) NOT NULL,
-	[titulo_comida] [varchar](255) NOT NULL,
-	[descricao_comida] [varchar](255) NOT NULL,
-	[tipo_comida] [varchar](255) NOT NULL,
-	[sabor_comida] [varchar](255) NULL,
-	[oferta_comida] [varchar](255) NULL,
-	[marca_comida] [varchar](255) NULL,
-	[unidade_comida] [varchar](255) NULL,
-	[preco_comida] [varchar](255) NOT NULL,
+CREATE TABLE [dbo].[Transporte](
+	[id_transporte] [int] IDENTITY(1,1) NOT NULL,
+	[titulo_transporte] [varchar](255) NOT NULL,
+	[descricao_transporte] [varchar](255) NULL,
+	[cidade_transporte] [varchar](255) NOT NULL,
+	[periodo_transporte] [varchar](255) NOT NULL,
+	[informacoesVeiculo_transporte] [varchar](255) NOT NULL,
+	[informacoesCondutor_transporte] [varchar](255) NOT NULL,
+	[qtdAssentosTotal_transporte] [int] NOT NULL,
+	[qtdAssentosPreenchidos_transporte] [int] NOT NULL,
+	[imagem_transporte] [varbinary](max) NULL,
 	[id_usuario] [int] NOT NULL,
- CONSTRAINT [PK_Comida] PRIMARY KEY CLUSTERED
+ CONSTRAINT [PK_Transporte] PRIMARY KEY CLUSTERED
 (
-	[id_comida] ASC
+	[id_transporte] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Comida]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Comida] FOREIGN KEY([id_usuario])
+ALTER TABLE [dbo].[Transporte]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Transporte] FOREIGN KEY([id_usuario])
 REFERENCES [dbo].[Usuario] ([id_usuario])
 GO
 
-ALTER TABLE [dbo].[Comida] CHECK CONSTRAINT [FK_Usuario_Comida]
+ALTER TABLE [dbo].[Transporte] CHECK CONSTRAINT [FK_Usuario_Transporte]
 GO
+
+
+
 
 
 --TABLE CRUSH
@@ -279,91 +287,99 @@ ALTER TABLE [dbo].[Objeto] CHECK CONSTRAINT [FK_Usuario_Objeto]
 GO
 
 --IMAGES
---TABLE APE IMAGES
-/****** Object:  Table [dbo].[ApeImage]    Script Date: 4/21/2023 6:47:21 PM ******/
+--TABLE MORADIA IMAGES
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[MoradiaImage]    Script Date: 6/1/2023 9:29:19 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[ApeImage](
-	[id_imageApe] [int] IDENTITY(1,1) NOT NULL,
-	[url_imageApe] [varchar](255) NOT NULL,
-	[sequence_imageApe] [int] NULL,
-	[fileName_imageApe] [varchar](255) NOT NULL,
-	[id_ape] [int] NOT NULL,
- CONSTRAINT [PK_ApeImage] PRIMARY KEY CLUSTERED
+CREATE TABLE [dbo].[MoradiaImage](
+	[id_imageMoradia] [int] IDENTITY(1,1) NOT NULL,
+	[url_imageMoradia] [varchar](255) NOT NULL,
+	[sequence_imageMoradia] [int] NULL,
+	[fileName_imageMoradia] [varchar](255) NOT NULL,
+	[id_moradia] [int] NOT NULL,
+ CONSTRAINT [PK_MoradiaImage] PRIMARY KEY CLUSTERED
 (
-	[id_imageApe] ASC
+	[id_imageMoradia] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[ApeImage]  WITH CHECK ADD  CONSTRAINT [FK_ApeImage_Ape] FOREIGN KEY([id_ape])
-REFERENCES [dbo].[Ape] ([id_ape])
+ALTER TABLE [dbo].[MoradiaImage]  WITH CHECK ADD  CONSTRAINT [FK_MoradiaImage_Moradia] FOREIGN KEY([id_moradia])
+REFERENCES [dbo].[Moradia] ([id_moradia])
 GO
 
-ALTER TABLE [dbo].[ApeImage] CHECK CONSTRAINT [FK_ApeImage_Ape]
+ALTER TABLE [dbo].[MoradiaImage] CHECK CONSTRAINT [FK_MoradiaImage_Moradia]
 GO
 
 
+--TABLE TRANSPORTE IMAGES
+USE [TCC]
+GO
 
---TABLE CARONA IMAGES
-/****** Object:  Table [dbo].[CaronaImage]    Script Date: 4/21/2023 6:47:51 PM ******/
+/****** Object:  Table [dbo].[TransporteImage]    Script Date: 6/1/2023 9:47:23 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[CaronaImage](
-	[id_imageCarona] [int] IDENTITY(1,1) NOT NULL,
-	[url_imageCarona] [varchar](255) NOT NULL,
-	[sequence_imageCarona] [int] NULL,
-	[fileName_imageCarona] [varchar](255) NOT NULL,
-	[id_carona] [int] NOT NULL,
- CONSTRAINT [PK_CaronaImage] PRIMARY KEY CLUSTERED
+CREATE TABLE [dbo].[TransporteImage](
+	[id_imageTransporte] [int] IDENTITY(1,1) NOT NULL,
+	[url_imageTransporte] [varchar](255) NOT NULL,
+	[sequence_imageTransporte] [int] NULL,
+	[fileName_imageTransporte] [varchar](255) NOT NULL,
+	[id_transporte] [int] NOT NULL,
+ CONSTRAINT [PK_TransporteImage] PRIMARY KEY CLUSTERED
 (
-	[id_imageCarona] ASC
+	[id_imageTransporte] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[CaronaImage]  WITH CHECK ADD  CONSTRAINT [FK_CaronaImage_Carona] FOREIGN KEY([id_carona])
-REFERENCES [dbo].[Carona] ([id_carona])
+ALTER TABLE [dbo].[TransporteImage]  WITH CHECK ADD  CONSTRAINT [FK_TransporteImage_Transporte] FOREIGN KEY([id_transporte])
+REFERENCES [dbo].[Transporte] ([id_transporte])
 GO
 
-ALTER TABLE [dbo].[CaronaImage] CHECK CONSTRAINT [FK_CaronaImage_Carona]
+ALTER TABLE [dbo].[TransporteImage] CHECK CONSTRAINT [FK_TransporteImage_Transporte]
 GO
 
 
---TABLE COMIDA IMAGES
-/****** Object:  Table [dbo].[ComidaImage]    Script Date: 4/21/2023 6:47:56 PM ******/
+--TABLE ALIMENTO IMAGES
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[AlimentoImage]    Script Date: 5/31/2023 10:23:57 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[ComidaImage](
-	[id_imageComida] [int] IDENTITY(1,1) NOT NULL,
-	[url_imageComida] [varchar](255) NOT NULL,
-	[sequence_imageComida] [int] NULL,
-	[fileName_imageComida] [varchar](255) NOT NULL,
-	[id_comida] [int] NOT NULL,
+CREATE TABLE [dbo].[AlimentoImage](
+	[id_imageAlimento] [int] IDENTITY(1,1) NOT NULL,
+	[url_imageAlimento] [varchar](255) NOT NULL,
+	[sequence_imageAlimento] [int] NULL,
+	[fileName_imageAlimento] [varchar](255) NOT NULL,
+	[id_alimento] [int] NOT NULL,
  CONSTRAINT [PK_Images] PRIMARY KEY CLUSTERED
 (
-	[id_imageComida] ASC
+	[id_imageAlimento] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[ComidaImage]  WITH CHECK ADD  CONSTRAINT [FK_ComidaImage_Comida] FOREIGN KEY([id_comida])
-REFERENCES [dbo].[Comida] ([id_comida])
+ALTER TABLE [dbo].[AlimentoImage]  WITH CHECK ADD  CONSTRAINT [FK_AlimentoImage_Alimento] FOREIGN KEY([id_alimento])
+REFERENCES [dbo].[Alimento] ([id_alimento])
 GO
 
-ALTER TABLE [dbo].[ComidaImage] CHECK CONSTRAINT [FK_ComidaImage_Comida]
+ALTER TABLE [dbo].[AlimentoImage] CHECK CONSTRAINT [FK_AlimentoImage_Alimento]
 GO
 
 
