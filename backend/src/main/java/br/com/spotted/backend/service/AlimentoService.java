@@ -52,8 +52,8 @@ public class AlimentoService {
     public ResponseBase<AlimentoResponse> cadastrar(AlimentoCreateRequest novo) {
 
         Alimento modeloDb = new Alimento();
-        modeloDb.setTituloAlimento(novo.getTituloAlimento());
-        modeloDb.setDescricaoAlimento(novo.getDescricaoAlimento());
+        modeloDb.setTitulo(novo.getTituloAlimento());
+        modeloDb.setDescricao(novo.getDescricaoAlimento());
         modeloDb.setTipoAlimento(novo.getTipoAlimento());
         modeloDb.setMarcaAlimento(novo.getMarcaAlimento());
         modeloDb.setPrecoAlimento(novo.getPrecoAlimento());
@@ -83,8 +83,8 @@ public class AlimentoService {
 
         return new AlimentoResponse(
                 alimento.getIdAlimento(),
-                alimento.getTituloAlimento(),
-                alimento.getDescricaoAlimento(),
+                alimento.getTitulo(),
+                alimento.getDescricao(),
                 alimento.getTipoAlimento(),
                 alimento.getMarcaAlimento(),
                 alimento.getPrecoAlimento(),
@@ -103,8 +103,8 @@ public class AlimentoService {
         }
 
         var alimento = alimentoEncontrada.get();
-        alimento.setTituloAlimento(alimentoUpdateRequest.getTituloAlimento());
-        alimento.setDescricaoAlimento(alimentoUpdateRequest.getDescricaoAlimento());
+        alimento.setTitulo(alimentoUpdateRequest.getTituloAlimento());
+        alimento.setDescricao(alimentoUpdateRequest.getDescricaoAlimento());
         alimento.setTipoAlimento(alimentoUpdateRequest.getTipoAlimento());
         alimento.setMarcaAlimento(alimentoUpdateRequest.getMarcaAlimento());
         alimento.setPrecoAlimento(alimentoUpdateRequest.getPrecoAlimento());
@@ -114,8 +114,8 @@ public class AlimentoService {
 
         return new AlimentoResponse(
                 alimento.getIdAlimento(),
-                alimento.getTituloAlimento(),
-                alimento.getDescricaoAlimento(),
+                alimento.getTitulo(),
+                alimento.getDescricao(),
                 alimento.getTipoAlimento(),
                 alimento.getMarcaAlimento(),
                 alimento.getPrecoAlimento(),

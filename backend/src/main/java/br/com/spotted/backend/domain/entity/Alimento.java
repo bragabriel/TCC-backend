@@ -16,18 +16,20 @@ import java.util.List;
 @Table(name="Alimento")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Alimento {
+@AttributeOverride(name = "titulo", column = @Column(name = "titulo_alimento", nullable = false))
+@AttributeOverride(name = "descricao", column = @Column(name = "descricao_alimento", nullable = false))
+public class Alimento extends Global{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_alimento")
     private Long idAlimento;
 
-    @Column(name = "titulo_alimento", nullable = false)
-    private String tituloAlimento;
-
-    @Column(name = "descricao_alimento", nullable = false)
-    private String descricaoAlimento;
+//    @Column(name = "titulo_alimento", nullable = false)
+//    private String titulo;
+//
+//    @Column(name = "descricao_alimento", nullable = false)
+//    private String descricao;
 
     @Column(name = "tipo_alimento", nullable = false)
     private String tipoAlimento;
@@ -52,4 +54,20 @@ public class Alimento {
     @OneToMany(mappedBy = "idAlimento", targetEntity = AlimentoImage.class, orphanRemoval = true) //idAlimento relacionamento na outra table
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private List<AlimentoImage> listaImagensAlimento = new ArrayList<AlimentoImage>();;
+
+    public String getTituloPai() {
+        return super.getTitulo();
+    }
+
+    public void setTitulo(String titulo) {
+        super.setTitulo(titulo);
+    }
+
+    public String getDescricaoPai() {
+        return super.getDescricao();
+    }
+
+    public void setDescricao(String descricao) {
+        super.setDescricao(descricao);
+    }
 }

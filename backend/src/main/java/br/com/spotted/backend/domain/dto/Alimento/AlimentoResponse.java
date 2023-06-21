@@ -34,12 +34,12 @@ public class AlimentoResponse {
     // Usado para mapear criar um DTO usando uma entidade
     public AlimentoResponse(Alimento alimento) {
         this.idAlimento = alimento.getIdAlimento();
-        this.tituloAlimento = alimento.getTituloAlimento();
-        this.descricaoAlimento = alimento.getTipoAlimento();
+        this.tituloAlimento = alimento.getTituloPai();
+        this.descricaoAlimento = alimento.getDescricaoPai();
         this.precoAlimento = alimento.getPrecoAlimento();
-        this.tipoAlimento = alimento.getDescricaoAlimento();
-        this.marcaAlimento = alimento.getTipoAlimento();
-        this.ofertaAlimento = alimento.getTipoAlimento();
+        this.tipoAlimento = alimento.getTipoAlimento();
+        this.marcaAlimento = alimento.getMarcaAlimento();
+        this.ofertaAlimento = alimento.getOfertaAlimento();
         this.listaImagensAlimento = alimento.getListaImagensAlimento();
         this.idUsuario = alimento.getIdUsuario();
     }
