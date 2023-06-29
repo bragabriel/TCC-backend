@@ -63,7 +63,6 @@ public class ImageUsuarioService {
                         usuarioSalvo.getEmailUsuario(),
                         usuarioSalvo.getTelefoneUsuario(),
                         usuarioSalvo.getDataNascimento(),
-                        usuarioSalvo.getDescricaoUsuario(),
                         usuarioSalvo.getUrl(),
                         usuarioSalvo.getSequence(),
                         usuarioSalvo.getFileName()
@@ -97,7 +96,6 @@ public class ImageUsuarioService {
                         usuarioSalvo.getEmailUsuario(),
                         usuarioSalvo.getTelefoneUsuario(),
                         usuarioSalvo.getDataNascimento(),
-                        usuarioSalvo.getDescricaoUsuario(),
                         usuarioSalvo.getUrl(),
                         usuarioSalvo.getSequence(),
                         usuarioSalvo.getFileName()

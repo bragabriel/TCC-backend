@@ -40,9 +40,6 @@ public class Usuario {
     @Column(name = "dataNascimento_usuario", nullable = false)
     private Date dataNascimento;
 
-    @Column(name = "descricao_usuario")
-    private String descricaoUsuario;
-
     @Column(name = "url_imageUsuario")
     private String url;
 
@@ -52,20 +49,18 @@ public class Usuario {
     @Column(name = "fileName_imageUsuario")
     private String fileName;
 
-    //Um USUARIO pode ter 1-N COMIDAS
-    @OneToMany(mappedBy = "idUsuario", targetEntity = Alimento.class, orphanRemoval = true)
+    //Um usuario pode ter 1-N ARTEFATOS; um Artefato pode pertencer a 1-1 usuário
+    @OneToMany(mappedBy = "usuario", targetEntity = Artefato.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<Alimento> listaAlimentos = new ArrayList<Alimento>();
+    private List<Artefato> listaArtefatos = new ArrayList<Artefato>();
 
-    @OneToMany(mappedBy = "idUsuario", targetEntity = Moradia.class, orphanRemoval = true)
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<Moradia> listaMoradias = new ArrayList<Moradia>();
+//    //Um USUARIO pode ter 1-N COMIDAS
+//    @OneToMany(mappedBy = "idUsuario", targetEntity = Alimento.class, orphanRemoval = true)
+//    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+//    private List<Alimento> listaAlimentos = new ArrayList<Alimento>();
 
-    @OneToMany(mappedBy = "idUsuario", targetEntity = Transporte.class, orphanRemoval = true)
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<Transporte> listaTransportes = new ArrayList<Transporte>();
-
-    @OneToMany(mappedBy = "idUsuario", targetEntity = Estagio.class, orphanRemoval = true)
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<Estagio> listaEstagios = new ArrayList<Estagio>();
+//    @OneToMany(mappedBy = "idUsuario", targetEntity = Moradia.class, orphanRemoval = true)
+//    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+//    private List<Moradia> listaMoradias = new ArrayList<Moradia>();
+;
 }

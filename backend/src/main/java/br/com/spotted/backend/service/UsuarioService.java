@@ -95,7 +95,6 @@ public class UsuarioService {
                 usuario.getEmailUsuario(),
                 usuario.getTelefoneUsuario(),
                 usuario.getDataNascimento(),
-                usuario.getDescricaoUsuario(),
                 usuario.getUrl(),
                 usuario.getSequence(),
                 usuario.getFileName()
@@ -140,7 +139,6 @@ public class UsuarioService {
                 usuarioSalvo.getEmailUsuario(),
                 usuarioSalvo.getTelefoneUsuario(),
                 usuarioSalvo.getDataNascimento(),
-                usuarioSalvo.getDescricaoUsuario(),
                 usuarioSalvo.getUrl(),
                 usuarioSalvo.getSequence(),
                 usuarioSalvo.getFileName()

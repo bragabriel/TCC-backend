@@ -1,11 +1,12 @@
 package br.com.spotted.backend.domain.dto.Alimento;
 
 import br.com.spotted.backend.domain.entity.Alimento;
-import br.com.spotted.backend.domain.entity.image.AlimentoImage;
+import br.com.spotted.backend.domain.entity.Artefato;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import java.util.List;
 
 @AllArgsConstructor
@@ -13,34 +14,36 @@ import java.util.List;
 @Data
 public class AlimentoResponse {
 
-    private Long idAlimento;
-
-    private String tituloAlimento;
-
-    private String descricaoAlimento;
+    private Long idArtefato;
 
     private String tipoAlimento;
 
     private String marcaAlimento;
 
+    private String saborAlimento;
+
+    private String unidadeAlimento;
+
     private Double precoAlimento;
 
     private String ofertaAlimento;
 
-    private List<AlimentoImage> listaImagensAlimento;
+    private String artefato;
 
-    private Long idUsuario;
+    //private List<AlimentoImage> listaImagensAlimento;
+
 
     // Usado para mapear criar um DTO usando uma entidade
     public AlimentoResponse(Alimento alimento) {
-        this.idAlimento = alimento.getIdAlimento();
-        this.tituloAlimento = alimento.getTituloPai();
-        this.descricaoAlimento = alimento.getDescricaoPai();
-        this.precoAlimento = alimento.getPrecoAlimento();
+        this.idArtefato = alimento.getIdArtefato();
         this.tipoAlimento = alimento.getTipoAlimento();
         this.marcaAlimento = alimento.getMarcaAlimento();
+        this.saborAlimento = alimento.getSaborAlimento();
+        this.unidadeAlimento = alimento.getUnidadeAlimento();
+        this.precoAlimento = alimento.getPrecoAlimento();
         this.ofertaAlimento = alimento.getOfertaAlimento();
-        this.listaImagensAlimento = alimento.getListaImagensAlimento();
-        this.idUsuario = alimento.getIdUsuario();
+        this.artefato = alimento.getArtefato().getDescricaoArtefato();
     }
+        //this.artefato = alimento.getArtefato();
+        //this.listaImagensAlimento = alimento.getListaImagensAlimento();
 }

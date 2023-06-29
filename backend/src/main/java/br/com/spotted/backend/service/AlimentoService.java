@@ -52,13 +52,11 @@ public class AlimentoService {
     public ResponseBase<AlimentoResponse> cadastrar(AlimentoCreateRequest novo) {
 
         Alimento modeloDb = new Alimento();
-        modeloDb.setTitulo(novo.getTituloAlimento());
-        modeloDb.setDescricao(novo.getDescricaoAlimento());
+//        modeloDb.setIdArtefato(novo.getIdArtefato);
         modeloDb.setTipoAlimento(novo.getTipoAlimento());
         modeloDb.setMarcaAlimento(novo.getMarcaAlimento());
         modeloDb.setPrecoAlimento(novo.getPrecoAlimento());
         modeloDb.setOfertaAlimento(novo.getOfertaAlimento());
-        modeloDb.setIdUsuario(novo.getIdUsuario());
 
         //Validação de usuário no banco de dados
         usuarioService.pesquisarPorId(novo.getIdUsuario());
@@ -82,16 +80,16 @@ public class AlimentoService {
         alimentoRepository.delete(alimento);
 
         return new AlimentoResponse(
-                alimento.getIdAlimento(),
-                alimento.getTitulo(),
-                alimento.getDescricao(),
+                alimento.getIdArtefato(),
                 alimento.getTipoAlimento(),
                 alimento.getMarcaAlimento(),
+                alimento.getSaborAlimento(),
+                alimento.getUnidadeAlimento(),
                 alimento.getPrecoAlimento(),
                 alimento.getOfertaAlimento(),
-                alimento.getListaImagensAlimento(),
-                alimento.getIdUsuario()
+                alimento.getArtefato().getDescricaoArtefato()
         );
+                //alimento.getListaImagensAlimento
     }
 
     public AlimentoResponse atualizarAlimento(Long idAlimento, AlimentoUpdateRequest alimentoUpdateRequest){
@@ -103,8 +101,8 @@ public class AlimentoService {
         }
 
         var alimento = alimentoEncontrada.get();
-        alimento.setTitulo(alimentoUpdateRequest.getTituloAlimento());
-        alimento.setDescricao(alimentoUpdateRequest.getDescricaoAlimento());
+
+        //alimento.setSaborAlimento(alimentoUpdateRequest.getSaborAlimento());
         alimento.setTipoAlimento(alimentoUpdateRequest.getTipoAlimento());
         alimento.setMarcaAlimento(alimentoUpdateRequest.getMarcaAlimento());
         alimento.setPrecoAlimento(alimentoUpdateRequest.getPrecoAlimento());
@@ -113,15 +111,15 @@ public class AlimentoService {
         var alimentoSalva = alimentoRepository.save(alimento);
 
         return new AlimentoResponse(
-                alimento.getIdAlimento(),
-                alimento.getTitulo(),
-                alimento.getDescricao(),
+                alimento.getIdArtefato(),
                 alimento.getTipoAlimento(),
                 alimento.getMarcaAlimento(),
+                alimento.getSaborAlimento(),
+                alimento.getUnidadeAlimento(),
                 alimento.getPrecoAlimento(),
                 alimento.getOfertaAlimento(),
-                alimento.getListaImagensAlimento(),
-                alimento.getIdUsuario()
+                alimento.getArtefato().getDescricaoArtefato()
+                //alimento.getListaImagensAlimento
         );
     }
 }

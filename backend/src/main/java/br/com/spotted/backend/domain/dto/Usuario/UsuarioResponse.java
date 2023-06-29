@@ -19,12 +19,8 @@ public class UsuarioResponse {
     private String emailUsuario;
     private String telefoneUsuario;
     private Date dataNascimento;
-    private String descricaoUsuario;
-
     private String url;
-
     private Long sequence;
-
     private String fileName;
 
     // Usado para mapear criar um DTO usando uma entidade
@@ -35,7 +31,6 @@ public class UsuarioResponse {
         this.emailUsuario = usuario.getEmailUsuario();
         this.telefoneUsuario = usuario.getTelefoneUsuario();
         this.dataNascimento = usuario.getDataNascimento();
-        this.descricaoUsuario = usuario.getDescricaoUsuario();
         this.url = usuario.getUrl();
         this.sequence = usuario.getSequence();
         this.fileName = usuario.getFileName();
