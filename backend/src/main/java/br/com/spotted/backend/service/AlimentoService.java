@@ -88,8 +88,8 @@ public class AlimentoService {
                 alimento.getPrecoAlimento(),
                 alimento.getOfertaAlimento(),
                 alimento.getArtefato().getDescricaoArtefato()
-        );
                 //alimento.getListaImagensAlimento
+        );
     }
 
     public AlimentoResponse atualizarAlimento(Long idAlimento, AlimentoUpdateRequest alimentoUpdateRequest){

@@ -1,13 +1,9 @@
 package br.com.spotted.backend.domain.dto.Alimento;
 
 import br.com.spotted.backend.domain.entity.Alimento;
-import br.com.spotted.backend.domain.entity.Artefato;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor

@@ -1,5 +1,7 @@
 package br.com.spotted.backend.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,18 +51,8 @@ public class Usuario {
     @Column(name = "fileName_imageUsuario")
     private String fileName;
 
-    //Um usuario pode ter 1-N ARTEFATOS; um Artefato pode pertencer a 1-1 usuário
+    //Um USUARIO pode ter 1-N ARTEFATOS; um ARTEFATO pode pertencer a 1-1 USUARIO
     @OneToMany(mappedBy = "usuario", targetEntity = Artefato.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private List<Artefato> listaArtefatos = new ArrayList<Artefato>();
-
-//    //Um USUARIO pode ter 1-N COMIDAS
-//    @OneToMany(mappedBy = "idUsuario", targetEntity = Alimento.class, orphanRemoval = true)
-//    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-//    private List<Alimento> listaAlimentos = new ArrayList<Alimento>();
-
-//    @OneToMany(mappedBy = "idUsuario", targetEntity = Moradia.class, orphanRemoval = true)
-//    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-//    private List<Moradia> listaMoradias = new ArrayList<Moradia>();
-;
 }

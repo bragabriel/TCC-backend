@@ -20,14 +20,8 @@ public class Transporte {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_transporte")
-    private Long idTransporte;
-
-    @Column(name = "titulo_transporte", nullable = false)
-    private String tituloTransporte;
-
-    @Column(name = "descricao_transporte", nullable = false)
-    private String descricaoTransporte;
+    @Column(name = "id_artefato")
+    private Long idArtefato;
 
     @Column(name = "informacoesVeiculo_transporte", nullable = false)
     private String informacoesVeiculoTransporte;
@@ -47,13 +41,13 @@ public class Transporte {
     @Column(name = "periodo_transporte")
     private String periodoTransporte;
 
-    @Column(name= "id_usuario")
-    private Long idUsuario;
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id_artefato", referencedColumnName = "id_artefato", updatable = false, insertable = false)
+    //Fk IdUsuario na tabela Alimento
+    private Artefato artefato;
 
-    @ManyToOne
-    @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false) //Fk IdUsuario na tabela Transporte
-    private Usuario usuario;
-
-    @OneToMany(mappedBy = "idTransporte", targetEntity = TransporteImage.class, orphanRemoval = true) //idApe relacionamento na outra table
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<TransporteImage> listaImagensTransporte = new ArrayList<TransporteImage>();}
+//    @OneToMany(mappedBy = "idTransporte", targetEntity = TransporteImage.class, orphanRemoval = true) //idApe relacionamento na outra table
+//    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+//    private List<TransporteImage> listaImagensTransporte = new ArrayList<TransporteImage>();}
+}

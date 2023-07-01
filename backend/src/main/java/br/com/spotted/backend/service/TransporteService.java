@@ -52,15 +52,13 @@ public class TransporteService {
     public ResponseBase<TransporteResponse> cadastrar(TransporteCreateRequest novo) {
 
         Transporte modeloDb = new Transporte();
-        modeloDb.setTituloTransporte(novo.getTituloTransporte());
-        modeloDb.setDescricaoTransporte(novo.getDescricaoTransporte());
+
         modeloDb.setInformacoesVeiculoTransporte(novo.getInformacoesVeiculoTransporte());
         modeloDb.setInformacoesCondutorTransporte(novo.getInformacoesCondutorTransporte());
         modeloDb.setQtdAssentosPreenchidosTransporte(novo.getQtdAssentosPreenchidosTransporte());
         modeloDb.setQtdAssentosTotalTransporte(novo.getQtdAssentosTotalTransporte());
         modeloDb.setCidadeTransporte(novo.getCidadeTransporte());
         modeloDb.setPeriodoTransporte(novo.getPeriodoTransporte());
-        modeloDb.setIdUsuario(novo.getIdUsuario());
 
         //Validação de usuário no banco de dados
         usuarioService.pesquisarPorId(novo.getIdUsuario());
@@ -84,17 +82,15 @@ public class TransporteService {
         transporteRepository.delete(transporte);
 
         return new TransporteResponse(
-                transporte.getIdTransporte(),
-                transporte.getTituloTransporte(),
-                transporte.getDescricaoTransporte(),
+                transporte.getIdArtefato(),
                 transporte.getInformacoesVeiculoTransporte(),
                 transporte.getInformacoesCondutorTransporte(),
                 transporte.getQtdAssentosPreenchidosTransporte(),
                 transporte.getQtdAssentosTotalTransporte(),
                 transporte.getCidadeTransporte(),
                 transporte.getPeriodoTransporte(),
-                transporte.getListaImagensTransporte(),
-                transporte.getIdUsuario()
+                transporte.getArtefato().getDescricaoArtefato()
+                //transporte.getListaImagensTransporte(),
         );
     }
 
@@ -107,8 +103,6 @@ public class TransporteService {
         }
 
         var transporte = comidaEncontrada.get();
-        transporte.setTituloTransporte(transporteUpdateRequest.getTituloTransporte());
-        transporte.setDescricaoTransporte(transporteUpdateRequest.getDescricaoTransporte());
         transporte.setInformacoesVeiculoTransporte(transporteUpdateRequest.getInformacoesVeiculoTransporte());
         transporte.setInformacoesCondutorTransporte(transporteUpdateRequest.getInformacoesCondutorTransporte());
         transporte.setQtdAssentosPreenchidosTransporte(transporteUpdateRequest.getQtdAssentosPreenchidosTransporte());
@@ -116,20 +110,18 @@ public class TransporteService {
         transporte.setCidadeTransporte(transporteUpdateRequest.getCidadeTransporte());
         transporte.setPeriodoTransporte(transporteUpdateRequest.getPeriodoTransporte());
 
-        var transporteSalva = transporteRepository.save(transporte);
+        var transporteSalvo = transporteRepository.save(transporte);
 
         return new TransporteResponse(
-                transporte.getIdTransporte(),
-                transporte.getTituloTransporte(),
-                transporte.getDescricaoTransporte(),
+                transporte.getIdArtefato(),
                 transporte.getInformacoesVeiculoTransporte(),
                 transporte.getInformacoesCondutorTransporte(),
                 transporte.getQtdAssentosPreenchidosTransporte(),
                 transporte.getQtdAssentosTotalTransporte(),
                 transporte.getCidadeTransporte(),
                 transporte.getPeriodoTransporte(),
-                transporte.getListaImagensTransporte(),
-                transporte.getIdUsuario()
+                transporte.getArtefato().getDescricaoArtefato()
+                //transporte.getListaImagensTransporte(),
         );
     }
 }

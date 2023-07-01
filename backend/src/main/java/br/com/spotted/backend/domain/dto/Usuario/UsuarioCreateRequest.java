@@ -26,8 +26,6 @@ public class UsuarioCreateRequest {
 
     @NotNull
     private Date dataNascimento;
-
-    private byte[] imagemUsuario = null;
 }
 
 

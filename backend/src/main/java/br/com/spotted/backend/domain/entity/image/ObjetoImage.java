@@ -1,6 +1,5 @@
 package br.com.spotted.backend.domain.entity.image;
 
-import br.com.spotted.backend.domain.entity.Crush;
 import br.com.spotted.backend.domain.entity.Objeto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

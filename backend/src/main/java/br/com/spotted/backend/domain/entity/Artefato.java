@@ -28,7 +28,7 @@ public class Artefato {
     private String tipoArtefato;
 
     @Column(name = "ativo", nullable = false)
-    private String ativo;
+    private Boolean ativo;
 
     @Column(name = "data_cadastro", nullable = false)
     private String dataCadastro;
@@ -37,11 +37,16 @@ public class Artefato {
     private Long idUsuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false) //Fk IdUsuario na tabela Artefato
+    @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false) //Fk Usuario na tabela Artefato
     private Usuario usuario;
 
     @OneToOne
-    @JoinColumn(name="id_artefato", referencedColumnName = "id_artefato", updatable = false, insertable = false) //Fk IdArtefato na tabela Artefato
+    @JoinColumn(name="id_artefato", referencedColumnName = "id_artefato", updatable = false, insertable = false) //Fk Alimento na tabela Artefato
     @PrimaryKeyJoinColumn
     private Alimento alimento;
+
+    @OneToOne
+    @JoinColumn(name="id_artefato", referencedColumnName = "id_artefato", updatable = false, insertable = false) //Fk Alimento na tabela Artefato
+    @PrimaryKeyJoinColumn
+    private Transporte transporte;
 }

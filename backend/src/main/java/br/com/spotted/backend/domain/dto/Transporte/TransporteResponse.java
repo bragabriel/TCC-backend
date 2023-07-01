@@ -13,11 +13,7 @@ import java.util.List;
 @Data
 public class TransporteResponse {
 
-    private Long idTransporte;
-
-    private String tituloTransporte;
-
-    private String descricaoTransporte;
+    private Long idArtefato;
 
     private String informacoesVeiculoTransporte;
 
@@ -31,21 +27,19 @@ public class TransporteResponse {
 
     private String periodoTransporte;
 
-    private List<TransporteImage> listaImagensTransporte;
+    private String artefato;
 
-    private Long idUsuario;
+    //private List<TransporteImage> listaImagensTransporte;
 
     public TransporteResponse(Transporte transporte) {
-        this.idTransporte = transporte.getIdTransporte();
-        this.tituloTransporte = transporte.getTituloTransporte();
-        this.descricaoTransporte = transporte.getDescricaoTransporte();
+        this.idArtefato = transporte.getIdArtefato();
         this.informacoesVeiculoTransporte = transporte.getInformacoesVeiculoTransporte();
         this.informacoesCondutorTransporte = transporte.getInformacoesCondutorTransporte();
         this.qtdAssentosTotalTransporte = transporte.getQtdAssentosTotalTransporte();
         this.qtdAssentosPreenchidosTransporte = transporte.getQtdAssentosPreenchidosTransporte();
         this.cidadeTransporte = transporte.getCidadeTransporte();
         this.periodoTransporte = transporte.getPeriodoTransporte();
-        this.listaImagensTransporte = transporte.getListaImagensTransporte();
-        this.idUsuario = transporte.getIdUsuario();
+        this.artefato = transporte.getArtefato().getDescricaoArtefato();
+        //this.listaImagensTransporte = transporte.getListaImagensTransporte();
     }
 }

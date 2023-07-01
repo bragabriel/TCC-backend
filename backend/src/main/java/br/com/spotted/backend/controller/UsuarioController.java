@@ -6,11 +6,8 @@ import br.com.spotted.backend.domain.dto.Usuario.UsuarioCreateRequest;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioLoginRequest;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioResponse;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioUpdateRequest_NomeSobrenome;
-import br.com.spotted.backend.domain.entity.Usuario;
 import br.com.spotted.backend.service.UsuarioService;
-import br.com.spotted.backend.service.images.ImageUsuarioService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +23,7 @@ import java.io.IOException;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
-    private final ImageUsuarioService imageUsuarioService;
+//    private final ImageUsuarioService imageUsuarioService;
 
     //Listar Usuarios com paginação
     @GetMapping("api/usuario")
@@ -80,15 +77,15 @@ public class UsuarioController {
     }
 
     //Usuario Imagens
-    @PostMapping(value = "api/usuarioUploadImage/{idUsuario}", consumes = "multipart/form-data")
-    @CrossOrigin()
-    public ResponseEntity uploadImage(@RequestPart("files") MultipartFile[] file, @Valid @PathVariable Long idUsuario) throws IOException {
-        return ResponseEntity.ok(imageUsuarioService.createUsuarioImage(file, idUsuario));
-    }
-
-    @DeleteMapping("api/usuarioDeleteImage/{idUsuario}")
-    public ResponseEntity deleteUsuarioImage(@PathVariable Long idUsuario){
-        return ResponseEntity.ok(imageUsuarioService.deleteUsuarioImage(idUsuario));
-    }
+//    @PostMapping(value = "api/usuarioUploadImage/{idUsuario}", consumes = "multipart/form-data")
+//    @CrossOrigin()
+//    public ResponseEntity uploadImage(@RequestPart("files") MultipartFile[] file, @Valid @PathVariable Long idUsuario) throws IOException {
+//        return ResponseEntity.ok(imageUsuarioService.createUsuarioImage(file, idUsuario));
+//    }
+//
+//    @DeleteMapping("api/usuarioDeleteImage/{idUsuario}")
+//    public ResponseEntity deleteUsuarioImage(@PathVariable Long idUsuario){
+//        return ResponseEntity.ok(imageUsuarioService.deleteUsuarioImage(idUsuario));
+//    }
 }
 

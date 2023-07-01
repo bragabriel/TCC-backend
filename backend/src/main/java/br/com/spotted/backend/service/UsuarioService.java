@@ -89,15 +89,7 @@ public class UsuarioService {
         usuarioRepository.delete(usuario);
 
         return new UsuarioResponse(
-                usuario.getIdUsuario(),
-                usuario.getNomeUsuario(),
-                usuario.getSobrenomeUsuario(),
-                usuario.getEmailUsuario(),
-                usuario.getTelefoneUsuario(),
-                usuario.getDataNascimento(),
-                usuario.getUrl(),
-                usuario.getSequence(),
-                usuario.getFileName()
+                usuario
         );
     }
 
@@ -133,15 +125,7 @@ public class UsuarioService {
         var usuarioSalvo = usuarioRepository.save(usuario);
 
         return new UsuarioResponse(
-                usuarioSalvo.getIdUsuario(),
-                usuarioSalvo.getNomeUsuario(),
-                usuarioSalvo.getSobrenomeUsuario(),
-                usuarioSalvo.getEmailUsuario(),
-                usuarioSalvo.getTelefoneUsuario(),
-                usuarioSalvo.getDataNascimento(),
-                usuarioSalvo.getUrl(),
-                usuarioSalvo.getSequence(),
-                usuarioSalvo.getFileName()
+                usuario
         );
     }
 
