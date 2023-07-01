@@ -98,3 +98,30 @@ GO
 
 ALTER TABLE [dbo].[Alimento] CHECK CONSTRAINT [FK_Artefato_Alimento]
 GO
+
+
+--TABLE TRANSPORTE
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[Transporte]    Script Date: 7/1/2023 1:19:23 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Transporte](
+	[id_artefato] [int] IDENTITY(1,1) NOT NULL,
+	[cidade_transporte] [varchar](255) NOT NULL,
+	[periodo_transporte] [varchar](255) NOT NULL,
+	[informacoesVeiculo_transporte] [varchar](255) NOT NULL,
+	[informacoesCondutor_transporte] [varchar](255) NOT NULL,
+	[qtdAssentosTotal_transporte] [int] NOT NULL,
+	[qtdAssentosPreenchidos_transporte] [int] NOT NULL,
+ CONSTRAINT [PK_Transporte] PRIMARY KEY CLUSTERED
+(
+	[id_artefato] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO

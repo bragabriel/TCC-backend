@@ -52,7 +52,7 @@ public class UsuarioService {
 
         // Verifica se o customer foi encontrado, caso o contratrio retorna um erro
         Usuario usuario = responsavelOptional
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Responsável não encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
 
         // Mapeia de entidade para dto
         UsuarioResponse usuarioResponse = new UsuarioResponse(usuario);

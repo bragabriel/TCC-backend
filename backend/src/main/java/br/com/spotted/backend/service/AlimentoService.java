@@ -21,7 +21,7 @@ import java.util.Optional;
 public class AlimentoService {
 
     private final AlimentoRepository alimentoRepository;
-    private final UsuarioService usuarioService;
+    private final ArtefatoService artefatoService;
 
     public ResponseBase<Page<AlimentoResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
 
@@ -51,15 +51,17 @@ public class AlimentoService {
 
     public ResponseBase<AlimentoResponse> cadastrar(AlimentoCreateRequest novo) {
 
+        //Validação de Artefato no banco de dados
+        //artefatoService.pesquisarPorId(novo.getIdArtefato());
+
         Alimento modeloDb = new Alimento();
-//        modeloDb.setIdArtefato(novo.getIdArtefato);
+        //modeloDb.setIdArtefato(novo.getIdArtefato);
         modeloDb.setTipoAlimento(novo.getTipoAlimento());
         modeloDb.setMarcaAlimento(novo.getMarcaAlimento());
+        modeloDb.setSaborAlimento(novo.getSaborAlimento());
+        modeloDb.setUnidadeAlimento(novo.getUnidadeAlimento());
         modeloDb.setPrecoAlimento(novo.getPrecoAlimento());
         modeloDb.setOfertaAlimento(novo.getOfertaAlimento());
-
-        //Validação de usuário no banco de dados
-        usuarioService.pesquisarPorId(novo.getIdUsuario());
 
         //Salvando
         Alimento alimentoSalva = alimentoRepository.save(modeloDb);

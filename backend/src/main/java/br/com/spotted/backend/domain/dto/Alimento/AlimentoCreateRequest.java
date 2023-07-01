@@ -9,23 +9,20 @@ import javax.validation.constraints.NotNull;
 public class AlimentoCreateRequest {
 
     @NotEmpty
-    private String tituloAlimento;
-
-    @NotEmpty
-    private String descricaoAlimento;
-
-    @NotEmpty
     private String tipoAlimento;
 
     @NotEmpty
     private String marcaAlimento;
+
+    @NotEmpty
+    private String saborAlimento;
+
+    @NotEmpty
+    private String unidadeAlimento;
 
     @NotNull
     private Double precoAlimento;
 
     @NotEmpty
     private String ofertaAlimento;
-
-    @NotNull
-    private Long idUsuario;
 }

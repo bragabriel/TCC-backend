@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -31,7 +32,7 @@ public class Artefato {
     private Boolean ativo;
 
     @Column(name = "data_cadastro", nullable = false)
-    private String dataCadastro;
+    private Date dataCadastro;
 
     @Column(name= "id_usuario")
     private Long idUsuario;

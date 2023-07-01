@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -17,11 +19,8 @@ public class ArtefatoResponse {
     private String descricaoArtefato;
     private String tipoArtefato;
     private Boolean ativo;
-    private String dataCadastro;
+    private Date dataCadastro;
     private Long idUsuario;
-
-//    private List<AlimentoResponse> listAlimentoResponse;
-
     private AlimentoResponse alimento;
     private TransporteResponse transporte;
 
@@ -33,9 +32,7 @@ public class ArtefatoResponse {
         this.ativo = artefato.getAtivo();
         this.dataCadastro = artefato.getDataCadastro();
         this.idUsuario = artefato.getIdUsuario();
-//        this.listAlimentoResponse = artefato.getAlimento().stream()
-//                .map(alimento -> new AlimentoResponse(alimento))
-//                .collect(Collectors.toList());
+
         if (artefato.getAlimento() != null) {
             this.alimento = new AlimentoResponse(artefato.getAlimento());
         }

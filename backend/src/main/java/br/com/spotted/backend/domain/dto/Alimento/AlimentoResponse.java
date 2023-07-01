@@ -28,8 +28,6 @@ public class AlimentoResponse {
 
     //private List<AlimentoImage> listaImagensAlimento;
 
-
-    // Usado para mapear criar um DTO usando uma entidade
     public AlimentoResponse(Alimento alimento) {
         this.idArtefato = alimento.getIdArtefato();
         this.tipoAlimento = alimento.getTipoAlimento();

@@ -32,10 +32,10 @@
 <!--        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_moradia.sql" relativeToChangelogFile="true" />-->
 <!--    </changeSet>-->
 
-<!--    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-TRANSPORTE">-->
-<!--        <comment>Insere Dados - Transporte</comment>-->
-<!--        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_transporte.sql" relativeToChangelogFile="true" />-->
-<!--    </changeSet>-->
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-TRANSPORTE">
+        <comment>Insere Dados - Transporte</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_transporte.sql" relativeToChangelogFile="true" />
+    </changeSet>
 
 <!--    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-CRUSH">-->
 <!--        <comment>Insere Dados - Crush</comment>-->

@@ -1,9 +1,11 @@
 package br.com.spotted.backend.domain.dto.Artefato;
 
+import br.com.spotted.backend.domain.entity.TipoArtefato;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Data
 public class ArtefatoCreateRequest {
@@ -14,12 +16,15 @@ public class ArtefatoCreateRequest {
     @NotEmpty
     private String descricaoArtefato;
 
-    @NotEmpty
-    private String tipoArtefato;
+    @NotNull(message = "Não existe um artefato deste tipo!")
+    private TipoArtefato tipoArtefato;
 
     @NotNull
     private Boolean ativo;
 
-    @NotEmpty
-    private String dataCadastro;
+    @NotNull
+    private Date dataCadastro;
+
+    @NotNull
+    private Long idUsuario;
 }

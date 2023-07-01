@@ -6,6 +6,7 @@ import br.com.spotted.backend.domain.dto.Artefato.ArtefatoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Artefato;
+import br.com.spotted.backend.domain.entity.TipoArtefato;
 import br.com.spotted.backend.exception.ArtefatoNaoEncontradoException;
 import br.com.spotted.backend.exception.UsuarioNaoEncontradoException;
 import br.com.spotted.backend.repository.ArtefatoRepository;
@@ -22,15 +23,20 @@ import java.util.Optional;
 public class ArtefatoService {
 
     private final ArtefatoRepository artefatoRepository;
+    private final UsuarioService usuarioService;
+    private final AlimentoService alimentoService;
+    private final EstagioService estagioService;
+    private final FestaService festaService;
+    private final MoradiaService moradiaService;
+    private final ObjetoService objetoService;
+    private final TransporteService transporteService;
 
     public ResponseBase<Page<ArtefatoResponse>> pesquisar(PaginatedSearchRequest searchRequest, String tipo) {
 
-        // a Pagina atual não pode ser menor que 1
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");
         }
 
-        // a quantidade de itens por página deve ser entre 1 e 50
         if (searchRequest.getQtdPorPagina() < 1 || searchRequest.getQtdPorPagina() > 50) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantidade de itens por página deve ser entre 1 e 50 itens");
         }
@@ -60,20 +66,54 @@ public class ArtefatoService {
 
         return new ResponseBase<>(artefatoResponse);
     }
+
     public ResponseBase<ArtefatoResponse> cadastrar(ArtefatoCreateRequest novo) {
+
+        //Validação de usuário no banco de dados
+        usuarioService.pesquisarPorId(novo.getIdUsuario());
+
+        //Validando tipo de artefato
+        TipoArtefato tipoArtefato;
+        try {
+            tipoArtefato = TipoArtefato.valueOf(novo.getTipoArtefato().toString().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tipo de artefato inválido");
+        }
 
         Artefato modeloDb = new Artefato();
         modeloDb.setTituloArtefato(novo.getTituloArtefato());
         modeloDb.setDescricaoArtefato(novo.getDescricaoArtefato());
-        modeloDb.setTipoArtefato(novo.getTipoArtefato());
+        modeloDb.setTipoArtefato(novo.getTipoArtefato().toString().toUpperCase());
         modeloDb.setAtivo(novo.getAtivo());
         modeloDb.setDataCadastro(novo.getDataCadastro());
+        modeloDb.setIdUsuario(novo.getIdUsuario());
 
-        //Salvando
-        Artefato usuarioSalvo = artefatoRepository.save(modeloDb);
+        Artefato artefatoSalvo = artefatoRepository.save(modeloDb);
 
-        // Mapeia de entidade para dto
-        ArtefatoResponse artefatoResponse = new ArtefatoResponse(usuarioSalvo);
+//        switch (tipoArtefato) {
+//            case ALIMENTO:
+//                alimentoService.cadastrar(artefatoSalvo);
+//                break;
+//            case ESTAGIO:
+//                estagioService.cadastrar(artefatoSalvo);
+//                break;
+//            case FESTA:
+//                festaService.cadastrar(artefatoSalvo);
+//                break;
+//            case MORADIA:
+//                moradiaService.cadastrar(artefatoSalvo);
+//                break;
+//            case OBJETO:
+//                objetoService.cadastrar(artefatoSalvo);
+//                break;
+//            case TRANSPORTE:
+//                transporteService.cadastrar(artefatoSalvo);
+//                break;
+//            default:
+//                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tipo de artefato inválido");
+//        }
+
+        ArtefatoResponse artefatoResponse = new ArtefatoResponse(artefatoSalvo);
         return new ResponseBase<>(artefatoResponse);
     }
     public ArtefatoResponse deletar(Long idArtefato) throws UsuarioNaoEncontradoException {
@@ -105,7 +145,7 @@ public class ArtefatoService {
         artefato.setDescricaoArtefato(artefatoUpdateRequest.getDescricaoArtefato());
         artefato.setTipoArtefato(artefatoUpdateRequest.getTipoArtefato());
         artefato.setAtivo(artefatoUpdateRequest.getAtivo());
-        artefato.setDataCadastro(artefatoUpdateRequest.getTipoArtefato());
+        artefato.setDataCadastro(artefatoUpdateRequest.getDataCadastro());
 
         var artefatoSalvo = artefatoRepository.save(artefato);
 
