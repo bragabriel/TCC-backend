@@ -78,7 +78,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Alimento](
-	[id_artefato] [int] IDENTITY(1,1) NOT NULL,
+	[id_artefato] [int] NOT NULL,
 	[tipo_alimento] [varchar](255) NOT NULL,
 	[preco_alimento] [varchar](255) NOT NULL,
 	[oferta_alimento] [varchar](255) NULL,

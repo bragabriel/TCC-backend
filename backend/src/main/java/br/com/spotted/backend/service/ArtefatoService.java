@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -24,12 +26,6 @@ public class ArtefatoService {
 
     private final ArtefatoRepository artefatoRepository;
     private final UsuarioService usuarioService;
-    private final AlimentoService alimentoService;
-    private final EstagioService estagioService;
-    private final FestaService festaService;
-    private final MoradiaService moradiaService;
-    private final ObjetoService objetoService;
-    private final TransporteService transporteService;
 
     public ResponseBase<Page<ArtefatoResponse>> pesquisar(PaginatedSearchRequest searchRequest, String tipo) {
 
@@ -69,6 +65,9 @@ public class ArtefatoService {
 
     public ResponseBase<ArtefatoResponse> cadastrar(ArtefatoCreateRequest novo) {
 
+        Calendar cal = Calendar.getInstance();
+        Date dataAtual = cal.getTime();
+
         //Validação de usuário no banco de dados
         usuarioService.pesquisarPorId(novo.getIdUsuario());
 
@@ -84,8 +83,8 @@ public class ArtefatoService {
         modeloDb.setTituloArtefato(novo.getTituloArtefato());
         modeloDb.setDescricaoArtefato(novo.getDescricaoArtefato());
         modeloDb.setTipoArtefato(novo.getTipoArtefato().toString().toUpperCase());
-        modeloDb.setAtivo(novo.getAtivo());
-        modeloDb.setDataCadastro(novo.getDataCadastro());
+        modeloDb.setAtivo(true);
+        modeloDb.setDataCadastro(dataAtual);
         modeloDb.setIdUsuario(novo.getIdUsuario());
 
         Artefato artefatoSalvo = artefatoRepository.save(modeloDb);

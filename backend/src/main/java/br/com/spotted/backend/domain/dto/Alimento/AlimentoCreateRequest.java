@@ -1,5 +1,7 @@
 package br.com.spotted.backend.domain.dto.Alimento;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoCreateRequest;
+import br.com.spotted.backend.domain.entity.Artefato;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -25,4 +27,7 @@ public class AlimentoCreateRequest {
 
     @NotEmpty
     private String ofertaAlimento;
+
+    @NotNull
+    private ArtefatoCreateRequest artefato;
 }

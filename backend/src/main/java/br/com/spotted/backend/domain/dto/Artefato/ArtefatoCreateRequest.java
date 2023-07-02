@@ -5,7 +5,6 @@ import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Data
 public class ArtefatoCreateRequest {
@@ -18,12 +17,6 @@ public class ArtefatoCreateRequest {
 
     @NotNull(message = "Não existe um artefato deste tipo!")
     private TipoArtefato tipoArtefato;
-
-    @NotNull
-    private Boolean ativo;
-
-    @NotNull
-    private Date dataCadastro;
 
     @NotNull
     private Long idUsuario;

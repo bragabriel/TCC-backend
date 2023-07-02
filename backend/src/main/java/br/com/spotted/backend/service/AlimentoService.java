@@ -3,12 +3,15 @@ package br.com.spotted.backend.service;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoCreateRequest;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoUpdateRequest;
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Alimento;
+import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
 import br.com.spotted.backend.repository.AlimentoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,7 +24,9 @@ import java.util.Optional;
 public class AlimentoService {
 
     private final AlimentoRepository alimentoRepository;
+    @Autowired
     private final ArtefatoService artefatoService;
+
 
     public ResponseBase<Page<AlimentoResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
 
@@ -51,23 +56,34 @@ public class AlimentoService {
 
     public ResponseBase<AlimentoResponse> cadastrar(AlimentoCreateRequest novo) {
 
-        //Validação de Artefato no banco de dados
-        //artefatoService.pesquisarPorId(novo.getIdArtefato());
+        //Cadastrando o artefato
+        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
+
+        //Cadastrando o Alimento
+        Artefato artefato = new Artefato();
+        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
+        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
+        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
+        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
+        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
+        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
+        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
 
         Alimento modeloDb = new Alimento();
-        //modeloDb.setIdArtefato(novo.getIdArtefato);
+        modeloDb.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
         modeloDb.setTipoAlimento(novo.getTipoAlimento());
         modeloDb.setMarcaAlimento(novo.getMarcaAlimento());
         modeloDb.setSaborAlimento(novo.getSaborAlimento());
         modeloDb.setUnidadeAlimento(novo.getUnidadeAlimento());
         modeloDb.setPrecoAlimento(novo.getPrecoAlimento());
         modeloDb.setOfertaAlimento(novo.getOfertaAlimento());
+        modeloDb.setArtefato(artefato);
 
         //Salvando
-        Alimento alimentoSalva = alimentoRepository.save(modeloDb);
+        Alimento alimentoSalvo = alimentoRepository.save(modeloDb);
 
         // Mapeia de entidade para dto
-        AlimentoResponse alimentoResponse = new AlimentoResponse(alimentoSalva);
+        AlimentoResponse alimentoResponse = new AlimentoResponse(alimentoSalvo);
         return new ResponseBase<>(alimentoResponse);
     }
 

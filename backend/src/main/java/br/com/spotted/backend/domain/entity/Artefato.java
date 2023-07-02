@@ -41,13 +41,10 @@ public class Artefato {
     @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false) //Fk Usuario na tabela Artefato
     private Usuario usuario;
 
-    @OneToOne
-    @JoinColumn(name="id_artefato", referencedColumnName = "id_artefato", updatable = false, insertable = false) //Fk Alimento na tabela Artefato
-    @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
     private Alimento alimento;
 
     @OneToOne
-    @JoinColumn(name="id_artefato", referencedColumnName = "id_artefato", updatable = false, insertable = false) //Fk Alimento na tabela Artefato
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name="id_artefato", referencedColumnName = "id_artefato", updatable = false) //Fk Alimento na tabela Artefato
     private Transporte transporte;
 }

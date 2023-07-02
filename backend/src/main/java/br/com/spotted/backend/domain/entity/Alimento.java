@@ -1,10 +1,9 @@
 package br.com.spotted.backend.domain.entity;
 
+import br.com.spotted.backend.service.ArtefatoService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 
@@ -16,7 +15,6 @@ import javax.persistence.*;
 public class Alimento{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_artefato")
     private Long idArtefato;
 
@@ -38,9 +36,9 @@ public class Alimento{
     @Column(name = "oferta_alimento")
     private String ofertaAlimento;
 
-    @OneToOne //Um alimento pode ter 1-1 artefato
     @MapsId
-    @JoinColumn(name="id_artefato", referencedColumnName = "id_artefato", updatable = false, insertable = false) //Fk IdUsuario na tabela Alimento
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //Um alimento pode ter 1-1 artefato
+    @JoinColumn(name = "id_artefato")
     private Artefato artefato;
 
 //    @OneToMany(mappedBy = "idAlimento", targetEntity = AlimentoImage.class, orphanRemoval = true) //idAlimento relacionamento na outra table
