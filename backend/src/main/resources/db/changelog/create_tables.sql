@@ -36,7 +36,7 @@ GO
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Artefato]    Script Date: 6/28/2023 7:43:09 PM ******/
+/****** Object:  Table [dbo].[Artefato]    Script Date: 7/2/2023 8:01:53 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -50,6 +50,8 @@ CREATE TABLE [dbo].[Artefato](
 	[tipo_artefato] [varchar](50) NOT NULL,
 	[ativo] [bit] NOT NULL,
 	[data_cadastro] [date] NOT NULL,
+	[data_inativo] [date] NULL,
+	[data_atualizacao] [date] NULL,
 	[id_usuario] [int] NOT NULL,
  CONSTRAINT [PK_Artefato] PRIMARY KEY CLUSTERED
 (

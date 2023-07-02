@@ -20,6 +20,7 @@ public class ArtefatoResponse {
     private String tipoArtefato;
     private Boolean ativo;
     private Date dataCadastro;
+    private Date dataAtualizacao;
     private Long idUsuario;
     private AlimentoResponse alimento;
     private TransporteResponse transporte;
@@ -31,6 +32,7 @@ public class ArtefatoResponse {
         this.tipoArtefato = artefato.getTipoArtefato();
         this.ativo = artefato.getAtivo();
         this.dataCadastro = artefato.getDataCadastro();
+        this.dataAtualizacao = artefato.getDataAtualizacao();
         this.idUsuario = artefato.getIdUsuario();
 
         if (artefato.getAlimento() != null) {

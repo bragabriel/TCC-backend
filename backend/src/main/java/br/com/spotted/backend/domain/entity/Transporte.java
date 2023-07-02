@@ -41,10 +41,9 @@ public class Transporte {
     @Column(name = "periodo_transporte")
     private String periodoTransporte;
 
-    @OneToOne
     @MapsId
-    @JoinColumn(name = "id_artefato", referencedColumnName = "id_artefato", updatable = false, insertable = false)
-    //Fk IdUsuario na tabela Alimento
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //Um transporte pode ter 1-1 artefato
+    @JoinColumn(name = "id_artefato")
     private Artefato artefato;
 
 //    @OneToMany(mappedBy = "idTransporte", targetEntity = TransporteImage.class, orphanRemoval = true) //idApe relacionamento na outra table

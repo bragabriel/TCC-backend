@@ -1,5 +1,6 @@
 package br.com.spotted.backend.domain.entity;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,12 @@ public class Artefato {
     @Column(name = "data_cadastro", nullable = false)
     private Date dataCadastro;
 
+    @Column(name = "data_inativo", nullable = false)
+    private Date dataInativo;
+
+    @Column(name = "data_atualizacao", nullable = false)
+    private Date dataAtualizacao;
+
     @Column(name= "id_usuario")
     private Long idUsuario;
 
@@ -41,10 +48,19 @@ public class Artefato {
     @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", updatable = false, insertable = false) //Fk Usuario na tabela Artefato
     private Usuario usuario;
 
-    @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+    @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Alimento na tabela Artefato
     private Alimento alimento;
 
-    @OneToOne
-    @JoinColumn(name="id_artefato", referencedColumnName = "id_artefato", updatable = false) //Fk Alimento na tabela Artefato
+    @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Transporte na tabela Artefato
     private Transporte transporte;
+
+    public Artefato(ArtefatoResponse artefatoResponse) {
+        this.idArtefato = artefatoResponse.getIdArtefato();
+        this.tituloArtefato = artefatoResponse.getTituloArtefato();
+        this.descricaoArtefato = artefatoResponse.getDescricaoArtefato();
+        this.tipoArtefato = artefatoResponse.getTipoArtefato();
+        this.ativo = artefatoResponse.getAtivo();
+        this.dataCadastro = artefatoResponse.getDataCadastro();
+        this.idUsuario = artefatoResponse.getIdUsuario();
+    }
 }

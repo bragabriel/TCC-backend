@@ -1,6 +1,7 @@
 package br.com.spotted.backend.service;
 
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoCreateRequest;
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
@@ -89,45 +90,8 @@ public class ArtefatoService {
 
         Artefato artefatoSalvo = artefatoRepository.save(modeloDb);
 
-//        switch (tipoArtefato) {
-//            case ALIMENTO:
-//                alimentoService.cadastrar(artefatoSalvo);
-//                break;
-//            case ESTAGIO:
-//                estagioService.cadastrar(artefatoSalvo);
-//                break;
-//            case FESTA:
-//                festaService.cadastrar(artefatoSalvo);
-//                break;
-//            case MORADIA:
-//                moradiaService.cadastrar(artefatoSalvo);
-//                break;
-//            case OBJETO:
-//                objetoService.cadastrar(artefatoSalvo);
-//                break;
-//            case TRANSPORTE:
-//                transporteService.cadastrar(artefatoSalvo);
-//                break;
-//            default:
-//                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tipo de artefato inválido");
-//        }
-
         ArtefatoResponse artefatoResponse = new ArtefatoResponse(artefatoSalvo);
         return new ResponseBase<>(artefatoResponse);
-    }
-    public ArtefatoResponse deletar(Long idArtefato) throws UsuarioNaoEncontradoException {
-        var artefatoEncontrado = artefatoRepository.findById(idArtefato);
-
-        if (artefatoEncontrado.isEmpty()) {
-            throw new ArtefatoNaoEncontradoException("Tarefa não encontrada.");
-        }
-
-        var artefato = artefatoEncontrado.get();
-        artefatoRepository.delete(artefato);
-
-        return new ArtefatoResponse(
-                artefato
-        );
     }
 
     public ArtefatoResponse atualizarArtefato(Long idArtefato, ArtefatoUpdateRequest artefatoUpdateRequest) {
@@ -142,14 +106,48 @@ public class ArtefatoService {
 
         artefato.setTituloArtefato(artefatoUpdateRequest.getTituloArtefato());
         artefato.setDescricaoArtefato(artefatoUpdateRequest.getDescricaoArtefato());
-        artefato.setTipoArtefato(artefatoUpdateRequest.getTipoArtefato());
         artefato.setAtivo(artefatoUpdateRequest.getAtivo());
-        artefato.setDataCadastro(artefatoUpdateRequest.getDataCadastro());
+        artefato.setDataAtualizacao(artefatoUpdateRequest.getDataAtualizacao());
 
-        var artefatoSalvo = artefatoRepository.save(artefato);
+        artefatoRepository.save(artefato);
 
         return new ArtefatoResponse(
                artefato
+        );
+    }
+
+    public ArtefatoResponse desativarArtefato(Long idArtefato, ArtefatoInactiveRequest artefatoInactiveRequest) {
+
+        var artefatoEncontrado = artefatoRepository.findById(idArtefato);
+
+        if (artefatoEncontrado.isEmpty()) {
+            throw new ArtefatoNaoEncontradoException("Artefato não encontrado.");
+        }
+
+        var artefato = artefatoEncontrado.get();
+
+        artefato.setAtivo(artefatoInactiveRequest.getAtivo());
+        artefato.setDataInativo(artefatoInactiveRequest.getDataInativo());
+
+        artefatoRepository.save(artefato);
+
+        return new ArtefatoResponse(
+                artefato
+        );
+    }
+
+    public ArtefatoResponse deletar(Long idArtefato) throws UsuarioNaoEncontradoException {
+        var artefatoEncontrado = artefatoRepository.findById(idArtefato);
+
+        if (artefatoEncontrado.isEmpty()) {
+            throw new ArtefatoNaoEncontradoException("Tarefa não encontrada.");
+        }
+
+        var artefato = artefatoEncontrado.get();
+        artefatoRepository.delete(artefato);
+
+        return new ArtefatoResponse(
+                artefato
         );
     }
 }

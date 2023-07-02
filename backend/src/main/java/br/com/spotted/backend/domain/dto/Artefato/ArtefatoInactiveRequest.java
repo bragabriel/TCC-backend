@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArtefatoUpdateRequest {
+public class ArtefatoInactiveRequest {
     @NotEmpty(message = "Campo titulo é obrigatório!")
     private String tituloArtefato;
 
@@ -26,13 +26,14 @@ public class ArtefatoUpdateRequest {
     private Boolean ativo;
 
     @NotEmpty(message = "Campo dataAtualizacao é obrigatório!")
-    private Date dataAtualizacao;
+    private Date dataInativo;
 
-    public ArtefatoUpdateRequest(Artefato artefato) {
+    public ArtefatoInactiveRequest(Artefato artefato) {
         this.tituloArtefato = artefato.getTituloArtefato();
         this.descricaoArtefato = artefato.getDescricaoArtefato();
         this.tipoArtefato = artefato.getTipoArtefato();
         this.ativo = artefato.getAtivo();
-        this.dataAtualizacao = artefato.getDataAtualizacao();
+        this.dataInativo = artefato.getDataInativo();
     }
 }
+

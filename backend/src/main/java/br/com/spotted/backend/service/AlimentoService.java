@@ -3,7 +3,9 @@ package br.com.spotted.backend.service;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoCreateRequest;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoUpdateRequest;
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Alimento;
@@ -14,9 +16,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -87,15 +92,32 @@ public class AlimentoService {
         return new ResponseBase<>(alimentoResponse);
     }
 
-    public AlimentoResponse deletar(Long idAlimento) {
-        var alimentoEncontrada = alimentoRepository.findById(idAlimento);
+    public AlimentoResponse atualizarAlimento(Long idAlimento, AlimentoUpdateRequest alimentoUpdateRequest){
 
-        if (alimentoEncontrada.isEmpty()) {
+        Calendar cal = Calendar.getInstance();
+        Date dataAtual = cal.getTime();
+
+        var alimentoEncontrada = alimentoRepository.findById(idAlimento);
+        if(alimentoEncontrada.isEmpty()){
             throw new AlimentoNaoEncontradoException("Alimento não encontrada.");
         }
 
+        var artefatoEncontrado = artefatoService.pesquisarPorId(idAlimento);
+        Artefato artefato = new Artefato(artefatoEncontrado.getObjetoRetorno());
+        artefato.setTituloArtefato(alimentoUpdateRequest.getTituloArtefato());
+        artefato.setDescricaoArtefato(alimentoUpdateRequest.getDescricaoArtefato());
+        artefato.setDataAtualizacao(dataAtual);
+        ArtefatoUpdateRequest artefatoUpdateRequest = new ArtefatoUpdateRequest(artefato);
+        artefatoService.atualizarArtefato(alimentoEncontrada.get().getIdArtefato(), artefatoUpdateRequest);
+
         var alimento = alimentoEncontrada.get();
-        alimentoRepository.delete(alimento);
+        alimento.setTipoAlimento(alimentoUpdateRequest.getTipoAlimento());
+        alimento.setMarcaAlimento(alimentoUpdateRequest.getMarcaAlimento());
+        alimento.setSaborAlimento(alimentoUpdateRequest.getSaborAlimento());
+        alimento.setUnidadeAlimento(alimentoUpdateRequest.getUnidadeAlimento());
+        alimento.setPrecoAlimento(alimentoUpdateRequest.getPrecoAlimento());
+        alimento.setOfertaAlimento(alimentoUpdateRequest.getOfertaAlimento());
+        alimentoRepository.save(alimento);
 
         return new AlimentoResponse(
                 alimento.getIdArtefato(),
@@ -105,39 +127,29 @@ public class AlimentoService {
                 alimento.getUnidadeAlimento(),
                 alimento.getPrecoAlimento(),
                 alimento.getOfertaAlimento(),
+                alimento.getArtefato().getTituloArtefato(),
                 alimento.getArtefato().getDescricaoArtefato()
                 //alimento.getListaImagensAlimento
         );
     }
 
-    public AlimentoResponse atualizarAlimento(Long idAlimento, AlimentoUpdateRequest alimentoUpdateRequest){
+    public ResponseEntity inativarAlimento(Long idAlimento) {
+
+        Calendar cal = Calendar.getInstance();
+        Date dataAtual = cal.getTime();
 
         var alimentoEncontrada = alimentoRepository.findById(idAlimento);
-
-        if(alimentoEncontrada.isEmpty()){
+        if (alimentoEncontrada.isEmpty()) {
             throw new AlimentoNaoEncontradoException("Alimento não encontrada.");
         }
 
-        var alimento = alimentoEncontrada.get();
+        var artefatoEncontrado = artefatoService.pesquisarPorId(idAlimento);
+        Artefato artefato = new Artefato(artefatoEncontrado.getObjetoRetorno());
+        artefato.setDataInativo(dataAtual);
+        artefato.setAtivo(false);
+        ArtefatoInactiveRequest artefatoInactiveRequest = new ArtefatoInactiveRequest(artefato);
+        artefatoService.desativarArtefato(alimentoEncontrada.get().getIdArtefato(), artefatoInactiveRequest);
 
-        //alimento.setSaborAlimento(alimentoUpdateRequest.getSaborAlimento());
-        alimento.setTipoAlimento(alimentoUpdateRequest.getTipoAlimento());
-        alimento.setMarcaAlimento(alimentoUpdateRequest.getMarcaAlimento());
-        alimento.setPrecoAlimento(alimentoUpdateRequest.getPrecoAlimento());
-        alimento.setOfertaAlimento(alimentoUpdateRequest.getOfertaAlimento());
-
-        var alimentoSalva = alimentoRepository.save(alimento);
-
-        return new AlimentoResponse(
-                alimento.getIdArtefato(),
-                alimento.getTipoAlimento(),
-                alimento.getMarcaAlimento(),
-                alimento.getSaborAlimento(),
-                alimento.getUnidadeAlimento(),
-                alimento.getPrecoAlimento(),
-                alimento.getOfertaAlimento(),
-                alimento.getArtefato().getDescricaoArtefato()
-                //alimento.getListaImagensAlimento
-        );
+        return ResponseEntity.ok().build();
     }
 }

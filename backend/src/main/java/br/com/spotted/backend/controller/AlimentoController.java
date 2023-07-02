@@ -46,13 +46,6 @@ public class AlimentoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
     }
 
-    //Deletar Alimento por Id
-    @DeleteMapping(value = "api/alimento/{idAlimento}")
-    public ResponseEntity<AlimentoResponse> deletar(@PathVariable Long idAlimento) {
-        var alimento = alimentoService.deletar(idAlimento);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(alimento);
-    }
-
     //Atualizar Alimento
     @PutMapping(value = "api/alimentoAtualizar/{idAlimento}")
     public ResponseEntity<AlimentoResponse> atualizarAlimento(
@@ -62,4 +55,20 @@ public class AlimentoController {
         var alimento = alimentoService.atualizarAlimento(idAlimento, alimentoUpdateRequest);
         return ResponseEntity.ok(alimento);
     }
+
+    //Atualizar Alimento
+    @PutMapping(value = "api/alimentoInativar/{idAlimento}")
+    public ResponseEntity<Void> inativarAlimento(
+            @PathVariable Long idAlimento
+    ){
+        var alimento = alimentoService.inativarAlimento(idAlimento);
+        return ResponseEntity.ok().build();
+    }
+
+    //Deletar Alimento por Id
+//    @DeleteMapping(value = "api/alimento/{idAlimento}")
+//    public ResponseEntity<Void> deletar(@PathVariable Long idAlimento) {
+//        alimentoService.deletar(idAlimento);
+//        return ResponseEntity.ok().build();
+//    }
 }
