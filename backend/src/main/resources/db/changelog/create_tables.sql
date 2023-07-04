@@ -72,7 +72,7 @@ GO
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Alimento]    Script Date: 6/28/2023 7:43:40 PM ******/
+/****** Object:  Table [dbo].[Alimento]    Script Date: 7/4/2023 9:59:50 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -114,7 +114,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Moradia](
-	[id_artefato] [int] IDENTITY(1,1) NOT NULL,
+	[id_artefato] [int] NOT NULL,
 	[qtdMoradoresPermitido_moradia] [int] NULL,
 	[qtdMoradoresAtuais_moradia] [int] NULL,
 	[precoAluguelTotal_moradia] [float] NULL,
@@ -149,7 +149,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Transporte](
-	[id_artefato] [int] IDENTITY(1,1) NOT NULL,
+	[id_artefato] [int] NOT NULL,
 	[cidade_transporte] [varchar](255) NOT NULL,
 	[periodo_transporte] [varchar](255) NOT NULL,
 	[informacoesVeiculo_transporte] [varchar](255) NOT NULL,
@@ -183,7 +183,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Emprego](
-	[id_artefato] [int] IDENTITY(1,1) NOT NULL,
+	[id_artefato] [int] NOT NULL,
 	[localizacao_emprego] [varchar](255) NULL,
 	[requisitos_emprego] [varchar](255) NULL,
 	[beneficios_emprego] [varchar](255) NULL,
@@ -215,7 +215,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Festa](
-	[id_artefato] [int] IDENTITY(1,1) NOT NULL,
+	[id_artefato] [int] NOT NULL,
 	[localizacao_festa] [varchar](255) NULL,
  CONSTRAINT [PK_Festa] PRIMARY KEY CLUSTERED
 (
@@ -244,7 +244,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Objeto](
-	[id_artefato] [int] IDENTITY(1,1) NOT NULL,
+	[id_artefato] [int] NOT NULL,
 	[localizacaoAchado_objeto] [varchar](255) NOT NULL,
 	[localizacaoAtual_objeto] [varchar](255) NOT NULL,
  CONSTRAINT [PK_Objeto] PRIMARY KEY CLUSTERED

@@ -1,5 +1,3 @@
---TABLE Festa
-SET IDENTITY_INSERT Festa ON
+--TABLE FESTA
 INSERT INTO [Festa] ([id_artefato], [localizacao_festa])
-VALUES(1, 'Araras, SP')
-SET IDENTITY_INSERT [Festa] OFF
+VALUES(5, 'Araras, SP')
