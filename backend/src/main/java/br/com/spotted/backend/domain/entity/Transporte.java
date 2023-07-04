@@ -1,15 +1,10 @@
 package br.com.spotted.backend.domain.entity;
 
-
-import br.com.spotted.backend.domain.entity.image.TransporteImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity
@@ -19,7 +14,6 @@ import java.util.List;
 public class Transporte {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_artefato")
     private Long idArtefato;
 
@@ -45,8 +39,4 @@ public class Transporte {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //Um transporte pode ter 1-1 artefato
     @JoinColumn(name = "id_artefato")
     private Artefato artefato;
-
-//    @OneToMany(mappedBy = "idTransporte", targetEntity = TransporteImage.class, orphanRemoval = true) //idApe relacionamento na outra table
-//    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-//    private List<TransporteImage> listaImagensTransporte = new ArrayList<TransporteImage>();}
 }

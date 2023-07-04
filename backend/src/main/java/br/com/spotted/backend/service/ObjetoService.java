@@ -1,15 +1,18 @@
 package br.com.spotted.backend.service;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoCreateRequest;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
+import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.Objeto;
 import br.com.spotted.backend.exception.ObjetoNaoEncontradoException;
 import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
 import br.com.spotted.backend.repository.ObjetoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,8 +25,8 @@ import java.util.Optional;
 public class ObjetoService {
 
     private final ObjetoRepository objetoRepository;
-    private final UsuarioService usuarioService;
-
+    @Autowired
+    private final ArtefatoService artefatoService;
     public ResponseBase<Page<ObjetoResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
 
         if (searchRequest.getPaginaAtual() < 1) {
@@ -52,14 +55,23 @@ public class ObjetoService {
 
     public ResponseBase<ObjetoResponse> cadastrar(ObjetoCreateRequest novo) {
 
+        //Cadastrando o artefato
+        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
+
+        //Cadastrando o Alimento
+        Artefato artefato = new Artefato();
+        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
+        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
+        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
+        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
+        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
+        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
+        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
+
         Objeto modeloDb = new Objeto();
-        modeloDb.setTituloObjeto(novo.getTituloObjeto());
-        modeloDb.setDescricaoObjeto(novo.getDescricaoObjeto());
         modeloDb.setLocalizacaoAchadoObjeto(novo.getLocalizacaoAchadoObjeto());
         modeloDb.setLocalizacaoAtualObjeto(novo.getLocalizacaoAtualObjeto());
-        modeloDb.setIdUsuario(novo.getIdUsuario());
-
-        usuarioService.pesquisarPorId(novo.getIdUsuario());
+        modeloDb.setArtefato(artefato);
 
         //Salvando
         Objeto apeSalvo = objetoRepository.save(modeloDb);
@@ -69,52 +81,52 @@ public class ObjetoService {
         return new ResponseBase<>(apeResponse);
     }
 
-    public ObjetoResponse deletar(Long idObjeto) {
-        var objetoEncontrado = objetoRepository.findById(idObjeto);
+//    public ObjetoResponse atualizarObjeto(Long idObjeto, ObjetoUpdateRequest objetoUpdateRequest) {
+//
+//        var objetoEncontrado = objetoRepository.findById(idObjeto);
+//
+//        if (objetoEncontrado.isEmpty()) {
+//            throw new ObjetoNaoEncontradoException("Objeto não encontrado.");
+//        }
+//
+//        var objeto = objetoEncontrado.get();
+//
+//        objeto.setTituloObjeto(objetoUpdateRequest.getTituloObjeto());
+//        objeto.setDescricaoObjeto(objetoUpdateRequest.getDescricaoObjeto());
+//        objeto.setLocalizacaoAchadoObjeto(objetoUpdateRequest.getLocalizacaoAchadoObjeto());
+//        objeto.setLocalizacaoAtualObjeto(objetoUpdateRequest.getLocalizacaoAtualObjeto());
+//
+//        var objetoSalvo = objetoRepository.save(objeto);
+//
+//        return new ObjetoResponse(
+//                objeto.getIdObjeto(),
+//                objeto.getTituloObjeto(),
+//                objeto.getDescricaoObjeto(),
+//                objeto.getLocalizacaoAchadoObjeto(),
+//                objeto.getLocalizacaoAtualObjeto(),
+//                objeto.getListaImagensObjeto(),
+//                objeto.getIdUsuario()
+//        );
+//    }
 
-        if (objetoEncontrado.isEmpty()) {
-            throw new ObjetoNaoEncontradoException("Objeto não encontrado.");
-        }
-
-        var objeto = objetoEncontrado.get();
-        objetoRepository.delete(objeto);
-
-        return new ObjetoResponse(
-                objeto.getIdObjeto(),
-                objeto.getTituloObjeto(),
-                objeto.getDescricaoObjeto(),
-                objeto.getLocalizacaoAchadoObjeto(),
-                objeto.getLocalizacaoAtualObjeto(),
-                objeto.getListaImagensObjeto(),
-                objeto.getIdUsuario()
-        );
-    }
-
-    public ObjetoResponse atualizarObjeto(Long idObjeto, ObjetoUpdateRequest objetoUpdateRequest) {
-
-        var objetoEncontrado = objetoRepository.findById(idObjeto);
-
-        if (objetoEncontrado.isEmpty()) {
-            throw new ObjetoNaoEncontradoException("Objeto não encontrado.");
-        }
-
-        var objeto = objetoEncontrado.get();
-
-        objeto.setTituloObjeto(objetoUpdateRequest.getTituloObjeto());
-        objeto.setDescricaoObjeto(objetoUpdateRequest.getDescricaoObjeto());
-        objeto.setLocalizacaoAchadoObjeto(objetoUpdateRequest.getLocalizacaoAchadoObjeto());
-        objeto.setLocalizacaoAtualObjeto(objetoUpdateRequest.getLocalizacaoAtualObjeto());
-
-        var objetoSalvo = objetoRepository.save(objeto);
-
-        return new ObjetoResponse(
-                objeto.getIdObjeto(),
-                objeto.getTituloObjeto(),
-                objeto.getDescricaoObjeto(),
-                objeto.getLocalizacaoAchadoObjeto(),
-                objeto.getLocalizacaoAtualObjeto(),
-                objeto.getListaImagensObjeto(),
-                objeto.getIdUsuario()
-        );
-    }
+//    public ObjetoResponse deletar(Long idObjeto) {
+//        var objetoEncontrado = objetoRepository.findById(idObjeto);
+//
+//        if (objetoEncontrado.isEmpty()) {
+//            throw new ObjetoNaoEncontradoException("Objeto não encontrado.");
+//        }
+//
+//        var objeto = objetoEncontrado.get();
+//        objetoRepository.delete(objeto);
+//
+//        return new ObjetoResponse(
+//                objeto.getIdObjeto(),
+//                objeto.getTituloObjeto(),
+//                objeto.getDescricaoObjeto(),
+//                objeto.getLocalizacaoAchadoObjeto(),
+//                objeto.getLocalizacaoAtualObjeto(),
+//                objeto.getListaImagensObjeto(),
+//                objeto.getIdUsuario()
+//        );
+//    }
 }

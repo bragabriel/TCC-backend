@@ -51,8 +51,24 @@ public class Artefato {
     @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Alimento na tabela Artefato
     private Alimento alimento;
 
+    @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Emprego na tabela Artefato
+    private Emprego emprego;
+
+    @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Festa na tabela Artefato
+    private Festa festa;
+
+    @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Moradia na tabela Artefato
+    private Moradia moradia;
+
+    @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Objeto na tabela Artefato
+    private Objeto objeto;
+
     @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Transporte na tabela Artefato
     private Transporte transporte;
+
+    //    @OneToMany(mappedBy = "idAlimento", targetEntity = AlimentoImage.class, orphanRemoval = true) //idAlimento relacionamento na outra table
+    //    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    //    private List<AlimentoImage> listaImagensAlimento = new ArrayList<AlimentoImage>();
 
     public Artefato(ArtefatoResponse artefatoResponse) {
         this.idArtefato = artefatoResponse.getIdArtefato();

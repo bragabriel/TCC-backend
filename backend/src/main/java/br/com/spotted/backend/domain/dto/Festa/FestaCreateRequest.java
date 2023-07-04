@@ -1,5 +1,6 @@
 package br.com.spotted.backend.domain.dto.Festa;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoCreateRequest;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -9,14 +10,8 @@ import javax.validation.constraints.NotNull;
 public class FestaCreateRequest {
 
     @NotEmpty
-    private String tituloFesta;
-
-    @NotEmpty
-    private String descricaoFesta;
-
-    @NotEmpty
     private String localizacaoFesta;
 
     @NotNull
-    private Long idUsuario;
+    private ArtefatoCreateRequest artefato;
 }

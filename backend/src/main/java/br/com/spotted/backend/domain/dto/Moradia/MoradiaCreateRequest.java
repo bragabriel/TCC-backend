@@ -1,5 +1,6 @@
 package br.com.spotted.backend.domain.dto.Moradia;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoCreateRequest;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -7,12 +8,6 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class MoradiaCreateRequest {
-
-    @NotEmpty(message = "O campo título é obrigatório!")
-    private String tituloMoradia;
-
-    @NotEmpty(message = "O campo descrição é obrigatório!")
-    private String descricaoMoradia;
 
     @NotEmpty(message = "O campo localização é obrigatório!")
     private String localizacaoMoradia;
@@ -36,5 +31,5 @@ public class MoradiaCreateRequest {
     private String animaisEstimacaoMoradia;
 
     @NotNull
-    private Long idUsuario;
+    private ArtefatoCreateRequest artefato;
 }

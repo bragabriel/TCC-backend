@@ -1,11 +1,11 @@
 package br.com.spotted.backend.controller;
 
-import br.com.spotted.backend.domain.dto.Estagio.EstagioCreateRequest;
-import br.com.spotted.backend.domain.dto.Estagio.EstagioResponse;
-import br.com.spotted.backend.domain.dto.Estagio.EstagioUpdateRequest;
+import br.com.spotted.backend.domain.dto.Emprego.EmpregoCreateRequest;
+import br.com.spotted.backend.domain.dto.Emprego.EmpregoResponse;
+import br.com.spotted.backend.domain.dto.Emprego.EmpregoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
-import br.com.spotted.backend.service.EstagioService;
+import br.com.spotted.backend.service.EmpregoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -18,12 +18,12 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class EstagioController {
 
-    private final EstagioService estagioService;
+    private final EmpregoService empregoService;
 
     @GetMapping("api/estagio")
     public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
 
-        ResponseBase<Page<EstagioResponse>> retorno = estagioService.pesquisar(searchRequest);
+        ResponseBase<Page<EmpregoResponse>> retorno = empregoService.pesquisar(searchRequest);
 
         return ResponseEntity.ok(retorno);
     }
@@ -31,31 +31,31 @@ public class EstagioController {
     @GetMapping(value = "api/estagio/{idEstagio}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idEstagio) {
 
-        ResponseBase<EstagioResponse> retorno = estagioService.pesquisarPorId(idEstagio);
+        ResponseBase<EmpregoResponse> retorno = empregoService.pesquisarPorId(idEstagio);
 
         return ResponseEntity.ok(retorno);
     }
 
     @PostMapping("api/estagio")
-    public ResponseEntity cadastrar(@Valid @RequestBody EstagioCreateRequest postModel) {
+    public ResponseEntity cadastrar(@Valid @RequestBody EmpregoCreateRequest postModel) {
 
-        ResponseBase<EstagioResponse> retorno = estagioService.cadastrar(postModel);
+        ResponseBase<EmpregoResponse> retorno = empregoService.cadastrar(postModel);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
     }
 
-    @DeleteMapping(value = "api/estagio/{idEstagio}")
-    public ResponseEntity<EstagioResponse> deletar(@PathVariable Long idEstagio) {
-        var estagio = estagioService.deletar(idEstagio);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(estagio);
-    }
-
-    @PutMapping(value = "api/estagioAtualizar/{idEstagio}")
-    public ResponseEntity<EstagioResponse> atualizarEstagio(
-            @PathVariable Long idEstagio,
-            @RequestBody @Valid EstagioUpdateRequest estagioUpdateRequest
-    ){
-        var estagio = estagioService.atualizarEstagio(idEstagio, estagioUpdateRequest);
-        return ResponseEntity.ok(estagio);
-    }
+//    @PutMapping(value = "api/estagioAtualizar/{idEstagio}")
+//    public ResponseEntity<EmpregoResponse> atualizarEstagio(
+//            @PathVariable Long idEstagio,
+//            @RequestBody @Valid EmpregoUpdateRequest empregoUpdateRequest
+//    ){
+//        var estagio = empregoService.atualizarEstagio(idEstagio, empregoUpdateRequest);
+//        return ResponseEntity.ok(estagio);
+//    }
+//
+//    @DeleteMapping(value = "api/estagio/{idEstagio}")
+//    public ResponseEntity<EmpregoResponse> deletar(@PathVariable Long idEstagio) {
+//        var estagio = empregoService.deletar(idEstagio);
+//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(estagio);
+//    }
 }

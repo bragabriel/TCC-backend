@@ -1,6 +1,6 @@
 package br.com.spotted.backend.domain.entity.image;
 
-import br.com.spotted.backend.domain.entity.Estagio;
+import br.com.spotted.backend.domain.entity.Emprego;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class EstagioImage {
+public class EmpregoImage {
 
     @Id
     @Column(name = "id_imageEstagio")
@@ -31,6 +31,6 @@ public class EstagioImage {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_imageEstagio", updatable = false, insertable = false) //FK
-    private Estagio estagio;
+    private Emprego emprego;
 
 }

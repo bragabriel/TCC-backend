@@ -20,7 +20,6 @@ public class ObjetoController {
 
     private final ObjetoService objetoService;
 
-    //Listar Objeto com paginação
     @GetMapping("api/objeto")
     public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
 
@@ -29,7 +28,6 @@ public class ObjetoController {
         return ResponseEntity.ok(retorno);
     }
 
-    //Buscar Objeto por Id
     @GetMapping(value = "api/objeto/{idObjeto}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idObjeto) {
 
@@ -38,7 +36,6 @@ public class ObjetoController {
         return ResponseEntity.ok(retorno);
     }
 
-    //Cadastrar Objeto
     @PostMapping("api/objeto")
     public ResponseEntity cadastrar(@Valid @RequestBody ObjetoCreateRequest postModel) {
 
@@ -47,20 +44,18 @@ public class ObjetoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
     }
 
-    //Deletar Objeto por Id
-    @DeleteMapping(value = "api/objeto/{idObjeto}")
-    public ResponseEntity<ObjetoResponse> deletar(@PathVariable Long idObjeto) {
-        var objeto = objetoService.deletar(idObjeto);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(objeto);
-    }
-
-    //Atualizar Objeto
-    @PutMapping(value = "api/objetoAtualizar/{idObjeto}")
-    public ResponseEntity<ObjetoResponse> atualizarObjeto(
-            @PathVariable Long idObjeto,
-            @RequestBody @Valid ObjetoUpdateRequest objetoUpdateRequest
-    ){
-        var objeto = objetoService.atualizarObjeto(idObjeto, objetoUpdateRequest);
-        return ResponseEntity.ok(objeto);
-    }
+//    @PutMapping(value = "api/objetoAtualizar/{idObjeto}")
+//    public ResponseEntity<ObjetoResponse> atualizarObjeto(
+//            @PathVariable Long idObjeto,
+//            @RequestBody @Valid ObjetoUpdateRequest objetoUpdateRequest
+//    ){
+//        var objeto = objetoService.atualizarObjeto(idObjeto, objetoUpdateRequest);
+//        return ResponseEntity.ok(objeto);
+//    }
+//
+//    @DeleteMapping(value = "api/objeto/{idObjeto}")
+//    public ResponseEntity<ObjetoResponse> deletar(@PathVariable Long idObjeto) {
+//        var objeto = objetoService.deletar(idObjeto);
+//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(objeto);
+//    }
 }

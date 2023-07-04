@@ -1,4 +1,4 @@
-package br.com.spotted.backend.domain.dto.Estagio;
+package br.com.spotted.backend.domain.dto.Emprego;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class EstagioUpdateRequest {
+public class EmpregoUpdateRequest {
     @NotEmpty
     private String tituloEstagio;
 

@@ -13,27 +13,21 @@ import java.util.List;
 @Data
 public class ObjetoResponse {
 
-    private Long idObjeto;
-
-    private String tituloObjeto;
-
-    private String descricaoObjeto;
+    private Long idArtefato;
 
     private String localizacaoAchadoObjeto;
 
     private String localizacaoAtualObjeto;
 
-    private List<ObjetoImage> listaImagensObjeto;
+    private String artefato_titulo;
 
-    private Long idUsuario;
+    private String artefato_descricao;
 
     public ObjetoResponse(Objeto objeto) {
-        this.idObjeto = objeto.getIdObjeto();
-        this.tituloObjeto = objeto.getTituloObjeto();
-        this.descricaoObjeto = objeto.getDescricaoObjeto();
+        this.idArtefato = objeto.getIdArtefato();
         this.localizacaoAchadoObjeto = objeto.getLocalizacaoAchadoObjeto();
         this.localizacaoAtualObjeto = objeto.getLocalizacaoAtualObjeto();
-        this.listaImagensObjeto = objeto.getListaImagensObjeto();
-        this.idUsuario = objeto.getIdUsuario();
+        this.artefato_titulo = objeto.getArtefato().getTituloArtefato();
+        this.artefato_descricao = objeto.getArtefato().getDescricaoArtefato();
     }
 }

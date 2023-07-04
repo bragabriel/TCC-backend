@@ -1,14 +1,17 @@
 package br.com.spotted.backend.service;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaCreateRequest;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
+import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.Moradia;
 import br.com.spotted.backend.exception.MoradiaNaoEncontradaException;
 import br.com.spotted.backend.repository.MoradiaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,7 +24,8 @@ import java.util.Optional;
 public class MoradiaService {
 
     private final MoradiaRepository moradiaRepository;
-    private final UsuarioService usuarioService;
+    @Autowired
+    private final ArtefatoService artefatoService;
 
     public ResponseBase<Page<MoradiaResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
 
@@ -51,9 +55,20 @@ public class MoradiaService {
 
     public ResponseBase<MoradiaResponse> cadastrar(MoradiaCreateRequest novo) {
 
+        //Cadastrando o artefato
+        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
+
+        //Cadastrando o Alimento
+        Artefato artefato = new Artefato();
+        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
+        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
+        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
+        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
+        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
+        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
+        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
+
         Moradia modeloDb = new Moradia();
-        modeloDb.setTituloMoradia(novo.getTituloMoradia());
-        modeloDb.setDescricaoMoradia(novo.getDescricaoMoradia());
         modeloDb.setLocalizacaoMoradia(novo.getLocalizacaoMoradia());
         modeloDb.setQtdMoradoresAtuaisMoradia(novo.getQtdMoradoresAtuaisMoradia());
         modeloDb.setQtdMoradoresPermitidoMoradia(novo.getQtdMoradoresPermitidoMoradia());
@@ -61,9 +76,7 @@ public class MoradiaService {
         modeloDb.setPrecoAluguelPorPessoaMoradia(novo.getPrecoAluguelPorPessoaMoradia());
         modeloDb.setVagaGaragemMoradia(novo.getVagaGaragemMoradia());
         modeloDb.setAnimaisEstimacaoMoradia(novo.getAnimaisEstimacaoMoradia());
-        modeloDb.setIdUsuario(novo.getIdUsuario());
-
-        usuarioService.pesquisarPorId(novo.getIdUsuario());
+        modeloDb.setArtefato(artefato);
 
         //Salvando
         Moradia moradiaSalvo = moradiaRepository.save(modeloDb);
@@ -73,66 +86,66 @@ public class MoradiaService {
         return new ResponseBase<>(moradiaResponse);
     }
 
-    public MoradiaResponse deletar(Long idMoradia) {
-        var moradiaEncontrado = moradiaRepository.findById(idMoradia);
+//    public MoradiaResponse atualizarMoradia(Long idMoradia, MoradiaUpdateRequest moradiaUpdateRequest) {
+//
+//        var moradiaEncontrado = moradiaRepository.findById(idMoradia);
+//
+//        if (moradiaEncontrado.isEmpty()) {
+//            throw new MoradiaNaoEncontradaException("Moradia não encontrado.");
+//        }
+//
+//        var moradia = moradiaEncontrado.get();
+//
+//        moradia.setTituloMoradia(moradiaUpdateRequest.getTituloMoradia());
+//        moradia.setDescricaoMoradia(moradiaUpdateRequest.getDescricaoMoradia());
+//        moradia.setQtdMoradoresAtuaisMoradia(moradiaUpdateRequest.getQtdMoradoresAtuaisMoradia());
+//        moradia.setQtdMoradoresPermitidoMoradia(moradiaUpdateRequest.getQtdMoradoresPermitidoMoradia());
+//        moradia.setPrecoAluguelTotalMoradia(moradiaUpdateRequest.getPrecoAluguelTotalMoradia());
+//        moradia.setPrecoAluguelPorPessoaMoradia(moradiaUpdateRequest.getPrecoAluguelPorPessoaMoradia());
+//        moradia.setVagaGaragemMoradia(moradiaUpdateRequest.getVagaGaragemMoradia());
+//        moradia.setAnimaisEstimacaoMoradia(moradiaUpdateRequest.getAnimaisEstimacaoMoradia());
+//
+//        var moradiaSalvo = moradiaRepository.save(moradia);
+//
+//        return new MoradiaResponse(
+//                moradia.getIdMoradia(),
+//                moradia.getTituloMoradia(),
+//                moradia.getDescricaoMoradia(),
+//                moradia.getLocalizacaoMoradia(),
+//                moradia.getQtdMoradoresAtuaisMoradia(),
+//                moradia.getQtdMoradoresPermitidoMoradia(),
+//                moradia.getPrecoAluguelTotalMoradia(),
+//                moradia.getPrecoAluguelPorPessoaMoradia(),
+//                moradia.getVagaGaragemMoradia(),
+//                moradia.getAnimaisEstimacaoMoradia(),
+//                moradia.getListaImagensMoradia(),
+//                moradia.getIdUsuario()
+//        );
+//    }
 
-        if (moradiaEncontrado.isEmpty()) {
-            throw new MoradiaNaoEncontradaException("Apê não encontrado.");
-        }
-
-        var moradia = moradiaEncontrado.get();
-        moradiaRepository.delete(moradia);
-
-        return new MoradiaResponse(
-            moradia.getIdMoradia(),
-            moradia.getTituloMoradia(),
-            moradia.getDescricaoMoradia(),
-            moradia.getLocalizacaoMoradia(),
-            moradia.getQtdMoradoresAtuaisMoradia(),
-            moradia.getQtdMoradoresPermitidoMoradia(),
-            moradia.getPrecoAluguelTotalMoradia(),
-            moradia.getPrecoAluguelPorPessoaMoradia(),
-            moradia.getVagaGaragemMoradia(),
-            moradia.getAnimaisEstimacaoMoradia(),
-            moradia.getListaImagensMoradia(),
-            moradia.getIdUsuario()
-        );
-    }
-
-    public MoradiaResponse atualizarMoradia(Long idMoradia, MoradiaUpdateRequest moradiaUpdateRequest) {
-
-        var moradiaEncontrado = moradiaRepository.findById(idMoradia);
-
-        if (moradiaEncontrado.isEmpty()) {
-            throw new MoradiaNaoEncontradaException("Moradia não encontrado.");
-        }
-
-        var moradia = moradiaEncontrado.get();
-
-        moradia.setTituloMoradia(moradiaUpdateRequest.getTituloMoradia());
-        moradia.setDescricaoMoradia(moradiaUpdateRequest.getDescricaoMoradia());
-        moradia.setQtdMoradoresAtuaisMoradia(moradiaUpdateRequest.getQtdMoradoresAtuaisMoradia());
-        moradia.setQtdMoradoresPermitidoMoradia(moradiaUpdateRequest.getQtdMoradoresPermitidoMoradia());
-        moradia.setPrecoAluguelTotalMoradia(moradiaUpdateRequest.getPrecoAluguelTotalMoradia());
-        moradia.setPrecoAluguelPorPessoaMoradia(moradiaUpdateRequest.getPrecoAluguelPorPessoaMoradia());
-        moradia.setVagaGaragemMoradia(moradiaUpdateRequest.getVagaGaragemMoradia());
-        moradia.setAnimaisEstimacaoMoradia(moradiaUpdateRequest.getAnimaisEstimacaoMoradia());
-
-        var moradiaSalvo = moradiaRepository.save(moradia);
-
-        return new MoradiaResponse(
-                moradia.getIdMoradia(),
-                moradia.getTituloMoradia(),
-                moradia.getDescricaoMoradia(),
-                moradia.getLocalizacaoMoradia(),
-                moradia.getQtdMoradoresAtuaisMoradia(),
-                moradia.getQtdMoradoresPermitidoMoradia(),
-                moradia.getPrecoAluguelTotalMoradia(),
-                moradia.getPrecoAluguelPorPessoaMoradia(),
-                moradia.getVagaGaragemMoradia(),
-                moradia.getAnimaisEstimacaoMoradia(),
-                moradia.getListaImagensMoradia(),
-                moradia.getIdUsuario()
-        );
-    }
+//    public MoradiaResponse deletar(Long idMoradia) {
+//        var moradiaEncontrado = moradiaRepository.findById(idMoradia);
+//
+//        if (moradiaEncontrado.isEmpty()) {
+//            throw new MoradiaNaoEncontradaException("Apê não encontrado.");
+//        }
+//
+//        var moradia = moradiaEncontrado.get();
+//        moradiaRepository.delete(moradia);
+//
+//        return new MoradiaResponse(
+//                moradia.getIdMoradia(),
+//                moradia.getTituloMoradia(),
+//                moradia.getDescricaoMoradia(),
+//                moradia.getLocalizacaoMoradia(),
+//                moradia.getQtdMoradoresAtuaisMoradia(),
+//                moradia.getQtdMoradoresPermitidoMoradia(),
+//                moradia.getPrecoAluguelTotalMoradia(),
+//                moradia.getPrecoAluguelPorPessoaMoradia(),
+//                moradia.getVagaGaragemMoradia(),
+//                moradia.getAnimaisEstimacaoMoradia(),
+//                moradia.getListaImagensMoradia(),
+//                moradia.getIdUsuario()
+//        );
+//    }
 }

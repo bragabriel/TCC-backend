@@ -40,8 +40,4 @@ public class Alimento{
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //Um alimento pode ter 1-1 artefato
     @JoinColumn(name = "id_artefato")
     private Artefato artefato;
-
-//    @OneToMany(mappedBy = "idAlimento", targetEntity = AlimentoImage.class, orphanRemoval = true) //idAlimento relacionamento na outra table
-//    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-//    private List<AlimentoImage> listaImagensAlimento = new ArrayList<AlimentoImage>();
 }

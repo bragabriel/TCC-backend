@@ -20,7 +20,6 @@ public class MoradiaController {
 
     private final MoradiaService moradiaService;
 
-    //Listar Comidas com paginação
     @GetMapping("api/moradia")
     public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
 
@@ -29,7 +28,6 @@ public class MoradiaController {
         return ResponseEntity.ok(retorno);
     }
 
-    //Buscar Moradia por Id
     @GetMapping(value = "api/moradia/{idMoradia}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idMoradia) {
 
@@ -38,7 +36,6 @@ public class MoradiaController {
         return ResponseEntity.ok(retorno);
     }
 
-    //Cadastrar Moradia
     @PostMapping("api/moradia")
     public ResponseEntity cadastrar(@Valid @RequestBody MoradiaCreateRequest postModel) {
 
@@ -47,20 +44,18 @@ public class MoradiaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
     }
 
-    //Deletar Moradia por Id
-    @DeleteMapping(value = "api/moradia/{idMoradia}")
-    public ResponseEntity<MoradiaResponse> deletar(@PathVariable Long idMoradia) {
-        var moradia = moradiaService.deletar(idMoradia);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(moradia);
-    }
-
-    //Atualizar Moradia
-    @PutMapping(value = "api/moradiaAtualizar/{idMoradia}")
-    public ResponseEntity<MoradiaResponse> atualizarMoradia(
-            @PathVariable Long idMoradia,
-            @RequestBody @Valid MoradiaUpdateRequest moradiaUpdateRequest
-    ){
-        var moradia = moradiaService.atualizarMoradia(idMoradia, moradiaUpdateRequest);
-        return ResponseEntity.ok(moradia);
-    }
+    //    @PutMapping(value = "api/moradiaAtualizar/{idMoradia}")
+//    public ResponseEntity<MoradiaResponse> atualizarMoradia(
+//            @PathVariable Long idMoradia,
+//            @RequestBody @Valid MoradiaUpdateRequest moradiaUpdateRequest
+//    ){
+//        var moradia = moradiaService.atualizarMoradia(idMoradia, moradiaUpdateRequest);
+//        return ResponseEntity.ok(moradia);
+//    }
+//
+//    @DeleteMapping(value = "api/moradia/{idMoradia}")
+//    public ResponseEntity<MoradiaResponse> deletar(@PathVariable Long idMoradia) {
+//        var moradia = moradiaService.deletar(idMoradia);
+//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(moradia);
+//    }
 }

@@ -1,15 +1,18 @@
 package br.com.spotted.backend.service;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaCreateRequest;
 import br.com.spotted.backend.domain.dto.Festa.FestaResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
+import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.Festa;
 import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
 import br.com.spotted.backend.exception.FestaNaoEncontradaException;
 import br.com.spotted.backend.repository.FestaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,7 +25,8 @@ import java.util.Optional;
 public class FestaService {
 
     private final FestaRepository festaRepository;
-    private final UsuarioService usuarioService;
+    @Autowired
+    private final ArtefatoService artefatoService;
 
     public ResponseBase<Page<FestaResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
 
@@ -52,13 +56,23 @@ public class FestaService {
 
     public ResponseBase<FestaResponse> cadastrar(FestaCreateRequest novo) {
 
-        Festa modeloDb = new Festa();
-        modeloDb.setTituloFesta(novo.getTituloFesta());
-        modeloDb.setDescricaoFesta(novo.getDescricaoFesta());
-        modeloDb.setLocalizacaoFesta(novo.getLocalizacaoFesta());
-        modeloDb.setIdUsuario(novo.getIdUsuario());
+        //Cadastrando o artefato
+        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
 
-        usuarioService.pesquisarPorId(novo.getIdUsuario());
+        //Cadastrando o Alimento
+        Artefato artefato = new Artefato();
+        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
+        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
+        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
+        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
+        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
+        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
+        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
+
+        Festa modeloDb = new Festa();
+        modeloDb.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
+        modeloDb.setLocalizacaoFesta(novo.getLocalizacaoFesta());
+        modeloDb.setArtefato(artefato);
 
         //Salvando
         Festa apeSalvo = festaRepository.save(modeloDb);
@@ -68,49 +82,49 @@ public class FestaService {
         return new ResponseBase<>(apeResponse);
     }
 
-    public FestaResponse deletar(Long idFesta) {
-        var festaEncontrada = festaRepository.findById(idFesta);
+//    public FestaResponse atualizarFesta(Long idFesta, FestaUpdateRequest festaUpdateRequest) {
+//
+//        var festaEncontrada = festaRepository.findById(idFesta);
+//
+//        if (festaEncontrada.isEmpty()) {
+//            throw new FestaNaoEncontradaException("Festa não encontrada.");
+//        }
+//
+//        var festa = festaEncontrada.get();
+//
+//        festa.setTituloFesta(festaUpdateRequest.getTituloFesta());
+//        festa.setDescricaoFesta(festaUpdateRequest.getDescricaoFesta());
+//        festa.setLocalizacaoFesta(festaUpdateRequest.getLocalizacaoFesta());
+//
+//        var festaSalva = festaRepository.save(festa);
+//
+//        return new FestaResponse(
+//                festa.getIdFesta(),
+//                festa.getTituloFesta(),
+//                festa.getDescricaoFesta(),
+//                festa.getLocalizacaoFesta(),
+//                festa.getListaImagensFesta(),
+//                festa.getIdUsuario()
+//        );
+//    }
 
-        if (festaEncontrada.isEmpty()) {
-            throw new FestaNaoEncontradaException("Festa não encontrada.");
-        }
-
-        var festa = festaEncontrada.get();
-        festaRepository.delete(festa);
-
-        return new FestaResponse(
-                festa.getIdFesta(),
-                festa.getTituloFesta(),
-                festa.getDescricaoFesta(),
-                festa.getLocalizacaoFesta(),
-                festa.getListaImagensFesta(),
-                festa.getIdUsuario()
-        );
-    }
-
-    public FestaResponse atualizarFesta(Long idFesta, FestaUpdateRequest festaUpdateRequest) {
-
-        var festaEncontrada = festaRepository.findById(idFesta);
-
-        if (festaEncontrada.isEmpty()) {
-            throw new FestaNaoEncontradaException("Festa não encontrada.");
-        }
-
-        var festa = festaEncontrada.get();
-
-        festa.setTituloFesta(festaUpdateRequest.getTituloFesta());
-        festa.setDescricaoFesta(festaUpdateRequest.getDescricaoFesta());
-        festa.setLocalizacaoFesta(festaUpdateRequest.getLocalizacaoFesta());
-
-        var festaSalva = festaRepository.save(festa);
-
-        return new FestaResponse(
-                festa.getIdFesta(),
-                festa.getTituloFesta(),
-                festa.getDescricaoFesta(),
-                festa.getLocalizacaoFesta(),
-                festa.getListaImagensFesta(),
-                festa.getIdUsuario()
-        );
-    }
+//    public FestaResponse deletar(Long idFesta) {
+//        var festaEncontrada = festaRepository.findById(idFesta);
+//
+//        if (festaEncontrada.isEmpty()) {
+//            throw new FestaNaoEncontradaException("Festa não encontrada.");
+//        }
+//
+//        var festa = festaEncontrada.get();
+//        festaRepository.delete(festa);
+//
+//        return new FestaResponse(
+//                festa.getIdFesta(),
+//                festa.getTituloFesta(),
+//                festa.getDescricaoFesta(),
+//                festa.getLocalizacaoFesta(),
+//                festa.getListaImagensFesta(),
+//                festa.getIdUsuario()
+//        );
+//    }
 }

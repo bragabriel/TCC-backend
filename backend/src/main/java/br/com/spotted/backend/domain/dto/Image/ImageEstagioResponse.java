@@ -1,6 +1,6 @@
 package br.com.spotted.backend.domain.dto.Image;
 
-import br.com.spotted.backend.domain.entity.image.EstagioImage;
+import br.com.spotted.backend.domain.entity.image.EmpregoImage;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,11 +13,11 @@ public class ImageEstagioResponse {
     private Long idEstagio;
     private String finalUrl;
 
-    public ImageEstagioResponse(EstagioImage estagioImage, String fileName) {
-        this.idImage = estagioImage.getIdImage();
-        this.localUrl = estagioImage.getUrl();
-        this.sequence = estagioImage.getSequence();
-        this.idEstagio = estagioImage.getIdEstagio();
+    public ImageEstagioResponse(EmpregoImage empregoImage, String fileName) {
+        this.idImage = empregoImage.getIdImage();
+        this.localUrl = empregoImage.getUrl();
+        this.sequence = empregoImage.getSequence();
+        this.idEstagio = empregoImage.getIdEstagio();
         this.finalUrl = fileName;
     }
 }

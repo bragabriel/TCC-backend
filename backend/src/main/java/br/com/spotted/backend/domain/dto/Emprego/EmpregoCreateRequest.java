@@ -1,18 +1,13 @@
-package br.com.spotted.backend.domain.dto.Estagio;
+package br.com.spotted.backend.domain.dto.Emprego;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoCreateRequest;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class EstagioCreateRequest {
-
-    @NotEmpty
-    private String tituloEstagio;
-
-    @NotEmpty
-    private String descricaoEstagio;
+public class EmpregoCreateRequest {
 
     @NotEmpty
     private String localizacaoEstagio;
@@ -26,5 +21,6 @@ public class EstagioCreateRequest {
     @NotEmpty
     private String beneficiosEstagio;
 
-    private Long idUsuario;
+    @NotNull
+    private ArtefatoCreateRequest artefato;
 }

@@ -47,20 +47,20 @@ public class FestaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
     }
 
-    //Deletar Festa por Id
-    @DeleteMapping(value = "api/festa/{idFesta}")
-    public ResponseEntity<FestaResponse> deletar(@PathVariable Long idFesta) {
-        var festa = festaService.deletar(idFesta);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(festa);
-    }
-
-    //Atualizar Festa
-    @PutMapping(value = "api/festaAtualizar/{idFesta}")
-    public ResponseEntity<FestaResponse> atualizarFesta(
-            @PathVariable Long idFesta,
-            @RequestBody @Valid FestaUpdateRequest festaUpdateRequest
-    ){
-        var festa = festaService.atualizarFesta(idFesta, festaUpdateRequest);
-        return ResponseEntity.ok(festa);
-    }
+//    //Atualizar Festa
+//    @PutMapping(value = "api/festaAtualizar/{idFesta}")
+//    public ResponseEntity<FestaResponse> atualizarFesta(
+//            @PathVariable Long idFesta,
+//            @RequestBody @Valid FestaUpdateRequest festaUpdateRequest
+//    ){
+//        var festa = festaService.atualizarFesta(idFesta, festaUpdateRequest);
+//        return ResponseEntity.ok(festa);
+//    }
+//
+//    //Deletar Festa por Id
+//    @DeleteMapping(value = "api/festa/{idFesta}")
+//    public ResponseEntity<FestaResponse> deletar(@PathVariable Long idFesta) {
+//        var festa = festaService.deletar(idFesta);
+//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(festa);
+//    }
 }

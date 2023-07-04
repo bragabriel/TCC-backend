@@ -20,7 +20,6 @@ public class TransporteController {
 
     private final TransporteService transporteService;
 
-    //Listar Transporte com paginação
     @GetMapping("api/transporte")
     public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
 
@@ -29,7 +28,6 @@ public class TransporteController {
         return ResponseEntity.ok(retorno);
     }
 
-    //Buscar Transporte por Id
     @GetMapping(value = "api/transporte/{idTransporte}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idTransporte) {
 
@@ -38,7 +36,6 @@ public class TransporteController {
         return ResponseEntity.ok(retorno);
     }
 
-    //Cadastrar Transporte
     @PostMapping("api/transporte")
     public ResponseEntity cadastrar(@Valid @RequestBody TransporteCreateRequest postModel) {
 
@@ -47,20 +44,18 @@ public class TransporteController {
         return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
     }
 
-    //Deletar Transporte por Id
-    @DeleteMapping(value = "api/transporte/{idTransporte}")
-    public ResponseEntity<TransporteResponse> deletar(@PathVariable Long idTransporte) {
-        var transporte = transporteService.deletar(idTransporte);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(transporte);
-    }
-
-    //Atualizar Transporte
-    @PutMapping(value = "api/transporteAtualizar/{idTransporte}")
-    public ResponseEntity<TransporteResponse> atualizarTransporte(
-            @PathVariable Long idTransporte,
-            @RequestBody @Valid TransporteUpdateRequest transporteUpdateRequest
-    ){
-        var transporte = transporteService.atualizarTransporte(idTransporte, transporteUpdateRequest);
-        return ResponseEntity.ok(transporte);
-    }
+//    @PutMapping(value = "api/transporteAtualizar/{idTransporte}")
+//    public ResponseEntity<TransporteResponse> atualizarTransporte(
+//            @PathVariable Long idTransporte,
+//            @RequestBody @Valid TransporteUpdateRequest transporteUpdateRequest
+//    ){
+//        var transporte = transporteService.atualizarTransporte(idTransporte, transporteUpdateRequest);
+//        return ResponseEntity.ok(transporte);
+//    }
+//
+//    @DeleteMapping(value = "api/transporte/{idTransporte}")
+//    public ResponseEntity<TransporteResponse> deletar(@PathVariable Long idTransporte) {
+//        var transporte = transporteService.deletar(idTransporte);
+//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(transporte);
+//    }
 }
