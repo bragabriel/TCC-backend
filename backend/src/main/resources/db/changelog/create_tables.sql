@@ -102,11 +102,46 @@ ALTER TABLE [dbo].[Alimento] CHECK CONSTRAINT [FK_Artefato_Alimento]
 GO
 
 
+--TABLE MORADIA
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[Moradia]    Script Date: 7/3/2023 8:59:29 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Moradia](
+	[id_artefato] [int] IDENTITY(1,1) NOT NULL,
+	[qtdMoradoresPermitido_moradia] [int] NULL,
+	[qtdMoradoresAtuais_moradia] [int] NULL,
+	[precoAluguelTotal_moradia] [float] NULL,
+	[precoAluguelPorPessoa_moradia] [float] NULL,
+	[localizacao_moradia] [varchar](255) NOT NULL,
+	[vagaGaragem_moradia] [varchar](255) NOT NULL,
+	[animaisEstimacao_moradia] [varchar](255) NOT NULL,
+ CONSTRAINT [PK_Moradia] PRIMARY KEY CLUSTERED
+(
+	[id_artefato] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Moradia]  WITH CHECK ADD  CONSTRAINT [FK_Artefato_Moradia] FOREIGN KEY([id_artefato])
+REFERENCES [dbo].[Artefato] ([id_artefato])
+GO
+
+ALTER TABLE [dbo].[Moradia] CHECK CONSTRAINT [FK_Artefato_Moradia]
+GO
+
+
 --TABLE TRANSPORTE
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Transporte]    Script Date: 7/1/2023 1:19:23 PM ******/
+/****** Object:  Table [dbo].[Transporte]    Script Date: 7/3/2023 8:54:41 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -126,4 +161,102 @@ CREATE TABLE [dbo].[Transporte](
 	[id_artefato] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Transporte]  WITH CHECK ADD  CONSTRAINT [FK_Artefato_Transporte] FOREIGN KEY([id_artefato])
+REFERENCES [dbo].[Artefato] ([id_artefato])
+GO
+
+ALTER TABLE [dbo].[Transporte] CHECK CONSTRAINT [FK_Artefato_Transporte]
+GO
+
+
+--TABLE EMPREGO
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[Emprego]    Script Date: 7/3/2023 9:07:47 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Emprego](
+	[id_artefato] [int] IDENTITY(1,1) NOT NULL,
+	[localizacao_emprego] [varchar](255) NULL,
+	[requisitos_emprego] [varchar](255) NULL,
+	[beneficios_emprego] [varchar](255) NULL,
+	[salario_emprego] [float] NULL,
+ CONSTRAINT [PK_Emprego] PRIMARY KEY CLUSTERED
+(
+	[id_artefato] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Emprego]  WITH CHECK ADD  CONSTRAINT [FK_Artefato_Emprego] FOREIGN KEY([id_artefato])
+REFERENCES [dbo].[Artefato] ([id_artefato])
+GO
+
+ALTER TABLE [dbo].[Emprego] CHECK CONSTRAINT [FK_Artefato_Emprego]
+GO
+
+
+--TABLE FESTA
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[Festa]    Script Date: 7/3/2023 8:48:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Festa](
+	[id_artefato] [int] IDENTITY(1,1) NOT NULL,
+	[localizacao_festa] [varchar](255) NULL,
+ CONSTRAINT [PK_Festa] PRIMARY KEY CLUSTERED
+(
+	[id_artefato] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Festa]  WITH CHECK ADD  CONSTRAINT [FK_Artefato_Festa] FOREIGN KEY([id_artefato])
+REFERENCES [dbo].[Artefato] ([id_artefato])
+GO
+
+ALTER TABLE [dbo].[Festa] CHECK CONSTRAINT [FK_Artefato_Festa]
+GO
+
+
+--TABLE OBJETO
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[Objeto]    Script Date: 7/3/2023 9:12:30 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Objeto](
+	[id_artefato] [int] IDENTITY(1,1) NOT NULL,
+	[localizacaoAchado_objeto] [varchar](255) NOT NULL,
+	[localizacaoAtual_objeto] [varchar](255) NOT NULL,
+ CONSTRAINT [PK_Objeto] PRIMARY KEY CLUSTERED
+(
+	[id_artefato] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Objeto]  WITH CHECK ADD  CONSTRAINT [FK_Artefato_Objeto] FOREIGN KEY([id_artefato])
+REFERENCES [dbo].[Artefato] ([id_artefato])
+GO
+
+ALTER TABLE [dbo].[Objeto] CHECK CONSTRAINT [FK_Artefato_Objeto]
 GO
