@@ -20,8 +20,8 @@ public class ArtefatoController {
     private final ArtefatoService artefatoService;
 
     @GetMapping("api/artefato")
-    public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest, String tipo) {
-        ResponseBase<Page<ArtefatoResponse>> retorno = artefatoService.pesquisar(searchRequest, tipo);
+    public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest, String tipo, Boolean ativo) {
+        ResponseBase<Page<ArtefatoResponse>> retorno = artefatoService.pesquisar(searchRequest, tipo, ativo);
         return ResponseEntity.ok(retorno);
     }
 

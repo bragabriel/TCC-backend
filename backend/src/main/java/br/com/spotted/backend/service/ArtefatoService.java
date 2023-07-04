@@ -28,7 +28,7 @@ public class ArtefatoService {
     private final ArtefatoRepository artefatoRepository;
     private final UsuarioService usuarioService;
 
-    public ResponseBase<Page<ArtefatoResponse>> pesquisar(PaginatedSearchRequest searchRequest, String tipo) {
+    public ResponseBase<Page<ArtefatoResponse>> pesquisar(PaginatedSearchRequest searchRequest, String tipo, Boolean ativo) {
 
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");
@@ -40,10 +40,22 @@ public class ArtefatoService {
 
         Page<Artefato> page;
         if ("alimento".equalsIgnoreCase(tipo)) {
-            page = artefatoRepository.findAllWithAlimento("alimento", searchRequest.parseToPageRequest());
+            page = artefatoRepository.findAllWithAlimento("alimento", searchRequest.parseToPageRequest(), ativo);
+        }
+        else if("emprego".equalsIgnoreCase(tipo)){
+            page = artefatoRepository.findAllWithEmprego("emprego", searchRequest.parseToPageRequest(), ativo);
+        }
+        else if("festa".equalsIgnoreCase(tipo)){
+            page = artefatoRepository.findAllWithFesta("festa", searchRequest.parseToPageRequest(), ativo);
+        }
+        else if("moradia".equalsIgnoreCase(tipo)){
+            page = artefatoRepository.findAllWithMoradia("moradia", searchRequest.parseToPageRequest(), ativo);
+        }
+        else if("objeto".equalsIgnoreCase(tipo)){
+            page = artefatoRepository.findAllWithObjeto("objeto", searchRequest.parseToPageRequest(), ativo);
         }
         else if("transporte".equalsIgnoreCase(tipo)){
-            page = artefatoRepository.findAllWithTransporte("transporte", searchRequest.parseToPageRequest());
+            page = artefatoRepository.findAllWithTransporte("transporte", searchRequest.parseToPageRequest(), ativo);
         }
         else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não existe este tipo de Artefato");
