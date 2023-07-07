@@ -1,6 +1,7 @@
 package br.com.spotted.backend.domain.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name="Transporte")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Transporte {
 
     @Id

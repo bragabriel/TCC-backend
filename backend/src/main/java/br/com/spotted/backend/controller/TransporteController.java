@@ -22,40 +22,36 @@ public class TransporteController {
 
     @GetMapping("api/transporte")
     public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
-
         ResponseBase<Page<TransporteResponse>> retorno = transporteService.pesquisar(searchRequest);
-
         return ResponseEntity.ok(retorno);
     }
 
     @GetMapping(value = "api/transporte/{idTransporte}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idTransporte) {
-
         ResponseBase<TransporteResponse> retorno = transporteService.pesquisarPorId(idTransporte);
-
         return ResponseEntity.ok(retorno);
     }
 
-//    @PostMapping("api/transporte")
-//    public ResponseEntity cadastrar(@Valid @RequestBody TransporteCreateRequest postModel) {
-//
-//        ResponseBase<TransporteResponse> retorno = transporteService.cadastrar(postModel);
-//
-//        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
-//    }
+    @PostMapping("api/transporte")
+    public ResponseEntity cadastrar(@Valid @RequestBody TransporteCreateRequest postModel) {
+        ResponseBase<TransporteResponse> retorno = transporteService.cadastrar(postModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
+    }
 
-//    @PutMapping(value = "api/transporteAtualizar/{idTransporte}")
-//    public ResponseEntity<TransporteResponse> atualizarTransporte(
-//            @PathVariable Long idTransporte,
-//            @RequestBody @Valid TransporteUpdateRequest transporteUpdateRequest
-//    ){
-//        var transporte = transporteService.atualizarTransporte(idTransporte, transporteUpdateRequest);
-//        return ResponseEntity.ok(transporte);
-//    }
-//
-//    @DeleteMapping(value = "api/transporte/{idTransporte}")
-//    public ResponseEntity<TransporteResponse> deletar(@PathVariable Long idTransporte) {
-//        var transporte = transporteService.deletar(idTransporte);
-//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(transporte);
-//    }
+    @PutMapping(value = "api/transporteAtualizar/{idTransporte}")
+    public ResponseEntity<TransporteResponse> atualizarTransporte(
+            @PathVariable Long idTransporte,
+            @RequestBody @Valid TransporteUpdateRequest transporteUpdateRequest
+    ){
+        var transporte = transporteService.atualizarTransporte(idTransporte, transporteUpdateRequest);
+        return ResponseEntity.ok(transporte);
+    }
+
+    @PutMapping(value = "api/transporteInativar/{idTransporte}")
+    public ResponseEntity<Void> inativarTransporte(
+            @PathVariable Long idTransporte
+    ){
+        var transporte = transporteService.inativarTransporte(idTransporte);
+        return ResponseEntity.ok().build();
+    }
 }

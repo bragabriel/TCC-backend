@@ -27,9 +27,9 @@ public class TransporteResponse {
 
     private String periodoTransporte;
 
-    private String artefato;
+    private String tituloArtefato;
 
-    //private List<TransporteImage> listaImagensTransporte;
+    private String descricaoArtefato;
 
     public TransporteResponse(Transporte transporte) {
         this.idArtefato = transporte.getIdArtefato();
@@ -39,7 +39,7 @@ public class TransporteResponse {
         this.qtdAssentosPreenchidosTransporte = transporte.getQtdAssentosPreenchidosTransporte();
         this.cidadeTransporte = transporte.getCidadeTransporte();
         this.periodoTransporte = transporte.getPeriodoTransporte();
-        this.artefato = transporte.getArtefato().getDescricaoArtefato();
-        //this.listaImagensTransporte = transporte.getListaImagensTransporte();
+        this.tituloArtefato = transporte.getArtefato().getTituloArtefato();
+        this.descricaoArtefato = transporte.getArtefato().getDescricaoArtefato();
     }
 }
