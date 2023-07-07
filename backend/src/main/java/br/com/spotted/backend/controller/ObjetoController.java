@@ -22,40 +22,36 @@ public class ObjetoController {
 
     @GetMapping("api/objeto")
     public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
-
         ResponseBase<Page<ObjetoResponse>> retorno = objetoService.pesquisar(searchRequest);
-
         return ResponseEntity.ok(retorno);
     }
 
     @GetMapping(value = "api/objeto/{idObjeto}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idObjeto) {
-
         ResponseBase<ObjetoResponse> retorno = objetoService.pesquisarPorId(idObjeto);
-
         return ResponseEntity.ok(retorno);
     }
 
-//    @PostMapping("api/objeto")
-//    public ResponseEntity cadastrar(@Valid @RequestBody ObjetoCreateRequest postModel) {
-//
-//        ResponseBase<ObjetoResponse> retorno = objetoService.cadastrar(postModel);
-//
-//        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
-//    }
+    @PostMapping("api/objeto")
+    public ResponseEntity cadastrar(@Valid @RequestBody ObjetoCreateRequest postModel) {
+        ResponseBase<ObjetoResponse> retorno = objetoService.cadastrar(postModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
+    }
 
-//    @PutMapping(value = "api/objetoAtualizar/{idObjeto}")
-//    public ResponseEntity<ObjetoResponse> atualizarObjeto(
-//            @PathVariable Long idObjeto,
-//            @RequestBody @Valid ObjetoUpdateRequest objetoUpdateRequest
-//    ){
-//        var objeto = objetoService.atualizarObjeto(idObjeto, objetoUpdateRequest);
-//        return ResponseEntity.ok(objeto);
-//    }
-//
-//    @DeleteMapping(value = "api/objeto/{idObjeto}")
-//    public ResponseEntity<ObjetoResponse> deletar(@PathVariable Long idObjeto) {
-//        var objeto = objetoService.deletar(idObjeto);
-//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(objeto);
-//    }
+    @PutMapping(value = "api/objetoAtualizar/{idObjeto}")
+    public ResponseEntity<ObjetoResponse> atualizarObjeto(
+            @PathVariable Long idObjeto,
+            @RequestBody @Valid ObjetoUpdateRequest objetoUpdateRequest
+    ){
+        var objeto = objetoService.atualizarObjeto(idObjeto, objetoUpdateRequest);
+        return ResponseEntity.ok(objeto);
+    }
+
+    @PutMapping(value = "api/objetoInativar/{idObjeto}")
+    public ResponseEntity<Void> inativarObjeto(
+            @PathVariable Long idObjeto
+    ){
+        var objeto = objetoService.inativarObjeto(idObjeto);
+        return ResponseEntity.ok().build();
+    }
 }

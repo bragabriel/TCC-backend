@@ -19,15 +19,15 @@ public class ObjetoResponse {
 
     private String localizacaoAtualObjeto;
 
-    private String artefato_titulo;
+    private String tituloArtefato;
 
-    private String artefato_descricao;
+    private String descricaoArtefato;
 
     public ObjetoResponse(Objeto objeto) {
         this.idArtefato = objeto.getIdArtefato();
         this.localizacaoAchadoObjeto = objeto.getLocalizacaoAchadoObjeto();
         this.localizacaoAtualObjeto = objeto.getLocalizacaoAtualObjeto();
-        this.artefato_titulo = objeto.getArtefato().getTituloArtefato();
-        this.artefato_descricao = objeto.getArtefato().getDescricaoArtefato();
+        this.tituloArtefato = objeto.getArtefato().getTituloArtefato();
+        this.descricaoArtefato = objeto.getArtefato().getDescricaoArtefato();
     }
 }
