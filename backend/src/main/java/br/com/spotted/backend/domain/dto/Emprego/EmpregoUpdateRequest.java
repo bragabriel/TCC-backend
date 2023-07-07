@@ -7,21 +7,21 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class EmpregoUpdateRequest {
-    @NotEmpty
-    private String tituloEstagio;
+    @NotEmpty(message = "Campo nome é obrigatório!")
+    private String tituloArtefato;
+
+    @NotEmpty(message = "Campo 'descrição' é obrigatório!")
+    private String descricaoArtefato;
 
     @NotEmpty
-    private String descricaoEstagio;
+    private String localizacaoEmprego;
 
     @NotEmpty
-    private String localizacaoEstagio;
-
-    @NotEmpty
-    private String requisitosEstagio;
+    private String requisitosEmprego;
 
     @NotNull
-    private Integer salarioEstagio;
+    private Integer salarioEmprego;
 
     @NotEmpty
-    private String beneficiosEstagio;
+    private String beneficiosEmprego;
 }

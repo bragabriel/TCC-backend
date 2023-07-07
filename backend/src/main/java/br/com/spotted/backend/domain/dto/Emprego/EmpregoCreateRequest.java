@@ -10,16 +10,16 @@ import javax.validation.constraints.NotNull;
 public class EmpregoCreateRequest {
 
     @NotEmpty
-    private String localizacaoEstagio;
+    private String localizacaoEmprego;
 
     @NotEmpty
-    private String requisitosEstagio;
+    private String requisitosEmprego;
 
     @NotNull
-    private Integer salarioEstagio;
+    private Integer salarioEmprego;
 
     @NotEmpty
-    private String beneficiosEstagio;
+    private String beneficiosEmprego;
 
     @NotNull
     private ArtefatoCreateRequest artefato;

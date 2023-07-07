@@ -13,10 +13,6 @@ public class EmpregoResponse {
 
     private Long idArtefato;
 
-    private String tituloEstagio;
-
-    private String descricaoEstagio;
-
     private String localizacaoEstagio;
 
     private String requisitosEstagio;
@@ -25,15 +21,14 @@ public class EmpregoResponse {
 
     private String beneficiosEstagio;
 
-    private String artefato_titulo;
+    private String tituloArtefato;
 
-    private String artefato_descricao;
-
+    private String descricaoArtefato;
 
     public EmpregoResponse(Emprego emprego) {
         this.idArtefato = emprego.getIdArtefato();
-        this.artefato_titulo = emprego.getArtefato().getTituloArtefato();
-        this.artefato_descricao = emprego.getArtefato().getDescricaoArtefato();
+        this.tituloArtefato = emprego.getArtefato().getTituloArtefato();
+        this.descricaoArtefato = emprego.getArtefato().getDescricaoArtefato();
         this.localizacaoEstagio = emprego.getLocalizacaoEmprego();
         this.requisitosEstagio = emprego.getRequisitosEmprego();
         this.salarioEstagio = emprego.getSalarioEmprego();

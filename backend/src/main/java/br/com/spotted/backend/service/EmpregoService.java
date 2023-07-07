@@ -1,5 +1,6 @@
 package br.com.spotted.backend.service;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoCreateRequest;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoResponse;
@@ -8,15 +9,18 @@ import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.Emprego;
-import br.com.spotted.backend.exception.EstagioNaoEncontradoException;
+import br.com.spotted.backend.exception.EmpregoNaoEncontradoException;
 import br.com.spotted.backend.repository.EmpregoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -36,16 +40,16 @@ public class EmpregoService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantidade de itens por página deve ser entre 1 e 50 itens");
         }
 
-        Page<Emprego> estagioPage = empregoRepository.findAll(searchRequest.parseToPageRequest());
+        Page<Emprego> empregoPage = empregoRepository.findAll(searchRequest.parseToPageRequest());
 
-        Page<EmpregoResponse> estagioResponsePage = estagioPage.map(EmpregoResponse::new);
-        return new ResponseBase<>(estagioResponsePage);
+        Page<EmpregoResponse> empregoResponsePage = empregoPage.map(EmpregoResponse::new);
+        return new ResponseBase<>(empregoResponsePage);
     }
 
     public ResponseBase<EmpregoResponse> pesquisarPorId(Long id) {
-        Optional<Emprego> estagioOptional = empregoRepository.findById(id);
+        Optional<Emprego> empregoOptional = empregoRepository.findById(id);
 
-        Emprego emprego = estagioOptional
+        Emprego emprego = empregoOptional
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Estágio não encontrado."));
 
         EmpregoResponse empregoResponse = new EmpregoResponse(emprego);
@@ -53,89 +57,80 @@ public class EmpregoService {
         return new ResponseBase<>(empregoResponse);
     }
 
-//    public ResponseBase<EmpregoResponse> cadastrar(EmpregoCreateRequest novo) {
-//
-//        //Cadastrando o artefato
-//        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
-//
-//        //Cadastrando o Alimento
-//        Artefato artefato = new Artefato();
-//        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-//        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
-//        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
-//        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
-//        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
-//        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
-//        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
-//
-//        Emprego modeloDb = new Emprego();
-//        modeloDb.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-//        modeloDb.setBeneficiosEmprego(novo.getBeneficiosEstagio());
-//        modeloDb.setLocalizacaoEmprego(novo.getLocalizacaoEstagio());
-//        modeloDb.setRequisitosEmprego(novo.getRequisitosEstagio());
-//        modeloDb.setSalarioEmprego(novo.getSalarioEstagio());
-//        modeloDb.setArtefato(artefato);
-//
-//        //Salvando
-//        Emprego estagioSalvo = empregoRepository.save(modeloDb);
-//
-//        // Mapeia de entidade para dto
-//        EmpregoResponse estagioResponse = new EmpregoResponse(estagioSalvo);
-//        return new ResponseBase<>(estagioResponse);
-//    }
+    public ResponseBase<EmpregoResponse> cadastrar(EmpregoCreateRequest novo) {
 
-//    public EmpregoResponse atualizarEstagio(Long idEstagio, EmpregoUpdateRequest empregoUpdateRequest){
-//
-//        var estagioEncontrado = empregoRepository.findById(idEstagio);
-//
-//        if(estagioEncontrado.isEmpty()){
-//            throw new EstagioNaoEncontradoException("Estágio não encontrado.");
-//        }
-//
-//        var estagio = estagioEncontrado.get();
-//
-//        estagio.setTituloEstagio(empregoUpdateRequest.getTituloEstagio());
-//        estagio.setDescricaoEstagio(empregoUpdateRequest.getDescricaoEstagio());
-//        estagio.setBeneficiosEstagio(empregoUpdateRequest.getBeneficiosEstagio());
-//        estagio.setLocalizacaoEstagio(empregoUpdateRequest.getLocalizacaoEstagio());
-//        estagio.setRequisitosEstagio(empregoUpdateRequest.getRequisitosEstagio());
-//        estagio.setSalarioEstagio(empregoUpdateRequest.getSalarioEstagio());
-//
-//        var estagioSalvo = empregoRepository.save(estagio);
-//
-//        return new EmpregoResponse(
-//                estagio.getIdEstagio(),
-//                estagio.getTituloEstagio(),
-//                estagio.getDescricaoEstagio(),
-//                estagio.getLocalizacaoEstagio(),
-//                estagio.getRequisitosEstagio(),
-//                estagio.getSalarioEstagio(),
-//                estagio.getBeneficiosEstagio(),
-//                estagio.getListaImagensEstagio(),
-//                estagio.getIdUsuario()
-//        );
-//    }
+        ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
-//    public EmpregoResponse deletar(Long idEstagio) {
-//        var estagioEncontrado = empregoRepository.findById(idEstagio);
-//
-//        if (estagioEncontrado.isEmpty()) {
-//            throw new EstagioNaoEncontradoException("Estágio não encontrado.");
-//        }
-//
-//        var estagio = estagioEncontrado.get();
-//        empregoRepository.delete(estagio);
-//
-//        return new EmpregoResponse(
-//                estagio.getIdEstagio(),
-//                estagio.getTituloEstagio(),
-//                estagio.getDescricaoEstagio(),
-//                estagio.getLocalizacaoEstagio(),
-//                estagio.getRequisitosEstagio(),
-//                estagio.getSalarioEstagio(),
-//                estagio.getBeneficiosEstagio(),
-//                estagio.getListaImagensEstagio(),
-//                estagio.getIdUsuario()
-//        );
-//    }
+        Artefato artefato = Artefato.builder()
+                .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
+                .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
+                .tipoArtefato(artefatoSalvo.getObjetoRetorno().getTipoArtefato())
+                .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
+                .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
+                .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())
+                .build();
+
+        Emprego modeloDb = Emprego.builder()
+                .idArtefato(artefatoSalvo.getObjetoRetorno().getIdArtefato())
+                .beneficiosEmprego(novo.getBeneficiosEmprego())
+                .localizacaoEmprego(novo.getLocalizacaoEmprego())
+                .requisitosEmprego(novo.getRequisitosEmprego())
+                .salarioEmprego(novo.getSalarioEmprego())
+                .artefato(artefato)
+                .build();
+
+        Emprego empregoSalvo = empregoRepository.save(modeloDb);
+
+        EmpregoResponse empregoResponse = new EmpregoResponse(empregoSalvo);
+        return new ResponseBase<>(empregoResponse);
+    }
+
+    public EmpregoResponse atualizarEmprego(Long idEmprego, EmpregoUpdateRequest empregoUpdateRequest){
+
+        Calendar cal = Calendar.getInstance();
+        Date dataAtual = cal.getTime();
+
+        var empregoEncontrado = empregoRepository.findById(idEmprego);
+        if(empregoEncontrado.isEmpty()){
+            throw new EmpregoNaoEncontradoException("Emprego não encontrada.");
+        }
+
+        Artefato artefato = new Artefato(empregoEncontrado.get().getArtefato());
+        artefato.setTituloArtefato(empregoUpdateRequest.getTituloArtefato());
+        artefato.setDescricaoArtefato(empregoUpdateRequest.getDescricaoArtefato());
+        artefato.setDataAtualizacao(dataAtual);
+
+        var emprego = empregoEncontrado.get();
+        emprego.setBeneficiosEmprego(empregoUpdateRequest.getBeneficiosEmprego());
+        emprego.setLocalizacaoEmprego(empregoUpdateRequest.getLocalizacaoEmprego());
+        emprego.setRequisitosEmprego(empregoUpdateRequest.getRequisitosEmprego());
+        emprego.setSalarioEmprego(empregoUpdateRequest.getSalarioEmprego());
+        emprego.setArtefato(artefato);
+        empregoRepository.save(emprego);
+
+        return new EmpregoResponse(
+                emprego.getIdArtefato(),
+                emprego.getLocalizacaoEmprego(),
+                emprego.getRequisitosEmprego(),
+                emprego.getSalarioEmprego(),
+                emprego.getBeneficiosEmprego(),
+                emprego.getArtefato().getTituloArtefato(),
+                emprego.getArtefato().getDescricaoArtefato()
+        );
+    }
+
+    public ResponseEntity inativarEmprego(Long idEmprego) {
+
+        var empregoEncontrada = empregoRepository.findById(idEmprego);
+        if (empregoEncontrada.isEmpty()) {
+            throw new EmpregoNaoEncontradoException("Emprego não encontrada.");
+        }
+
+        Artefato artefato = new Artefato(empregoEncontrada.get().getArtefato());
+        artefato.setAtivo(false);
+        ArtefatoInactiveRequest artefatoInactiveRequest = new ArtefatoInactiveRequest(artefato);
+        artefatoService.desativarArtefato(empregoEncontrada.get().getIdArtefato(), artefatoInactiveRequest);
+
+        return ResponseEntity.ok().build();
+    }
 }

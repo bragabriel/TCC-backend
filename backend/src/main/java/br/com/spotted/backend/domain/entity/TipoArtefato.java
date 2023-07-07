@@ -3,7 +3,7 @@ package br.com.spotted.backend.domain.entity;
 public enum TipoArtefato {
 
     ALIMENTO,
-    ESTAGIO,
+    EMPREGO,
     FESTA,
     MORADIA,
     OBJETO,
