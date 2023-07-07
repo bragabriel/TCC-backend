@@ -8,11 +8,11 @@ import javax.validation.constraints.NotNull;
 @Data
 public class MoradiaUpdateRequest {
 
-    @NotEmpty(message = "O campo título é obrigatório!")
-    private String tituloMoradia;
+    @NotEmpty(message = "Campo nome é obrigatório!")
+    private String tituloArtefato;
 
-    @NotEmpty(message = "O campo descrição é obrigatório!")
-    private String descricaoMoradia;
+    @NotEmpty(message = "Campo 'descrição' é obrigatório!")
+    private String descricaoArtefato;
 
     @NotEmpty(message = "O campo localização é obrigatório!")
     private String localizacaoMoradia;
@@ -23,10 +23,10 @@ public class MoradiaUpdateRequest {
     @NotNull(message = "O campo quantidade de moradores atuais é obrigatório!")
     private Integer qtdMoradoresAtuaisMoradia;
 
-    @NotEmpty(message = "O campo preço total do aluguel é obrigatório!")
+    @NotNull(message = "O campo preço total do aluguel é obrigatório!")
     private Double precoAluguelTotalMoradia;
 
-    @NotEmpty(message = "O campo preço do aluguel por pessoa é obrigatório!")
+    @NotNull(message = "O campo preço do aluguel por pessoa é obrigatório!")
     private Double precoAluguelPorPessoaMoradia;
 
     @NotEmpty(message = "O campo vaga garagem é obrigatório!")

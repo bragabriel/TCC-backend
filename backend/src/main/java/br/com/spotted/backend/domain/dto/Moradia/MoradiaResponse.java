@@ -28,9 +28,9 @@ public class MoradiaResponse {
 
     private String animaisEstimacaoMoradia;
 
-    private String artefato_titulo;
+    private String tituloArtefato;
 
-    private String artefato_descricao;
+    private String descricaoArtefato;
 
     public MoradiaResponse(Moradia moradia) {
         this.idArtefato = moradia.getIdArtefato();
@@ -41,7 +41,7 @@ public class MoradiaResponse {
         this.precoAluguelPorPessoaMoradia = moradia.getPrecoAluguelPorPessoaMoradia();
         this.vagaGaragemMoradia = moradia.getVagaGaragemMoradia();
         this.animaisEstimacaoMoradia = moradia.getAnimaisEstimacaoMoradia();
-        this.artefato_titulo = moradia.getArtefato().getTituloArtefato();
-        this.artefato_descricao = moradia.getArtefato().getDescricaoArtefato();
+        this.tituloArtefato = moradia.getArtefato().getTituloArtefato();
+        this.descricaoArtefato = moradia.getArtefato().getDescricaoArtefato();
     }
 }

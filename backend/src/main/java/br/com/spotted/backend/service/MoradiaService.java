@@ -1,17 +1,26 @@
 package br.com.spotted.backend.service;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
+import br.com.spotted.backend.domain.dto.Moradia.MoradiaCreateRequest;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaResponse;
+import br.com.spotted.backend.domain.dto.Moradia.MoradiaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Moradia;
+import br.com.spotted.backend.domain.entity.Artefato;
+import br.com.spotted.backend.exception.MoradiaNotFoundException;
 import br.com.spotted.backend.repository.MoradiaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -48,99 +57,88 @@ public class MoradiaService {
         return new ResponseBase<>(moradiaResponse);
     }
 
-//    public ResponseBase<MoradiaResponse> cadastrar(MoradiaCreateRequest novo) {
-//
-//        //Cadastrando o artefato
-//        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
-//
-//        //Cadastrando o Alimento
-//        Artefato artefato = new Artefato();
-//        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-//        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
-//        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
-//        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
-//        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
-//        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
-//        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
-//
-//        Moradia modeloDb = new Moradia();
-//        modeloDb.setLocalizacaoMoradia(novo.getLocalizacaoMoradia());
-//        modeloDb.setQtdMoradoresAtuaisMoradia(novo.getQtdMoradoresAtuaisMoradia());
-//        modeloDb.setQtdMoradoresPermitidoMoradia(novo.getQtdMoradoresPermitidoMoradia());
-//        modeloDb.setPrecoAluguelTotalMoradia(novo.getPrecoAluguelTotalMoradia());
-//        modeloDb.setPrecoAluguelPorPessoaMoradia(novo.getPrecoAluguelPorPessoaMoradia());
-//        modeloDb.setVagaGaragemMoradia(novo.getVagaGaragemMoradia());
-//        modeloDb.setAnimaisEstimacaoMoradia(novo.getAnimaisEstimacaoMoradia());
-//        modeloDb.setArtefato(artefato);
-//
-//        //Salvando
-//        Moradia moradiaSalvo = moradiaRepository.save(modeloDb);
-//
-//        // Mmoradiaia de entidade para dto
-//        MoradiaResponse moradiaResponse = new MoradiaResponse(moradiaSalvo);
-//        return new ResponseBase<>(moradiaResponse);
-//    }
+    public ResponseBase<MoradiaResponse> cadastrar(MoradiaCreateRequest novo) {
 
-//    public MoradiaResponse atualizarMoradia(Long idMoradia, MoradiaUpdateRequest moradiaUpdateRequest) {
-//
-//        var moradiaEncontrado = moradiaRepository.findById(idMoradia);
-//
-//        if (moradiaEncontrado.isEmpty()) {
-//            throw new MoradiaNotFoundException("Moradia não encontrado.");
-//        }
-//
-//        var moradia = moradiaEncontrado.get();
-//
-//        moradia.setTituloMoradia(moradiaUpdateRequest.getTituloMoradia());
-//        moradia.setDescricaoMoradia(moradiaUpdateRequest.getDescricaoMoradia());
-//        moradia.setQtdMoradoresAtuaisMoradia(moradiaUpdateRequest.getQtdMoradoresAtuaisMoradia());
-//        moradia.setQtdMoradoresPermitidoMoradia(moradiaUpdateRequest.getQtdMoradoresPermitidoMoradia());
-//        moradia.setPrecoAluguelTotalMoradia(moradiaUpdateRequest.getPrecoAluguelTotalMoradia());
-//        moradia.setPrecoAluguelPorPessoaMoradia(moradiaUpdateRequest.getPrecoAluguelPorPessoaMoradia());
-//        moradia.setVagaGaragemMoradia(moradiaUpdateRequest.getVagaGaragemMoradia());
-//        moradia.setAnimaisEstimacaoMoradia(moradiaUpdateRequest.getAnimaisEstimacaoMoradia());
-//
-//        var moradiaSalvo = moradiaRepository.save(moradia);
-//
-//        return new MoradiaResponse(
-//                moradia.getIdMoradia(),
-//                moradia.getTituloMoradia(),
-//                moradia.getDescricaoMoradia(),
-//                moradia.getLocalizacaoMoradia(),
-//                moradia.getQtdMoradoresAtuaisMoradia(),
-//                moradia.getQtdMoradoresPermitidoMoradia(),
-//                moradia.getPrecoAluguelTotalMoradia(),
-//                moradia.getPrecoAluguelPorPessoaMoradia(),
-//                moradia.getVagaGaragemMoradia(),
-//                moradia.getAnimaisEstimacaoMoradia(),
-//                moradia.getListaImagensMoradia(),
-//                moradia.getIdUsuario()
-//        );
-//    }
+        ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
-//    public MoradiaResponse deletar(Long idMoradia) {
-//        var moradiaEncontrado = moradiaRepository.findById(idMoradia);
-//
-//        if (moradiaEncontrado.isEmpty()) {
-//            throw new MoradiaNotFoundException("Apê não encontrado.");
-//        }
-//
-//        var moradia = moradiaEncontrado.get();
-//        moradiaRepository.delete(moradia);
-//
-//        return new MoradiaResponse(
-//                moradia.getIdMoradia(),
-//                moradia.getTituloMoradia(),
-//                moradia.getDescricaoMoradia(),
-//                moradia.getLocalizacaoMoradia(),
-//                moradia.getQtdMoradoresAtuaisMoradia(),
-//                moradia.getQtdMoradoresPermitidoMoradia(),
-//                moradia.getPrecoAluguelTotalMoradia(),
-//                moradia.getPrecoAluguelPorPessoaMoradia(),
-//                moradia.getVagaGaragemMoradia(),
-//                moradia.getAnimaisEstimacaoMoradia(),
-//                moradia.getListaImagensMoradia(),
-//                moradia.getIdUsuario()
-//        );
-//    }
+        Artefato artefato = Artefato.builder()
+                .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
+                .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
+                .tipoArtefato(artefatoSalvo.getObjetoRetorno().getTipoArtefato())
+                .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
+                .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
+                .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())
+                .build();
+
+        Moradia modeloDb = Moradia.builder()
+                .idArtefato(artefatoSalvo.getObjetoRetorno().getIdArtefato())
+                .localizacaoMoradia(novo.getLocalizacaoMoradia())
+                .qtdMoradoresAtuaisMoradia(novo.getQtdMoradoresAtuaisMoradia())
+                .qtdMoradoresPermitidoMoradia(novo.getQtdMoradoresPermitidoMoradia())
+                .precoAluguelTotalMoradia(novo.getPrecoAluguelTotalMoradia())
+                .precoAluguelPorPessoaMoradia(novo.getPrecoAluguelPorPessoaMoradia())
+                .vagaGaragemMoradia(novo.getVagaGaragemMoradia())
+                .animaisEstimacaoMoradia(novo.getAnimaisEstimacaoMoradia())
+                .artefato(artefato)
+                .build();
+
+        Moradia moradiaSalvo = moradiaRepository.save(modeloDb);
+
+        MoradiaResponse moradiaResponse = new MoradiaResponse(moradiaSalvo);
+        return new ResponseBase<>(moradiaResponse);
+    }
+
+    public MoradiaResponse atualizarMoradia(Long idMoradia, MoradiaUpdateRequest moradiaUpdateRequest) {
+
+        Calendar cal = Calendar.getInstance();
+        Date dataAtual = cal.getTime();
+
+        var moradiaEncontrado = moradiaRepository.findById(idMoradia);
+        if (moradiaEncontrado.isEmpty()) {
+            throw new MoradiaNotFoundException("Moradia não encontrado.");
+        }
+
+        Artefato artefato = new Artefato(moradiaEncontrado.get().getArtefato());
+        artefato.setTituloArtefato(moradiaUpdateRequest.getTituloArtefato());
+        artefato.setDescricaoArtefato(moradiaUpdateRequest.getDescricaoArtefato());
+        artefato.setDataAtualizacao(dataAtual);
+
+        var moradia = moradiaEncontrado.get();
+        moradia.setQtdMoradoresAtuaisMoradia(moradiaUpdateRequest.getQtdMoradoresAtuaisMoradia());
+        moradia.setQtdMoradoresPermitidoMoradia(moradiaUpdateRequest.getQtdMoradoresPermitidoMoradia());
+        moradia.setPrecoAluguelTotalMoradia(moradiaUpdateRequest.getPrecoAluguelTotalMoradia());
+        moradia.setPrecoAluguelPorPessoaMoradia(moradiaUpdateRequest.getPrecoAluguelPorPessoaMoradia());
+        moradia.setVagaGaragemMoradia(moradiaUpdateRequest.getVagaGaragemMoradia());
+        moradia.setAnimaisEstimacaoMoradia(moradiaUpdateRequest.getAnimaisEstimacaoMoradia());
+        moradia.setArtefato(artefato);
+       moradiaRepository.save(moradia);
+
+        return new MoradiaResponse(
+                moradia.getIdArtefato(),
+                moradia.getLocalizacaoMoradia(),
+                moradia.getQtdMoradoresAtuaisMoradia(),
+                moradia.getQtdMoradoresPermitidoMoradia(),
+                moradia.getPrecoAluguelTotalMoradia(),
+                moradia.getPrecoAluguelPorPessoaMoradia(),
+                moradia.getVagaGaragemMoradia(),
+                moradia.getAnimaisEstimacaoMoradia(),
+                moradia.getArtefato().getTituloArtefato(),
+                moradia.getArtefato().getDescricaoArtefato()
+        );
+    }
+
+    public ResponseEntity inativarMoradia(Long idMoradia) {
+
+        var moradiaEncontrada = moradiaRepository.findById(idMoradia);
+        if (moradiaEncontrada.isEmpty()) {
+            throw new MoradiaNotFoundException("Moradia não encontrada.");
+        }
+
+        Artefato artefato = new Artefato(moradiaEncontrada.get().getArtefato());
+        artefato.setAtivo(false);
+        ArtefatoInactiveRequest artefatoInactiveRequest = new ArtefatoInactiveRequest(artefato);
+        artefatoService.desativarArtefato(moradiaEncontrada.get().getIdArtefato(), artefatoInactiveRequest);
+
+        return ResponseEntity.ok().build();
+    }
 }
