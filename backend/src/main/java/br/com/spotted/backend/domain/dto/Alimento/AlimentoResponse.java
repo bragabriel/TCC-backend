@@ -24,9 +24,9 @@ public class AlimentoResponse {
 
     private String ofertaAlimento;
 
-    private String artefato_titulo;
+    private String tituloArtefato;
 
-    private String artefato_descricao;
+    private String descricaoArtefato;
 
     //private List<AlimentoImage> listaImagensAlimento;
 
@@ -38,7 +38,7 @@ public class AlimentoResponse {
         this.unidadeAlimento = alimento.getUnidadeAlimento();
         this.precoAlimento = alimento.getPrecoAlimento();
         this.ofertaAlimento = alimento.getOfertaAlimento();
-        this.artefato_titulo = alimento.getArtefato().getTituloArtefato();
-        this.artefato_descricao = alimento.getArtefato().getDescricaoArtefato();
+        this.tituloArtefato = alimento.getArtefato().getTituloArtefato();
+        this.descricaoArtefato = alimento.getArtefato().getDescricaoArtefato();
     }
 }

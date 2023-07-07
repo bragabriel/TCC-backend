@@ -36,13 +36,13 @@ public class ObjetoController {
         return ResponseEntity.ok(retorno);
     }
 
-    @PostMapping("api/objeto")
-    public ResponseEntity cadastrar(@Valid @RequestBody ObjetoCreateRequest postModel) {
-
-        ResponseBase<ObjetoResponse> retorno = objetoService.cadastrar(postModel);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
-    }
+//    @PostMapping("api/objeto")
+//    public ResponseEntity cadastrar(@Valid @RequestBody ObjetoCreateRequest postModel) {
+//
+//        ResponseBase<ObjetoResponse> retorno = objetoService.cadastrar(postModel);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
+//    }
 
 //    @PutMapping(value = "api/objetoAtualizar/{idObjeto}")
 //    public ResponseEntity<ObjetoResponse> atualizarObjeto(

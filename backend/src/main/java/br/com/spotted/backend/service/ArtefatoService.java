@@ -108,6 +108,9 @@ public class ArtefatoService {
 
     public ArtefatoResponse atualizarArtefato(Long idArtefato, ArtefatoUpdateRequest artefatoUpdateRequest) {
 
+        Calendar cal = Calendar.getInstance();
+        Date dataAtual = cal.getTime();
+
         var artefatoEncontrado = artefatoRepository.findById(idArtefato);
 
         if (artefatoEncontrado.isEmpty()) {
@@ -115,11 +118,10 @@ public class ArtefatoService {
         }
 
         var artefato = artefatoEncontrado.get();
-
         artefato.setTituloArtefato(artefatoUpdateRequest.getTituloArtefato());
         artefato.setDescricaoArtefato(artefatoUpdateRequest.getDescricaoArtefato());
         artefato.setAtivo(artefatoUpdateRequest.getAtivo());
-        artefato.setDataAtualizacao(artefatoUpdateRequest.getDataAtualizacao());
+        artefato.setDataAtualizacao(dataAtual);
 
         artefatoRepository.save(artefato);
 
@@ -130,6 +132,9 @@ public class ArtefatoService {
 
     public ArtefatoResponse desativarArtefato(Long idArtefato, ArtefatoInactiveRequest artefatoInactiveRequest) {
 
+        Calendar cal = Calendar.getInstance();
+        Date dataAtual = cal.getTime();
+
         var artefatoEncontrado = artefatoRepository.findById(idArtefato);
 
         if (artefatoEncontrado.isEmpty()) {
@@ -139,7 +144,7 @@ public class ArtefatoService {
         var artefato = artefatoEncontrado.get();
 
         artefato.setAtivo(artefatoInactiveRequest.getAtivo());
-        artefato.setDataInativo(artefatoInactiveRequest.getDataInativo());
+        artefato.setDataInativo(dataAtual);
 
         artefatoRepository.save(artefato);
 

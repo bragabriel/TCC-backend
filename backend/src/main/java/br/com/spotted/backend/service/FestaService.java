@@ -54,33 +54,33 @@ public class FestaService {
         return new ResponseBase<>(apeResponse);
     }
 
-    public ResponseBase<FestaResponse> cadastrar(FestaCreateRequest novo) {
-
-        //Cadastrando o artefato
-        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
-
-        //Cadastrando o Alimento
-        Artefato artefato = new Artefato();
-        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
-        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
-        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
-        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
-        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
-        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
-
-        Festa modeloDb = new Festa();
-        modeloDb.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-        modeloDb.setLocalizacaoFesta(novo.getLocalizacaoFesta());
-        modeloDb.setArtefato(artefato);
-
-        //Salvando
-        Festa apeSalvo = festaRepository.save(modeloDb);
-
-        // Mapeia de entidade para dto
-        FestaResponse apeResponse = new FestaResponse(apeSalvo);
-        return new ResponseBase<>(apeResponse);
-    }
+//    public ResponseBase<FestaResponse> cadastrar(FestaCreateRequest novo) {
+//
+//        //Cadastrando o artefato
+//        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
+//
+//        //Cadastrando o Alimento
+//        Artefato artefato = new Artefato();
+//        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
+//        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
+//        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
+//        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
+//        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
+//        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
+//        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
+//
+//        Festa modeloDb = new Festa();
+//        modeloDb.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
+//        modeloDb.setLocalizacaoFesta(novo.getLocalizacaoFesta());
+//        modeloDb.setArtefato(artefato);
+//
+//        //Salvando
+//        Festa apeSalvo = festaRepository.save(modeloDb);
+//
+//        // Mapeia de entidade para dto
+//        FestaResponse apeResponse = new FestaResponse(apeSalvo);
+//        return new ResponseBase<>(apeResponse);
+//    }
 
 //    public FestaResponse atualizarFesta(Long idFesta, FestaUpdateRequest festaUpdateRequest) {
 //

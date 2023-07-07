@@ -53,37 +53,37 @@ public class TransporteService {
         return new ResponseBase<>(transporteResponse);
     }
 
-    public ResponseBase<TransporteResponse> cadastrar(TransporteCreateRequest novo) {
-
-        //Cadastrando o artefato
-        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
-
-        //Cadastrando o Alimento
-        Artefato artefato = new Artefato();
-        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
-        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
-        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
-        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
-        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
-        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
-
-        Transporte modeloDb = new Transporte();
-        modeloDb.setInformacoesVeiculoTransporte(novo.getInformacoesVeiculoTransporte());
-        modeloDb.setInformacoesCondutorTransporte(novo.getInformacoesCondutorTransporte());
-        modeloDb.setQtdAssentosPreenchidosTransporte(novo.getQtdAssentosPreenchidosTransporte());
-        modeloDb.setQtdAssentosTotalTransporte(novo.getQtdAssentosTotalTransporte());
-        modeloDb.setCidadeTransporte(novo.getCidadeTransporte());
-        modeloDb.setPeriodoTransporte(novo.getPeriodoTransporte());
-        modeloDb.setArtefato(artefato);
-
-        //Salvando
-        Transporte transporteSalva = transporteRepository.save(modeloDb);
-
-        // Mapeia de entidade para dto
-        TransporteResponse transporteResponse = new TransporteResponse(transporteSalva);
-        return new ResponseBase<>(transporteResponse);
-    }
+//    public ResponseBase<TransporteResponse> cadastrar(TransporteCreateRequest novo) {
+//
+//        //Cadastrando o artefato
+//        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
+//
+//        //Cadastrando o Alimento
+//        Artefato artefato = new Artefato();
+//        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
+//        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
+//        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
+//        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
+//        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
+//        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
+//        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
+//
+//        Transporte modeloDb = new Transporte();
+//        modeloDb.setInformacoesVeiculoTransporte(novo.getInformacoesVeiculoTransporte());
+//        modeloDb.setInformacoesCondutorTransporte(novo.getInformacoesCondutorTransporte());
+//        modeloDb.setQtdAssentosPreenchidosTransporte(novo.getQtdAssentosPreenchidosTransporte());
+//        modeloDb.setQtdAssentosTotalTransporte(novo.getQtdAssentosTotalTransporte());
+//        modeloDb.setCidadeTransporte(novo.getCidadeTransporte());
+//        modeloDb.setPeriodoTransporte(novo.getPeriodoTransporte());
+//        modeloDb.setArtefato(artefato);
+//
+//        //Salvando
+//        Transporte transporteSalva = transporteRepository.save(modeloDb);
+//
+//        // Mapeia de entidade para dto
+//        TransporteResponse transporteResponse = new TransporteResponse(transporteSalva);
+//        return new ResponseBase<>(transporteResponse);
+//    }
 
 //    public TransporteResponse atualizarTransporte(Long idTransporte, TransporteUpdateRequest transporteUpdateRequest){
 //

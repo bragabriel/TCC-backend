@@ -53,36 +53,36 @@ public class EmpregoService {
         return new ResponseBase<>(empregoResponse);
     }
 
-    public ResponseBase<EmpregoResponse> cadastrar(EmpregoCreateRequest novo) {
-
-        //Cadastrando o artefato
-        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
-
-        //Cadastrando o Alimento
-        Artefato artefato = new Artefato();
-        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
-        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
-        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
-        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
-        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
-        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
-
-        Emprego modeloDb = new Emprego();
-        modeloDb.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-        modeloDb.setBeneficiosEmprego(novo.getBeneficiosEstagio());
-        modeloDb.setLocalizacaoEmprego(novo.getLocalizacaoEstagio());
-        modeloDb.setRequisitosEmprego(novo.getRequisitosEstagio());
-        modeloDb.setSalarioEmprego(novo.getSalarioEstagio());
-        modeloDb.setArtefato(artefato);
-
-        //Salvando
-        Emprego estagioSalvo = empregoRepository.save(modeloDb);
-
-        // Mapeia de entidade para dto
-        EmpregoResponse estagioResponse = new EmpregoResponse(estagioSalvo);
-        return new ResponseBase<>(estagioResponse);
-    }
+//    public ResponseBase<EmpregoResponse> cadastrar(EmpregoCreateRequest novo) {
+//
+//        //Cadastrando o artefato
+//        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
+//
+//        //Cadastrando o Alimento
+//        Artefato artefato = new Artefato();
+//        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
+//        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
+//        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
+//        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
+//        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
+//        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
+//        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
+//
+//        Emprego modeloDb = new Emprego();
+//        modeloDb.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
+//        modeloDb.setBeneficiosEmprego(novo.getBeneficiosEstagio());
+//        modeloDb.setLocalizacaoEmprego(novo.getLocalizacaoEstagio());
+//        modeloDb.setRequisitosEmprego(novo.getRequisitosEstagio());
+//        modeloDb.setSalarioEmprego(novo.getSalarioEstagio());
+//        modeloDb.setArtefato(artefato);
+//
+//        //Salvando
+//        Emprego estagioSalvo = empregoRepository.save(modeloDb);
+//
+//        // Mapeia de entidade para dto
+//        EmpregoResponse estagioResponse = new EmpregoResponse(estagioSalvo);
+//        return new ResponseBase<>(estagioResponse);
+//    }
 
 //    public EmpregoResponse atualizarEstagio(Long idEstagio, EmpregoUpdateRequest empregoUpdateRequest){
 //

@@ -3,11 +3,9 @@ package br.com.spotted.backend.controller;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoCreateRequest;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoUpdateRequest;
-import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.service.AlimentoService;
-import br.com.spotted.backend.service.ArtefatoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,28 +23,24 @@ public class AlimentoController {
     @Autowired
     private final AlimentoService alimentoService;
 
-    //Listar Alimentos com paginação
     @GetMapping("api/alimento")
     public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
         ResponseBase<Page<AlimentoResponse>> retorno = alimentoService.pesquisar(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 
-    //Buscar Alimento por Id
     @GetMapping(value = "api/alimento/{idAlimento}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idAlimento) {
         ResponseBase<AlimentoResponse> retorno = alimentoService.pesquisarPorId(idAlimento);
         return ResponseEntity.ok(retorno);
     }
 
-    //Cadastrar Alimento
     @PostMapping("api/alimento")
     public ResponseEntity cadastrar(@Valid @RequestBody AlimentoCreateRequest postModel) {
         ResponseBase<AlimentoResponse> retorno = alimentoService.cadastrar(postModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
     }
 
-    //Atualizar Alimento
     @PutMapping(value = "api/alimentoAtualizar/{idAlimento}")
     public ResponseEntity<AlimentoResponse> atualizarAlimento(
             @PathVariable Long idAlimento,
@@ -56,7 +50,6 @@ public class AlimentoController {
         return ResponseEntity.ok(alimento);
     }
 
-    //Atualizar Alimento
     @PutMapping(value = "api/alimentoInativar/{idAlimento}")
     public ResponseEntity<Void> inativarAlimento(
             @PathVariable Long idAlimento

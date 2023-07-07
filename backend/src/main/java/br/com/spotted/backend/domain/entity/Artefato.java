@@ -2,6 +2,7 @@ package br.com.spotted.backend.domain.entity;
 
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.Date;
 @Table(name="Artefato")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Artefato {
 
     @Id
@@ -70,7 +72,7 @@ public class Artefato {
     //    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     //    private List<AlimentoImage> listaImagensAlimento = new ArrayList<AlimentoImage>();
 
-    public Artefato(ArtefatoResponse artefatoResponse) {
+    public Artefato(Artefato artefatoResponse) {
         this.idArtefato = artefatoResponse.getIdArtefato();
         this.tituloArtefato = artefatoResponse.getTituloArtefato();
         this.descricaoArtefato = artefatoResponse.getDescricaoArtefato();

@@ -36,13 +36,13 @@ public class EstagioController {
         return ResponseEntity.ok(retorno);
     }
 
-    @PostMapping("api/estagio")
-    public ResponseEntity cadastrar(@Valid @RequestBody EmpregoCreateRequest postModel) {
-
-        ResponseBase<EmpregoResponse> retorno = empregoService.cadastrar(postModel);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
-    }
+//    @PostMapping("api/estagio")
+//    public ResponseEntity cadastrar(@Valid @RequestBody EmpregoCreateRequest postModel) {
+//
+//        ResponseBase<EmpregoResponse> retorno = empregoService.cadastrar(postModel);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
+//    }
 
 //    @PutMapping(value = "api/estagioAtualizar/{idEstagio}")
 //    public ResponseEntity<EmpregoResponse> atualizarEstagio(

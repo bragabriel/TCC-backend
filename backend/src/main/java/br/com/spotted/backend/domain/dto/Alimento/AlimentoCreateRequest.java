@@ -1,7 +1,6 @@
 package br.com.spotted.backend.domain.dto.Alimento;
 
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoCreateRequest;
-import br.com.spotted.backend.domain.entity.Artefato;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;

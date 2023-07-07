@@ -36,13 +36,13 @@ public class MoradiaController {
         return ResponseEntity.ok(retorno);
     }
 
-    @PostMapping("api/moradia")
-    public ResponseEntity cadastrar(@Valid @RequestBody MoradiaCreateRequest postModel) {
-
-        ResponseBase<MoradiaResponse> retorno = moradiaService.cadastrar(postModel);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
-    }
+//    @PostMapping("api/moradia")
+//    public ResponseEntity cadastrar(@Valid @RequestBody MoradiaCreateRequest postModel) {
+//
+//        ResponseBase<MoradiaResponse> retorno = moradiaService.cadastrar(postModel);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
+//    }
 
     //    @PutMapping(value = "api/moradiaAtualizar/{idMoradia}")
 //    public ResponseEntity<MoradiaResponse> atualizarMoradia(

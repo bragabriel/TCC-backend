@@ -39,13 +39,13 @@ public class FestaController {
     }
 
     //Cadastrar Festa
-    @PostMapping("api/festa")
-    public ResponseEntity cadastrar(@Valid @RequestBody FestaCreateRequest postModel) {
-
-        ResponseBase<FestaResponse> retorno = festaService.cadastrar(postModel);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
-    }
+//    @PostMapping("api/festa")
+//    public ResponseEntity cadastrar(@Valid @RequestBody FestaCreateRequest postModel) {
+//
+//        ResponseBase<FestaResponse> retorno = festaService.cadastrar(postModel);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
+//    }
 
 //    //Atualizar Festa
 //    @PutMapping(value = "api/festaAtualizar/{idFesta}")

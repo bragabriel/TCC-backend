@@ -19,7 +19,7 @@ import javax.validation.Valid;
 public class ArtefatoController {
     private final ArtefatoService artefatoService;
 
-    @GetMapping("api/artefato")
+    @GetMapping("api/artefato") // fazer um /api/alimento
     public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest, String tipo, Boolean ativo) {
         ResponseBase<Page<ArtefatoResponse>> retorno = artefatoService.pesquisar(searchRequest, tipo, ativo);
         return ResponseEntity.ok(retorno);
@@ -34,6 +34,7 @@ public class ArtefatoController {
     @PostMapping("api/artefato")
     public ResponseEntity cadastrar(@Valid @RequestBody ArtefatoCreateRequest postModel) {
         ResponseBase<ArtefatoResponse> retorno = artefatoService.cadastrar(postModel);
+        //ResponseBase<Artefato> retorno = artefatoService.cadastrar(postModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
     }
 

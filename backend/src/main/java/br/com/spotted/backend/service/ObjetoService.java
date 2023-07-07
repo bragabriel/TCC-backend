@@ -53,33 +53,33 @@ public class ObjetoService {
         return new ResponseBase<>(objetoResponse);
     }
 
-    public ResponseBase<ObjetoResponse> cadastrar(ObjetoCreateRequest novo) {
-
-        //Cadastrando o artefato
-        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
-
-        //Cadastrando o Alimento
-        Artefato artefato = new Artefato();
-        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
-        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
-        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
-        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
-        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
-        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
-
-        Objeto modeloDb = new Objeto();
-        modeloDb.setLocalizacaoAchadoObjeto(novo.getLocalizacaoAchadoObjeto());
-        modeloDb.setLocalizacaoAtualObjeto(novo.getLocalizacaoAtualObjeto());
-        modeloDb.setArtefato(artefato);
-
-        //Salvando
-        Objeto apeSalvo = objetoRepository.save(modeloDb);
-
-        // Mapeia de entidade para dto
-        ObjetoResponse apeResponse = new ObjetoResponse(apeSalvo);
-        return new ResponseBase<>(apeResponse);
-    }
+//    public ResponseBase<ObjetoResponse> cadastrar(ObjetoCreateRequest novo) {
+//
+//        //Cadastrando o artefato
+//        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
+//
+//        //Cadastrando o Alimento
+//        Artefato artefato = new Artefato();
+//        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
+//        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
+//        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
+//        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
+//        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
+//        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
+//        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
+//
+//        Objeto modeloDb = new Objeto();
+//        modeloDb.setLocalizacaoAchadoObjeto(novo.getLocalizacaoAchadoObjeto());
+//        modeloDb.setLocalizacaoAtualObjeto(novo.getLocalizacaoAtualObjeto());
+//        modeloDb.setArtefato(artefato);
+//
+//        //Salvando
+//        Objeto apeSalvo = objetoRepository.save(modeloDb);
+//
+//        // Mapeia de entidade para dto
+//        ObjetoResponse apeResponse = new ObjetoResponse(apeSalvo);
+//        return new ResponseBase<>(apeResponse);
+//    }
 
 //    public ObjetoResponse atualizarObjeto(Long idObjeto, ObjetoUpdateRequest objetoUpdateRequest) {
 //

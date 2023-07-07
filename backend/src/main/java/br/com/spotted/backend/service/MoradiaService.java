@@ -53,38 +53,38 @@ public class MoradiaService {
         return new ResponseBase<>(moradiaResponse);
     }
 
-    public ResponseBase<MoradiaResponse> cadastrar(MoradiaCreateRequest novo) {
-
-        //Cadastrando o artefato
-        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
-
-        //Cadastrando o Alimento
-        Artefato artefato = new Artefato();
-        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
-        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
-        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
-        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
-        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
-        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
-
-        Moradia modeloDb = new Moradia();
-        modeloDb.setLocalizacaoMoradia(novo.getLocalizacaoMoradia());
-        modeloDb.setQtdMoradoresAtuaisMoradia(novo.getQtdMoradoresAtuaisMoradia());
-        modeloDb.setQtdMoradoresPermitidoMoradia(novo.getQtdMoradoresPermitidoMoradia());
-        modeloDb.setPrecoAluguelTotalMoradia(novo.getPrecoAluguelTotalMoradia());
-        modeloDb.setPrecoAluguelPorPessoaMoradia(novo.getPrecoAluguelPorPessoaMoradia());
-        modeloDb.setVagaGaragemMoradia(novo.getVagaGaragemMoradia());
-        modeloDb.setAnimaisEstimacaoMoradia(novo.getAnimaisEstimacaoMoradia());
-        modeloDb.setArtefato(artefato);
-
-        //Salvando
-        Moradia moradiaSalvo = moradiaRepository.save(modeloDb);
-
-        // Mmoradiaia de entidade para dto
-        MoradiaResponse moradiaResponse = new MoradiaResponse(moradiaSalvo);
-        return new ResponseBase<>(moradiaResponse);
-    }
+//    public ResponseBase<MoradiaResponse> cadastrar(MoradiaCreateRequest novo) {
+//
+//        //Cadastrando o artefato
+//        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
+//
+//        //Cadastrando o Alimento
+//        Artefato artefato = new Artefato();
+//        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
+//        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
+//        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
+//        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
+//        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
+//        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
+//        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
+//
+//        Moradia modeloDb = new Moradia();
+//        modeloDb.setLocalizacaoMoradia(novo.getLocalizacaoMoradia());
+//        modeloDb.setQtdMoradoresAtuaisMoradia(novo.getQtdMoradoresAtuaisMoradia());
+//        modeloDb.setQtdMoradoresPermitidoMoradia(novo.getQtdMoradoresPermitidoMoradia());
+//        modeloDb.setPrecoAluguelTotalMoradia(novo.getPrecoAluguelTotalMoradia());
+//        modeloDb.setPrecoAluguelPorPessoaMoradia(novo.getPrecoAluguelPorPessoaMoradia());
+//        modeloDb.setVagaGaragemMoradia(novo.getVagaGaragemMoradia());
+//        modeloDb.setAnimaisEstimacaoMoradia(novo.getAnimaisEstimacaoMoradia());
+//        modeloDb.setArtefato(artefato);
+//
+//        //Salvando
+//        Moradia moradiaSalvo = moradiaRepository.save(modeloDb);
+//
+//        // Mmoradiaia de entidade para dto
+//        MoradiaResponse moradiaResponse = new MoradiaResponse(moradiaSalvo);
+//        return new ResponseBase<>(moradiaResponse);
+//    }
 
 //    public MoradiaResponse atualizarMoradia(Long idMoradia, MoradiaUpdateRequest moradiaUpdateRequest) {
 //

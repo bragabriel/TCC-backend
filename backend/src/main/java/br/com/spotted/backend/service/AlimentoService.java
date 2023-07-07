@@ -5,7 +5,6 @@ import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoUpdateRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
-import br.com.spotted.backend.domain.dto.Artefato.ArtefatoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Alimento;
@@ -31,7 +30,6 @@ public class AlimentoService {
     private final AlimentoRepository alimentoRepository;
     @Autowired
     private final ArtefatoService artefatoService;
-
 
     public ResponseBase<Page<AlimentoResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
 
@@ -62,29 +60,29 @@ public class AlimentoService {
     public ResponseBase<AlimentoResponse> cadastrar(AlimentoCreateRequest novo) {
 
         //Cadastrando o artefato
-        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
+        ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
-        //Cadastrando o Alimento
-        Artefato artefato = new Artefato();
-        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
-        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
-        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
-        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
-        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
-        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
+        Artefato artefato = Artefato.builder()
+                .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
+                .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
+                .tipoArtefato(artefatoSalvo.getObjetoRetorno().getTipoArtefato())
+                .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
+                .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
+                .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())
+                .build();
 
-        Alimento modeloDb = new Alimento();
-        modeloDb.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-        modeloDb.setTipoAlimento(novo.getTipoAlimento());
-        modeloDb.setMarcaAlimento(novo.getMarcaAlimento());
-        modeloDb.setSaborAlimento(novo.getSaborAlimento());
-        modeloDb.setUnidadeAlimento(novo.getUnidadeAlimento());
-        modeloDb.setPrecoAlimento(novo.getPrecoAlimento());
-        modeloDb.setOfertaAlimento(novo.getOfertaAlimento());
-        modeloDb.setArtefato(artefato);
+        Alimento modeloDb = Alimento.builder()
+                .idArtefato(artefatoSalvo.getObjetoRetorno().getIdArtefato())
+                .tipoAlimento(novo.getTipoAlimento())
+                .marcaAlimento(novo.getMarcaAlimento())
+                .saborAlimento(novo.getSaborAlimento())
+                .unidadeAlimento(novo.getUnidadeAlimento())
+                .precoAlimento(novo.getPrecoAlimento())
+                .ofertaAlimento(novo.getOfertaAlimento())
+                .artefato(artefato)
+                .build();
 
-        //Salvando
+        //Cadastrando Alimento
         Alimento alimentoSalvo = alimentoRepository.save(modeloDb);
 
         // Mapeia de entidade para dto
@@ -102,13 +100,10 @@ public class AlimentoService {
             throw new AlimentoNaoEncontradoException("Alimento não encontrada.");
         }
 
-        var artefatoEncontrado = artefatoService.pesquisarPorId(idAlimento);
-        Artefato artefato = new Artefato(artefatoEncontrado.getObjetoRetorno());
+        Artefato artefato = new Artefato(alimentoEncontrada.get().getArtefato());
         artefato.setTituloArtefato(alimentoUpdateRequest.getTituloArtefato());
         artefato.setDescricaoArtefato(alimentoUpdateRequest.getDescricaoArtefato());
         artefato.setDataAtualizacao(dataAtual);
-        ArtefatoUpdateRequest artefatoUpdateRequest = new ArtefatoUpdateRequest(artefato);
-        artefatoService.atualizarArtefato(alimentoEncontrada.get().getIdArtefato(), artefatoUpdateRequest);
 
         var alimento = alimentoEncontrada.get();
         alimento.setTipoAlimento(alimentoUpdateRequest.getTipoAlimento());
@@ -117,6 +112,7 @@ public class AlimentoService {
         alimento.setUnidadeAlimento(alimentoUpdateRequest.getUnidadeAlimento());
         alimento.setPrecoAlimento(alimentoUpdateRequest.getPrecoAlimento());
         alimento.setOfertaAlimento(alimentoUpdateRequest.getOfertaAlimento());
+        alimento.setArtefato(artefato);
         alimentoRepository.save(alimento);
 
         return new AlimentoResponse(
@@ -129,23 +125,17 @@ public class AlimentoService {
                 alimento.getOfertaAlimento(),
                 alimento.getArtefato().getTituloArtefato(),
                 alimento.getArtefato().getDescricaoArtefato()
-                //alimento.getListaImagensAlimento
         );
     }
 
     public ResponseEntity inativarAlimento(Long idAlimento) {
-
-        Calendar cal = Calendar.getInstance();
-        Date dataAtual = cal.getTime();
 
         var alimentoEncontrada = alimentoRepository.findById(idAlimento);
         if (alimentoEncontrada.isEmpty()) {
             throw new AlimentoNaoEncontradoException("Alimento não encontrada.");
         }
 
-        var artefatoEncontrado = artefatoService.pesquisarPorId(idAlimento);
-        Artefato artefato = new Artefato(artefatoEncontrado.getObjetoRetorno());
-        artefato.setDataInativo(dataAtual);
+        Artefato artefato = new Artefato(alimentoEncontrada.get().getArtefato());
         artefato.setAtivo(false);
         ArtefatoInactiveRequest artefatoInactiveRequest = new ArtefatoInactiveRequest(artefato);
         artefatoService.desativarArtefato(alimentoEncontrada.get().getIdArtefato(), artefatoInactiveRequest);

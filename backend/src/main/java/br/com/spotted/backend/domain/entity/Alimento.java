@@ -2,6 +2,7 @@ package br.com.spotted.backend.domain.entity;
 
 import br.com.spotted.backend.service.ArtefatoService;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @Table(name="Alimento")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Alimento{
 
     @Id
