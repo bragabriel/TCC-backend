@@ -1,15 +1,9 @@
 package br.com.spotted.backend.service;
 
-import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
-import br.com.spotted.backend.domain.dto.Objeto.ObjetoCreateRequest;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoResponse;
-import br.com.spotted.backend.domain.dto.Objeto.ObjetoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
-import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.Objeto;
-import br.com.spotted.backend.exception.ObjetoNaoEncontradoException;
-import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
 import br.com.spotted.backend.repository.ObjetoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +80,7 @@ public class ObjetoService {
 //        var objetoEncontrado = objetoRepository.findById(idObjeto);
 //
 //        if (objetoEncontrado.isEmpty()) {
-//            throw new ObjetoNaoEncontradoException("Objeto não encontrado.");
+//            throw new ObjetoNotFoundException("Objeto não encontrado.");
 //        }
 //
 //        var objeto = objetoEncontrado.get();
@@ -113,7 +107,7 @@ public class ObjetoService {
 //        var objetoEncontrado = objetoRepository.findById(idObjeto);
 //
 //        if (objetoEncontrado.isEmpty()) {
-//            throw new ObjetoNaoEncontradoException("Objeto não encontrado.");
+//            throw new ObjetoNotFoundException("Objeto não encontrado.");
 //        }
 //
 //        var objeto = objetoEncontrado.get();

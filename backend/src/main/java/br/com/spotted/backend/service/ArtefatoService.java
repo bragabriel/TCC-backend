@@ -8,8 +8,8 @@ import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.TipoArtefato;
-import br.com.spotted.backend.exception.ArtefatoNaoEncontradoException;
-import br.com.spotted.backend.exception.UsuarioNaoEncontradoException;
+import br.com.spotted.backend.exception.ArtefatoNotFoundException;
+import br.com.spotted.backend.exception.UsuarioNotFoundException;
 import br.com.spotted.backend.repository.ArtefatoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -114,7 +114,7 @@ public class ArtefatoService {
         var artefatoEncontrado = artefatoRepository.findById(idArtefato);
 
         if (artefatoEncontrado.isEmpty()) {
-            throw new ArtefatoNaoEncontradoException("Artefato não encontrado.");
+            throw new ArtefatoNotFoundException("Artefato não encontrado.");
         }
 
         var artefato = artefatoEncontrado.get();
@@ -138,7 +138,7 @@ public class ArtefatoService {
         var artefatoEncontrado = artefatoRepository.findById(idArtefato);
 
         if (artefatoEncontrado.isEmpty()) {
-            throw new ArtefatoNaoEncontradoException("Artefato não encontrado.");
+            throw new ArtefatoNotFoundException("Artefato não encontrado.");
         }
 
         var artefato = artefatoEncontrado.get();
@@ -153,11 +153,11 @@ public class ArtefatoService {
         );
     }
 
-    public ArtefatoResponse deletar(Long idArtefato) throws UsuarioNaoEncontradoException {
+    public ArtefatoResponse deletar(Long idArtefato) throws UsuarioNotFoundException {
         var artefatoEncontrado = artefatoRepository.findById(idArtefato);
 
         if (artefatoEncontrado.isEmpty()) {
-            throw new ArtefatoNaoEncontradoException("Tarefa não encontrada.");
+            throw new ArtefatoNotFoundException("Tarefa não encontrada.");
         }
 
         var artefato = artefatoEncontrado.get();

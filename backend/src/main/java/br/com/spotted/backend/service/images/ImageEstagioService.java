@@ -4,7 +4,7 @@
 //import br.com.spotted.backend.domain.dto.Image.ImageUpdateRequest;
 //import br.com.spotted.backend.domain.dto.ResponseBase;
 //import br.com.spotted.backend.domain.entity.image.EmpregoImage;
-//import br.com.spotted.backend.exception.ImagemNaoEncontradaException;
+//import br.com.spotted.backend.exception.ImagemNotFoundException;
 //import br.com.spotted.backend.repository.images.ImageEstagioRepository;
 //import br.com.spotted.backend.service.EmpregoService;
 //import br.com.spotted.backend.service.StorageService;
@@ -67,7 +67,7 @@
 //        var estagio = estagioService.pesquisarPorId(idItem);
 //
 //        if(estagio.getObjetoRetorno().getListaImagensEstagio().isEmpty()){
-//            throw new ImagemNaoEncontradaException("Este item não tem imagem cadastrada.");
+//            throw new ImagemNotFoundException("Este item não tem imagem cadastrada.");
 //        }
 //
 //        List<ImageEstagioResponse> estagioImageList = new ArrayList<>();

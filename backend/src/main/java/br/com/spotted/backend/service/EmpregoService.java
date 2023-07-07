@@ -9,7 +9,7 @@ import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.Emprego;
-import br.com.spotted.backend.exception.EmpregoNaoEncontradoException;
+import br.com.spotted.backend.exception.EmpregoNotFoundException;
 import br.com.spotted.backend.repository.EmpregoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +92,7 @@ public class EmpregoService {
 
         var empregoEncontrado = empregoRepository.findById(idEmprego);
         if(empregoEncontrado.isEmpty()){
-            throw new EmpregoNaoEncontradoException("Emprego não encontrada.");
+            throw new EmpregoNotFoundException("Emprego não encontrada.");
         }
 
         Artefato artefato = new Artefato(empregoEncontrado.get().getArtefato());
@@ -123,7 +123,7 @@ public class EmpregoService {
 
         var empregoEncontrada = empregoRepository.findById(idEmprego);
         if (empregoEncontrada.isEmpty()) {
-            throw new EmpregoNaoEncontradoException("Emprego não encontrada.");
+            throw new EmpregoNotFoundException("Emprego não encontrada.");
         }
 
         Artefato artefato = new Artefato(empregoEncontrada.get().getArtefato());

@@ -1,14 +1,9 @@
 package br.com.spotted.backend.service;
 
-import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
-import br.com.spotted.backend.domain.dto.Transporte.TransporteCreateRequest;
 import br.com.spotted.backend.domain.dto.Transporte.TransporteResponse;
-import br.com.spotted.backend.domain.dto.Transporte.TransporteUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
-import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.Transporte;
-import br.com.spotted.backend.exception.TransporteNaoEncontradoException;
 import br.com.spotted.backend.repository.TransporteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +85,7 @@ public class TransporteService {
 //        var comidaEncontrada = transporteRepository.findById(idTransporte);
 //
 //        if(comidaEncontrada.isEmpty()){
-//            throw new TransporteNaoEncontradoException("Transporte não encontrado.");
+//            throw new TransporteNotFoundException("Transporte não encontrado.");
 //        }
 //
 //        var transporte = comidaEncontrada.get();
@@ -120,7 +115,7 @@ public class TransporteService {
 //        var transporteEncontrada = transporteRepository.findById(idTransporte);
 //
 //        if (transporteEncontrada.isEmpty()) {
-//            throw new TransporteNaoEncontradoException("Transporte não encontrado.");
+//            throw new TransporteNotFoundException("Transporte não encontrado.");
 //        }
 //
 //        var transporte = transporteEncontrada.get();

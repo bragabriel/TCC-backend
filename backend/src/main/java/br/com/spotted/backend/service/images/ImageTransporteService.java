@@ -4,7 +4,7 @@
 //import br.com.spotted.backend.domain.dto.Image.ImageUpdateRequest;
 //import br.com.spotted.backend.domain.dto.ResponseBase;
 //import br.com.spotted.backend.domain.entity.image.TransporteImage;
-//import br.com.spotted.backend.exception.ImagemNaoEncontradaException;
+//import br.com.spotted.backend.exception.ImagemNotFoundException;
 //import br.com.spotted.backend.repository.images.ImageTransporteRepository;
 //import br.com.spotted.backend.service.TransporteService;
 //import br.com.spotted.backend.service.StorageService;
@@ -67,7 +67,7 @@
 //        var transporte = transporteService.pesquisarPorId(idItem);
 //
 //        if(transporte.getObjetoRetorno().getListaImagensTransporte().isEmpty()){
-//            throw new ImagemNaoEncontradaException("Este item não tem imagem cadastrada.");
+//            throw new ImagemNotFoundException("Este item não tem imagem cadastrada.");
 //        }
 //
 //        List<ImageTransporteResponse> transporteImageList = new ArrayList<>();

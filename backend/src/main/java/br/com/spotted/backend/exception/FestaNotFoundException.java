@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-public class AlimentoNaoEncontradoException extends RuntimeException {
-    public AlimentoNaoEncontradoException(String message) {
+public class FestaNotFoundException extends RuntimeException {
+    public FestaNotFoundException(String message) {
         super(message);
     }
 }

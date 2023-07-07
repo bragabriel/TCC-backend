@@ -9,7 +9,7 @@ import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Alimento;
 import br.com.spotted.backend.domain.entity.Artefato;
-import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
+import br.com.spotted.backend.exception.AlimentoNotFoundException;
 import br.com.spotted.backend.repository.AlimentoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +97,7 @@ public class AlimentoService {
 
         var alimentoEncontrada = alimentoRepository.findById(idAlimento);
         if(alimentoEncontrada.isEmpty()){
-            throw new AlimentoNaoEncontradoException("Alimento não encontrada.");
+            throw new AlimentoNotFoundException("Alimento não encontrada.");
         }
 
         Artefato artefato = new Artefato(alimentoEncontrada.get().getArtefato());
@@ -132,7 +132,7 @@ public class AlimentoService {
 
         var alimentoEncontrada = alimentoRepository.findById(idAlimento);
         if (alimentoEncontrada.isEmpty()) {
-            throw new AlimentoNaoEncontradoException("Alimento não encontrada.");
+            throw new AlimentoNotFoundException("Alimento não encontrada.");
         }
 
         Artefato artefato = new Artefato(alimentoEncontrada.get().getArtefato());

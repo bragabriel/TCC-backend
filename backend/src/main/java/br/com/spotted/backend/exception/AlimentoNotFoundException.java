@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-public class TransporteNaoEncontradoException extends RuntimeException {
-    public TransporteNaoEncontradoException(String message) {
+public class AlimentoNotFoundException extends RuntimeException {
+    public AlimentoNotFoundException(String message) {
         super(message);
     }
 }

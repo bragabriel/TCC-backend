@@ -13,20 +13,16 @@ public class FestaResponse {
 
     private Long idArtefato;
 
-    private String tituloFesta;
-
-    private String descricaoFesta;
-
     private String localizacaoFesta;
 
-    private String artefato_titulo;
+    private String tituloArtefato;
 
-    private String artefato_descricao;
+    private String descricaoArtefato;
 
     public FestaResponse(Festa festa) {
         this.idArtefato = festa.getIdArtefato();
         this.localizacaoFesta = festa.getLocalizacaoFesta();
-        this.artefato_titulo = festa.getArtefato().getTituloArtefato();
-        this.artefato_descricao = festa.getArtefato().getDescricaoArtefato();
+        this.tituloArtefato = festa.getArtefato().getTituloArtefato();
+        this.descricaoArtefato = festa.getArtefato().getDescricaoArtefato();
     }
 }

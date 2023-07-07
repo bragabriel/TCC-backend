@@ -1,14 +1,9 @@
 package br.com.spotted.backend.service;
 
-import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
-import br.com.spotted.backend.domain.dto.Moradia.MoradiaCreateRequest;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaResponse;
-import br.com.spotted.backend.domain.dto.Moradia.MoradiaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
-import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.Moradia;
-import br.com.spotted.backend.exception.MoradiaNaoEncontradaException;
 import br.com.spotted.backend.repository.MoradiaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,7 +86,7 @@ public class MoradiaService {
 //        var moradiaEncontrado = moradiaRepository.findById(idMoradia);
 //
 //        if (moradiaEncontrado.isEmpty()) {
-//            throw new MoradiaNaoEncontradaException("Moradia não encontrado.");
+//            throw new MoradiaNotFoundException("Moradia não encontrado.");
 //        }
 //
 //        var moradia = moradiaEncontrado.get();
@@ -127,7 +122,7 @@ public class MoradiaService {
 //        var moradiaEncontrado = moradiaRepository.findById(idMoradia);
 //
 //        if (moradiaEncontrado.isEmpty()) {
-//            throw new MoradiaNaoEncontradaException("Apê não encontrado.");
+//            throw new MoradiaNotFoundException("Apê não encontrado.");
 //        }
 //
 //        var moradia = moradiaEncontrado.get();

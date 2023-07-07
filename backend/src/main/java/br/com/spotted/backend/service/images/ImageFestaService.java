@@ -4,7 +4,7 @@
 //import br.com.spotted.backend.domain.dto.Image.ImageUpdateRequest;
 //import br.com.spotted.backend.domain.dto.ResponseBase;
 //import br.com.spotted.backend.domain.entity.image.FestaImage;
-//import br.com.spotted.backend.exception.ImagemNaoEncontradaException;
+//import br.com.spotted.backend.exception.ImagemNotFoundException;
 //import br.com.spotted.backend.repository.images.ImageFestaRepository;
 //import br.com.spotted.backend.service.FestaService;
 //import br.com.spotted.backend.service.StorageService;
@@ -67,7 +67,7 @@
 //        var festa = festaService.pesquisarPorId(idItem);
 //
 //        if(festa.getObjetoRetorno().getListaImagensFesta().isEmpty()){
-//            throw new ImagemNaoEncontradaException("Este item não tem imagem cadastrada.");
+//            throw new ImagemNotFoundException("Este item não tem imagem cadastrada.");
 //        }
 //
 //        List<ImageFestaResponse> festaImageList = new ArrayList<>();

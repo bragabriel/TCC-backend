@@ -9,11 +9,10 @@ import br.com.spotted.backend.domain.dto.Usuario.UsuarioResponse;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioUpdateRequest_NomeSobrenome;
 import br.com.spotted.backend.domain.entity.Usuario;
 import br.com.spotted.backend.exception.EmailDuplicadoException;
-import br.com.spotted.backend.exception.UsuarioNaoEncontradoException;
+import br.com.spotted.backend.exception.UsuarioNotFoundException;
 import br.com.spotted.backend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -78,11 +77,11 @@ public class UsuarioService {
         UsuarioResponse usuarioResponse = new UsuarioResponse(usuarioSalvo);
         return new ResponseBase<>(usuarioResponse);
     }
-    public UsuarioResponse deletar(Long idUsuario) throws UsuarioNaoEncontradoException {
+    public UsuarioResponse deletar(Long idUsuario) throws UsuarioNotFoundException {
         var usuarioEncontrado = usuarioRepository.findById(idUsuario);
 
         if (usuarioEncontrado.isEmpty()) {
-            throw new UsuarioNaoEncontradoException("Tarefa não encontrada.");
+            throw new UsuarioNotFoundException("Tarefa não encontrada.");
         }
 
         var usuario = usuarioEncontrado.get();
@@ -101,7 +100,7 @@ public class UsuarioService {
         var retorno = usuarioRepository.login(email, senhaCriptografada);
 
         if (retorno == null) {
-            throw new UsuarioNaoEncontradoException("Usuário ou senha inválida.");
+            throw new UsuarioNotFoundException("Usuário ou senha inválida.");
         }
 
         // Mapeia de entidade para dto
@@ -115,7 +114,7 @@ public class UsuarioService {
         var usuarioEncontrado = usuarioRepository.findById(idUsuario);
 
         if(usuarioEncontrado.isEmpty()){
-            throw new UsuarioNaoEncontradoException("Usuário não encontrado");
+            throw new UsuarioNotFoundException("Usuário não encontrado");
         }
 
         var usuario = usuarioEncontrado.get();

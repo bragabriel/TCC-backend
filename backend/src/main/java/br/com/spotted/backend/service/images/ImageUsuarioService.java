@@ -2,7 +2,7 @@
 //
 //import br.com.spotted.backend.domain.dto.ResponseBase;
 //import br.com.spotted.backend.domain.dto.Usuario.UsuarioResponse;
-//import br.com.spotted.backend.exception.UsuarioNaoEncontradoException;
+//import br.com.spotted.backend.exception.UsuarioNotFoundException;
 //import br.com.spotted.backend.repository.UsuarioRepository;
 //import br.com.spotted.backend.repository.images.ImageMoradiaRepository;
 //import br.com.spotted.backend.service.StorageService;
@@ -40,7 +40,7 @@
 //        var usuarioEncontrado = usuarioRepository.findById(idItem);
 //
 //        if(usuarioEncontrado.isEmpty()){
-//            throw new UsuarioNaoEncontradoException("Usuário não encontrado");
+//            throw new UsuarioNotFoundException("Usuário não encontrado");
 //        }
 //
 //        var usuario = usuarioEncontrado.get();
@@ -76,7 +76,7 @@
 //        var usuarioEncontrado = usuarioRepository.findById(usuarioId);
 //
 //        if (usuarioEncontrado.isEmpty()) {
-//            throw new UsuarioNaoEncontradoException("Usuário não encontrada");
+//            throw new UsuarioNotFoundException("Usuário não encontrada");
 //        }
 //
 //        var usuario = usuarioEncontrado.get();

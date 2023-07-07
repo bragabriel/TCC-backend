@@ -4,7 +4,7 @@
 //import br.com.spotted.backend.domain.dto.Image.ImageUpdateRequest;
 //import br.com.spotted.backend.domain.dto.ResponseBase;
 //import br.com.spotted.backend.domain.entity.image.MoradiaImage;
-//import br.com.spotted.backend.exception.ImagemNaoEncontradaException;
+//import br.com.spotted.backend.exception.ImagemNotFoundException;
 //import br.com.spotted.backend.repository.images.ImageMoradiaRepository;
 //import br.com.spotted.backend.service.MoradiaService;
 //import br.com.spotted.backend.service.StorageService;
@@ -67,7 +67,7 @@
 //        var moradia = moradiaService.pesquisarPorId(idItem);
 //
 //        if(moradia.getObjetoRetorno().getListaImagensMoradia().isEmpty()){
-//            throw new ImagemNaoEncontradaException("Este item não tem imagem cadastrada.");
+//            throw new ImagemNotFoundException("Este item não tem imagem cadastrada.");
 //        }
 //
 //        List<ImageMoradiaResponse> moradiaImageList = new ArrayList<>();

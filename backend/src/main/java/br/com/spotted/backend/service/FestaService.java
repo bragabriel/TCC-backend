@@ -1,23 +1,26 @@
 package br.com.spotted.backend.service;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaCreateRequest;
 import br.com.spotted.backend.domain.dto.Festa.FestaResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
-import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.Festa;
-import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
-import br.com.spotted.backend.exception.FestaNaoEncontradaException;
+import br.com.spotted.backend.domain.entity.Artefato;
+import br.com.spotted.backend.exception.FestaNotFoundException;
 import br.com.spotted.backend.repository.FestaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -54,77 +57,71 @@ public class FestaService {
         return new ResponseBase<>(apeResponse);
     }
 
-//    public ResponseBase<FestaResponse> cadastrar(FestaCreateRequest novo) {
-//
-//        //Cadastrando o artefato
-//        ResponseBase<ArtefatoResponse> idArtefato = artefatoService.cadastrar(novo.getArtefato());
-//
-//        //Cadastrando o Alimento
-//        Artefato artefato = new Artefato();
-//        artefato.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-//        artefato.setTituloArtefato(idArtefato.getObjetoRetorno().getTituloArtefato());
-//        artefato.setDescricaoArtefato(idArtefato.getObjetoRetorno().getDescricaoArtefato());
-//        artefato.setTipoArtefato(idArtefato.getObjetoRetorno().getTipoArtefato());
-//        artefato.setAtivo(idArtefato.getObjetoRetorno().getAtivo());
-//        artefato.setDataCadastro(idArtefato.getObjetoRetorno().getDataCadastro());
-//        artefato.setIdUsuario(idArtefato.getObjetoRetorno().getIdUsuario());
-//
-//        Festa modeloDb = new Festa();
-//        modeloDb.setIdArtefato(idArtefato.getObjetoRetorno().getIdArtefato());
-//        modeloDb.setLocalizacaoFesta(novo.getLocalizacaoFesta());
-//        modeloDb.setArtefato(artefato);
-//
-//        //Salvando
-//        Festa apeSalvo = festaRepository.save(modeloDb);
-//
-//        // Mapeia de entidade para dto
-//        FestaResponse apeResponse = new FestaResponse(apeSalvo);
-//        return new ResponseBase<>(apeResponse);
-//    }
+    public ResponseBase<FestaResponse> cadastrar(FestaCreateRequest novo) {
 
-//    public FestaResponse atualizarFesta(Long idFesta, FestaUpdateRequest festaUpdateRequest) {
-//
-//        var festaEncontrada = festaRepository.findById(idFesta);
-//
-//        if (festaEncontrada.isEmpty()) {
-//            throw new FestaNaoEncontradaException("Festa não encontrada.");
-//        }
-//
-//        var festa = festaEncontrada.get();
-//
-//        festa.setTituloFesta(festaUpdateRequest.getTituloFesta());
-//        festa.setDescricaoFesta(festaUpdateRequest.getDescricaoFesta());
-//        festa.setLocalizacaoFesta(festaUpdateRequest.getLocalizacaoFesta());
-//
-//        var festaSalva = festaRepository.save(festa);
-//
-//        return new FestaResponse(
-//                festa.getIdFesta(),
-//                festa.getTituloFesta(),
-//                festa.getDescricaoFesta(),
-//                festa.getLocalizacaoFesta(),
-//                festa.getListaImagensFesta(),
-//                festa.getIdUsuario()
-//        );
-//    }
+        ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
-//    public FestaResponse deletar(Long idFesta) {
-//        var festaEncontrada = festaRepository.findById(idFesta);
-//
-//        if (festaEncontrada.isEmpty()) {
-//            throw new FestaNaoEncontradaException("Festa não encontrada.");
-//        }
-//
-//        var festa = festaEncontrada.get();
-//        festaRepository.delete(festa);
-//
-//        return new FestaResponse(
-//                festa.getIdFesta(),
-//                festa.getTituloFesta(),
-//                festa.getDescricaoFesta(),
-//                festa.getLocalizacaoFesta(),
-//                festa.getListaImagensFesta(),
-//                festa.getIdUsuario()
-//        );
-//    }
+        Artefato artefato = Artefato.builder()
+                .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
+                .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
+                .tipoArtefato(artefatoSalvo.getObjetoRetorno().getTipoArtefato())
+                .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
+                .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
+                .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())
+                .build();
+
+        Festa modeloDb = Festa.builder()
+                .idArtefato(artefatoSalvo.getObjetoRetorno().getIdArtefato())
+                .localizacaoFesta(novo.getLocalizacaoFesta())
+                .artefato(artefato)
+                .build();
+
+        Festa apeSalvo = festaRepository.save(modeloDb);
+
+        FestaResponse apeResponse = new FestaResponse(apeSalvo);
+        return new ResponseBase<>(apeResponse);
+    }
+
+    public FestaResponse atualizarFesta(Long idFesta, FestaUpdateRequest festaUpdateRequest) {
+
+        Calendar cal = Calendar.getInstance();
+        Date dataAtual = cal.getTime();
+
+        var festaEncontrada = festaRepository.findById(idFesta);
+        if (festaEncontrada.isEmpty()) {
+            throw new FestaNotFoundException("Festa não encontrada.");
+        }
+
+        Artefato artefato = new Artefato(festaEncontrada.get().getArtefato());
+        artefato.setTituloArtefato(festaUpdateRequest.getTituloArtefato());
+        artefato.setDescricaoArtefato(festaUpdateRequest.getDescricaoArtefato());
+        artefato.setDataAtualizacao(dataAtual);
+
+        var festa = festaEncontrada.get();
+        festa.setLocalizacaoFesta(festaUpdateRequest.getLocalizacaoFesta());
+        festa.setArtefato(artefato);
+        festaRepository.save(festa);
+
+        return new FestaResponse(
+                festa.getIdArtefato(),
+                festa.getLocalizacaoFesta(),
+                festa.getArtefato().getTituloArtefato(),
+                festa.getArtefato().getDescricaoArtefato()
+        );
+    }
+
+    public ResponseEntity inativarFesta(Long idFesta) {
+
+        var festaEncontrada = festaRepository.findById(idFesta);
+        if (festaEncontrada.isEmpty()) {
+            throw new FestaNotFoundException("Festa não encontrada.");
+        }
+
+        Artefato artefato = new Artefato(festaEncontrada.get().getArtefato());
+        artefato.setAtivo(false);
+        ArtefatoInactiveRequest artefatoInactiveRequest = new ArtefatoInactiveRequest(artefato);
+        artefatoService.desativarArtefato(festaEncontrada.get().getIdArtefato(), artefatoInactiveRequest);
+
+        return ResponseEntity.ok().build();
+    }
 }

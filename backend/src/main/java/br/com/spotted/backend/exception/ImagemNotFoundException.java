@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-public class ObjetoNaoEncontradoException extends RuntimeException {
-    public ObjetoNaoEncontradoException(String message) {
+public class ImagemNotFoundException extends RuntimeException {
+    public ImagemNotFoundException(String message) {
         super(message);
     }
 }
