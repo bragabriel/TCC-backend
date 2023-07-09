@@ -1,6 +1,5 @@
-package br.com.spotted.backend.domain.entity.image;
+package br.com.spotted.backend.domain.entity;
 
-import br.com.spotted.backend.domain.entity.Artefato;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -8,20 +7,20 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class Image {
+public class Imagem {
 
     @Id
-    @Column(name = "id_image")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idImage;
 
-    @Column(name = "url_imageAlimento")
+    @Column(name = "url")
     private String url;
 
-    @Column(name = "sequence_imageAlimento")
+    @Column(name = "sequence")
     private int sequence;
 
-    @Column(name = "fileName_imageAlimento")
+    @Column(name = "fileName")
     private String fileName;
 
     @Column(name = "id_artefato", nullable = false)

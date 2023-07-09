@@ -1,12 +1,9 @@
 package br.com.spotted.backend.domain.dto.Transporte;
 
 import br.com.spotted.backend.domain.entity.Transporte;
-import br.com.spotted.backend.domain.entity.image.TransporteImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor

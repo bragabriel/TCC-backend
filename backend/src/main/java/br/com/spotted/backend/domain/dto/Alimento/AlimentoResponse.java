@@ -28,7 +28,7 @@ public class AlimentoResponse {
 
     private String descricaoArtefato;
 
-    //private List<Image> listaImagensAlimento;
+    //private List<Imagem> listaImagensAlimento;
 
     public AlimentoResponse(Alimento alimento) {
         this.idArtefato = alimento.getIdArtefato();

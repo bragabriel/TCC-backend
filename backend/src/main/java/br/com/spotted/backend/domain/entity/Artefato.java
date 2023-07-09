@@ -1,7 +1,5 @@
 package br.com.spotted.backend.domain.entity;
 
-import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
-import br.com.spotted.backend.domain.entity.image.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -72,9 +70,9 @@ public class Artefato {
     @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Transporte na tabela Artefato
     private Transporte transporte;
 
-    @OneToMany(mappedBy = "idArtefato", targetEntity = Image.class, orphanRemoval = true)
+    @OneToMany(mappedBy = "idArtefato", targetEntity = Imagem.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<Image> listaImagens = new ArrayList<Image>();;
+    private List<Imagem> listaImagens = new ArrayList<Imagem>();;
 
     public Artefato(Artefato artefatoResponse) {
         this.idArtefato = artefatoResponse.getIdArtefato();
