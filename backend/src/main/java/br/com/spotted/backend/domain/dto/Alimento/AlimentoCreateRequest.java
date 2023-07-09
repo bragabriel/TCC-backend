@@ -1,5 +1,6 @@
 package br.com.spotted.backend.domain.dto.Alimento;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoCreateRequest;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -9,16 +10,16 @@ import javax.validation.constraints.NotNull;
 public class AlimentoCreateRequest {
 
     @NotEmpty
-    private String tituloAlimento;
-
-    @NotEmpty
-    private String descricaoAlimento;
-
-    @NotEmpty
     private String tipoAlimento;
 
     @NotEmpty
     private String marcaAlimento;
+
+    @NotEmpty
+    private String saborAlimento;
+
+    @NotEmpty
+    private String unidadeAlimento;
 
     @NotNull
     private Double precoAlimento;
@@ -27,5 +28,5 @@ public class AlimentoCreateRequest {
     private String ofertaAlimento;
 
     @NotNull
-    private Long idUsuario;
+    private ArtefatoCreateRequest artefato;
 }

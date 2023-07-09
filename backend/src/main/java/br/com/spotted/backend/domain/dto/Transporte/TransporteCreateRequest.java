@@ -1,5 +1,6 @@
 package br.com.spotted.backend.domain.dto.Transporte;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoCreateRequest;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -7,12 +8,6 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class TransporteCreateRequest {
-
-    @NotEmpty
-    private String tituloTransporte;
-
-    @NotEmpty
-    private String descricaoTransporte;
 
     @NotEmpty
     private String informacoesVeiculoTransporte;
@@ -33,5 +28,5 @@ public class TransporteCreateRequest {
     private String periodoTransporte;
 
     @NotNull
-    private Long idUsuario;
+    private ArtefatoCreateRequest artefato;
 }

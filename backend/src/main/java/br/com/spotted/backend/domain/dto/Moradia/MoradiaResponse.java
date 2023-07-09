@@ -2,23 +2,17 @@ package br.com.spotted.backend.domain.dto.Moradia;
 
 
 import br.com.spotted.backend.domain.entity.Moradia;
-import br.com.spotted.backend.domain.entity.image.MoradiaImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class MoradiaResponse {
 
-    private Long idMoradia;
-
-    private String tituloMoradia;
-
-    private String descricaoMoradia;
+    private Long idArtefato;
 
     private String localizacaoMoradia;
 
@@ -34,15 +28,12 @@ public class MoradiaResponse {
 
     private String animaisEstimacaoMoradia;
 
-    private List<MoradiaImage> listaImagensMoradia;
+    private String tituloArtefato;
 
-    private Long idUsuario;
+    private String descricaoArtefato;
 
-    // Usado para mapear criar um DTO usando uma entidade
     public MoradiaResponse(Moradia moradia) {
-        this.idMoradia = moradia.getIdMoradia();
-        this.tituloMoradia = moradia.getTituloMoradia();
-        this.descricaoMoradia = moradia.getDescricaoMoradia();
+        this.idArtefato = moradia.getIdArtefato();
         this.localizacaoMoradia = moradia.getLocalizacaoMoradia();
         this.qtdMoradoresPermitidoMoradia = moradia.getQtdMoradoresPermitidoMoradia();
         this.qtdMoradoresAtuaisMoradia = moradia.getQtdMoradoresAtuaisMoradia();
@@ -50,7 +41,7 @@ public class MoradiaResponse {
         this.precoAluguelPorPessoaMoradia = moradia.getPrecoAluguelPorPessoaMoradia();
         this.vagaGaragemMoradia = moradia.getVagaGaragemMoradia();
         this.animaisEstimacaoMoradia = moradia.getAnimaisEstimacaoMoradia();
-        this.listaImagensMoradia = moradia.getListaImagensMoradia();
-        this.idUsuario = moradia.getIdUsuario();
+        this.tituloArtefato = moradia.getArtefato().getTituloArtefato();
+        this.descricaoArtefato = moradia.getArtefato().getDescricaoArtefato();
     }
 }

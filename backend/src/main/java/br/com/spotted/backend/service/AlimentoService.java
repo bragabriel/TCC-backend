@@ -3,17 +3,24 @@ package br.com.spotted.backend.service;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoCreateRequest;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoUpdateRequest;
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Alimento;
-import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
+import br.com.spotted.backend.domain.entity.Artefato;
+import br.com.spotted.backend.exception.AlimentoNotFoundException;
 import br.com.spotted.backend.repository.AlimentoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -21,7 +28,8 @@ import java.util.Optional;
 public class AlimentoService {
 
     private final AlimentoRepository alimentoRepository;
-    private final UsuarioService usuarioService;
+    @Autowired
+    private final ArtefatoService artefatoService;
 
     public ResponseBase<Page<AlimentoResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
 
@@ -51,77 +59,87 @@ public class AlimentoService {
 
     public ResponseBase<AlimentoResponse> cadastrar(AlimentoCreateRequest novo) {
 
-        Alimento modeloDb = new Alimento();
-        modeloDb.setTituloAlimento(novo.getTituloAlimento());
-        modeloDb.setDescricaoAlimento(novo.getDescricaoAlimento());
-        modeloDb.setTipoAlimento(novo.getTipoAlimento());
-        modeloDb.setMarcaAlimento(novo.getMarcaAlimento());
-        modeloDb.setPrecoAlimento(novo.getPrecoAlimento());
-        modeloDb.setOfertaAlimento(novo.getOfertaAlimento());
-        modeloDb.setIdUsuario(novo.getIdUsuario());
+        //Cadastrando o artefato
+        ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
-        //Validação de usuário no banco de dados
-        usuarioService.pesquisarPorId(novo.getIdUsuario());
+        Artefato artefato = Artefato.builder()
+                .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
+                .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
+                .tipoArtefato(artefatoSalvo.getObjetoRetorno().getTipoArtefato())
+                .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
+                .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
+                .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())
+                .build();
 
-        //Salvando
-        Alimento alimentoSalva = alimentoRepository.save(modeloDb);
+        Alimento modeloDb = Alimento.builder()
+                .idArtefato(artefatoSalvo.getObjetoRetorno().getIdArtefato())
+                .tipoAlimento(novo.getTipoAlimento())
+                .marcaAlimento(novo.getMarcaAlimento())
+                .saborAlimento(novo.getSaborAlimento())
+                .unidadeAlimento(novo.getUnidadeAlimento())
+                .precoAlimento(novo.getPrecoAlimento())
+                .ofertaAlimento(novo.getOfertaAlimento())
+                .artefato(artefato)
+                .build();
+
+        //Cadastrando Alimento
+        Alimento alimentoSalvo = alimentoRepository.save(modeloDb);
 
         // Mapeia de entidade para dto
-        AlimentoResponse alimentoResponse = new AlimentoResponse(alimentoSalva);
+        AlimentoResponse alimentoResponse = new AlimentoResponse(alimentoSalvo);
         return new ResponseBase<>(alimentoResponse);
-    }
-
-    public AlimentoResponse deletar(Long idAlimento) {
-        var alimentoEncontrada = alimentoRepository.findById(idAlimento);
-
-        if (alimentoEncontrada.isEmpty()) {
-            throw new AlimentoNaoEncontradoException("Alimento não encontrada.");
-        }
-
-        var alimento = alimentoEncontrada.get();
-        alimentoRepository.delete(alimento);
-
-        return new AlimentoResponse(
-                alimento.getIdAlimento(),
-                alimento.getTituloAlimento(),
-                alimento.getDescricaoAlimento(),
-                alimento.getTipoAlimento(),
-                alimento.getMarcaAlimento(),
-                alimento.getPrecoAlimento(),
-                alimento.getOfertaAlimento(),
-                alimento.getListaImagensAlimento(),
-                alimento.getIdUsuario()
-        );
     }
 
     public AlimentoResponse atualizarAlimento(Long idAlimento, AlimentoUpdateRequest alimentoUpdateRequest){
 
-        var alimentoEncontrada = alimentoRepository.findById(idAlimento);
+        Calendar cal = Calendar.getInstance();
+        Date dataAtual = cal.getTime();
 
+        var alimentoEncontrada = alimentoRepository.findById(idAlimento);
         if(alimentoEncontrada.isEmpty()){
-            throw new AlimentoNaoEncontradoException("Alimento não encontrada.");
+            throw new AlimentoNotFoundException("Alimento não encontrada.");
         }
 
+        Artefato artefato = new Artefato(alimentoEncontrada.get().getArtefato());
+        artefato.setTituloArtefato(alimentoUpdateRequest.getTituloArtefato());
+        artefato.setDescricaoArtefato(alimentoUpdateRequest.getDescricaoArtefato());
+        artefato.setDataAtualizacao(dataAtual);
+
         var alimento = alimentoEncontrada.get();
-        alimento.setTituloAlimento(alimentoUpdateRequest.getTituloAlimento());
-        alimento.setDescricaoAlimento(alimentoUpdateRequest.getDescricaoAlimento());
         alimento.setTipoAlimento(alimentoUpdateRequest.getTipoAlimento());
         alimento.setMarcaAlimento(alimentoUpdateRequest.getMarcaAlimento());
+        alimento.setSaborAlimento(alimentoUpdateRequest.getSaborAlimento());
+        alimento.setUnidadeAlimento(alimentoUpdateRequest.getUnidadeAlimento());
         alimento.setPrecoAlimento(alimentoUpdateRequest.getPrecoAlimento());
         alimento.setOfertaAlimento(alimentoUpdateRequest.getOfertaAlimento());
-
-        var alimentoSalva = alimentoRepository.save(alimento);
+        alimento.setArtefato(artefato);
+        alimentoRepository.save(alimento);
 
         return new AlimentoResponse(
-                alimento.getIdAlimento(),
-                alimento.getTituloAlimento(),
-                alimento.getDescricaoAlimento(),
+                alimento.getIdArtefato(),
                 alimento.getTipoAlimento(),
                 alimento.getMarcaAlimento(),
+                alimento.getSaborAlimento(),
+                alimento.getUnidadeAlimento(),
                 alimento.getPrecoAlimento(),
                 alimento.getOfertaAlimento(),
-                alimento.getListaImagensAlimento(),
-                alimento.getIdUsuario()
+                alimento.getArtefato().getTituloArtefato(),
+                alimento.getArtefato().getDescricaoArtefato()
         );
+    }
+
+    public ResponseEntity inativarAlimento(Long idAlimento) {
+
+        var alimentoEncontrada = alimentoRepository.findById(idAlimento);
+        if (alimentoEncontrada.isEmpty()) {
+            throw new AlimentoNotFoundException("Alimento não encontrada.");
+        }
+
+        Artefato artefato = new Artefato(alimentoEncontrada.get().getArtefato());
+        artefato.setAtivo(false);
+        ArtefatoInactiveRequest artefatoInactiveRequest = new ArtefatoInactiveRequest(artefato);
+        artefatoService.desativarArtefato(alimentoEncontrada.get().getIdArtefato(), artefatoInactiveRequest);
+
+        return ResponseEntity.ok().build();
     }
 }

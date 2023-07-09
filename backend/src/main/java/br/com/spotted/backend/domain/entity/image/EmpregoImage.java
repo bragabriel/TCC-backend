@@ -1,6 +1,6 @@
 package br.com.spotted.backend.domain.entity.image;
 
-import br.com.spotted.backend.domain.entity.Crush;
+import br.com.spotted.backend.domain.entity.Emprego;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -8,29 +8,29 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class CrushImage {
+public class EmpregoImage {
 
     @Id
-    @Column(name = "id_imageCrush")
+    @Column(name = "id_imageEstagio")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idImage;
 
-    @Column(name = "url_imageCrush")
+    @Column(name = "url_imageEstagio")
     private String url;
 
-    @Column(name = "sequence_imageCrush")
+    @Column(name = "sequence_imageEstagio")
     private int sequence;
 
-    @Column(name = "fileName_imageCrush")
+    @Column(name = "fileName_imageEstagio")
     private String fileName;
 
     //PRODUCT ID, no caso, o id do item que queremos relacionar
-    @Column(name = "id_crush", nullable = false)
-    private Long idCrush;
+    @Column(name = "id_estagio", nullable = false)
+    private Long idEstagio;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_imageCrush", updatable = false, insertable = false) //FK
-    private Crush crush;
+    @JoinColumn(name = "id_imageEstagio", updatable = false, insertable = false) //FK
+    private Emprego emprego;
 
 }

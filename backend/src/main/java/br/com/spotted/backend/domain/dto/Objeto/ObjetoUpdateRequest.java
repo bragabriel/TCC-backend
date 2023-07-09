@@ -8,18 +8,15 @@ import javax.validation.constraints.NotNull;
 @Data
 public class ObjetoUpdateRequest {
 
-    @NotEmpty
-    private String tituloObjeto;
+    @NotEmpty(message = "Campo nome é obrigatório!")
+    private String tituloArtefato;
 
-    @NotEmpty
-    private String descricaoObjeto;
+    @NotEmpty(message = "Campo 'descrição' é obrigatório!")
+    private String descricaoArtefato;
 
     @NotEmpty
     private String localizacaoAchadoObjeto;
 
     @NotEmpty
     private String localizacaoAtualObjeto;
-
-    @NotNull
-    private Long idUsuario;
 }

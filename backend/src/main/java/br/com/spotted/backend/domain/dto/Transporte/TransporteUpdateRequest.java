@@ -7,11 +7,11 @@ import javax.validation.constraints.NotNull;
 @Data
 public class TransporteUpdateRequest {
 
-    @NotEmpty
-    private String tituloTransporte;
+    @NotEmpty(message = "Campo nome é obrigatório!")
+    private String tituloArtefato;
 
-    @NotEmpty
-    private String descricaoTransporte;
+    @NotEmpty(message = "Campo 'descrição' é obrigatório!")
+    private String descricaoArtefato;
 
     @NotEmpty
     private String informacoesVeiculoTransporte;

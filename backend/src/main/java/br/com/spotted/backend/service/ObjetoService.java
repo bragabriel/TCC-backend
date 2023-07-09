@@ -1,20 +1,26 @@
 package br.com.spotted.backend.service;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoCreateRequest;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Objeto;
-import br.com.spotted.backend.exception.ObjetoNaoEncontradoException;
-import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
+import br.com.spotted.backend.domain.entity.Artefato;
+import br.com.spotted.backend.exception.ObjetoNotFoundException;
 import br.com.spotted.backend.repository.ObjetoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -22,7 +28,8 @@ import java.util.Optional;
 public class ObjetoService {
 
     private final ObjetoRepository objetoRepository;
-    private final UsuarioService usuarioService;
+    @Autowired
+    private final ArtefatoService artefatoService;
 
     public ResponseBase<Page<ObjetoResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
 
@@ -52,69 +59,72 @@ public class ObjetoService {
 
     public ResponseBase<ObjetoResponse> cadastrar(ObjetoCreateRequest novo) {
 
-        Objeto modeloDb = new Objeto();
-        modeloDb.setTituloObjeto(novo.getTituloObjeto());
-        modeloDb.setDescricaoObjeto(novo.getDescricaoObjeto());
-        modeloDb.setLocalizacaoAchadoObjeto(novo.getLocalizacaoAchadoObjeto());
-        modeloDb.setLocalizacaoAtualObjeto(novo.getLocalizacaoAtualObjeto());
-        modeloDb.setIdUsuario(novo.getIdUsuario());
+        ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
-        usuarioService.pesquisarPorId(novo.getIdUsuario());
+        Artefato artefato = Artefato.builder()
+                .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
+                .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
+                .tipoArtefato(artefatoSalvo.getObjetoRetorno().getTipoArtefato())
+                .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
+                .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
+                .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())
+                .build();
 
-        //Salvando
+        Objeto modeloDb = Objeto.builder()
+                .idArtefato(artefatoSalvo.getObjetoRetorno().getIdArtefato())
+                .localizacaoAtualObjeto(novo.getLocalizacaoAtualObjeto())
+                .localizacaoAchadoObjeto(novo.getLocalizacaoAchadoObjeto())
+                .artefato(artefato)
+                .build();
+
         Objeto apeSalvo = objetoRepository.save(modeloDb);
 
-        // Mapeia de entidade para dto
         ObjetoResponse apeResponse = new ObjetoResponse(apeSalvo);
         return new ResponseBase<>(apeResponse);
     }
 
-    public ObjetoResponse deletar(Long idObjeto) {
-        var objetoEncontrado = objetoRepository.findById(idObjeto);
+    public ObjetoResponse atualizarObjeto(Long idObjeto, ObjetoUpdateRequest objetoUpdateRequest) {
 
+        Calendar cal = Calendar.getInstance();
+        Date dataAtual = cal.getTime();
+
+        var objetoEncontrado = objetoRepository.findById(idObjeto);
         if (objetoEncontrado.isEmpty()) {
-            throw new ObjetoNaoEncontradoException("Objeto não encontrado.");
+            throw new ObjetoNotFoundException("Objeto não encontrado.");
         }
 
+        Artefato artefato = new Artefato(objetoEncontrado.get().getArtefato());
+        artefato.setTituloArtefato(objetoUpdateRequest.getTituloArtefato());
+        artefato.setDescricaoArtefato(objetoUpdateRequest.getDescricaoArtefato());
+        artefato.setDataAtualizacao(dataAtual);
+
         var objeto = objetoEncontrado.get();
-        objetoRepository.delete(objeto);
+        objeto.setLocalizacaoAchadoObjeto(objetoUpdateRequest.getLocalizacaoAchadoObjeto());
+        objeto.setLocalizacaoAtualObjeto(objetoUpdateRequest.getLocalizacaoAtualObjeto());
+        objeto.setArtefato(artefato);
+        objetoRepository.save(objeto);
 
         return new ObjetoResponse(
-                objeto.getIdObjeto(),
-                objeto.getTituloObjeto(),
-                objeto.getDescricaoObjeto(),
+                objeto.getIdArtefato(),
                 objeto.getLocalizacaoAchadoObjeto(),
                 objeto.getLocalizacaoAtualObjeto(),
-                objeto.getListaImagensObjeto(),
-                objeto.getIdUsuario()
+                objeto.getArtefato().getTituloArtefato(),
+                objeto.getArtefato().getDescricaoArtefato()
         );
     }
 
-    public ObjetoResponse atualizarObjeto(Long idObjeto, ObjetoUpdateRequest objetoUpdateRequest) {
+    public ResponseEntity inativarObjeto(Long idObjeto) {
 
-        var objetoEncontrado = objetoRepository.findById(idObjeto);
-
-        if (objetoEncontrado.isEmpty()) {
-            throw new ObjetoNaoEncontradoException("Objeto não encontrado.");
+        var objetoEncontrada = objetoRepository.findById(idObjeto);
+        if (objetoEncontrada.isEmpty()) {
+            throw new ObjetoNotFoundException("Objeto não encontrada.");
         }
 
-        var objeto = objetoEncontrado.get();
+        Artefato artefato = new Artefato(objetoEncontrada.get().getArtefato());
+        artefato.setAtivo(false);
+        ArtefatoInactiveRequest artefatoInactiveRequest = new ArtefatoInactiveRequest(artefato);
+        artefatoService.desativarArtefato(objetoEncontrada.get().getIdArtefato(), artefatoInactiveRequest);
 
-        objeto.setTituloObjeto(objetoUpdateRequest.getTituloObjeto());
-        objeto.setDescricaoObjeto(objetoUpdateRequest.getDescricaoObjeto());
-        objeto.setLocalizacaoAchadoObjeto(objetoUpdateRequest.getLocalizacaoAchadoObjeto());
-        objeto.setLocalizacaoAtualObjeto(objetoUpdateRequest.getLocalizacaoAtualObjeto());
-
-        var objetoSalvo = objetoRepository.save(objeto);
-
-        return new ObjetoResponse(
-                objeto.getIdObjeto(),
-                objeto.getTituloObjeto(),
-                objeto.getDescricaoObjeto(),
-                objeto.getLocalizacaoAchadoObjeto(),
-                objeto.getLocalizacaoAtualObjeto(),
-                objeto.getListaImagensObjeto(),
-                objeto.getIdUsuario()
-        );
+        return ResponseEntity.ok().build();
     }
 }

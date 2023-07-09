@@ -1,20 +1,26 @@
 package br.com.spotted.backend.service;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaCreateRequest;
 import br.com.spotted.backend.domain.dto.Festa.FestaResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Festa;
-import br.com.spotted.backend.exception.AlimentoNaoEncontradoException;
-import br.com.spotted.backend.exception.FestaNaoEncontradaException;
+import br.com.spotted.backend.domain.entity.Artefato;
+import br.com.spotted.backend.exception.FestaNotFoundException;
 import br.com.spotted.backend.repository.FestaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -22,7 +28,8 @@ import java.util.Optional;
 public class FestaService {
 
     private final FestaRepository festaRepository;
-    private final UsuarioService usuarioService;
+    @Autowired
+    private final ArtefatoService artefatoService;
 
     public ResponseBase<Page<FestaResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
 
@@ -52,65 +59,69 @@ public class FestaService {
 
     public ResponseBase<FestaResponse> cadastrar(FestaCreateRequest novo) {
 
-        Festa modeloDb = new Festa();
-        modeloDb.setTituloFesta(novo.getTituloFesta());
-        modeloDb.setDescricaoFesta(novo.getDescricaoFesta());
-        modeloDb.setLocalizacaoFesta(novo.getLocalizacaoFesta());
-        modeloDb.setIdUsuario(novo.getIdUsuario());
+        ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
-        usuarioService.pesquisarPorId(novo.getIdUsuario());
+        Artefato artefato = Artefato.builder()
+                .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
+                .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
+                .tipoArtefato(artefatoSalvo.getObjetoRetorno().getTipoArtefato())
+                .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
+                .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
+                .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())
+                .build();
 
-        //Salvando
+        Festa modeloDb = Festa.builder()
+                .idArtefato(artefatoSalvo.getObjetoRetorno().getIdArtefato())
+                .localizacaoFesta(novo.getLocalizacaoFesta())
+                .artefato(artefato)
+                .build();
+
         Festa apeSalvo = festaRepository.save(modeloDb);
 
-        // Mapeia de entidade para dto
         FestaResponse apeResponse = new FestaResponse(apeSalvo);
         return new ResponseBase<>(apeResponse);
     }
 
-    public FestaResponse deletar(Long idFesta) {
-        var festaEncontrada = festaRepository.findById(idFesta);
+    public FestaResponse atualizarFesta(Long idFesta, FestaUpdateRequest festaUpdateRequest) {
 
+        Calendar cal = Calendar.getInstance();
+        Date dataAtual = cal.getTime();
+
+        var festaEncontrada = festaRepository.findById(idFesta);
         if (festaEncontrada.isEmpty()) {
-            throw new FestaNaoEncontradaException("Festa não encontrada.");
+            throw new FestaNotFoundException("Festa não encontrada.");
         }
 
+        Artefato artefato = new Artefato(festaEncontrada.get().getArtefato());
+        artefato.setTituloArtefato(festaUpdateRequest.getTituloArtefato());
+        artefato.setDescricaoArtefato(festaUpdateRequest.getDescricaoArtefato());
+        artefato.setDataAtualizacao(dataAtual);
+
         var festa = festaEncontrada.get();
-        festaRepository.delete(festa);
+        festa.setLocalizacaoFesta(festaUpdateRequest.getLocalizacaoFesta());
+        festa.setArtefato(artefato);
+        festaRepository.save(festa);
 
         return new FestaResponse(
-                festa.getIdFesta(),
-                festa.getTituloFesta(),
-                festa.getDescricaoFesta(),
+                festa.getIdArtefato(),
                 festa.getLocalizacaoFesta(),
-                festa.getListaImagensFesta(),
-                festa.getIdUsuario()
+                festa.getArtefato().getTituloArtefato(),
+                festa.getArtefato().getDescricaoArtefato()
         );
     }
 
-    public FestaResponse atualizarFesta(Long idFesta, FestaUpdateRequest festaUpdateRequest) {
+    public ResponseEntity inativarFesta(Long idFesta) {
 
         var festaEncontrada = festaRepository.findById(idFesta);
-
         if (festaEncontrada.isEmpty()) {
-            throw new FestaNaoEncontradaException("Festa não encontrada.");
+            throw new FestaNotFoundException("Festa não encontrada.");
         }
 
-        var festa = festaEncontrada.get();
+        Artefato artefato = new Artefato(festaEncontrada.get().getArtefato());
+        artefato.setAtivo(false);
+        ArtefatoInactiveRequest artefatoInactiveRequest = new ArtefatoInactiveRequest(artefato);
+        artefatoService.desativarArtefato(festaEncontrada.get().getIdArtefato(), artefatoInactiveRequest);
 
-        festa.setTituloFesta(festaUpdateRequest.getTituloFesta());
-        festa.setDescricaoFesta(festaUpdateRequest.getDescricaoFesta());
-        festa.setLocalizacaoFesta(festaUpdateRequest.getLocalizacaoFesta());
-
-        var festaSalva = festaRepository.save(festa);
-
-        return new FestaResponse(
-                festa.getIdFesta(),
-                festa.getTituloFesta(),
-                festa.getDescricaoFesta(),
-                festa.getLocalizacaoFesta(),
-                festa.getListaImagensFesta(),
-                festa.getIdUsuario()
-        );
+        return ResponseEntity.ok().build();
     }
 }

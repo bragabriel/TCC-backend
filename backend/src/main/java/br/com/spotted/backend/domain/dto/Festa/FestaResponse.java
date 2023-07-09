@@ -1,37 +1,28 @@
 package br.com.spotted.backend.domain.dto.Festa;
 
 import br.com.spotted.backend.domain.entity.Festa;
-import br.com.spotted.backend.domain.entity.image.FestaImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class FestaResponse {
 
-
-    private Long idFesta;
-
-    private String tituloFesta;
-
-    private String descricaoFesta;
+    private Long idArtefato;
 
     private String localizacaoFesta;
 
-    private List<FestaImage> listaImagensFesta;
+    private String tituloArtefato;
 
-    private Long idUsuario;
+    private String descricaoArtefato;
 
     public FestaResponse(Festa festa) {
-        this.idFesta = festa.getIdFesta();
-        this.tituloFesta = festa.getTituloFesta();
-        this.descricaoFesta = festa.getDescricaoFesta();
+        this.idArtefato = festa.getIdArtefato();
         this.localizacaoFesta = festa.getLocalizacaoFesta();
-        this.listaImagensFesta = festa.getListaImagensFesta();
-        this.idUsuario = festa.getIdUsuario();
+        this.tituloArtefato = festa.getArtefato().getTituloArtefato();
+        this.descricaoArtefato = festa.getArtefato().getDescricaoArtefato();
     }
 }
