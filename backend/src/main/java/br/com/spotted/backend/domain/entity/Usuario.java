@@ -1,7 +1,5 @@
 package br.com.spotted.backend.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,9 +42,6 @@ public class Usuario {
 
     @Column(name = "url_imageUsuario")
     private String url;
-
-    @Column(name = "sequence_imageUsuario")
-    private Long sequence;
 
     @Column(name = "fileName_imageUsuario")
     private String fileName;

@@ -22,7 +22,6 @@ CREATE TABLE [dbo].[Usuario](
 	[telefone_usuario] [varchar](255) NOT NULL,
 	[dataNascimento_usuario] [date] NOT NULL,
 	[url_imageUsuario] [varchar](255) NULL,
-	[sequence_imageUsuario] [int] NULL,
 	[fileName_imageUsuario] [varchar](255) NULL,
  CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED
 (
@@ -259,4 +258,36 @@ REFERENCES [dbo].[Artefato] ([id_artefato])
 GO
 
 ALTER TABLE [dbo].[Objeto] CHECK CONSTRAINT [FK_Artefato_Objeto]
+GO
+
+
+--TABLE IMAGEM
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[Imagem]    Script Date: 7/8/2023 9:56:37 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Imagem](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[url] [varchar](255) NOT NULL,
+	[sequence] [int] NULL,
+	[fileName] [varchar](255) NOT NULL,
+	[id_artefato] [int] NOT NULL,
+ CONSTRAINT [PK_Imagem] PRIMARY KEY CLUSTERED
+(
+	[id_artefato] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Imagem]  WITH CHECK ADD  CONSTRAINT [FK_Artefato_Imagem] FOREIGN KEY([id_artefato])
+REFERENCES [dbo].[Artefato] ([id_artefato])
+GO
+
+ALTER TABLE [dbo].[Imagem] CHECK CONSTRAINT [FK_Artefato_Imagem]
 GO

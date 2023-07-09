@@ -7,11 +7,13 @@ import br.com.spotted.backend.domain.dto.Moradia.MoradiaResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoResponse;
 import br.com.spotted.backend.domain.dto.Transporte.TransporteResponse;
 import br.com.spotted.backend.domain.entity.Artefato;
+import br.com.spotted.backend.domain.entity.Imagem;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,6 +34,7 @@ public class ArtefatoResponse {
     private MoradiaResponse moradia;
     private ObjetoResponse objeto;
     private TransporteResponse transporte;
+    private List<Imagem> listaImagens;
 
     public ArtefatoResponse(Artefato artefato) {
         this.idArtefato = artefato.getIdArtefato();
@@ -42,6 +45,7 @@ public class ArtefatoResponse {
         this.dataCadastro = artefato.getDataCadastro();
         this.dataAtualizacao = artefato.getDataAtualizacao();
         this.idUsuario = artefato.getIdUsuario();
+        this.listaImagens = artefato.getListaImagens();
 
         if (artefato.getAlimento() != null) {
             this.alimento = new AlimentoResponse(artefato.getAlimento());
