@@ -3,7 +3,7 @@
 //import br.com.spotted.backend.domain.dto.Image.ImageAlimentoResponse;
 //import br.com.spotted.backend.domain.dto.Image.ImageUpdateRequest;
 //import br.com.spotted.backend.domain.dto.ResponseBase;
-//import br.com.spotted.backend.domain.entity.image.AlimentoImage;
+//import br.com.spotted.backend.domain.entity.image.Image;
 //import br.com.spotted.backend.exception.ImagemNotFoundException;
 //import br.com.spotted.backend.repository.images.ImageAlimentoRepository;
 //import br.com.spotted.backend.service.AlimentoService;
@@ -45,7 +45,7 @@
 //        List<ImageAlimentoResponse> comidaImageAlimentoResponseList = new ArrayList<>();
 //
 //        for (int i = 0; i < retorno.size(); i++) {
-//            AlimentoImage alimentoImage = new AlimentoImage();
+//            Image alimentoImage = new Image();
 //
 //            String finalUrl = concatenarUrl(alimentoImage.getUrl());
 //

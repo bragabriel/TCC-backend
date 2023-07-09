@@ -1,6 +1,6 @@
 package br.com.spotted.backend.domain.entity.image;
 
-import br.com.spotted.backend.domain.entity.Alimento;
+import br.com.spotted.backend.domain.entity.Artefato;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -8,10 +8,10 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class AlimentoImage {
+public class Image {
 
     @Id
-    @Column(name = "id_imageAlimento")
+    @Column(name = "id_image")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idImage;
 
@@ -24,12 +24,11 @@ public class AlimentoImage {
     @Column(name = "fileName_imageAlimento")
     private String fileName;
 
-    //PRODUCT ID, no caso, o id do item que queremos relacionar
-    @Column(name = "id_alimento", nullable = false)
-    private Long idAlimento;
+    @Column(name = "id_artefato", nullable = false)
+    private Long idArtefato;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_imageAlimento", updatable = false, insertable = false) //FK
-    private Alimento alimento;
+    @JoinColumn(name = "id_artefato", updatable = false, insertable = false) //FK
+    private Artefato artefato;
 }

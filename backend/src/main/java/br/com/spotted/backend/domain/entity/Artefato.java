@@ -1,13 +1,17 @@
 package br.com.spotted.backend.domain.entity;
 
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
+import br.com.spotted.backend.domain.entity.image.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -68,9 +72,9 @@ public class Artefato {
     @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Transporte na tabela Artefato
     private Transporte transporte;
 
-    //    @OneToMany(mappedBy = "idAlimento", targetEntity = AlimentoImage.class, orphanRemoval = true) //idAlimento relacionamento na outra table
-    //    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    //    private List<AlimentoImage> listaImagensAlimento = new ArrayList<AlimentoImage>();
+    @OneToMany(mappedBy = "idArtefato", targetEntity = Image.class, orphanRemoval = true)
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    private List<Image> listaImagens = new ArrayList<Image>();;
 
     public Artefato(Artefato artefatoResponse) {
         this.idArtefato = artefatoResponse.getIdArtefato();

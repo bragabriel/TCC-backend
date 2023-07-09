@@ -1,6 +1,6 @@
 package br.com.spotted.backend.domain.dto.Image;
 
-import br.com.spotted.backend.domain.entity.image.AlimentoImage;
+import br.com.spotted.backend.domain.entity.image.Image;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,11 +14,11 @@ public class ImageAlimentoResponse {
     private Long idAlimento;
     private String finalUrl;
 
-    public ImageAlimentoResponse(AlimentoImage alimentoImage, String fileName) {
-        this.idImage = alimentoImage.getIdImage();
-        this.localUrl = alimentoImage.getUrl();
-        this.sequence = alimentoImage.getSequence();
-        this.idAlimento = alimentoImage.getIdAlimento();
+    public ImageAlimentoResponse(Image image, String fileName) {
+        this.idImage = image.getIdImage();
+        this.localUrl = image.getUrl();
+        this.sequence = image.getSequence();
+        this.idAlimento = image.getIdAlimento();
         this.finalUrl = fileName;
     }
 }
