@@ -23,10 +23,8 @@ public class UsuarioResponse {
     private String telefoneUsuario;
     private Date dataNascimento;
     private String url;
-    private Long sequence;
     private String fileName;
     private List<Artefato> listaArtefatos;
-
     private List<ArtefatoResponse> listaArtefatosReponse;
 
     // Usado para mapear criar um DTO usando uma entidade
@@ -38,7 +36,6 @@ public class UsuarioResponse {
         this.telefoneUsuario = usuario.getTelefoneUsuario();
         this.dataNascimento = usuario.getDataNascimento();
         this.url = usuario.getUrl();
-        this.sequence = usuario.getSequence();
         this.fileName = usuario.getFileName();
         this.listaArtefatosReponse = usuario.getListaArtefatos().stream()
                 .map(artefato -> new ArtefatoResponse(artefato))
