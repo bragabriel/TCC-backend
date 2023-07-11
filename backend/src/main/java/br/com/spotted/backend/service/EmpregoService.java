@@ -76,6 +76,8 @@ public class EmpregoService {
                 .localizacaoEmprego(novo.getLocalizacaoEmprego())
                 .requisitosEmprego(novo.getRequisitosEmprego())
                 .salarioEmprego(novo.getSalarioEmprego())
+                .contatoEmprego(novo.getContatoEmprego())
+                .linkVagaEmprego(novo.getLinkVagaEmprego())
                 .artefato(artefato)
                 .build();
 
@@ -105,6 +107,8 @@ public class EmpregoService {
         emprego.setLocalizacaoEmprego(empregoUpdateRequest.getLocalizacaoEmprego());
         emprego.setRequisitosEmprego(empregoUpdateRequest.getRequisitosEmprego());
         emprego.setSalarioEmprego(empregoUpdateRequest.getSalarioEmprego());
+        emprego.setContatoEmprego(empregoUpdateRequest.getContatoEmprego());
+        emprego.setLinkVagaEmprego(empregoUpdateRequest.getLinkVagaEmprego());
         emprego.setArtefato(artefato);
         empregoRepository.save(emprego);
 
@@ -114,6 +118,8 @@ public class EmpregoService {
                 emprego.getRequisitosEmprego(),
                 emprego.getSalarioEmprego(),
                 emprego.getBeneficiosEmprego(),
+                emprego.getContatoEmprego(),
+                emprego.getLinkVagaEmprego(),
                 emprego.getArtefato().getTituloArtefato(),
                 emprego.getArtefato().getDescricaoArtefato()
         );
