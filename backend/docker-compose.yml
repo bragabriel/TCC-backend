@@ -6,7 +6,6 @@ services:
       - SERVICES=s3
       - DOCKER_HOST=unix:///var/run/docker.sock
       - DATA_DIR=/tmp/localstack/data
-
     ports:
       - "4566:4566" # s3
     volumes:
@@ -19,15 +18,10 @@ services:
       - SA_PASSWORD=TCCgh100  #user: sa
       - ACCEPT_EULA=Y
     ports:
-      - "5432:1433"
-    networks:
-      - mynetwork
+      - "1433:1433"
     volumes:
       - sqlserver:/var/opt/mssql
     container_name: db_tcc
-
-networks:
-  mynetwork:
 
 volumes:
   sqlserver:
