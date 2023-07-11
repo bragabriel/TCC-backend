@@ -31,6 +31,12 @@ public class Emprego {
     @Column(name = "beneficios_emprego")
     private String beneficiosEmprego;
 
+    @Column(name = "contato_emprego")
+    private String contatoEmprego;
+
+    @Column(name = "linkVaga_emprego")
+    private String linkVagaEmprego;
+
     @MapsId
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //Um emprego pode ter 1-1 artefato
     @JoinColumn(name = "id_artefato")

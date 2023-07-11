@@ -24,4 +24,10 @@ public class EmpregoUpdateRequest {
 
     @NotEmpty
     private String beneficiosEmprego;
+
+    @NotEmpty
+    private String contatoEmprego;
+
+    @NotEmpty
+    private String linkVagaEmprego;
 }

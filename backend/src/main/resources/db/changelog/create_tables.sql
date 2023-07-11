@@ -174,7 +174,7 @@ GO
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Emprego]    Script Date: 7/3/2023 9:07:47 PM ******/
+/****** Object:  Table [dbo].[Emprego]    Script Date: 7/11/2023 8:28:49 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -187,6 +187,8 @@ CREATE TABLE [dbo].[Emprego](
 	[requisitos_emprego] [varchar](255) NULL,
 	[beneficios_emprego] [varchar](255) NULL,
 	[salario_emprego] [float] NULL,
+	[contato_emprego] [varchar](255) NULL,
+	[linkVaga_emprego] [varchar](255) NULL,
  CONSTRAINT [PK_Emprego] PRIMARY KEY CLUSTERED
 (
 	[id_artefato] ASC

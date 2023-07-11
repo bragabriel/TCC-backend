@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,13 +12,17 @@ public class EmpregoResponse {
 
     private Long idArtefato;
 
-    private String localizacaoEstagio;
+    private String localizacaoEmprego;
 
-    private String requisitosEstagio;
+    private String requisitosEmprego;
 
-    private Integer salarioEstagio;
+    private Integer salarioEmprego;
 
-    private String beneficiosEstagio;
+    private String beneficiosEmprego;
+
+    private String contatoEmprego;
+
+    private String linkVagaEmprego;
 
     private String tituloArtefato;
 
@@ -29,9 +32,11 @@ public class EmpregoResponse {
         this.idArtefato = emprego.getIdArtefato();
         this.tituloArtefato = emprego.getArtefato().getTituloArtefato();
         this.descricaoArtefato = emprego.getArtefato().getDescricaoArtefato();
-        this.localizacaoEstagio = emprego.getLocalizacaoEmprego();
-        this.requisitosEstagio = emprego.getRequisitosEmprego();
-        this.salarioEstagio = emprego.getSalarioEmprego();
-        this.beneficiosEstagio = emprego.getBeneficiosEmprego();
+        this.localizacaoEmprego = emprego.getLocalizacaoEmprego();
+        this.requisitosEmprego = emprego.getRequisitosEmprego();
+        this.salarioEmprego = emprego.getSalarioEmprego();
+        this.beneficiosEmprego = emprego.getBeneficiosEmprego();
+        this.contatoEmprego = emprego.getContatoEmprego();
+        this.linkVagaEmprego = emprego.getLinkVagaEmprego();
     }
 }
