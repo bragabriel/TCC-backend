@@ -1,11 +1,7 @@
 version: '3'
 
-networks:
-  backend_application:
-
 services:
   backend:
-    #image:
     build:
       context: ./
       dockerfile: Dockerfile
@@ -17,8 +13,8 @@ services:
       - localstack
     networks:
       - backend_application
-    links:
-      - sqlserver
+    #links:
+      #- sqlserver
 
   localstack:
     image: localstack/localstack:0.14.5
@@ -47,21 +43,15 @@ services:
     networks:
       - backend_application
 
-  sqlserver_new:
-    image: mcr.microsoft.com/mssql/server
-    environment:
-      - SA_PASSWORD=TCCgh100
-      - ACCEPT_EULA=Y
-    ports:
-      - "1434:1433"
-    networks:
-      - backend_application
-    volumes:
-      - sqlserver_new:/var/opt/mssql
-    container_name: db_tcc_new
+networks:
+  backend_application:
+    driver: bridge
+#    ipam:
+#      driver: bridge
+#      config:
+#        - subnet: 172.19.0.0/16
 
 volumes:
   sqlserver:
   localstack:
   backend:
-  sqlserver_new:
