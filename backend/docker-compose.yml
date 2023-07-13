@@ -6,7 +6,6 @@ networks:
 services:
   backend:
     #image:
-    #container_name: backend
     build:
       context: ./
       dockerfile: Dockerfile
@@ -31,7 +30,6 @@ services:
       - "4566:4566" # s3
     volumes:
       - localstack:/tmp/localstack
-    #container_name: aws_tcc
     networks:
       - backend_application
 
@@ -46,11 +44,24 @@ services:
       - "1433:1433" # banco
     volumes:
       - sqlserver:/var/opt/mssql
-    #container_name: db_tcc
     networks:
       - backend_application
+
+  sqlserver_new:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      - SA_PASSWORD=TCCgh100
+      - ACCEPT_EULA=Y
+    ports:
+      - "1434:1433"
+    networks:
+      - backend_application
+    volumes:
+      - sqlserver_new:/var/opt/mssql
+    container_name: db_tcc_new
 
 volumes:
   sqlserver:
   localstack:
   backend:
+  sqlserver_new:
