@@ -5,8 +5,7 @@ WORKDIR /app
 # Copy project and build layers
 COPY src ./src
 COPY pom.xml ./
-RUN mvn clean package
-#RUN mvn install -DskipTests
+RUN mvn install -DskipTests
 
 # Stage 2: Create the application image
 FROM amazoncorretto:17

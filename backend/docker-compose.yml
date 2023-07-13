@@ -1,21 +1,6 @@
 version: '3'
 
 services:
-  backend:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080" # backend
-      - "5005:5005"
-    depends_on:
-      - sqlserver
-      - localstack
-    networks:
-      - backend_application
-    #links:
-      #- sqlserver
-
   localstack:
     image: localstack/localstack:0.14.5
     environment:
@@ -36,6 +21,11 @@ services:
       - ACCEPT_EULA=Y
       - MYSQL_DATABASE=TCC
       - MYSQL_USER=sa
+    healthcheck:
+      test: [ "CMD-SHELL", "sleep 15 && sqlcmd -U sa -P TCCgh100 -Q 'SELECT 1' || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     ports:
       - "1433:1433" # banco
     volumes:
@@ -43,13 +33,22 @@ services:
     networks:
       - backend_application
 
+  backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" # backend
+      - "5005:5005"
+    depends_on:
+      - sqlserver
+      - localstack
+    networks:
+      - backend_application
+
 networks:
   backend_application:
     driver: bridge
-#    ipam:
-#      driver: bridge
-#      config:
-#        - subnet: 172.19.0.0/16
 
 volumes:
   sqlserver:
