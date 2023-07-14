@@ -22,7 +22,7 @@ services:
       - MYSQL_DATABASE=TCC
       - MYSQL_USER=sa
     healthcheck:
-      test: [ "CMD-SHELL", "sleep 15 && sqlcmd -U sa -P TCCgh100 -Q 'SELECT 1' || exit 1" ]
+      test: [ "CMD-SHELL", "sqlcmd -U sa -P TCCgh100 -Q 'SELECT 1' || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 3
