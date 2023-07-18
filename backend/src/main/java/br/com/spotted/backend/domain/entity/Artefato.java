@@ -74,13 +74,13 @@ public class Artefato {
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private List<Imagem> listaImagens = new ArrayList<Imagem>();;
 
-    public Artefato(Artefato artefatoResponse) {
-        this.idArtefato = artefatoResponse.getIdArtefato();
-        this.tituloArtefato = artefatoResponse.getTituloArtefato();
-        this.descricaoArtefato = artefatoResponse.getDescricaoArtefato();
-        this.tipoArtefato = artefatoResponse.getTipoArtefato();
-        this.ativo = artefatoResponse.getAtivo();
-        this.dataCadastro = artefatoResponse.getDataCadastro();
-        this.idUsuario = artefatoResponse.getIdUsuario();
+    public Artefato(Artefato artefato) {
+        this.idArtefato = artefato.getIdArtefato();
+        this.tituloArtefato = artefato.getTituloArtefato();
+        this.descricaoArtefato = artefato.getDescricaoArtefato();
+        this.tipoArtefato = artefato.getTipoArtefato();
+        this.ativo = artefato.getAtivo();
+        this.dataCadastro = artefato.getDataCadastro();
+        this.idUsuario = artefato.getIdUsuario();
     }
 }

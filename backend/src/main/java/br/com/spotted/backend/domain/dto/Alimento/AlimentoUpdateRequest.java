@@ -15,7 +15,7 @@ public class AlimentoUpdateRequest {
     private String descricaoArtefato;
 
     @NotEmpty(message = "Campo 'tipo' é obrigatório!")
-    private String tipoAlimento;
+    private TipoAlimento tipoAlimento;
 
     @NotEmpty(message = "Campo 'marca' é obrigatório!")
     private String marcaAlimento;
