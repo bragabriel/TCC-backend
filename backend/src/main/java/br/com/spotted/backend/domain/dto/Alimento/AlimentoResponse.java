@@ -1,6 +1,8 @@
 package br.com.spotted.backend.domain.dto.Alimento;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoIndividualResponse;
 import br.com.spotted.backend.domain.entity.Alimento;
+import br.com.spotted.backend.domain.entity.Imagem;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AlimentoResponse {
+public class AlimentoResponse extends ArtefatoIndividualResponse {
 
     private Long idArtefato;
 
@@ -24,13 +26,9 @@ public class AlimentoResponse {
 
     private String ofertaAlimento;
 
-    private String tituloArtefato;
-
-    private String descricaoArtefato;
-
-    //private List<Imagem> listaImagensAlimento;
 
     public AlimentoResponse(Alimento alimento) {
+        super();
         this.idArtefato = alimento.getIdArtefato();
         this.tipoAlimento = alimento.getTipoAlimento();
         this.marcaAlimento = alimento.getMarcaAlimento();
@@ -38,7 +36,14 @@ public class AlimentoResponse {
         this.unidadeAlimento = alimento.getUnidadeAlimento();
         this.precoAlimento = alimento.getPrecoAlimento();
         this.ofertaAlimento = alimento.getOfertaAlimento();
-        this.tituloArtefato = alimento.getArtefato().getTituloArtefato();
-        this.descricaoArtefato = alimento.getArtefato().getDescricaoArtefato();
+
+        this.setTituloArtefato(alimento.getArtefato().getTituloArtefato());
+        this.setDescricaoArtefato(alimento.getArtefato().getDescricaoArtefato());
+        this.setTipoAlimento(alimento.getArtefato().getTipoArtefato());
+        this.setAtivo(alimento.getArtefato().getAtivo());
+        this.setDataCadastro(alimento.getArtefato().getDataCadastro());
+        this.setDataAtualizacao(alimento.getArtefato().getDataAtualizacao());
+        this.setIdUsuario(alimento.getArtefato().getIdUsuario());
+        this.setListaImagens(alimento.getArtefato().getListaImagens());
     }
 }

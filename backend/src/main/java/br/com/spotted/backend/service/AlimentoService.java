@@ -73,7 +73,7 @@ public class AlimentoService {
 
         Alimento modeloDb = Alimento.builder()
                 .idArtefato(artefatoSalvo.getObjetoRetorno().getIdArtefato())
-                .tipoAlimento(novo.getTipoAlimento())
+                .tipoAlimento(novo.getTipoAlimento().toString())
                 .marcaAlimento(novo.getMarcaAlimento())
                 .saborAlimento(novo.getSaborAlimento())
                 .unidadeAlimento(novo.getUnidadeAlimento())
@@ -106,7 +106,7 @@ public class AlimentoService {
         artefato.setDataAtualizacao(dataAtual);
 
         var alimento = alimentoEncontrada.get();
-        alimento.setTipoAlimento(alimentoUpdateRequest.getTipoAlimento());
+        alimento.setTipoAlimento(alimentoUpdateRequest.getTipoAlimento().toString());
         alimento.setMarcaAlimento(alimentoUpdateRequest.getMarcaAlimento());
         alimento.setSaborAlimento(alimentoUpdateRequest.getSaborAlimento());
         alimento.setUnidadeAlimento(alimentoUpdateRequest.getUnidadeAlimento());
@@ -122,9 +122,7 @@ public class AlimentoService {
                 alimento.getSaborAlimento(),
                 alimento.getUnidadeAlimento(),
                 alimento.getPrecoAlimento(),
-                alimento.getOfertaAlimento(),
-                alimento.getArtefato().getTituloArtefato(),
-                alimento.getArtefato().getDescricaoArtefato()
+                alimento.getOfertaAlimento()
         );
     }
 
