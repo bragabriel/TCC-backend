@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController()
@@ -24,8 +25,14 @@ public class AlimentoController {
     private final AlimentoService alimentoService;
 
     @GetMapping("api/alimento")
-    public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
-        ResponseBase<Page<AlimentoResponse>> retorno = alimentoService.pesquisar(searchRequest);
+    public ResponseEntity<ResponseBase<List<AlimentoResponse>>> pesquisar() {
+        ResponseBase<List<AlimentoResponse>> retorno = alimentoService.pesquisar();
+        return ResponseEntity.ok(retorno);
+    }
+
+    @GetMapping("api/alimentoPaginado")
+    public ResponseEntity pesquisarPaginado(PaginatedSearchRequest searchRequest) {
+        ResponseBase<Page<AlimentoResponse>> retorno = alimentoService.pesquisarPaginado(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 

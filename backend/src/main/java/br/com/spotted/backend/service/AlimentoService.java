@@ -19,9 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +30,18 @@ public class AlimentoService {
     @Autowired
     private final ArtefatoService artefatoService;
 
-    public ResponseBase<Page<AlimentoResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
+    public ResponseBase<List<AlimentoResponse>> pesquisar() {
+        Iterable<Alimento> alimentos = alimentoRepository.findAll();
+        List<AlimentoResponse> alimentoResponses = new ArrayList<>();
+
+        for (Alimento alimento : alimentos) {
+            alimentoResponses.add(new AlimentoResponse(alimento));
+        }
+
+        return new ResponseBase<>(alimentoResponses);
+    }
+
+    public ResponseBase<Page<AlimentoResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
 
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");
