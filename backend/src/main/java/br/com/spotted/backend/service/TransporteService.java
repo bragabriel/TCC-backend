@@ -1,5 +1,6 @@
 package br.com.spotted.backend.service;
 
+import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Transporte.TransporteCreateRequest;
@@ -7,6 +8,7 @@ import br.com.spotted.backend.domain.dto.Transporte.TransporteResponse;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.dto.Transporte.TransporteUpdateRequest;
+import br.com.spotted.backend.domain.entity.Alimento;
 import br.com.spotted.backend.domain.entity.Transporte;
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.exception.TransporteNotFoundException;
@@ -19,9 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +31,18 @@ public class TransporteService {
     @Autowired
     private final ArtefatoService artefatoService;
 
-    public ResponseBase<Page<TransporteResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
+    public ResponseBase<List<TransporteResponse>> pesquisar() {
+        Iterable<Transporte> transportes = transporteRepository.findAll();
+        List<TransporteResponse> transporteResponses = new ArrayList<>();
+
+        for (Transporte transporte : transportes) {
+            transporteResponses.add(new TransporteResponse(transporte));
+        }
+
+        return new ResponseBase<>(transporteResponses);
+    }
+
+    public ResponseBase<Page<TransporteResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
 
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");

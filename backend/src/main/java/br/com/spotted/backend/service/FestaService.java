@@ -1,5 +1,6 @@
 package br.com.spotted.backend.service;
 
+import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaCreateRequest;
@@ -7,6 +8,7 @@ import br.com.spotted.backend.domain.dto.Festa.FestaResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
+import br.com.spotted.backend.domain.entity.Alimento;
 import br.com.spotted.backend.domain.entity.Festa;
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.exception.FestaNotFoundException;
@@ -19,9 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +31,18 @@ public class FestaService {
     @Autowired
     private final ArtefatoService artefatoService;
 
-    public ResponseBase<Page<FestaResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
+    public ResponseBase<List<FestaResponse>> pesquisar() {
+        Iterable<Festa> festas = festaRepository.findAll();
+        List<FestaResponse> festaResponse = new ArrayList<>();
+
+        for (Festa festa : festas) {
+            festaResponse.add(new FestaResponse(festa));
+        }
+
+        return new ResponseBase<>(festaResponse);
+    }
+
+    public ResponseBase<Page<FestaResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
 
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");

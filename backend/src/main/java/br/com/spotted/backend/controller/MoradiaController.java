@@ -1,9 +1,9 @@
 package br.com.spotted.backend.controller;
 
+import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaCreateRequest;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaUpdateRequest;
-import br.com.spotted.backend.domain.dto.Moradia.MoradiaResponse;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.service.MoradiaService;
@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController()
@@ -23,8 +24,14 @@ public class MoradiaController {
     private final MoradiaService moradiaService;
 
     @GetMapping("api/moradia")
-    public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
-        ResponseBase<Page<MoradiaResponse>> retorno = moradiaService.pesquisar(searchRequest);
+    public ResponseEntity<ResponseBase<List<MoradiaResponse>>> pesquisar() {
+        ResponseBase<List<MoradiaResponse>> retorno = moradiaService.pesquisar();
+        return ResponseEntity.ok(retorno);
+    }
+
+    @GetMapping("api/moradiaPaginado")
+    public ResponseEntity pesquisarPaginado(PaginatedSearchRequest searchRequest) {
+        ResponseBase<Page<MoradiaResponse>> retorno = moradiaService.pesquisarPaginado(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 

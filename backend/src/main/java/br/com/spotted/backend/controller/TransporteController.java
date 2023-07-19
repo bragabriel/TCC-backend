@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController()
 @RequiredArgsConstructor
@@ -21,8 +22,14 @@ public class TransporteController {
     private final TransporteService transporteService;
 
     @GetMapping("api/transporte")
+    public ResponseEntity<ResponseBase<List<TransporteResponse>>> pesquisar() {
+        ResponseBase<List<TransporteResponse>> retorno = transporteService.pesquisar();
+        return ResponseEntity.ok(retorno);
+    }
+
+    @GetMapping("api/transportePaginado")
     public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
-        ResponseBase<Page<TransporteResponse>> retorno = transporteService.pesquisar(searchRequest);
+        ResponseBase<Page<TransporteResponse>> retorno = transporteService.pesquisarPaginado(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 

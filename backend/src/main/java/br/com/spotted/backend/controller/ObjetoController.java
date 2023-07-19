@@ -1,10 +1,12 @@
 package br.com.spotted.backend.controller;
 
+import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoCreateRequest;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
+import br.com.spotted.backend.domain.entity.Objeto;
 import br.com.spotted.backend.service.ObjetoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController()
 @RequiredArgsConstructor
@@ -21,8 +24,13 @@ public class ObjetoController {
     private final ObjetoService objetoService;
 
     @GetMapping("api/objeto")
+    public ResponseEntity<ResponseBase<List<ObjetoResponse>>> pesquisar() {
+        ResponseBase<List<ObjetoResponse>> retorno = objetoService.pesquisar();
+        return ResponseEntity.ok(retorno);
+    }
+    @GetMapping("api/objetoPaginado")
     public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
-        ResponseBase<Page<ObjetoResponse>> retorno = objetoService.pesquisar(searchRequest);
+        ResponseBase<Page<ObjetoResponse>> retorno = objetoService.pesquisarPaginado(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 
