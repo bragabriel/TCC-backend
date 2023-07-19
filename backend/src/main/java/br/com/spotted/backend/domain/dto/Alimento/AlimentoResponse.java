@@ -2,7 +2,6 @@ package br.com.spotted.backend.domain.dto.Alimento;
 
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoIndividualResponse;
 import br.com.spotted.backend.domain.entity.Alimento;
-import br.com.spotted.backend.domain.entity.Imagem;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,10 +38,16 @@ public class AlimentoResponse extends ArtefatoIndividualResponse {
 
         this.setTituloArtefato(alimento.getArtefato().getTituloArtefato());
         this.setDescricaoArtefato(alimento.getArtefato().getDescricaoArtefato());
-        this.setTipoAlimento(alimento.getArtefato().getTipoArtefato());
+        this.setTipoArtefato(alimento.getArtefato().getTipoArtefato());
         this.setAtivo(alimento.getArtefato().getAtivo());
-        this.setDataCadastro(alimento.getArtefato().getDataCadastro());
-        this.setDataAtualizacao(alimento.getArtefato().getDataAtualizacao());
+        this.setDataCadastro(alimento.getArtefato().getDataCadastro().toString());
+
+        if (alimento.getArtefato() != null && alimento.getArtefato().getDataAtualizacao() != null) {
+            this.setDataAtualizacao(alimento.getArtefato().getDataAtualizacao().toString());
+        } else {
+            this.setDataAtualizacao("");
+        }
+
         this.setIdUsuario(alimento.getArtefato().getIdUsuario());
         this.setListaImagens(alimento.getArtefato().getListaImagens());
     }

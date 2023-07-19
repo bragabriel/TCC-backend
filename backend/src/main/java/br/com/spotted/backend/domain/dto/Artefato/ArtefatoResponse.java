@@ -21,10 +21,6 @@ import java.util.List;
 @Data
 public class ArtefatoResponse {
 
-    private static final String DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-    private static final SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
-
     private Long idArtefato;
     private String tituloArtefato;
     private String descricaoArtefato;
@@ -70,16 +66,5 @@ public class ArtefatoResponse {
         if (artefato.getTransporte() != null) {
             this.transporte = new TransporteResponse(artefato.getTransporte());
         }
-    }
-
-    private String formatDate(Date date) {
-        if (date != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
-            var dateFormated = sdf.format(date);
-
-            return dateFormated;
-        }
-        return null;
     }
 }

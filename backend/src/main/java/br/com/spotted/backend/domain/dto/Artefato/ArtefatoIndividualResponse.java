@@ -2,12 +2,10 @@ package br.com.spotted.backend.domain.dto.Artefato;
 
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.Imagem;
-import br.com.spotted.backend.domain.entity.TipoArtefato;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -20,8 +18,8 @@ public class ArtefatoIndividualResponse {
     private String descricaoArtefato;
     private String tipoArtefato;
     private Boolean ativo;
-    private Date dataCadastro;
-    private Date dataAtualizacao;
+    private String dataCadastro;
+    private String dataAtualizacao;
     private Long idUsuario;
     private List<Imagem> listaImagens;
 
@@ -31,8 +29,8 @@ public class ArtefatoIndividualResponse {
         this.descricaoArtefato = artefato.getDescricaoArtefato();
         this.tipoArtefato = artefato.getTipoArtefato();
         this.ativo = artefato.getAtivo();
-        this.dataCadastro = artefato.getDataCadastro();
-        this.dataAtualizacao = artefato.getDataAtualizacao();
+        this.dataCadastro = artefato.getDataCadastro().toString();
+        this.dataAtualizacao = artefato.getDataAtualizacao().toString();
         this.idUsuario = artefato.getIdUsuario();
         this.listaImagens = artefato.getListaImagens();
     }
