@@ -36,7 +36,7 @@ public class ImageService {
 
     public ResponseBase<List<ImageResponse>> createImage(MultipartFile[] file, Long idItem) throws IOException {
 
-        var comida = artefatoService.pesquisarPorId(idItem);
+        artefatoService.pesquisarPorId(idItem);
 
         var retorno = storageService.uploadFile(file, idItem);
 
@@ -45,7 +45,7 @@ public class ImageService {
         for (int i = 0; i < retorno.size(); i++) {
             Imagem imagem = new Imagem();
 
-            String finalUrl = concatenarUrl(imagem.getUrl());
+            String finalUrl = concatenarUrl(retorno.get(i));
 
             imagem.setIdArtefato(idItem);
             imagem.setSequence(i);
@@ -102,7 +102,7 @@ public class ImageService {
 
         image.setSequence(imageUpdateRequest.getSequence());
 
-        var imagemSalva = imageRepository.save(image);
+        imageRepository.save(image);
 
         String finalUrl = concatenarUrl(image.getUrl());
 
