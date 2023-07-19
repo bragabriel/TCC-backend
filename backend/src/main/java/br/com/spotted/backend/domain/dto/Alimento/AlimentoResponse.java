@@ -40,8 +40,14 @@ public class AlimentoResponse extends ArtefatoIndividualResponse {
         this.setDescricaoArtefato(alimento.getArtefato().getDescricaoArtefato());
         this.setTipoArtefato(alimento.getArtefato().getTipoArtefato());
         this.setAtivo(alimento.getArtefato().getAtivo());
-        this.setDataCadastro(alimento.getArtefato().getDataCadastro());
-        this.setDataAtualizacao(alimento.getArtefato().getDataAtualizacao());
+        this.setDataCadastro(alimento.getArtefato().getDataCadastro().toString());
+
+        if (alimento.getArtefato() != null && alimento.getArtefato().getDataAtualizacao() != null) {
+            this.setDataAtualizacao(alimento.getArtefato().getDataAtualizacao().toString());
+        } else {
+            this.setDataAtualizacao("");
+        }
+
         this.setIdUsuario(alimento.getArtefato().getIdUsuario());
         this.setListaImagens(alimento.getArtefato().getListaImagens());
     }
