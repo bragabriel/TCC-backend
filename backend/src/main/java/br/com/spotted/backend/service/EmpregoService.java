@@ -1,6 +1,5 @@
 package br.com.spotted.backend.service;
 
-import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoCreateRequest;
@@ -8,7 +7,6 @@ import br.com.spotted.backend.domain.dto.Emprego.EmpregoResponse;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
-import br.com.spotted.backend.domain.entity.Alimento;
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.Emprego;
 import br.com.spotted.backend.exception.EmpregoNotFoundException;
@@ -89,6 +87,12 @@ public class EmpregoService {
                 .salarioEmprego(novo.getSalarioEmprego())
                 .contatoEmprego(novo.getContatoEmprego())
                 .linkVagaEmprego(novo.getLinkVagaEmprego())
+                .empresaEmprego(novo.getEmpresaEmprego())
+                .cidadeEmprego(novo.getCidadeEmprego())
+                .estadoEmprego(novo.getEstadoEmprego())
+                .experienciaEmprego(novo.getExperienciaEmprego())
+                .tipoVagaEmprego(novo.getTipoVagaEmprego())
+                .presencialEmprego(novo.getPresencialEmprego())
                 .artefato(artefato)
                 .build();
 
@@ -120,6 +124,13 @@ public class EmpregoService {
         emprego.setSalarioEmprego(empregoUpdateRequest.getSalarioEmprego());
         emprego.setContatoEmprego(empregoUpdateRequest.getContatoEmprego());
         emprego.setLinkVagaEmprego(empregoUpdateRequest.getLinkVagaEmprego());
+        emprego.setEmpresaEmprego(empregoUpdateRequest.getEmpresaEmprego());
+        emprego.setCidadeEmprego(empregoUpdateRequest.getCidadeEmprego());
+        emprego.setEstadoEmprego(empregoUpdateRequest.getEstadoEmprego());
+        emprego.setExperienciaEmprego(empregoUpdateRequest.getExperienciaEmprego());
+        emprego.setTipoVagaEmprego(empregoUpdateRequest.getTipoVagaEmprego());
+        emprego.setPresencialEmprego(empregoUpdateRequest.getPresencialEmprego());
+
         emprego.setArtefato(artefato);
         empregoRepository.save(emprego);
 
@@ -131,6 +142,12 @@ public class EmpregoService {
                 emprego.getBeneficiosEmprego(),
                 emprego.getContatoEmprego(),
                 emprego.getLinkVagaEmprego(),
+                emprego.getEmpresaEmprego(),
+                emprego.getCidadeEmprego(),
+                emprego.getEstadoEmprego(),
+                emprego.getExperienciaEmprego(),
+                emprego.getTipoVagaEmprego(),
+                emprego.getPresencialEmprego(),
                 emprego.getArtefato().getTituloArtefato(),
                 emprego.getArtefato().getDescricaoArtefato()
         );

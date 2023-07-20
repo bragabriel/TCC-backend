@@ -13,21 +13,27 @@ public class EmpregoUpdateRequest {
     @NotEmpty(message = "Campo 'descrição' é obrigatório!")
     private String descricaoArtefato;
 
-    @NotEmpty
     private String localizacaoEmprego;
 
-    @NotEmpty
     private String requisitosEmprego;
 
-    @NotNull
     private Integer salarioEmprego;
 
-    @NotEmpty
     private String beneficiosEmprego;
 
-    @NotEmpty
     private String contatoEmprego;
 
-    @NotEmpty
     private String linkVagaEmprego;
+
+    private String empresaEmprego;
+
+    private String cidadeEmprego;
+
+    private String estadoEmprego;
+
+    private String experienciaEmprego;
+
+    private String tipoVagaEmprego;
+
+    private String presencialEmprego;
 }
