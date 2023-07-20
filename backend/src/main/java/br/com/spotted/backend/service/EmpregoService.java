@@ -19,9 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +29,18 @@ public class EmpregoService {
     @Autowired
     private final ArtefatoService artefatoService;
 
-    public ResponseBase<Page<EmpregoResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
+
+    public ResponseBase<List<EmpregoResponse>> pesquisar() {
+        Iterable<Emprego> empregos = empregoRepository.findAll();
+        List<EmpregoResponse> empregoResponse = new ArrayList<>();
+
+        for (Emprego emprego : empregos) {
+            empregoResponse.add(new EmpregoResponse(emprego));
+        }
+        return new ResponseBase<>(empregoResponse);
+    }
+
+    public ResponseBase<Page<EmpregoResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
 
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");
@@ -78,6 +87,12 @@ public class EmpregoService {
                 .salarioEmprego(novo.getSalarioEmprego())
                 .contatoEmprego(novo.getContatoEmprego())
                 .linkVagaEmprego(novo.getLinkVagaEmprego())
+                .empresaEmprego(novo.getEmpresaEmprego())
+                .cidadeEmprego(novo.getCidadeEmprego())
+                .estadoEmprego(novo.getEstadoEmprego())
+                .experienciaEmprego(novo.getExperienciaEmprego())
+                .tipoVagaEmprego(novo.getTipoVagaEmprego())
+                .presencialEmprego(novo.getPresencialEmprego())
                 .artefato(artefato)
                 .build();
 
@@ -109,6 +124,13 @@ public class EmpregoService {
         emprego.setSalarioEmprego(empregoUpdateRequest.getSalarioEmprego());
         emprego.setContatoEmprego(empregoUpdateRequest.getContatoEmprego());
         emprego.setLinkVagaEmprego(empregoUpdateRequest.getLinkVagaEmprego());
+        emprego.setEmpresaEmprego(empregoUpdateRequest.getEmpresaEmprego());
+        emprego.setCidadeEmprego(empregoUpdateRequest.getCidadeEmprego());
+        emprego.setEstadoEmprego(empregoUpdateRequest.getEstadoEmprego());
+        emprego.setExperienciaEmprego(empregoUpdateRequest.getExperienciaEmprego());
+        emprego.setTipoVagaEmprego(empregoUpdateRequest.getTipoVagaEmprego());
+        emprego.setPresencialEmprego(empregoUpdateRequest.getPresencialEmprego());
+
         emprego.setArtefato(artefato);
         empregoRepository.save(emprego);
 
@@ -120,6 +142,12 @@ public class EmpregoService {
                 emprego.getBeneficiosEmprego(),
                 emprego.getContatoEmprego(),
                 emprego.getLinkVagaEmprego(),
+                emprego.getEmpresaEmprego(),
+                emprego.getCidadeEmprego(),
+                emprego.getEstadoEmprego(),
+                emprego.getExperienciaEmprego(),
+                emprego.getTipoVagaEmprego(),
+                emprego.getPresencialEmprego(),
                 emprego.getArtefato().getTituloArtefato(),
                 emprego.getArtefato().getDescricaoArtefato()
         );

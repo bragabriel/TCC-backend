@@ -1,5 +1,6 @@
 package br.com.spotted.backend.service;
 
+import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaCreateRequest;
@@ -7,6 +8,7 @@ import br.com.spotted.backend.domain.dto.Moradia.MoradiaResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
+import br.com.spotted.backend.domain.entity.Alimento;
 import br.com.spotted.backend.domain.entity.Moradia;
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.exception.MoradiaNotFoundException;
@@ -19,9 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +31,18 @@ public class MoradiaService {
     @Autowired
     private final ArtefatoService artefatoService;
 
-    public ResponseBase<Page<MoradiaResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
+    public ResponseBase<List<MoradiaResponse>> pesquisar() {
+        Iterable<Moradia> moradias = moradiaRepository.findAll();
+        List<MoradiaResponse> moradiaResponses = new ArrayList<>();
+
+        for (Moradia moradia : moradias) {
+            moradiaResponses.add(new MoradiaResponse(moradia));
+        }
+
+        return new ResponseBase<>(moradiaResponses);
+    }
+
+    public ResponseBase<Page<MoradiaResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
 
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");

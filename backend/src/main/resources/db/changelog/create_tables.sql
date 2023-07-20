@@ -189,6 +189,12 @@ CREATE TABLE [dbo].[Emprego](
 	[salario_emprego] [float] NULL,
 	[contato_emprego] [varchar](255) NULL,
 	[linkVaga_emprego] [varchar](255) NULL,
+	[empresa_emprego] [varchar](255) NULL,
+	[cidade_emprego] [varchar](255) NULL,
+	[estado_emprego] [varchar](255) NULL,
+	[experiencia_emprego] [varchar](255) NULL,
+	[tipoVaga_emprego] [varchar](255) NULL,
+	[presencial_emprego] [varchar](255) NULL,
  CONSTRAINT [PK_Emprego] PRIMARY KEY CLUSTERED
 (
 	[id_artefato] ASC

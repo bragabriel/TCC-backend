@@ -1,9 +1,9 @@
 package br.com.spotted.backend.controller;
 
+import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaUpdateRequest;
 import br.com.spotted.backend.domain.dto.Festa.FestaCreateRequest;
-import br.com.spotted.backend.domain.dto.Festa.FestaResponse;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.service.FestaService;
@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController()
 @RequiredArgsConstructor
@@ -22,8 +23,14 @@ public class FestaController {
     private final FestaService festaService;
 
     @GetMapping("api/festa")
-    public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
-        ResponseBase<Page<FestaResponse>> retorno = festaService.pesquisar(searchRequest);
+    public ResponseEntity<ResponseBase<List<FestaResponse>>> pesquisar() {
+        ResponseBase<List<FestaResponse>> retorno = festaService.pesquisar();
+        return ResponseEntity.ok(retorno);
+    }
+
+    @GetMapping("api/festaPaginado")
+    public ResponseEntity pesquisarPaginado(PaginatedSearchRequest searchRequest) {
+        ResponseBase<Page<FestaResponse>> retorno = festaService.pesquisarPaginado(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 

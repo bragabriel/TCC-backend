@@ -1,5 +1,6 @@
 package br.com.spotted.backend.controller;
 
+import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoResponse;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoUpdateRequest;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoCreateRequest;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController()
 @RequiredArgsConstructor
@@ -21,8 +23,14 @@ public class EmpregoController {
     private final EmpregoService empregoService;
 
     @GetMapping("api/emprego")
-    public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
-        ResponseBase<Page<EmpregoResponse>> retorno = empregoService.pesquisar(searchRequest);
+    public ResponseEntity<ResponseBase<List<EmpregoResponse>>> pesquisar() {
+        ResponseBase<List<EmpregoResponse>> retorno = empregoService.pesquisar();
+        return ResponseEntity.ok(retorno);
+    }
+
+    @GetMapping("api/empregoPaginado")
+    public ResponseEntity pesquisarPaginado(PaginatedSearchRequest searchRequest) {
+        ResponseBase<Page<EmpregoResponse>> retorno = empregoService.pesquisarPaginado(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 

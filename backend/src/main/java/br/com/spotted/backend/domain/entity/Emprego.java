@@ -37,6 +37,24 @@ public class Emprego {
     @Column(name = "linkVaga_emprego")
     private String linkVagaEmprego;
 
+    @Column(name = "empresa_emprego")
+    private String empresaEmprego;
+
+    @Column(name = "cidade_emprego")
+    private String cidadeEmprego;
+
+    @Column(name = "estado_emprego")
+    private String estadoEmprego;
+
+    @Column(name = "experiencia_emprego")
+    private String experienciaEmprego;
+
+    @Column(name = "tipoVaga_emprego")
+    private String tipoVagaEmprego;
+
+    @Column(name = "presencial_emprego")
+    private String presencialEmprego;
+
     @MapsId
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //Um emprego pode ter 1-1 artefato
     @JoinColumn(name = "id_artefato")
