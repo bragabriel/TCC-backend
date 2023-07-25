@@ -1,5 +1,6 @@
 package br.com.spotted.backend.controller;
 
+import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioCreateRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 
 
 @RestController()
@@ -26,8 +28,14 @@ public class UsuarioController {
     private final ImagemUsuarioService imagemUsuarioService;
 
     @GetMapping("api/usuario")
+    public ResponseEntity<ResponseBase<List<UsuarioResponse>>> pesquisar() {
+        ResponseBase<List<UsuarioResponse>> retorno = usuarioService.pesquisar();
+        return ResponseEntity.ok(retorno);
+    }
+
+    @GetMapping("api/usuariPaginado")
     public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
-        ResponseBase<Page<UsuarioResponse>> retorno = usuarioService.pesquisar(searchRequest);
+        ResponseBase<Page<UsuarioResponse>> retorno = usuarioService.pesquisarPaginado(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 
