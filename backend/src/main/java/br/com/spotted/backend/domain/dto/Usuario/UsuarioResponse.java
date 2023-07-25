@@ -21,7 +21,7 @@ public class UsuarioResponse {
     private String sobrenomeUsuario;
     private String emailUsuario;
     private String telefoneUsuario;
-    private Date dataNascimento;
+    private String dataNascimento;
     private String url;
     private String fileName;
     private List<Artefato> listaArtefatos;
@@ -34,7 +34,7 @@ public class UsuarioResponse {
         this.sobrenomeUsuario = usuario.getSobrenomeUsuario();
         this.emailUsuario = usuario.getEmailUsuario();
         this.telefoneUsuario = usuario.getTelefoneUsuario();
-        this.dataNascimento = usuario.getDataNascimento();
+        this.dataNascimento = usuario.getDataNascimento().toString();
         this.url = usuario.getUrl();
         this.fileName = usuario.getFileName();
         this.listaArtefatosReponse = usuario.getListaArtefatos().stream()

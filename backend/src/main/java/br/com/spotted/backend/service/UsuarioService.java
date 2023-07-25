@@ -1,6 +1,5 @@
 package br.com.spotted.backend.service;
 
-
 import br.com.spotted.backend.domain.dto.Criptografia;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
@@ -17,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,41 +26,42 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
-    public ResponseBase<Page<UsuarioResponse>> pesquisar(PaginatedSearchRequest searchRequest) {
+    public ResponseBase<List<UsuarioResponse>> pesquisar() {
+        Iterable<Usuario> usuarios = usuarioRepository.findAll();
+        List<UsuarioResponse> usuarioResponses = new ArrayList<>();
 
-        // a Pagina atual não pode ser menor que 1
+        for (Usuario usuario : usuarios) {
+            usuarioResponses.add(new UsuarioResponse(usuario));
+        }
+
+        return new ResponseBase<>(usuarioResponses);
+    }
+
+    public ResponseBase<Page<UsuarioResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");
         }
-
-        // a quantidade de itens por página deve ser entre 1 e 50
         if (searchRequest.getQtdPorPagina() < 1 || searchRequest.getQtdPorPagina() > 50) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantidade de itens por página deve ser entre 1 e 50 itens");
         }
 
-        // pesquisa no repositorio de customer usando a consulta paginada
         Page<Usuario> responsavelPage = usuarioRepository.findAll(searchRequest.parseToPageRequest());
 
-        // Mapeia da entidade(Customer) para o DTO(CustomerResponse)
         Page<UsuarioResponse> responsavelResponsePage = responsavelPage.map(UsuarioResponse::new);
         return new ResponseBase<>(responsavelResponsePage);
     }
 
     public ResponseBase<UsuarioResponse> pesquisarPorId(Long id) {
-        // Consulta o repositorio para procurar por um custumer pelo 'id'
         Optional<Usuario> responsavelOptional = usuarioRepository.findById(id);
 
-        // Verifica se o customer foi encontrado, caso o contratrio retorna um erro
         Usuario usuario = responsavelOptional
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
 
-        // Mapeia de entidade para dto
         UsuarioResponse usuarioResponse = new UsuarioResponse(usuario);
 
         return new ResponseBase<>(usuarioResponse);
     }
     public ResponseBase<UsuarioResponse> cadastrar(UsuarioCreateRequest novo) {
-
         validateEmail(novo.getEmail());
 
         Usuario modeloDb = new Usuario();
@@ -70,10 +72,8 @@ public class UsuarioService {
         modeloDb.setTelefoneUsuario(novo.getTelefone());
         modeloDb.setDataNascimento(novo.getDataNascimento());
 
-        //Salvando
         Usuario usuarioSalvo = usuarioRepository.save(modeloDb);
 
-        // Mapeia de entidade para dto
         UsuarioResponse usuarioResponse = new UsuarioResponse(usuarioSalvo);
         return new ResponseBase<>(usuarioResponse);
     }
@@ -93,24 +93,20 @@ public class UsuarioService {
     }
 
     public UsuarioResponse logar(String email, String senha) {
-
         var senhaCriptografada = Criptografia.encriptografar(senha);
 
         // Consulta o repositorio para procurar por um custumer pelo nome e senha
         var retorno = usuarioRepository.login(email, senhaCriptografada);
-
         if (retorno == null) {
             throw new UsuarioNotFoundException("Usuário ou senha inválida.");
         }
 
-        // Mapeia de entidade para dto
         UsuarioResponse usuarioResponse = new UsuarioResponse(retorno);
 
         return usuarioResponse;
     }
 
     public UsuarioResponse atualizarNomeSobrenome(Long idUsuario, UsuarioUpdateRequest_NomeSobrenome usuarioUpdateRequest){
-
         var usuarioEncontrado = usuarioRepository.findById(idUsuario);
 
         if(usuarioEncontrado.isEmpty()){
