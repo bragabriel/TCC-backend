@@ -273,7 +273,10 @@ GO
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Imagem]    Script Date: 7/8/2023 9:56:37 PM ******/
+USE [TCC]
+GO
+
+/****** Object:  Table [dbo].[Imagem]    Script Date: 7/25/2023 11:47:47 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -285,17 +288,10 @@ CREATE TABLE [dbo].[Imagem](
 	[url] [varchar](255) NOT NULL,
 	[sequence] [int] NULL,
 	[fileName] [varchar](255) NOT NULL,
-	[id_artefato] [int] NOT NULL,
- CONSTRAINT [PK_Imagem] PRIMARY KEY CLUSTERED
-(
-	[id_artefato] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	[id_artefato] [int] NOT NULL
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Imagem]  WITH CHECK ADD  CONSTRAINT [FK_Artefato_Imagem] FOREIGN KEY([id_artefato])
+ALTER TABLE [dbo].[Imagem]  WITH CHECK ADD FOREIGN KEY([id_artefato])
 REFERENCES [dbo].[Artefato] ([id_artefato])
-GO
-
-ALTER TABLE [dbo].[Imagem] CHECK CONSTRAINT [FK_Artefato_Imagem]
 GO
