@@ -12,6 +12,9 @@ VALUES(7, 'Trufa Maravilhosa', 'A melhor trufa de Nutella que você vai provar n
 INSERT INTO [Artefato] ([id_artefato], [titulo_artefato], [descricao_artefato], [tipo_artefato], [ativo], [data_cadastro], [id_usuario])
 VALUES(2, 'Ofereço vaga em apê', '5 quartos, 3 banheiros, vaga na garagem para 4 carros, piscina, alarme, cerca elétrica, cozinha e sala de estar', 'MORADIA', 1, convert(datetime,'2001-12-12 10:34:09 PM'), 1)
 
+INSERT INTO [Artefato] ([id_artefato], [titulo_artefato], [descricao_artefato], [tipo_artefato], [ativo], [data_cadastro], [id_usuario])
+VALUES(8, 'blablabla', 'alarme, cerca elétrica, cozinha e sala de estar', 'MORADIA', 1, convert(datetime,'2001-12-12 10:34:09 PM'), 1)
+
 --Insert Transporte
 INSERT INTO [Artefato] ([id_artefato], [titulo_artefato], [descricao_artefato], [tipo_artefato], [ativo], [data_cadastro], [id_usuario])
 VALUES(3, 'Ofereco transporte para FHO período noturno', 'Transporte para a FHO saindo de Pirassununga. Com rotação de motorista', 'TRANSPORTE', 1, convert(datetime,'2001-12-12 10:34:09 PM'), 1)

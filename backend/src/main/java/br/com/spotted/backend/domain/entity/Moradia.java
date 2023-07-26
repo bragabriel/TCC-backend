@@ -19,8 +19,17 @@ public class Moradia {
     @Column(name = "id_artefato")
     private Long idArtefato;
 
-    @Column(name = "localizacao_moradia")
-    private String localizacaoMoradia;
+    @Column(name = "estado_moradia")
+    private String estadoMoradia;
+
+    @Column(name = "cidade_moradia")
+    private String cidadeMoradia;
+
+    @Column(name = "bairro_moradia")
+    private String bairroMoradia;
+
+    @Column(name = "cep_moradia")
+    private String cepMoradia;
 
     @Column(name = "qtdMoradoresPermitido_moradia")
     private Integer qtdMoradoresPermitidoMoradia;

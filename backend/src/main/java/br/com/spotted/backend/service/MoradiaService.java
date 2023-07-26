@@ -81,7 +81,10 @@ public class MoradiaService {
 
         Moradia modeloDb = Moradia.builder()
                 .idArtefato(artefatoSalvo.getObjetoRetorno().getIdArtefato())
-                .localizacaoMoradia(novo.getLocalizacaoMoradia())
+                .estadoMoradia(novo.getEstadoMoradia())
+                .cidadeMoradia(novo.getCidadeMoradia())
+                .bairroMoradia(novo.getBairroMoradia())
+                .cepMoradia(novo.getCepMoradia())
                 .qtdMoradoresAtuaisMoradia(novo.getQtdMoradoresAtuaisMoradia())
                 .qtdMoradoresPermitidoMoradia(novo.getQtdMoradoresPermitidoMoradia())
                 .precoAluguelTotalMoradia(novo.getPrecoAluguelTotalMoradia())
@@ -119,12 +122,19 @@ public class MoradiaService {
         moradia.setPrecoAluguelPorPessoaMoradia(moradiaUpdateRequest.getPrecoAluguelPorPessoaMoradia());
         moradia.setVagaGaragemMoradia(moradiaUpdateRequest.getVagaGaragemMoradia());
         moradia.setAnimaisEstimacaoMoradia(moradiaUpdateRequest.getAnimaisEstimacaoMoradia());
+        moradia.setEstadoMoradia(moradiaUpdateRequest.getEstadoMoradia());
+        moradia.setCidadeMoradia(moradiaUpdateRequest.getCidadeMoradia());
+        moradia.setBairroMoradia(moradiaUpdateRequest.getBairroMoradia());
+        moradia.setCepMoradia(moradiaUpdateRequest.getCepMoradia());
         moradia.setArtefato(artefato);
         moradiaRepository.save(moradia);
 
         return new MoradiaResponse(
                 moradia.getIdArtefato(),
-                moradia.getLocalizacaoMoradia(),
+                moradia.getEstadoMoradia(),
+                moradia.getCidadeMoradia(),
+                moradia.getBairroMoradia(),
+                moradia.getCepMoradia(),
                 moradia.getQtdMoradoresAtuaisMoradia(),
                 moradia.getQtdMoradoresPermitidoMoradia(),
                 moradia.getPrecoAluguelTotalMoradia(),

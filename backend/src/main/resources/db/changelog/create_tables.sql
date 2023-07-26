@@ -105,7 +105,7 @@ GO
 USE [TCC]
 GO
 
-/****** Object:  Table [dbo].[Moradia]    Script Date: 7/3/2023 8:59:29 PM ******/
+/****** Object:  Table [dbo].[Moradia]    Script Date: 7/26/2023 10:46:20 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -118,7 +118,10 @@ CREATE TABLE [dbo].[Moradia](
 	[qtdMoradoresAtuais_moradia] [int] NULL,
 	[precoAluguelTotal_moradia] [float] NULL,
 	[precoAluguelPorPessoa_moradia] [float] NULL,
-	[localizacao_moradia] [varchar](255) NOT NULL,
+	[estado_moradia] [varchar](255) NOT NULL,
+	[cidade_moradia] [varchar](255) NOT NULL,
+	[bairro_moradia] [varchar](255) NULL,
+	[cep_moradia] [varchar](255) NULL,
 	[vagaGaragem_moradia] [varchar](255) NOT NULL,
 	[animaisEstimacao_moradia] [varchar](255) NOT NULL,
  CONSTRAINT [PK_Moradia] PRIMARY KEY CLUSTERED

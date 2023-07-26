@@ -15,7 +15,13 @@ public class MoradiaResponse extends ArtefatoIndividualResponse {
 
     private Long idArtefato;
 
-    private String localizacaoMoradia;
+    private String estadoMoradia;
+
+    private String cidadeMoradia;
+
+    private String bairroMoradia;
+
+    private String cepMoradia;
 
     private Integer qtdMoradoresPermitidoMoradia;
 
@@ -33,7 +39,10 @@ public class MoradiaResponse extends ArtefatoIndividualResponse {
     public MoradiaResponse(Moradia moradia) {
         super();
         this.idArtefato = moradia.getIdArtefato();
-        this.localizacaoMoradia = moradia.getLocalizacaoMoradia();
+        this.estadoMoradia = moradia.getEstadoMoradia();
+        this.cidadeMoradia = moradia.getCidadeMoradia();
+        this.bairroMoradia = moradia.getBairroMoradia();
+        this.cepMoradia = moradia.getCepMoradia();
         this.qtdMoradoresPermitidoMoradia = moradia.getQtdMoradoresPermitidoMoradia();
         this.qtdMoradoresAtuaisMoradia = moradia.getQtdMoradoresAtuaisMoradia();
         this.precoAluguelTotalMoradia = moradia.getPrecoAluguelTotalMoradia();
