@@ -1,6 +1,5 @@
 package br.com.spotted.backend.service;
 
-import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoCreateRequest;
@@ -8,7 +7,6 @@ import br.com.spotted.backend.domain.dto.Objeto.ObjetoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
-import br.com.spotted.backend.domain.entity.Alimento;
 import br.com.spotted.backend.domain.entity.Objeto;
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.exception.ObjetoNotFoundException;
@@ -118,9 +116,7 @@ public class ObjetoService {
         return new ObjetoResponse(
                 objeto.getIdArtefato(),
                 objeto.getLocalizacaoAchadoObjeto(),
-                objeto.getLocalizacaoAtualObjeto(),
-                objeto.getArtefato().getTituloArtefato(),
-                objeto.getArtefato().getDescricaoArtefato()
+                objeto.getLocalizacaoAtualObjeto()
         );
     }
 

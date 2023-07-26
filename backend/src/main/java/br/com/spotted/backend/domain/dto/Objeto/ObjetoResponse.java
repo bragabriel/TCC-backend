@@ -1,5 +1,6 @@
 package br.com.spotted.backend.domain.dto.Objeto;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoIndividualResponse;
 import br.com.spotted.backend.domain.entity.Objeto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ObjetoResponse {
+public class ObjetoResponse extends ArtefatoIndividualResponse {
 
     private Long idArtefato;
 
@@ -16,15 +17,25 @@ public class ObjetoResponse {
 
     private String localizacaoAtualObjeto;
 
-    private String tituloArtefato;
-
-    private String descricaoArtefato;
 
     public ObjetoResponse(Objeto objeto) {
         this.idArtefato = objeto.getIdArtefato();
         this.localizacaoAchadoObjeto = objeto.getLocalizacaoAchadoObjeto();
         this.localizacaoAtualObjeto = objeto.getLocalizacaoAtualObjeto();
-        this.tituloArtefato = objeto.getArtefato().getTituloArtefato();
-        this.descricaoArtefato = objeto.getArtefato().getDescricaoArtefato();
+
+        this.setTituloArtefato(objeto.getArtefato().getTituloArtefato());
+        this.setDescricaoArtefato(objeto.getArtefato().getDescricaoArtefato());
+        this.setTipoArtefato(objeto.getArtefato().getTipoArtefato());
+        this.setAtivo(objeto.getArtefato().getAtivo());
+        this.setDataCadastro(objeto.getArtefato().getDataCadastro().toString());
+
+        if (objeto.getArtefato() != null && objeto.getArtefato().getDataAtualizacao() != null) {
+            this.setDataAtualizacao(objeto.getArtefato().getDataAtualizacao().toString());
+        } else {
+            this.setDataAtualizacao("");
+        }
+
+        this.setIdUsuario(objeto.getArtefato().getIdUsuario());
+        this.setListaImagens(objeto.getArtefato().getListaImagens());
     }
 }

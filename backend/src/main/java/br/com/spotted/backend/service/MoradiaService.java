@@ -1,6 +1,5 @@
 package br.com.spotted.backend.service;
 
-import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaCreateRequest;
@@ -8,7 +7,6 @@ import br.com.spotted.backend.domain.dto.Moradia.MoradiaResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
-import br.com.spotted.backend.domain.entity.Alimento;
 import br.com.spotted.backend.domain.entity.Moradia;
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.exception.MoradiaNotFoundException;
@@ -122,7 +120,7 @@ public class MoradiaService {
         moradia.setVagaGaragemMoradia(moradiaUpdateRequest.getVagaGaragemMoradia());
         moradia.setAnimaisEstimacaoMoradia(moradiaUpdateRequest.getAnimaisEstimacaoMoradia());
         moradia.setArtefato(artefato);
-       moradiaRepository.save(moradia);
+        moradiaRepository.save(moradia);
 
         return new MoradiaResponse(
                 moradia.getIdArtefato(),
@@ -132,9 +130,7 @@ public class MoradiaService {
                 moradia.getPrecoAluguelTotalMoradia(),
                 moradia.getPrecoAluguelPorPessoaMoradia(),
                 moradia.getVagaGaragemMoradia(),
-                moradia.getAnimaisEstimacaoMoradia(),
-                moradia.getArtefato().getTituloArtefato(),
-                moradia.getArtefato().getDescricaoArtefato()
+                moradia.getAnimaisEstimacaoMoradia()
         );
     }
 
