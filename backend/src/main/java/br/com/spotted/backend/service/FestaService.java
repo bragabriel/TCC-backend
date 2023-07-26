@@ -115,9 +115,7 @@ public class FestaService {
 
         return new FestaResponse(
                 festa.getIdArtefato(),
-                festa.getLocalizacaoFesta(),
-                festa.getArtefato().getTituloArtefato(),
-                festa.getArtefato().getDescricaoArtefato()
+                festa.getLocalizacaoFesta()
         );
     }
 

@@ -1,5 +1,6 @@
 package br.com.spotted.backend.domain.dto.Transporte;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoIndividualResponse;
 import br.com.spotted.backend.domain.entity.Transporte;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class TransporteResponse {
+public class TransporteResponse extends ArtefatoIndividualResponse {
 
     private Long idArtefato;
 
@@ -24,11 +25,8 @@ public class TransporteResponse {
 
     private String periodoTransporte;
 
-    private String tituloArtefato;
-
-    private String descricaoArtefato;
-
     public TransporteResponse(Transporte transporte) {
+        super();
         this.idArtefato = transporte.getIdArtefato();
         this.informacoesVeiculoTransporte = transporte.getInformacoesVeiculoTransporte();
         this.informacoesCondutorTransporte = transporte.getInformacoesCondutorTransporte();
@@ -36,7 +34,20 @@ public class TransporteResponse {
         this.qtdAssentosPreenchidosTransporte = transporte.getQtdAssentosPreenchidosTransporte();
         this.cidadeTransporte = transporte.getCidadeTransporte();
         this.periodoTransporte = transporte.getPeriodoTransporte();
-        this.tituloArtefato = transporte.getArtefato().getTituloArtefato();
-        this.descricaoArtefato = transporte.getArtefato().getDescricaoArtefato();
+
+        this.setTituloArtefato(transporte.getArtefato().getTituloArtefato());
+        this.setDescricaoArtefato(transporte.getArtefato().getDescricaoArtefato());
+        this.setTipoArtefato(transporte.getArtefato().getTipoArtefato());
+        this.setAtivo(transporte.getArtefato().getAtivo());
+        this.setDataCadastro(transporte.getArtefato().getDataCadastro().toString());
+
+        if (transporte.getArtefato() != null && transporte.getArtefato().getDataAtualizacao() != null) {
+            this.setDataAtualizacao(transporte.getArtefato().getDataAtualizacao().toString());
+        } else {
+            this.setDataAtualizacao("");
+        }
+
+        this.setIdUsuario(transporte.getArtefato().getIdUsuario());
+        this.setListaImagens(transporte.getArtefato().getListaImagens());
     }
 }
