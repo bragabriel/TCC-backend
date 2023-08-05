@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -33,6 +32,7 @@ public class FestaResponse extends ArtefatoIndividualResponse {
         }
 
         this.setIdUsuario(festa.getArtefato().getIdUsuario());
+        this.setTelefoneUsuario(festa.getArtefato().getUsuario().getTelefoneUsuario());
         this.setListaImagens(festa.getArtefato().getListaImagens());
     }
 }

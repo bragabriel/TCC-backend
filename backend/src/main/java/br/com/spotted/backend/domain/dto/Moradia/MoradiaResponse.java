@@ -63,6 +63,7 @@ public class MoradiaResponse extends ArtefatoIndividualResponse {
         }
 
         this.setIdUsuario(moradia.getArtefato().getIdUsuario());
+        this.setTelefoneUsuario(moradia.getArtefato().getUsuario().getTelefoneUsuario());
         this.setListaImagens(moradia.getArtefato().getListaImagens());
     }
 }

@@ -49,6 +49,7 @@ public class AlimentoResponse extends ArtefatoIndividualResponse {
         }
 
         this.setIdUsuario(alimento.getArtefato().getIdUsuario());
+        this.setTelefoneUsuario(alimento.getArtefato().getUsuario().getTelefoneUsuario());
         this.setListaImagens(alimento.getArtefato().getListaImagens());
     }
 }
