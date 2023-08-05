@@ -75,6 +75,7 @@ public class EmpregoResponse extends ArtefatoIndividualResponse {
         }
 
         this.setIdUsuario(emprego.getArtefato().getIdUsuario());
+        this.setTelefoneUsuario(emprego.getArtefato().getUsuario().getTelefoneUsuario());
         this.setListaImagens(emprego.getArtefato().getListaImagens());
     }
 }

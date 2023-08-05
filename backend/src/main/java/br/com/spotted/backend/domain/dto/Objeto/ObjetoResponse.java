@@ -36,6 +36,7 @@ public class ObjetoResponse extends ArtefatoIndividualResponse {
         }
 
         this.setIdUsuario(objeto.getArtefato().getIdUsuario());
+        this.setTelefoneUsuario(objeto.getArtefato().getUsuario().getTelefoneUsuario());
         this.setListaImagens(objeto.getArtefato().getListaImagens());
     }
 }

@@ -21,6 +21,7 @@ public class ArtefatoIndividualResponse {
     private String dataCadastro;
     private String dataAtualizacao;
     private Long idUsuario;
+    private String telefoneUsuario;
     private List<Imagem> listaImagens;
 
     public ArtefatoIndividualResponse(Artefato artefato) {
@@ -32,6 +33,7 @@ public class ArtefatoIndividualResponse {
         this.dataCadastro = artefato.getDataCadastro().toString();
         this.dataAtualizacao = artefato.getDataAtualizacao().toString();
         this.idUsuario = artefato.getIdUsuario();
+        this.telefoneUsuario = artefato.getUsuario().getTelefoneUsuario();
         this.listaImagens = artefato.getListaImagens();
     }
 }

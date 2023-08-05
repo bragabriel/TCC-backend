@@ -48,6 +48,7 @@ public class TransporteResponse extends ArtefatoIndividualResponse {
         }
 
         this.setIdUsuario(transporte.getArtefato().getIdUsuario());
+        this.setTelefoneUsuario(transporte.getArtefato().getUsuario().getTelefoneUsuario());
         this.setListaImagens(transporte.getArtefato().getListaImagens());
     }
 }
