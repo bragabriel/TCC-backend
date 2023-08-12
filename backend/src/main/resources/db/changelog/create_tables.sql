@@ -79,7 +79,7 @@ GO
 
 CREATE TABLE [dbo].[Alimento](
 	[id_artefato] [int] NOT NULL,
-	[tipo_alimento] [varchar](255) NOT NULL,
+	[tipo_alimento] [varchar](255) NULL,
 	[preco_alimento] [varchar](255) NULL,
 	[oferta_alimento] [varchar](255) NULL,
 	[sabor_alimento] [varchar](255) NULL,
@@ -151,8 +151,8 @@ GO
 
 CREATE TABLE [dbo].[Transporte](
 	[id_artefato] [int] NOT NULL,
-	[cidade_transporte] [varchar](255) NOT NULL,
-	[periodo_transporte] [varchar](255) NOT NULL,
+	[cidade_transporte] [varchar](255) NULL,
+	[periodo_transporte] [varchar](255) NULL,
 	[informacoesVeiculo_transporte] [varchar](255) NULL,
 	[informacoesCondutor_transporte] [varchar](255) NULL,
 	[qtdAssentosTotal_transporte] [int] NULL,

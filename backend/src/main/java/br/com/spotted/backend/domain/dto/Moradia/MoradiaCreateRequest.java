@@ -10,8 +10,10 @@ import javax.validation.constraints.NotNull;
 @Data
 public class MoradiaCreateRequest {
 
+    @NotEmpty
     private String estadoMoradia;
 
+    @NotEmpty
     private String cidadeMoradia;
 
     private String bairroMoradia;
