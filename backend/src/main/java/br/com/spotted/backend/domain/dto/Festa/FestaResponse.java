@@ -21,7 +21,6 @@ public class FestaResponse extends ArtefatoIndividualResponse {
         this.localizacaoFesta = festa.getLocalizacaoFesta();
         this.setTituloArtefato(festa.getArtefato().getTituloArtefato());
         this.setDescricaoArtefato(festa.getArtefato().getDescricaoArtefato());
-        this.setTipoArtefato(festa.getArtefato().getTipoArtefato());
         this.setAtivo(festa.getArtefato().getAtivo());
         this.setDataCadastro(festa.getArtefato().getDataCadastro().toString());
 

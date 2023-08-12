@@ -24,7 +24,6 @@ public class ArtefatoResponse {
     private Long idArtefato;
     private String tituloArtefato;
     private String descricaoArtefato;
-    private String tipoArtefato;
     private Boolean ativo;
     private Date dataCadastro;
     private Date dataAtualizacao;
@@ -41,7 +40,6 @@ public class ArtefatoResponse {
         this.idArtefato = artefato.getIdArtefato();
         this.tituloArtefato = artefato.getTituloArtefato();
         this.descricaoArtefato = artefato.getDescricaoArtefato();
-        this.tipoArtefato = artefato.getTipoArtefato();
         this.ativo = artefato.getAtivo();
         this.dataCadastro = artefato.getDataCadastro();
         this.dataAtualizacao = artefato.getDataAtualizacao();

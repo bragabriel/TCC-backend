@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 
 @Data
 @NoArgsConstructor
@@ -64,7 +63,6 @@ public class EmpregoResponse extends ArtefatoIndividualResponse {
 
         this.setTituloArtefato(emprego.getArtefato().getTituloArtefato());
         this.setDescricaoArtefato(emprego.getArtefato().getDescricaoArtefato());
-        this.setTipoArtefato(emprego.getArtefato().getTipoArtefato());
         this.setAtivo(emprego.getArtefato().getAtivo());
         this.setDataCadastro(emprego.getArtefato().getDataCadastro().toString());
 

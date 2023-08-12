@@ -37,7 +37,6 @@ public class TransporteResponse extends ArtefatoIndividualResponse {
 
         this.setTituloArtefato(transporte.getArtefato().getTituloArtefato());
         this.setDescricaoArtefato(transporte.getArtefato().getDescricaoArtefato());
-        this.setTipoArtefato(transporte.getArtefato().getTipoArtefato());
         this.setAtivo(transporte.getArtefato().getAtivo());
         this.setDataCadastro(transporte.getArtefato().getDataCadastro().toString());
 

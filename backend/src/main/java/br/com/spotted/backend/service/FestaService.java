@@ -75,7 +75,6 @@ public class FestaService {
         Artefato artefato = Artefato.builder()
                 .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
                 .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
-                .tipoArtefato(artefatoSalvo.getObjetoRetorno().getTipoArtefato())
                 .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
                 .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
                 .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())

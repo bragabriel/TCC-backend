@@ -19,9 +19,6 @@ public class ArtefatoUpdateRequest {
     @NotEmpty(message = "Campo descrição é obrigatório!")
     private String descricaoArtefato;
 
-    @NotEmpty(message = "Campo tipo é obrigatório!")
-    private String tipoArtefato;
-
     @NotNull(message = "Campo ativo é obrigatório!")
     private Boolean ativo;
 
@@ -31,7 +28,6 @@ public class ArtefatoUpdateRequest {
     public ArtefatoUpdateRequest(Artefato artefato) {
         this.tituloArtefato = artefato.getTituloArtefato();
         this.descricaoArtefato = artefato.getDescricaoArtefato();
-        this.tipoArtefato = artefato.getTipoArtefato();
         this.ativo = artefato.getAtivo();
         this.dataAtualizacao = artefato.getDataAtualizacao();
     }
