@@ -30,9 +30,6 @@ public class Artefato {
     @Column(name = "descricao_artefato", nullable = false)
     private String descricaoArtefato;
 
-    @Column(name = "tipo_artefato", nullable = false)
-    private String tipoArtefato;
-
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;
 
@@ -78,7 +75,6 @@ public class Artefato {
         this.idArtefato = artefato.getIdArtefato();
         this.tituloArtefato = artefato.getTituloArtefato();
         this.descricaoArtefato = artefato.getDescricaoArtefato();
-        this.tipoArtefato = artefato.getTipoArtefato();
         this.ativo = artefato.getAtivo();
         this.dataCadastro = artefato.getDataCadastro();
         this.idUsuario = artefato.getIdUsuario();

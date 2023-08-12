@@ -25,6 +25,8 @@ public class TransporteResponse extends ArtefatoIndividualResponse {
 
     private String periodoTransporte;
 
+    private String valorTransporte;
+
     public TransporteResponse(Transporte transporte) {
         super();
         this.idArtefato = transporte.getIdArtefato();
@@ -34,10 +36,10 @@ public class TransporteResponse extends ArtefatoIndividualResponse {
         this.qtdAssentosPreenchidosTransporte = transporte.getQtdAssentosPreenchidosTransporte();
         this.cidadeTransporte = transporte.getCidadeTransporte();
         this.periodoTransporte = transporte.getPeriodoTransporte();
+        this.valorTransporte = transporte.getValorTransporte();
 
         this.setTituloArtefato(transporte.getArtefato().getTituloArtefato());
         this.setDescricaoArtefato(transporte.getArtefato().getDescricaoArtefato());
-        this.setTipoArtefato(transporte.getArtefato().getTipoArtefato());
         this.setAtivo(transporte.getArtefato().getAtivo());
         this.setDataCadastro(transporte.getArtefato().getDataCadastro().toString());
 

@@ -37,6 +37,9 @@ public class Transporte {
     @Column(name = "periodo_transporte")
     private String periodoTransporte;
 
+    @Column(name = "valor_transporte")
+    private String valorTransporte;
+
     @MapsId
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //Um transporte pode ter 1-1 artefato
     @JoinColumn(name = "id_artefato")

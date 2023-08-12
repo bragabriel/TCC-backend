@@ -52,7 +52,6 @@ public class MoradiaResponse extends ArtefatoIndividualResponse {
 
         this.setTituloArtefato(moradia.getArtefato().getTituloArtefato());
         this.setDescricaoArtefato(moradia.getArtefato().getDescricaoArtefato());
-        this.setTipoArtefato(moradia.getArtefato().getTipoArtefato());
         this.setAtivo(moradia.getArtefato().getAtivo());
         this.setDataCadastro(moradia.getArtefato().getDataCadastro().toString());
 

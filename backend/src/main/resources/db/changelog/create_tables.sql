@@ -46,7 +46,6 @@ CREATE TABLE [dbo].[Artefato](
 	[id_artefato] [int] IDENTITY(1,1) NOT NULL,
 	[titulo_artefato] [varchar](255) NOT NULL,
 	[descricao_artefato] [varchar](255) NOT NULL,
-	[tipo_artefato] [varchar](50) NOT NULL,
 	[ativo] [bit] NOT NULL,
 	[data_cadastro] [date] NOT NULL,
 	[data_inativo] [date] NULL,
@@ -80,8 +79,8 @@ GO
 
 CREATE TABLE [dbo].[Alimento](
 	[id_artefato] [int] NOT NULL,
-	[tipo_alimento] [varchar](255) NOT NULL,
-	[preco_alimento] [varchar](255) NOT NULL,
+	[tipo_alimento] [varchar](255) NULL,
+	[preco_alimento] [varchar](255) NULL,
 	[oferta_alimento] [varchar](255) NULL,
 	[sabor_alimento] [varchar](255) NULL,
 	[marca_alimento] [varchar](255) NULL,
@@ -122,8 +121,8 @@ CREATE TABLE [dbo].[Moradia](
 	[cidade_moradia] [varchar](255) NOT NULL,
 	[bairro_moradia] [varchar](255) NULL,
 	[cep_moradia] [varchar](255) NULL,
-	[vagaGaragem_moradia] [varchar](255) NOT NULL,
-	[animaisEstimacao_moradia] [varchar](255) NOT NULL,
+	[vagaGaragem_moradia] [varchar](255) NULL,
+	[animaisEstimacao_moradia] [varchar](255) NULL,
  CONSTRAINT [PK_Moradia] PRIMARY KEY CLUSTERED
 (
 	[id_artefato] ASC
@@ -152,12 +151,13 @@ GO
 
 CREATE TABLE [dbo].[Transporte](
 	[id_artefato] [int] NOT NULL,
-	[cidade_transporte] [varchar](255) NOT NULL,
-	[periodo_transporte] [varchar](255) NOT NULL,
-	[informacoesVeiculo_transporte] [varchar](255) NOT NULL,
-	[informacoesCondutor_transporte] [varchar](255) NOT NULL,
-	[qtdAssentosTotal_transporte] [int] NOT NULL,
-	[qtdAssentosPreenchidos_transporte] [int] NOT NULL,
+	[cidade_transporte] [varchar](255) NULL,
+	[periodo_transporte] [varchar](255) NULL,
+	[informacoesVeiculo_transporte] [varchar](255) NULL,
+	[informacoesCondutor_transporte] [varchar](255) NULL,
+	[qtdAssentosTotal_transporte] [int] NULL,
+	[qtdAssentosPreenchidos_transporte] [int] NULL,
+	[valor_transporte] [varchar] (255) NULL,
  CONSTRAINT [PK_Transporte] PRIMARY KEY CLUSTERED
 (
 	[id_artefato] ASC

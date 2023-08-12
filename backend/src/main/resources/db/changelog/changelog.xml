@@ -52,4 +52,8 @@
         <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_objeto.sql" relativeToChangelogFile="true" />
     </changeSet>
 
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-IMAGENS">
+        <comment>Insere Imagens</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_image.sql" relativeToChangelogFile="true" />
+    </changeSet>
 </databaseChangeLog>

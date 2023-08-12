@@ -25,7 +25,6 @@ public class ObjetoResponse extends ArtefatoIndividualResponse {
 
         this.setTituloArtefato(objeto.getArtefato().getTituloArtefato());
         this.setDescricaoArtefato(objeto.getArtefato().getDescricaoArtefato());
-        this.setTipoArtefato(objeto.getArtefato().getTipoArtefato());
         this.setAtivo(objeto.getArtefato().getAtivo());
         this.setDataCadastro(objeto.getArtefato().getDataCadastro().toString());
 
