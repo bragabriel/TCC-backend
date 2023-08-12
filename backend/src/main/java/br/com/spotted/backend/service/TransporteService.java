@@ -86,6 +86,7 @@ public class TransporteService {
                 .qtdAssentosPreenchidosTransporte(novo.getQtdAssentosPreenchidosTransporte())
                 .cidadeTransporte(novo.getCidadeTransporte())
                 .periodoTransporte(novo.getPeriodoTransporte())
+                .valorTransporte(novo.getValorTransporte())
                 .artefato(artefato)
                 .build();
 
@@ -117,6 +118,7 @@ public class TransporteService {
         transporte.setQtdAssentosTotalTransporte(transporteUpdateRequest.getQtdAssentosTotalTransporte());
         transporte.setCidadeTransporte(transporteUpdateRequest.getCidadeTransporte());
         transporte.setPeriodoTransporte(transporteUpdateRequest.getPeriodoTransporte());
+        transporte.setValorTransporte(transporteUpdateRequest.getValorTransporte());
         transporte.setArtefato(artefato);
         transporteRepository.save(transporte);
 
@@ -127,7 +129,8 @@ public class TransporteService {
                 transporte.getQtdAssentosPreenchidosTransporte(),
                 transporte.getQtdAssentosTotalTransporte(),
                 transporte.getCidadeTransporte(),
-                transporte.getPeriodoTransporte()
+                transporte.getPeriodoTransporte(),
+                transporte.getValorTransporte()
         );
     }
 

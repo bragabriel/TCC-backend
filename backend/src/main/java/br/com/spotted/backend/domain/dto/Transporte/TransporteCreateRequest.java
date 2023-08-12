@@ -9,16 +9,12 @@ import javax.validation.constraints.NotNull;
 @Data
 public class TransporteCreateRequest {
 
-    @NotEmpty
     private String informacoesVeiculoTransporte;
 
-    @NotEmpty
     private String informacoesCondutorTransporte;
 
-    @NotNull
     private Integer qtdAssentosTotalTransporte;
 
-    @NotNull
     private Integer qtdAssentosPreenchidosTransporte;
 
     @NotEmpty
@@ -26,6 +22,8 @@ public class TransporteCreateRequest {
 
     @NotEmpty
     private String periodoTransporte;
+
+    private String valorTransporte;
 
     @NotNull
     private ArtefatoCreateRequest artefato;
