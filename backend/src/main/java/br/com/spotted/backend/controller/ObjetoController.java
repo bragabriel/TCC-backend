@@ -1,12 +1,10 @@
 package br.com.spotted.backend.controller;
 
-import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoCreateRequest;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
-import br.com.spotted.backend.domain.entity.Objeto;
 import br.com.spotted.backend.service.ObjetoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -42,8 +40,8 @@ public class ObjetoController {
 
     @PostMapping("api/objeto")
     public ResponseEntity cadastrar(@Valid @RequestBody ObjetoCreateRequest postModel) {
-        ResponseBase<ObjetoResponse> retorno = objetoService.cadastrar(postModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
+        HttpStatus status = objetoService.cadastrar(postModel);
+        return ResponseEntity.status(status).build();
     }
 
     @PutMapping(value = "api/objetoAtualizar/{idObjeto}")

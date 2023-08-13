@@ -11,6 +11,7 @@ import br.com.spotted.backend.domain.entity.Transporte;
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.exception.TransporteNotFoundException;
 import br.com.spotted.backend.repository.TransporteRepository;
+import com.mysql.cj.protocol.x.Ok;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -66,7 +67,7 @@ public class TransporteService {
         return new ResponseBase<>(transporteResponse);
     }
 
-    public ResponseBase<TransporteResponse> cadastrar(TransporteCreateRequest novo) {
+    public HttpStatus cadastrar(TransporteCreateRequest novo) {
 
         ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
@@ -92,8 +93,7 @@ public class TransporteService {
 
         Transporte transporteSalva = transporteRepository.save(modeloDb);
 
-        TransporteResponse transporteResponse = new TransporteResponse(transporteSalva);
-        return new ResponseBase<>(transporteResponse);
+        return HttpStatus.CREATED;
     }
 
     public TransporteResponse atualizarTransporte(Long idTransporte, TransporteUpdateRequest transporteUpdateRequest){

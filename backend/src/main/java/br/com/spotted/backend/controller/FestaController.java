@@ -1,6 +1,5 @@
 package br.com.spotted.backend.controller;
 
-import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaUpdateRequest;
 import br.com.spotted.backend.domain.dto.Festa.FestaCreateRequest;
@@ -42,8 +41,8 @@ public class FestaController {
 
     @PostMapping("api/festa")
     public ResponseEntity cadastrar(@Valid @RequestBody FestaCreateRequest postModel) {
-        ResponseBase<FestaResponse> retorno = festaService.cadastrar(postModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
+        HttpStatus status = festaService.cadastrar(postModel);
+        return ResponseEntity.status(status).build();
     }
 
     @PutMapping(value = "api/festaAtualizar/{idFesta}")

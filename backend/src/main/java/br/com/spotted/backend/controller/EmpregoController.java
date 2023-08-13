@@ -1,6 +1,5 @@
 package br.com.spotted.backend.controller;
 
-import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoResponse;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoUpdateRequest;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoCreateRequest;
@@ -42,8 +41,8 @@ public class EmpregoController {
 
     @PostMapping("api/emprego")
     public ResponseEntity cadastrar(@Valid @RequestBody EmpregoCreateRequest postModel) {
-        ResponseBase<EmpregoResponse> retorno = empregoService.cadastrar(postModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
+        HttpStatus status = empregoService.cadastrar(postModel);
+        return ResponseEntity.status(status).build();
     }
 
     @PutMapping(value = "api/empregoAtualizar/{idEmprego}")

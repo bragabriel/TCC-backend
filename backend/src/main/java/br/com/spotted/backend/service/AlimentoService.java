@@ -67,9 +67,8 @@ public class AlimentoService {
         return new ResponseBase<>(alimentoResponse);
     }
 
-    public ResponseBase<AlimentoResponse> cadastrar(AlimentoCreateRequest novo) {
+    public HttpStatus cadastrar(AlimentoCreateRequest novo) {
 
-        //Cadastrando o artefato
         ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
         Artefato artefato = Artefato.builder()
@@ -91,12 +90,9 @@ public class AlimentoService {
                 .artefato(artefato)
                 .build();
 
-        //Cadastrando Alimento
         Alimento alimentoSalvo = alimentoRepository.save(modeloDb);
 
-        // Mapeia de entidade para dto
-        AlimentoResponse alimentoResponse = new AlimentoResponse(alimentoSalvo);
-        return new ResponseBase<>(alimentoResponse);
+        return HttpStatus.CREATED;
     }
 
     public AlimentoResponse atualizarAlimento(Long idAlimento, AlimentoUpdateRequest alimentoUpdateRequest){

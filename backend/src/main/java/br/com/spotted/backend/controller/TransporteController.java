@@ -41,8 +41,8 @@ public class TransporteController {
 
     @PostMapping("api/transporte")
     public ResponseEntity cadastrar(@Valid @RequestBody TransporteCreateRequest postModel) {
-        ResponseBase<TransporteResponse> retorno = transporteService.cadastrar(postModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
+        HttpStatus status = transporteService.cadastrar(postModel);
+        return ResponseEntity.status(status).build();
     }
 
     @PutMapping(value = "api/transporteAtualizar/{idTransporte}")
