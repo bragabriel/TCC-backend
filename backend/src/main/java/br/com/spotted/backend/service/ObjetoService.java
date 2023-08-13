@@ -66,7 +66,7 @@ public class ObjetoService {
         return new ResponseBase<>(objetoResponse);
     }
 
-    public ResponseBase<ObjetoResponse> cadastrar(ObjetoCreateRequest novo) {
+    public HttpStatus cadastrar(ObjetoCreateRequest novo) {
 
         ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
@@ -87,8 +87,7 @@ public class ObjetoService {
 
         Objeto apeSalvo = objetoRepository.save(modeloDb);
 
-        ObjetoResponse apeResponse = new ObjetoResponse(apeSalvo);
-        return new ResponseBase<>(apeResponse);
+        return HttpStatus.CREATED;
     }
 
     public ObjetoResponse atualizarObjeto(Long idObjeto, ObjetoUpdateRequest objetoUpdateRequest) {

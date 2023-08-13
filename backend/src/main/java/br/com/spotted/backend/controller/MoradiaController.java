@@ -1,6 +1,5 @@
 package br.com.spotted.backend.controller;
 
-import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaCreateRequest;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaUpdateRequest;
@@ -43,8 +42,8 @@ public class MoradiaController {
 
     @PostMapping("api/moradia")
     public ResponseEntity cadastrar(@Valid @RequestBody MoradiaCreateRequest postModel) {
-        ResponseBase<MoradiaResponse> retorno = moradiaService.cadastrar(postModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
+        HttpStatus status = moradiaService.cadastrar(postModel);
+        return ResponseEntity.status(status).build();
     }
 
     @PutMapping(value = "api/moradiaAtualizar/{idMoradia}")

@@ -44,8 +44,8 @@ public class AlimentoController {
 
     @PostMapping("api/alimento")
     public ResponseEntity cadastrar(@Valid @RequestBody AlimentoCreateRequest postModel) {
-        ResponseBase<AlimentoResponse> retorno = alimentoService.cadastrar(postModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
+        HttpStatus status = alimentoService.cadastrar(postModel);
+        return ResponseEntity.status(status).build();
     }
 
     @PutMapping(value = "api/alimentoAtualizar/{idAlimento}")

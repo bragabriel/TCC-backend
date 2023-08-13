@@ -15,9 +15,6 @@ public class ArtefatoCreateRequest {
     @NotEmpty
     private String descricaoArtefato;
 
-    @NotNull(message = "Não existe um artefato deste tipo!")
-    private TipoArtefato tipoArtefato;
-
     @NotNull
     private Long idUsuario;
 }

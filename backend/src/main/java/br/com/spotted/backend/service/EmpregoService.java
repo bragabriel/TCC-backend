@@ -66,7 +66,7 @@ public class EmpregoService {
         return new ResponseBase<>(empregoResponse);
     }
 
-    public ResponseBase<EmpregoResponse> cadastrar(EmpregoCreateRequest novo) {
+    public HttpStatus cadastrar(EmpregoCreateRequest novo) {
 
         ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
@@ -97,8 +97,7 @@ public class EmpregoService {
 
         Emprego empregoSalvo = empregoRepository.save(modeloDb);
 
-        EmpregoResponse empregoResponse = new EmpregoResponse(empregoSalvo);
-        return new ResponseBase<>(empregoResponse);
+        return HttpStatus.CREATED;
     }
 
     public EmpregoResponse atualizarEmprego(Long idEmprego, EmpregoUpdateRequest empregoUpdateRequest){

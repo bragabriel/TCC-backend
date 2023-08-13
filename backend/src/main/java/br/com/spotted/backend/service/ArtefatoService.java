@@ -64,14 +64,6 @@ public class ArtefatoService {
         //Validação de usuário no banco de dados
         usuarioService.pesquisarPorId(novo.getIdUsuario());
 
-        //Validando tipo de artefato
-        TipoArtefato tipoArtefato;
-        try {
-            tipoArtefato = TipoArtefato.valueOf(novo.getTipoArtefato().toString().toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tipo de artefato inválido");
-        }
-
         Artefato modeloDb = new Artefato();
         modeloDb.setTituloArtefato(novo.getTituloArtefato());
         modeloDb.setDescricaoArtefato(novo.getDescricaoArtefato());
