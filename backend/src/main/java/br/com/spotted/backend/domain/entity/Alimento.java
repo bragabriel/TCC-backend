@@ -1,7 +1,5 @@
 package br.com.spotted.backend.domain.entity;
 
-import br.com.spotted.backend.domain.dto.Alimento.TipoAlimento;
-import br.com.spotted.backend.service.ArtefatoService;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
