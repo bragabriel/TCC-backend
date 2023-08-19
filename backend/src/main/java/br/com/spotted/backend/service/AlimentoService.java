@@ -67,7 +67,7 @@ public class AlimentoService {
         return new ResponseBase<>(alimentoResponse);
     }
 
-    public HttpStatus cadastrar(AlimentoCreateRequest novo) {
+    public Long cadastrar(AlimentoCreateRequest novo) {
 
         ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
@@ -92,7 +92,7 @@ public class AlimentoService {
 
         Alimento alimentoSalvo = alimentoRepository.save(modeloDb);
 
-        return HttpStatus.CREATED;
+        return alimentoSalvo.getArtefato().getIdArtefato();
     }
 
     public AlimentoResponse atualizarAlimento(Long idAlimento, AlimentoUpdateRequest alimentoUpdateRequest){

@@ -40,8 +40,8 @@ public class ObjetoController {
 
     @PostMapping("api/objeto")
     public ResponseEntity cadastrar(@Valid @RequestBody ObjetoCreateRequest postModel) {
-        HttpStatus status = objetoService.cadastrar(postModel);
-        return ResponseEntity.status(status).build();
+        Long idArtefato = objetoService.cadastrar(postModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(idArtefato);
     }
 
     @PutMapping(value = "api/objetoAtualizar/{idObjeto}")

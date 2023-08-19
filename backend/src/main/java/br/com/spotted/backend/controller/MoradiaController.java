@@ -42,8 +42,8 @@ public class MoradiaController {
 
     @PostMapping("api/moradia")
     public ResponseEntity cadastrar(@Valid @RequestBody MoradiaCreateRequest postModel) {
-        HttpStatus status = moradiaService.cadastrar(postModel);
-        return ResponseEntity.status(status).build();
+        Long idArtefato = moradiaService.cadastrar(postModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(idArtefato);
     }
 
     @PutMapping(value = "api/moradiaAtualizar/{idMoradia}")

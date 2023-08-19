@@ -68,7 +68,7 @@ public class FestaService {
         return new ResponseBase<>(apeResponse);
     }
 
-    public HttpStatus cadastrar(FestaCreateRequest novo) {
+    public Long cadastrar(FestaCreateRequest novo) {
 
         ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
@@ -88,7 +88,7 @@ public class FestaService {
 
         Festa apeSalvo = festaRepository.save(modeloDb);
 
-        return HttpStatus.CREATED;
+        return apeSalvo.getArtefato().getIdArtefato();
     }
 
     public FestaResponse atualizarFesta(Long idFesta, FestaUpdateRequest festaUpdateRequest) {

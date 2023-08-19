@@ -66,7 +66,7 @@ public class MoradiaService {
         return new ResponseBase<>(moradiaResponse);
     }
 
-    public HttpStatus cadastrar(MoradiaCreateRequest novo) {
+    public Long cadastrar(MoradiaCreateRequest novo) {
 
         ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
@@ -95,7 +95,7 @@ public class MoradiaService {
 
         Moradia moradiaSalvo = moradiaRepository.save(modeloDb);
 
-        return HttpStatus.CREATED;
+        return moradiaSalvo.getArtefato().getIdArtefato();
     }
 
     public MoradiaResponse atualizarMoradia(Long idMoradia, MoradiaUpdateRequest moradiaUpdateRequest) {

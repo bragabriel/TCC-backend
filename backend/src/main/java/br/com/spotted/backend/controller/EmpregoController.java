@@ -41,8 +41,8 @@ public class EmpregoController {
 
     @PostMapping("api/emprego")
     public ResponseEntity cadastrar(@Valid @RequestBody EmpregoCreateRequest postModel) {
-        HttpStatus status = empregoService.cadastrar(postModel);
-        return ResponseEntity.status(status).build();
+        Long idArtefato = empregoService.cadastrar(postModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(idArtefato);
     }
 
     @PutMapping(value = "api/empregoAtualizar/{idEmprego}")
