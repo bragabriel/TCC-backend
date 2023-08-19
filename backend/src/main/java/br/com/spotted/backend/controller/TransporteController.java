@@ -48,7 +48,7 @@ public class TransporteController {
     @PutMapping(value = "api/transporteAtualizar/{idTransporte}")
     public ResponseEntity<TransporteResponse> atualizarTransporte(
             @PathVariable Long idTransporte,
-            @RequestBody @Valid TransporteUpdateRequesst transporteUpdateRequest
+            @RequestBody @Valid TransporteUpdateRequest transporteUpdateRequest
     ){
         var transporte = transporteService.atualizarTransporte(idTransporte, transporteUpdateRequest);
         return ResponseEntity.ok(transporte);
