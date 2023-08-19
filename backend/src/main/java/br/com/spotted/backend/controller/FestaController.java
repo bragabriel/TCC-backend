@@ -41,8 +41,8 @@ public class FestaController {
 
     @PostMapping("api/festa")
     public ResponseEntity cadastrar(@Valid @RequestBody FestaCreateRequest postModel) {
-        HttpStatus status = festaService.cadastrar(postModel);
-        return ResponseEntity.status(status).build();
+        Long idArtefato = festaService.cadastrar(postModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(idArtefato);
     }
 
     @PutMapping(value = "api/festaAtualizar/{idFesta}")

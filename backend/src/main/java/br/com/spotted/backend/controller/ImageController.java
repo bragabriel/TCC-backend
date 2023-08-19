@@ -20,24 +20,24 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
-    @PostMapping(value = "/uploadImage/{idArtefato}", consumes = "multipart/form-data")
+    @PostMapping(value = "/api/uploadImage/{idArtefato}", consumes = "multipart/form-data")
     @CrossOrigin()
     public ResponseEntity uploadImage(@RequestPart("files") MultipartFile[] file, @Valid @PathVariable Long idArtefato) throws IOException {
         return ResponseEntity.ok(imageService.createImage(file, idArtefato));
     }
 
-    @GetMapping("{idArtefato}")
+    @GetMapping("/api/{idArtefato}")
     @CrossOrigin()
     public ResponseEntity findAlimentoImageByIdImage(@PathVariable Long idArtefato){
         return ResponseEntity.ok(imageService.findImageByIdArtefato(idArtefato));
     }
 
-    @DeleteMapping("{imageId}")
+    @DeleteMapping("/api/{imageId}")
     public ResponseEntity deleteAlimentoImage(@PathVariable Long imageId){
         return ResponseEntity.ok(imageService.deleteImage(imageId));
     }
 
-    @PutMapping("/updateImage/{imageId}")
+    @PutMapping("/api/updateImage/{imageId}")
     public ResponseEntity updateAlimentoImageSequence(@PathVariable Long imageId, @RequestBody @NotNull ImageUpdateRequest imageUpdateRequest){
         return ResponseEntity.ok(imageService.updateImageSequence(imageId, imageUpdateRequest));
     }

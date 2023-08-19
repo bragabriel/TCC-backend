@@ -67,7 +67,7 @@ public class TransporteService {
         return new ResponseBase<>(transporteResponse);
     }
 
-    public HttpStatus cadastrar(TransporteCreateRequest novo) {
+    public Long cadastrar(TransporteCreateRequest novo) {
 
         ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
 
@@ -93,7 +93,7 @@ public class TransporteService {
 
         Transporte transporteSalva = transporteRepository.save(modeloDb);
 
-        return HttpStatus.CREATED;
+        return transporteSalva.getArtefato().getIdArtefato();
     }
 
     public TransporteResponse atualizarTransporte(Long idTransporte, TransporteUpdateRequest transporteUpdateRequest){

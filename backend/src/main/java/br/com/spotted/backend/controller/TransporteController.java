@@ -41,14 +41,14 @@ public class TransporteController {
 
     @PostMapping("api/transporte")
     public ResponseEntity cadastrar(@Valid @RequestBody TransporteCreateRequest postModel) {
-        HttpStatus status = transporteService.cadastrar(postModel);
-        return ResponseEntity.status(status).build();
+        Long idArtefato = transporteService.cadastrar(postModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(idArtefato);
     }
 
     @PutMapping(value = "api/transporteAtualizar/{idTransporte}")
     public ResponseEntity<TransporteResponse> atualizarTransporte(
             @PathVariable Long idTransporte,
-            @RequestBody @Valid TransporteUpdateRequest transporteUpdateRequest
+            @RequestBody @Valid TransporteUpdateRequesst transporteUpdateRequest
     ){
         var transporte = transporteService.atualizarTransporte(idTransporte, transporteUpdateRequest);
         return ResponseEntity.ok(transporte);
