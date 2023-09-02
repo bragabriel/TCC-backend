@@ -47,6 +47,7 @@ CREATE TABLE [dbo].[Artefato](
 	[titulo_artefato] [varchar](255) NOT NULL,
 	[descricao_artefato] [varchar](255) NOT NULL,
 	[ativo] [bit] NOT NULL,
+	[tipo_artefato] [varchar] (255) NOT NULL,
 	[data_cadastro] [date] NOT NULL,
 	[data_inativo] [date] NULL,
 	[data_atualizacao] [date] NULL,

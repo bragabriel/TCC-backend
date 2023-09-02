@@ -9,6 +9,7 @@ import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Alimento;
 import br.com.spotted.backend.domain.entity.Artefato;
+import br.com.spotted.backend.domain.entity.TipoArtefato;
 import br.com.spotted.backend.exception.AlimentoNotFoundException;
 import br.com.spotted.backend.repository.AlimentoRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -75,6 +75,7 @@ public class AlimentoService {
                 .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
                 .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
                 .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
+                .tipoArtefato(TipoArtefato.ALIMENTO)
                 .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
                 .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())
                 .build();

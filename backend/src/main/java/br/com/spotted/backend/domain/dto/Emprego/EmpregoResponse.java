@@ -64,6 +64,7 @@ public class EmpregoResponse extends ArtefatoIndividualResponse {
         this.setTituloArtefato(emprego.getArtefato().getTituloArtefato());
         this.setDescricaoArtefato(emprego.getArtefato().getDescricaoArtefato());
         this.setAtivo(emprego.getArtefato().getAtivo());
+        this.setTipoArtefato(emprego.getArtefato().getTipoArtefato());
         this.setDataCadastro(emprego.getArtefato().getDataCadastro().toString());
 
         if (emprego.getArtefato() != null && emprego.getArtefato().getDataAtualizacao() != null) {

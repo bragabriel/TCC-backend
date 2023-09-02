@@ -11,6 +11,7 @@ import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Alimento;
 import br.com.spotted.backend.domain.entity.Festa;
 import br.com.spotted.backend.domain.entity.Artefato;
+import br.com.spotted.backend.domain.entity.TipoArtefato;
 import br.com.spotted.backend.exception.FestaNotFoundException;
 import br.com.spotted.backend.repository.FestaRepository;
 import lombok.RequiredArgsConstructor;
@@ -76,6 +77,7 @@ public class FestaService {
                 .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
                 .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
                 .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
+                .tipoArtefato(TipoArtefato.FESTA)
                 .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
                 .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())
                 .build();

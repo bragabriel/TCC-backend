@@ -16,5 +16,8 @@ public class ArtefatoCreateRequest {
     private String descricaoArtefato;
 
     @NotNull
+    private TipoArtefato tipoArtefato;
+
+    @NotNull
     private Long idUsuario;
 }

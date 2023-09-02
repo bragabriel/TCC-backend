@@ -39,6 +39,7 @@ public class AlimentoResponse extends ArtefatoIndividualResponse {
         this.setTituloArtefato(alimento.getArtefato().getTituloArtefato());
         this.setDescricaoArtefato(alimento.getArtefato().getDescricaoArtefato());
         this.setAtivo(alimento.getArtefato().getAtivo());
+        this.setTipoArtefato(alimento.getArtefato().getTipoArtefato());
         this.setDataCadastro(alimento.getArtefato().getDataCadastro().toString());
 
         if (alimento.getArtefato() != null && alimento.getArtefato().getDataAtualizacao() != null) {
