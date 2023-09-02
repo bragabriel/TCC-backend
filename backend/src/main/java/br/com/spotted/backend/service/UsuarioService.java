@@ -6,6 +6,7 @@ import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioCreateRequest;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioResponse;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioUpdateRequest_NomeSobrenome;
+import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.Usuario;
 import br.com.spotted.backend.exception.EmailDuplicadoException;
 import br.com.spotted.backend.exception.UsuarioNotFoundException;
@@ -19,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -57,10 +59,18 @@ public class UsuarioService {
         Usuario usuario = responsavelOptional
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
 
-        UsuarioResponse usuarioResponse = new UsuarioResponse(usuario);
+        List<Artefato> artefatosAtivos = usuario.getListaArtefatos().stream()
+                .filter(artefato -> artefato.getAtivo() == true)
+                .collect(Collectors.toList());
+
+        Usuario newUser = new Usuario(usuario);
+        newUser.setListaArtefatos(artefatosAtivos);
+
+        UsuarioResponse usuarioResponse = new UsuarioResponse(newUser);
 
         return new ResponseBase<>(usuarioResponse);
     }
+
     public ResponseBase<UsuarioResponse> cadastrar(UsuarioCreateRequest novo) {
         validateEmail(novo.getEmail());
 

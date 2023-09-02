@@ -32,7 +32,7 @@ public class FestaService {
     private final ArtefatoService artefatoService;
 
     public ResponseBase<List<FestaResponse>> pesquisar() {
-        Iterable<Festa> festas = festaRepository.findAll();
+        Iterable<Festa> festas = festaRepository.findAllFestasWithArtefatoAtivo();
         List<FestaResponse> festaResponse = new ArrayList<>();
 
         for (Festa festa : festas) {

@@ -28,5 +28,19 @@ public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, L
     Usuario login(@Param("email") String emailUsuario,
                         @Param("senha") String senhaUsuario);
     Optional<Usuario> findByEmailUsuario (String email);
+
+    @Query("SELECT u FROM Usuario u JOIN u.listaArtefatos a WHERE u.idUsuario = :id AND a.ativo = true")
+    Optional<Usuario> findByIdAndArtefatoAtivo(@Param("id") Long id);
+
+
+    @Query(
+            nativeQuery = true,
+            value = "SELECT * FROM Usuario u " +
+                    "INNER JOIN Artefato a " +
+                    "ON a.id_usuario = u.id_usuario " +
+                    "WHERE (u.id_usuario = :id) " +
+                    "AND (a.ativo = 1)"
+    )
+    Optional<Usuario> teste(@Param("id") Long id);
 }
 

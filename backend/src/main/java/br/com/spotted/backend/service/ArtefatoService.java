@@ -29,22 +29,6 @@ public class ArtefatoService {
     private final ArtefatoRepository artefatoRepository;
     private final UsuarioService usuarioService;
 
-//    public ResponseBase<Page<ArtefatoResponse>> pesquisar(PaginatedSearchRequest searchRequest, Boolean ativo) {
-//
-//        if (searchRequest.getPaginaAtual() < 1) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");
-//        }
-//
-//        if (searchRequest.getQtdPorPagina() < 1 || searchRequest.getQtdPorPagina() > 50) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantidade de itens por página deve ser entre 1 e 50 itens");
-//        }
-//
-//        Page<Artefato> page;
-//
-//        Page<ArtefatoResponse> artefatoResponsePage = page.map(ArtefatoResponse::new);
-//        return new ResponseBase<>(artefatoResponsePage);
-//    }
-
     public ResponseBase<ArtefatoResponse> pesquisarPorId(Long id) {
         Optional<Artefato> artefatoOptional = artefatoRepository.findById(id);
 

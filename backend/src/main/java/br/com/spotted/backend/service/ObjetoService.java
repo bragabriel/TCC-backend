@@ -30,7 +30,7 @@ public class ObjetoService {
     private final ArtefatoService artefatoService;
 
     public ResponseBase<List<ObjetoResponse>> pesquisar() {
-        Iterable<Objeto> objetos = objetoRepository.findAll();
+        Iterable<Objeto> objetos = objetoRepository.findAllObjetosWithArtefatoAtivo();
         List<ObjetoResponse> objetoResponses = new ArrayList<>();
 
         for (Objeto objeto : objetos) {

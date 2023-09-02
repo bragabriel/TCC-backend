@@ -30,7 +30,7 @@ public class MoradiaService {
     private final ArtefatoService artefatoService;
 
     public ResponseBase<List<MoradiaResponse>> pesquisar() {
-        Iterable<Moradia> moradias = moradiaRepository.findAll();
+        Iterable<Moradia> moradias = moradiaRepository.findAllMoradiasWithArtefatoAtivo();
         List<MoradiaResponse> moradiaResponses = new ArrayList<>();
 
         for (Moradia moradia : moradias) {
