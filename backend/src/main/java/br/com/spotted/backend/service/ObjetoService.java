@@ -9,6 +9,7 @@ import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.entity.Objeto;
 import br.com.spotted.backend.domain.entity.Artefato;
+import br.com.spotted.backend.domain.entity.TipoArtefato;
 import br.com.spotted.backend.exception.ObjetoNotFoundException;
 import br.com.spotted.backend.repository.ObjetoRepository;
 import lombok.RequiredArgsConstructor;
@@ -74,6 +75,7 @@ public class ObjetoService {
                 .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
                 .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
                 .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
+                .tipoArtefato(TipoArtefato.OBJETO)
                 .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
                 .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())
                 .build();

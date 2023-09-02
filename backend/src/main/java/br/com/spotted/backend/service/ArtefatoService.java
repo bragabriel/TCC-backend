@@ -51,6 +51,7 @@ public class ArtefatoService {
         Artefato modeloDb = new Artefato();
         modeloDb.setTituloArtefato(novo.getTituloArtefato());
         modeloDb.setDescricaoArtefato(novo.getDescricaoArtefato());
+        modeloDb.setTipoArtefato(novo.getTipoArtefato());
         modeloDb.setAtivo(true);
         modeloDb.setDataCadastro(dataAtual);
         modeloDb.setIdUsuario(novo.getIdUsuario());

@@ -7,6 +7,7 @@ import br.com.spotted.backend.domain.dto.Transporte.TransporteResponse;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.dto.Transporte.TransporteUpdateRequest;
+import br.com.spotted.backend.domain.entity.TipoArtefato;
 import br.com.spotted.backend.domain.entity.Transporte;
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.exception.TransporteNotFoundException;
@@ -75,6 +76,7 @@ public class TransporteService {
                 .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
                 .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
                 .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
+                .tipoArtefato(TipoArtefato.TRANSPORTE)
                 .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
                 .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())
                 .build();
