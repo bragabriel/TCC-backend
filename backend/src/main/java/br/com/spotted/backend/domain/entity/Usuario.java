@@ -50,4 +50,17 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", targetEntity = Artefato.class, orphanRemoval = true)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private List<Artefato> listaArtefatos = new ArrayList<Artefato>();
+
+    public Usuario(Usuario usuario) {
+        this.idUsuario = usuario.idUsuario;
+        this.nomeUsuario = usuario.nomeUsuario;
+        this.sobrenomeUsuario = usuario.sobrenomeUsuario;
+        this.emailUsuario = usuario.emailUsuario;
+        this.senhaUsuario = usuario.senhaUsuario;
+        this.telefoneUsuario = usuario.telefoneUsuario;
+        this.dataNascimento = usuario.dataNascimento;
+        this.url = usuario.url;
+        this.fileName = usuario.fileName;
+        this.listaArtefatos = usuario.listaArtefatos;
+    }
 }

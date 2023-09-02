@@ -31,7 +31,7 @@ public class EmpregoService {
 
 
     public ResponseBase<List<EmpregoResponse>> pesquisar() {
-        Iterable<Emprego> empregos = empregoRepository.findAll();
+        Iterable<Emprego> empregos = empregoRepository.findAllEmpregosWithArtefatoAtivo();
         List<EmpregoResponse> empregoResponse = new ArrayList<>();
 
         for (Emprego emprego : empregos) {

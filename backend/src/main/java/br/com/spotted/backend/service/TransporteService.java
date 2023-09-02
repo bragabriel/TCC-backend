@@ -31,7 +31,7 @@ public class TransporteService {
     private final ArtefatoService artefatoService;
 
     public ResponseBase<List<TransporteResponse>> pesquisar() {
-        Iterable<Transporte> transportes = transporteRepository.findAll();
+        Iterable<Transporte> transportes = transporteRepository.findAllTransportesWithArtefatoAtivo();
         List<TransporteResponse> transporteResponses = new ArrayList<>();
 
         for (Transporte transporte : transportes) {

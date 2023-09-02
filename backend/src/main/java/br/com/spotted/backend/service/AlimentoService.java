@@ -31,7 +31,7 @@ public class AlimentoService {
     private final ArtefatoService artefatoService;
 
     public ResponseBase<List<AlimentoResponse>> pesquisar() {
-        Iterable<Alimento> alimentos = alimentoRepository.findAll();
+        Iterable<Alimento> alimentos = alimentoRepository.findAllAlimentosWithArtefatoAtivo();
         List<AlimentoResponse> alimentoResponses = new ArrayList<>();
 
         for (Alimento alimento : alimentos) {
