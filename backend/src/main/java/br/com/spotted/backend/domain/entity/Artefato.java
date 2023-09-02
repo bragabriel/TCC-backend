@@ -33,6 +33,10 @@ public class Artefato {
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;
 
+    @Column(name = "tipo_artefato", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TipoArtefato tipoArtefato;
+
     @Column(name = "data_cadastro", nullable = false)
     private Date dataCadastro;
 
@@ -76,6 +80,7 @@ public class Artefato {
         this.tituloArtefato = artefato.getTituloArtefato();
         this.descricaoArtefato = artefato.getDescricaoArtefato();
         this.ativo = artefato.getAtivo();
+        this.tipoArtefato = artefato.getTipoArtefato();
         this.dataCadastro = artefato.getDataCadastro();
         this.idUsuario = artefato.getIdUsuario();
     }

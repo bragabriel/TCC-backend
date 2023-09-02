@@ -1,6 +1,5 @@
 package br.com.spotted.backend.domain.dto.Artefato;
 
-import br.com.spotted.backend.domain.entity.TipoArtefato;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;

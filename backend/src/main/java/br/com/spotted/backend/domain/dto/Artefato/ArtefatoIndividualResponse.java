@@ -2,6 +2,7 @@ package br.com.spotted.backend.domain.dto.Artefato;
 
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.Imagem;
+import br.com.spotted.backend.domain.entity.TipoArtefato;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ public class ArtefatoIndividualResponse {
     private String tituloArtefato;
     private String descricaoArtefato;
     private Boolean ativo;
+    private String tipoArtefato;
     private String dataCadastro;
     private String dataAtualizacao;
     private Long idUsuario;
@@ -28,6 +30,7 @@ public class ArtefatoIndividualResponse {
         this.tituloArtefato = artefato.getTituloArtefato();
         this.descricaoArtefato = artefato.getDescricaoArtefato();
         this.ativo = artefato.getAtivo();
+        this.tipoArtefato = artefato.getTipoArtefato().toString();
         this.dataCadastro = artefato.getDataCadastro().toString();
         this.dataAtualizacao = artefato.getDataAtualizacao().toString();
         this.idUsuario = artefato.getIdUsuario();
