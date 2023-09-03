@@ -1,5 +1,6 @@
 package br.com.spotted.backend.domain.dto.Emprego;
 
+import br.com.spotted.backend.domain.dto.Artefato.ArtefatoIndividualResponse;
 import br.com.spotted.backend.domain.entity.Emprego;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmpregoResponse{
+public class EmpregoArtefatoResponse extends ArtefatoIndividualResponse {
 
     private Long idArtefato;
 
@@ -25,6 +26,10 @@ public class EmpregoResponse{
 
     private String linkVagaEmprego;
 
+    private String tituloArtefato;
+
+    private String descricaoArtefato;
+
     private String empresaEmprego;
 
     private String cidadeEmprego;
@@ -38,8 +43,11 @@ public class EmpregoResponse{
     private String presencialEmprego;
 
 
-    public EmpregoResponse(Emprego emprego) {
+    public EmpregoArtefatoResponse(Emprego emprego) {
+        super();
         this.idArtefato = emprego.getIdArtefato();
+        this.tituloArtefato = emprego.getArtefato().getTituloArtefato();
+        this.descricaoArtefato = emprego.getArtefato().getDescricaoArtefato();
         this.localizacaoEmprego = emprego.getLocalizacaoEmprego();
         this.requisitosEmprego = emprego.getRequisitosEmprego();
         this.salarioEmprego = emprego.getSalarioEmprego();
@@ -52,5 +60,21 @@ public class EmpregoResponse{
         this.experienciaEmprego = emprego.getExperienciaEmprego();
         this.tipoVagaEmprego = emprego.getTipoVagaEmprego();
         this.presencialEmprego = emprego.getPresencialEmprego();
+
+        this.setTituloArtefato(emprego.getArtefato().getTituloArtefato());
+        this.setDescricaoArtefato(emprego.getArtefato().getDescricaoArtefato());
+        this.setAtivo(emprego.getArtefato().getAtivo());
+        this.setTipoArtefato(emprego.getArtefato().getTipoArtefato());
+        this.setDataCadastro(emprego.getArtefato().getDataCadastro().toString());
+
+        if (emprego.getArtefato() != null && emprego.getArtefato().getDataAtualizacao() != null) {
+            this.setDataAtualizacao(emprego.getArtefato().getDataAtualizacao().toString());
+        } else {
+            this.setDataAtualizacao("");
+        }
+
+        this.setIdUsuario(emprego.getArtefato().getIdUsuario());
+        this.setTelefoneUsuario(emprego.getArtefato().getUsuario().getTelefoneUsuario());
+        this.setListaImagens(emprego.getArtefato().getListaImagens());
     }
 }

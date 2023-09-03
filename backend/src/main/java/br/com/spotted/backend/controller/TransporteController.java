@@ -1,7 +1,7 @@
 package br.com.spotted.backend.controller;
 
 import br.com.spotted.backend.domain.dto.Transporte.TransporteCreateRequest;
-import br.com.spotted.backend.domain.dto.Transporte.TransporteResponse;
+import br.com.spotted.backend.domain.dto.Transporte.TransporteArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Transporte.TransporteUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
@@ -22,20 +22,20 @@ public class TransporteController {
     private final TransporteService transporteService;
 
     @GetMapping("api/transporte")
-    public ResponseEntity<ResponseBase<List<TransporteResponse>>> pesquisar() {
-        ResponseBase<List<TransporteResponse>> retorno = transporteService.pesquisar();
+    public ResponseEntity<ResponseBase<List<TransporteArtefatoResponse>>> pesquisar() {
+        ResponseBase<List<TransporteArtefatoResponse>> retorno = transporteService.pesquisar();
         return ResponseEntity.ok(retorno);
     }
 
     @GetMapping("api/transportePaginado")
     public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
-        ResponseBase<Page<TransporteResponse>> retorno = transporteService.pesquisarPaginado(searchRequest);
+        ResponseBase<Page<TransporteArtefatoResponse>> retorno = transporteService.pesquisarPaginado(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 
     @GetMapping(value = "api/transporte/{idTransporte}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idTransporte) {
-        ResponseBase<TransporteResponse> retorno = transporteService.pesquisarPorId(idTransporte);
+        ResponseBase<TransporteArtefatoResponse> retorno = transporteService.pesquisarPorId(idTransporte);
         return ResponseEntity.ok(retorno);
     }
 
@@ -46,7 +46,7 @@ public class TransporteController {
     }
 
     @PutMapping(value = "api/transporteAtualizar/{idTransporte}")
-    public ResponseEntity<TransporteResponse> atualizarTransporte(
+    public ResponseEntity<TransporteArtefatoResponse> atualizarTransporte(
             @PathVariable Long idTransporte,
             @RequestBody @Valid TransporteUpdateRequest transporteUpdateRequest
     ){

@@ -3,7 +3,7 @@ package br.com.spotted.backend.service;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Transporte.TransporteCreateRequest;
-import br.com.spotted.backend.domain.dto.Transporte.TransporteResponse;
+import br.com.spotted.backend.domain.dto.Transporte.TransporteArtefatoResponse;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.dto.Transporte.TransporteUpdateRequest;
@@ -12,7 +12,6 @@ import br.com.spotted.backend.domain.entity.Transporte;
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.exception.TransporteNotFoundException;
 import br.com.spotted.backend.repository.TransporteRepository;
-import com.mysql.cj.protocol.x.Ok;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,18 +30,18 @@ public class TransporteService {
     @Autowired
     private final ArtefatoService artefatoService;
 
-    public ResponseBase<List<TransporteResponse>> pesquisar() {
+    public ResponseBase<List<TransporteArtefatoResponse>> pesquisar() {
         Iterable<Transporte> transportes = transporteRepository.findAllTransportesWithArtefatoAtivo();
-        List<TransporteResponse> transporteResponses = new ArrayList<>();
+        List<TransporteArtefatoResponse> transporteArtefatoRespons = new ArrayList<>();
 
         for (Transporte transporte : transportes) {
-            transporteResponses.add(new TransporteResponse(transporte));
+            transporteArtefatoRespons.add(new TransporteArtefatoResponse(transporte));
         }
 
-        return new ResponseBase<>(transporteResponses);
+        return new ResponseBase<>(transporteArtefatoRespons);
     }
 
-    public ResponseBase<Page<TransporteResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
+    public ResponseBase<Page<TransporteArtefatoResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
 
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");
@@ -53,19 +52,19 @@ public class TransporteService {
 
         Page<Transporte> transportePage = transporteRepository.findAll(searchRequest.parseToPageRequest());
 
-        Page<TransporteResponse> transporteResponsePage = transportePage.map(TransporteResponse::new);
+        Page<TransporteArtefatoResponse> transporteResponsePage = transportePage.map(TransporteArtefatoResponse::new);
         return new ResponseBase<>(transporteResponsePage);
     }
 
-    public ResponseBase<TransporteResponse> pesquisarPorId(Long id) {
+    public ResponseBase<TransporteArtefatoResponse> pesquisarPorId(Long id) {
         Optional<Transporte> transporteOptional = transporteRepository.findById(id);
 
         Transporte transporte = transporteOptional
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Transporte não encontrada."));
 
-        TransporteResponse transporteResponse = new TransporteResponse(transporte);
+        TransporteArtefatoResponse transporteArtefatoResponse = new TransporteArtefatoResponse(transporte);
 
-        return new ResponseBase<>(transporteResponse);
+        return new ResponseBase<>(transporteArtefatoResponse);
     }
 
     public Long cadastrar(TransporteCreateRequest novo) {
@@ -98,7 +97,7 @@ public class TransporteService {
         return transporteSalva.getArtefato().getIdArtefato();
     }
 
-    public TransporteResponse atualizarTransporte(Long idTransporte, TransporteUpdateRequest transporteUpdateRequest){
+    public TransporteArtefatoResponse atualizarTransporte(Long idTransporte, TransporteUpdateRequest transporteUpdateRequest){
 
         Calendar cal = Calendar.getInstance();
         Date dataAtual = cal.getTime();
@@ -124,7 +123,7 @@ public class TransporteService {
         transporte.setArtefato(artefato);
         transporteRepository.save(transporte);
 
-        return new TransporteResponse(
+        return new TransporteArtefatoResponse(
                 transporte.getIdArtefato(),
                 transporte.getInformacoesVeiculoTransporte(),
                 transporte.getInformacoesCondutorTransporte(),

@@ -1,14 +1,12 @@
 package br.com.spotted.backend.service;
 
-import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaCreateRequest;
-import br.com.spotted.backend.domain.dto.Festa.FestaResponse;
+import br.com.spotted.backend.domain.dto.Festa.FestaArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
-import br.com.spotted.backend.domain.entity.Alimento;
 import br.com.spotted.backend.domain.entity.Festa;
 import br.com.spotted.backend.domain.entity.Artefato;
 import br.com.spotted.backend.domain.entity.TipoArtefato;
@@ -32,18 +30,18 @@ public class FestaService {
     @Autowired
     private final ArtefatoService artefatoService;
 
-    public ResponseBase<List<FestaResponse>> pesquisar() {
+    public ResponseBase<List<FestaArtefatoResponse>> pesquisar() {
         Iterable<Festa> festas = festaRepository.findAllFestasWithArtefatoAtivo();
-        List<FestaResponse> festaResponse = new ArrayList<>();
+        List<FestaArtefatoResponse> festaArtefatoResponse = new ArrayList<>();
 
         for (Festa festa : festas) {
-            festaResponse.add(new FestaResponse(festa));
+            festaArtefatoResponse.add(new FestaArtefatoResponse(festa));
         }
 
-        return new ResponseBase<>(festaResponse);
+        return new ResponseBase<>(festaArtefatoResponse);
     }
 
-    public ResponseBase<Page<FestaResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
+    public ResponseBase<Page<FestaArtefatoResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
 
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");
@@ -54,17 +52,17 @@ public class FestaService {
 
         Page<Festa> festaPage = festaRepository.findAll(searchRequest.parseToPageRequest());
 
-        Page<FestaResponse> apeResponsePage = festaPage.map(FestaResponse::new);
+        Page<FestaArtefatoResponse> apeResponsePage = festaPage.map(FestaArtefatoResponse::new);
         return new ResponseBase<>(apeResponsePage);
     }
 
-    public ResponseBase<FestaResponse> pesquisarPorId(Long id) {
+    public ResponseBase<FestaArtefatoResponse> pesquisarPorId(Long id) {
 
         Optional<Festa> apeOptional = festaRepository.findById(id);
 
         Festa ape = apeOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Festa não encontrada."));
 
-        FestaResponse apeResponse = new FestaResponse(ape);
+        FestaArtefatoResponse apeResponse = new FestaArtefatoResponse(ape);
 
         return new ResponseBase<>(apeResponse);
     }
@@ -93,7 +91,7 @@ public class FestaService {
         return apeSalvo.getArtefato().getIdArtefato();
     }
 
-    public FestaResponse atualizarFesta(Long idFesta, FestaUpdateRequest festaUpdateRequest) {
+    public FestaArtefatoResponse atualizarFesta(Long idFesta, FestaUpdateRequest festaUpdateRequest) {
 
         Calendar cal = Calendar.getInstance();
         Date dataAtual = cal.getTime();
@@ -113,7 +111,7 @@ public class FestaService {
         festa.setArtefato(artefato);
         festaRepository.save(festa);
 
-        return new FestaResponse(
+        return new FestaArtefatoResponse(
                 festa.getIdArtefato(),
                 festa.getLocalizacaoFesta()
         );

@@ -3,7 +3,7 @@ package br.com.spotted.backend.service;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaCreateRequest;
-import br.com.spotted.backend.domain.dto.Moradia.MoradiaResponse;
+import br.com.spotted.backend.domain.dto.Moradia.MoradiaArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
@@ -30,18 +30,18 @@ public class MoradiaService {
     @Autowired
     private final ArtefatoService artefatoService;
 
-    public ResponseBase<List<MoradiaResponse>> pesquisar() {
+    public ResponseBase<List<MoradiaArtefatoResponse>> pesquisar() {
         Iterable<Moradia> moradias = moradiaRepository.findAllMoradiasWithArtefatoAtivo();
-        List<MoradiaResponse> moradiaResponses = new ArrayList<>();
+        List<MoradiaArtefatoResponse> moradiaArtefatoRespons = new ArrayList<>();
 
         for (Moradia moradia : moradias) {
-            moradiaResponses.add(new MoradiaResponse(moradia));
+            moradiaArtefatoRespons.add(new MoradiaArtefatoResponse(moradia));
         }
 
-        return new ResponseBase<>(moradiaResponses);
+        return new ResponseBase<>(moradiaArtefatoRespons);
     }
 
-    public ResponseBase<Page<MoradiaResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
+    public ResponseBase<Page<MoradiaArtefatoResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
 
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");
@@ -52,19 +52,19 @@ public class MoradiaService {
 
         Page<Moradia> moradiaPage = moradiaRepository.findAll(searchRequest.parseToPageRequest());
 
-        Page<MoradiaResponse> moradiaResponsePage = moradiaPage.map(MoradiaResponse::new);
+        Page<MoradiaArtefatoResponse> moradiaResponsePage = moradiaPage.map(MoradiaArtefatoResponse::new);
         return new ResponseBase<>(moradiaResponsePage);
     }
 
-    public ResponseBase<MoradiaResponse> pesquisarPorId(Long id) {
+    public ResponseBase<MoradiaArtefatoResponse> pesquisarPorId(Long id) {
 
         Optional<Moradia> moradiaOptional = moradiaRepository.findById(id);
 
         Moradia moradia = moradiaOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Apê não encontrado."));
 
-        MoradiaResponse moradiaResponse = new MoradiaResponse(moradia);
+        MoradiaArtefatoResponse moradiaArtefatoResponse = new MoradiaArtefatoResponse(moradia);
 
-        return new ResponseBase<>(moradiaResponse);
+        return new ResponseBase<>(moradiaArtefatoResponse);
     }
 
     public Long cadastrar(MoradiaCreateRequest novo) {
@@ -100,7 +100,7 @@ public class MoradiaService {
         return moradiaSalvo.getArtefato().getIdArtefato();
     }
 
-    public MoradiaResponse atualizarMoradia(Long idMoradia, MoradiaUpdateRequest moradiaUpdateRequest) {
+    public MoradiaArtefatoResponse atualizarMoradia(Long idMoradia, MoradiaUpdateRequest moradiaUpdateRequest) {
 
         Calendar cal = Calendar.getInstance();
         Date dataAtual = cal.getTime();
@@ -129,7 +129,7 @@ public class MoradiaService {
         moradia.setArtefato(artefato);
         moradiaRepository.save(moradia);
 
-        return new MoradiaResponse(
+        return new MoradiaArtefatoResponse(
                 moradia.getIdArtefato(),
                 moradia.getEstadoMoradia(),
                 moradia.getCidadeMoradia(),

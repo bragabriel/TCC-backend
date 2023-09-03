@@ -1,7 +1,7 @@
 package br.com.spotted.backend.controller;
 
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoCreateRequest;
-import br.com.spotted.backend.domain.dto.Objeto.ObjetoResponse;
+import br.com.spotted.backend.domain.dto.Objeto.ObjetoArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
@@ -22,19 +22,19 @@ public class ObjetoController {
     private final ObjetoService objetoService;
 
     @GetMapping("api/objeto")
-    public ResponseEntity<ResponseBase<List<ObjetoResponse>>> pesquisar() {
-        ResponseBase<List<ObjetoResponse>> retorno = objetoService.pesquisar();
+    public ResponseEntity<ResponseBase<List<ObjetoArtefatoResponse>>> pesquisar() {
+        ResponseBase<List<ObjetoArtefatoResponse>> retorno = objetoService.pesquisar();
         return ResponseEntity.ok(retorno);
     }
     @GetMapping("api/objetoPaginado")
     public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest) {
-        ResponseBase<Page<ObjetoResponse>> retorno = objetoService.pesquisarPaginado(searchRequest);
+        ResponseBase<Page<ObjetoArtefatoResponse>> retorno = objetoService.pesquisarPaginado(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 
     @GetMapping(value = "api/objeto/{idObjeto}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idObjeto) {
-        ResponseBase<ObjetoResponse> retorno = objetoService.pesquisarPorId(idObjeto);
+        ResponseBase<ObjetoArtefatoResponse> retorno = objetoService.pesquisarPorId(idObjeto);
         return ResponseEntity.ok(retorno);
     }
 
@@ -45,7 +45,7 @@ public class ObjetoController {
     }
 
     @PutMapping(value = "api/objetoAtualizar/{idObjeto}")
-    public ResponseEntity<ObjetoResponse> atualizarObjeto(
+    public ResponseEntity<ObjetoArtefatoResponse> atualizarObjeto(
             @PathVariable Long idObjeto,
             @RequestBody @Valid ObjetoUpdateRequest objetoUpdateRequest
     ){

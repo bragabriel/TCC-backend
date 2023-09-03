@@ -3,7 +3,7 @@ package br.com.spotted.backend.service;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoCreateRequest;
-import br.com.spotted.backend.domain.dto.Emprego.EmpregoResponse;
+import br.com.spotted.backend.domain.dto.Emprego.EmpregoArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
@@ -31,17 +31,17 @@ public class EmpregoService {
     private final ArtefatoService artefatoService;
 
 
-    public ResponseBase<List<EmpregoResponse>> pesquisar() {
+    public ResponseBase<List<EmpregoArtefatoResponse>> pesquisar() {
         Iterable<Emprego> empregos = empregoRepository.findAllEmpregosWithArtefatoAtivo();
-        List<EmpregoResponse> empregoResponse = new ArrayList<>();
+        List<EmpregoArtefatoResponse> empregoArtefatoResponse = new ArrayList<>();
 
         for (Emprego emprego : empregos) {
-            empregoResponse.add(new EmpregoResponse(emprego));
+            empregoArtefatoResponse.add(new EmpregoArtefatoResponse(emprego));
         }
-        return new ResponseBase<>(empregoResponse);
+        return new ResponseBase<>(empregoArtefatoResponse);
     }
 
-    public ResponseBase<Page<EmpregoResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
+    public ResponseBase<Page<EmpregoArtefatoResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
 
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");
@@ -52,19 +52,19 @@ public class EmpregoService {
 
         Page<Emprego> empregoPage = empregoRepository.findAll(searchRequest.parseToPageRequest());
 
-        Page<EmpregoResponse> empregoResponsePage = empregoPage.map(EmpregoResponse::new);
+        Page<EmpregoArtefatoResponse> empregoResponsePage = empregoPage.map(EmpregoArtefatoResponse::new);
         return new ResponseBase<>(empregoResponsePage);
     }
 
-    public ResponseBase<EmpregoResponse> pesquisarPorId(Long id) {
+    public ResponseBase<EmpregoArtefatoResponse> pesquisarPorId(Long id) {
         Optional<Emprego> empregoOptional = empregoRepository.findById(id);
 
         Emprego emprego = empregoOptional
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Estágio não encontrado."));
 
-        EmpregoResponse empregoResponse = new EmpregoResponse(emprego);
+        EmpregoArtefatoResponse empregoArtefatoResponse = new EmpregoArtefatoResponse(emprego);
 
-        return new ResponseBase<>(empregoResponse);
+        return new ResponseBase<>(empregoArtefatoResponse);
     }
 
     public Long cadastrar(EmpregoCreateRequest novo) {
@@ -102,7 +102,7 @@ public class EmpregoService {
         return empregoSalvo.getArtefato().getIdArtefato();
     }
 
-    public EmpregoResponse atualizarEmprego(Long idEmprego, EmpregoUpdateRequest empregoUpdateRequest){
+    public EmpregoArtefatoResponse atualizarEmprego(Long idEmprego, EmpregoUpdateRequest empregoUpdateRequest){
 
         Calendar cal = Calendar.getInstance();
         Date dataAtual = cal.getTime();
@@ -134,7 +134,7 @@ public class EmpregoService {
         emprego.setArtefato(artefato);
         empregoRepository.save(emprego);
 
-        return new EmpregoResponse(
+        return new EmpregoArtefatoResponse(
                 emprego.getIdArtefato(),
                 emprego.getLocalizacaoEmprego(),
                 emprego.getRequisitosEmprego(),

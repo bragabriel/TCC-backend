@@ -1,6 +1,6 @@
 package br.com.spotted.backend.controller;
 
-import br.com.spotted.backend.domain.dto.Emprego.EmpregoResponse;
+import br.com.spotted.backend.domain.dto.Emprego.EmpregoArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoUpdateRequest;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoCreateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
@@ -22,20 +22,20 @@ public class EmpregoController {
     private final EmpregoService empregoService;
 
     @GetMapping("api/emprego")
-    public ResponseEntity<ResponseBase<List<EmpregoResponse>>> pesquisar() {
-        ResponseBase<List<EmpregoResponse>> retorno = empregoService.pesquisar();
+    public ResponseEntity<ResponseBase<List<EmpregoArtefatoResponse>>> pesquisar() {
+        ResponseBase<List<EmpregoArtefatoResponse>> retorno = empregoService.pesquisar();
         return ResponseEntity.ok(retorno);
     }
 
     @GetMapping("api/empregoPaginado")
     public ResponseEntity pesquisarPaginado(PaginatedSearchRequest searchRequest) {
-        ResponseBase<Page<EmpregoResponse>> retorno = empregoService.pesquisarPaginado(searchRequest);
+        ResponseBase<Page<EmpregoArtefatoResponse>> retorno = empregoService.pesquisarPaginado(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 
     @GetMapping(value = "api/emprego/{idEmprego}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idEmprego) {
-        ResponseBase<EmpregoResponse> retorno = empregoService.pesquisarPorId(idEmprego);
+        ResponseBase<EmpregoArtefatoResponse> retorno = empregoService.pesquisarPorId(idEmprego);
         return ResponseEntity.ok(retorno);
     }
 
@@ -46,7 +46,7 @@ public class EmpregoController {
     }
 
     @PutMapping(value = "api/empregoAtualizar/{idEmprego}")
-    public ResponseEntity<EmpregoResponse> atualizarEmprego(
+    public ResponseEntity<EmpregoArtefatoResponse> atualizarEmprego(
             @PathVariable Long idEmprego,
             @RequestBody @Valid EmpregoUpdateRequest empregoUpdateRequest
     ){
