@@ -1,6 +1,6 @@
 package br.com.spotted.backend.controller;
 
-import br.com.spotted.backend.domain.dto.Festa.FestaResponse;
+import br.com.spotted.backend.domain.dto.Festa.FestaArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Festa.FestaUpdateRequest;
 import br.com.spotted.backend.domain.dto.Festa.FestaCreateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
@@ -22,20 +22,20 @@ public class FestaController {
     private final FestaService festaService;
 
     @GetMapping("api/festa")
-    public ResponseEntity<ResponseBase<List<FestaResponse>>> pesquisar() {
-        ResponseBase<List<FestaResponse>> retorno = festaService.pesquisar();
+    public ResponseEntity<ResponseBase<List<FestaArtefatoResponse>>> pesquisar() {
+        ResponseBase<List<FestaArtefatoResponse>> retorno = festaService.pesquisar();
         return ResponseEntity.ok(retorno);
     }
 
     @GetMapping("api/festaPaginado")
     public ResponseEntity pesquisarPaginado(PaginatedSearchRequest searchRequest) {
-        ResponseBase<Page<FestaResponse>> retorno = festaService.pesquisarPaginado(searchRequest);
+        ResponseBase<Page<FestaArtefatoResponse>> retorno = festaService.pesquisarPaginado(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 
     @GetMapping(value = "api/festa/{idFesta}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idFesta) {
-        ResponseBase<FestaResponse> retorno = festaService.pesquisarPorId(idFesta);
+        ResponseBase<FestaArtefatoResponse> retorno = festaService.pesquisarPorId(idFesta);
         return ResponseEntity.ok(retorno);
     }
 
@@ -46,7 +46,7 @@ public class FestaController {
     }
 
     @PutMapping(value = "api/festaAtualizar/{idFesta}")
-    public ResponseEntity<FestaResponse> atualizarFesta(
+    public ResponseEntity<FestaArtefatoResponse> atualizarFesta(
             @PathVariable Long idFesta,
             @RequestBody @Valid FestaUpdateRequest festaUpdateRequest
     ){

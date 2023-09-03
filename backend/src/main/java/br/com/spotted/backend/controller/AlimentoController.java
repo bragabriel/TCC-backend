@@ -1,7 +1,7 @@
 package br.com.spotted.backend.controller;
 
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoCreateRequest;
-import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
+import br.com.spotted.backend.domain.dto.Alimento.AlimentoArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
@@ -25,20 +25,20 @@ public class AlimentoController {
     private final AlimentoService alimentoService;
 
     @GetMapping("api/alimento")
-    public ResponseEntity<ResponseBase<List<AlimentoResponse>>> pesquisar() {
-        ResponseBase<List<AlimentoResponse>> retorno = alimentoService.pesquisar();
+    public ResponseEntity<ResponseBase<List<AlimentoArtefatoResponse>>> pesquisar() {
+        ResponseBase<List<AlimentoArtefatoResponse>> retorno = alimentoService.pesquisar();
         return ResponseEntity.ok(retorno);
     }
 
     @GetMapping("api/alimentoPaginado")
     public ResponseEntity pesquisarPaginado(PaginatedSearchRequest searchRequest) {
-        ResponseBase<Page<AlimentoResponse>> retorno = alimentoService.pesquisarPaginado(searchRequest);
+        ResponseBase<Page<AlimentoArtefatoResponse>> retorno = alimentoService.pesquisarPaginado(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 
     @GetMapping(value = "api/alimento/{idAlimento}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idAlimento) {
-        ResponseBase<AlimentoResponse> retorno = alimentoService.pesquisarPorId(idAlimento);
+        ResponseBase<AlimentoArtefatoResponse> retorno = alimentoService.pesquisarPorId(idAlimento);
         return ResponseEntity.ok(retorno);
     }
 
@@ -49,7 +49,7 @@ public class AlimentoController {
     }
 
     @PutMapping(value = "api/alimentoAtualizar/{idAlimento}")
-    public ResponseEntity<AlimentoResponse> atualizarAlimento(
+    public ResponseEntity<AlimentoArtefatoResponse> atualizarAlimento(
             @PathVariable Long idAlimento,
             @RequestBody @Valid AlimentoUpdateRequest alimentoUpdateRequest
     ){

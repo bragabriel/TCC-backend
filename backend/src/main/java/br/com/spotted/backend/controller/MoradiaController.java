@@ -1,7 +1,7 @@
 package br.com.spotted.backend.controller;
 
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaCreateRequest;
-import br.com.spotted.backend.domain.dto.Moradia.MoradiaResponse;
+import br.com.spotted.backend.domain.dto.Moradia.MoradiaArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
@@ -23,20 +23,20 @@ public class MoradiaController {
     private final MoradiaService moradiaService;
 
     @GetMapping("api/moradia")
-    public ResponseEntity<ResponseBase<List<MoradiaResponse>>> pesquisar() {
-        ResponseBase<List<MoradiaResponse>> retorno = moradiaService.pesquisar();
+    public ResponseEntity<ResponseBase<List<MoradiaArtefatoResponse>>> pesquisar() {
+        ResponseBase<List<MoradiaArtefatoResponse>> retorno = moradiaService.pesquisar();
         return ResponseEntity.ok(retorno);
     }
 
     @GetMapping("api/moradiaPaginado")
     public ResponseEntity pesquisarPaginado(PaginatedSearchRequest searchRequest) {
-        ResponseBase<Page<MoradiaResponse>> retorno = moradiaService.pesquisarPaginado(searchRequest);
+        ResponseBase<Page<MoradiaArtefatoResponse>> retorno = moradiaService.pesquisarPaginado(searchRequest);
         return ResponseEntity.ok(retorno);
     }
 
     @GetMapping(value = "api/moradia/{idMoradia}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idMoradia) {
-        ResponseBase<MoradiaResponse> retorno = moradiaService.pesquisarPorId(idMoradia);
+        ResponseBase<MoradiaArtefatoResponse> retorno = moradiaService.pesquisarPorId(idMoradia);
         return ResponseEntity.ok(retorno);
     }
 
@@ -47,7 +47,7 @@ public class MoradiaController {
     }
 
     @PutMapping(value = "api/moradiaAtualizar/{idMoradia}")
-    public ResponseEntity<MoradiaResponse> atualizarMoradia(
+    public ResponseEntity<MoradiaArtefatoResponse> atualizarMoradia(
             @PathVariable Long idMoradia,
             @RequestBody @Valid MoradiaUpdateRequest moradiaUpdateRequest
     ){

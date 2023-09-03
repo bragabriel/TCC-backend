@@ -3,7 +3,7 @@ package br.com.spotted.backend.service;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoCreateRequest;
-import br.com.spotted.backend.domain.dto.Objeto.ObjetoResponse;
+import br.com.spotted.backend.domain.dto.Objeto.ObjetoArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoUpdateRequest;
 import br.com.spotted.backend.domain.dto.PaginatedSearchRequest;
 import br.com.spotted.backend.domain.dto.ResponseBase;
@@ -30,18 +30,18 @@ public class ObjetoService {
     @Autowired
     private final ArtefatoService artefatoService;
 
-    public ResponseBase<List<ObjetoResponse>> pesquisar() {
+    public ResponseBase<List<ObjetoArtefatoResponse>> pesquisar() {
         Iterable<Objeto> objetos = objetoRepository.findAllObjetosWithArtefatoAtivo();
-        List<ObjetoResponse> objetoResponses = new ArrayList<>();
+        List<ObjetoArtefatoResponse> objetoArtefatoRespons = new ArrayList<>();
 
         for (Objeto objeto : objetos) {
-            objetoResponses.add(new ObjetoResponse(objeto));
+            objetoArtefatoRespons.add(new ObjetoArtefatoResponse(objeto));
         }
 
-        return new ResponseBase<>(objetoResponses);
+        return new ResponseBase<>(objetoArtefatoRespons);
     }
 
-    public ResponseBase<Page<ObjetoResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
+    public ResponseBase<Page<ObjetoArtefatoResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
 
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");
@@ -52,19 +52,19 @@ public class ObjetoService {
 
         Page<Objeto> objetoPage = objetoRepository.findAll(searchRequest.parseToPageRequest());
 
-        Page<ObjetoResponse> apeResponsePage = objetoPage.map(ObjetoResponse::new);
+        Page<ObjetoArtefatoResponse> apeResponsePage = objetoPage.map(ObjetoArtefatoResponse::new);
         return new ResponseBase<>(apeResponsePage);
     }
 
-    public ResponseBase<ObjetoResponse> pesquisarPorId(Long id) {
+    public ResponseBase<ObjetoArtefatoResponse> pesquisarPorId(Long id) {
 
         Optional<Objeto> apeOptional = objetoRepository.findById(id);
 
         Objeto objeto = apeOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Objeto não encontrado."));
 
-        ObjetoResponse objetoResponse = new ObjetoResponse(objeto);
+        ObjetoArtefatoResponse objetoArtefatoResponse = new ObjetoArtefatoResponse(objeto);
 
-        return new ResponseBase<>(objetoResponse);
+        return new ResponseBase<>(objetoArtefatoResponse);
     }
 
     public Long cadastrar(ObjetoCreateRequest novo) {
@@ -92,7 +92,7 @@ public class ObjetoService {
         return apeSalvo.getArtefato().getIdArtefato();
     }
 
-    public ObjetoResponse atualizarObjeto(Long idObjeto, ObjetoUpdateRequest objetoUpdateRequest) {
+    public ObjetoArtefatoResponse atualizarObjeto(Long idObjeto, ObjetoUpdateRequest objetoUpdateRequest) {
 
         Calendar cal = Calendar.getInstance();
         Date dataAtual = cal.getTime();
@@ -113,7 +113,7 @@ public class ObjetoService {
         objeto.setArtefato(artefato);
         objetoRepository.save(objeto);
 
-        return new ObjetoResponse(
+        return new ObjetoArtefatoResponse(
                 objeto.getIdArtefato(),
                 objeto.getLocalizacaoAchadoObjeto(),
                 objeto.getLocalizacaoAtualObjeto()

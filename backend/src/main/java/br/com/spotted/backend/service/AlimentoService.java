@@ -1,7 +1,7 @@
 package br.com.spotted.backend.service;
 
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoCreateRequest;
-import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
+import br.com.spotted.backend.domain.dto.Alimento.AlimentoArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoUpdateRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
@@ -30,18 +30,18 @@ public class AlimentoService {
     @Autowired
     private final ArtefatoService artefatoService;
 
-    public ResponseBase<List<AlimentoResponse>> pesquisar() {
+    public ResponseBase<List<AlimentoArtefatoResponse>> pesquisar() {
         Iterable<Alimento> alimentos = alimentoRepository.findAllAlimentosWithArtefatoAtivo();
-        List<AlimentoResponse> alimentoResponses = new ArrayList<>();
+        List<AlimentoArtefatoResponse> alimentoArtefatoRespons = new ArrayList<>();
 
         for (Alimento alimento : alimentos) {
-            alimentoResponses.add(new AlimentoResponse(alimento));
+            alimentoArtefatoRespons.add(new AlimentoArtefatoResponse(alimento));
         }
 
-        return new ResponseBase<>(alimentoResponses);
+        return new ResponseBase<>(alimentoArtefatoRespons);
     }
 
-    public ResponseBase<Page<AlimentoResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
+    public ResponseBase<Page<AlimentoArtefatoResponse>> pesquisarPaginado(PaginatedSearchRequest searchRequest) {
 
         if (searchRequest.getPaginaAtual() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O indice da página atual deve começar em 1");
@@ -52,19 +52,19 @@ public class AlimentoService {
 
         Page<Alimento> alimentoPage = alimentoRepository.findAll(searchRequest.parseToPageRequest());
 
-        Page<AlimentoResponse> alimentoResponsePage = alimentoPage.map(AlimentoResponse::new);
+        Page<AlimentoArtefatoResponse> alimentoResponsePage = alimentoPage.map(AlimentoArtefatoResponse::new);
         return new ResponseBase<>(alimentoResponsePage);
     }
 
-    public ResponseBase<AlimentoResponse> pesquisarPorId(Long id) {
+    public ResponseBase<AlimentoArtefatoResponse> pesquisarPorId(Long id) {
         Optional<Alimento> alimentoOptional = alimentoRepository.findById(id);
 
         Alimento alimento = alimentoOptional
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Alimento não encontrada."));
 
-        AlimentoResponse alimentoResponse = new AlimentoResponse(alimento);
+        AlimentoArtefatoResponse alimentoArtefatoResponse = new AlimentoArtefatoResponse(alimento);
 
-        return new ResponseBase<>(alimentoResponse);
+        return new ResponseBase<>(alimentoArtefatoResponse);
     }
 
     public Long cadastrar(AlimentoCreateRequest novo) {
@@ -96,7 +96,7 @@ public class AlimentoService {
         return alimentoSalvo.getArtefato().getIdArtefato();
     }
 
-    public AlimentoResponse atualizarAlimento(Long idAlimento, AlimentoUpdateRequest alimentoUpdateRequest){
+    public AlimentoArtefatoResponse atualizarAlimento(Long idAlimento, AlimentoUpdateRequest alimentoUpdateRequest){
 
         Calendar cal = Calendar.getInstance();
         Date dataAtual = cal.getTime();
@@ -121,7 +121,7 @@ public class AlimentoService {
         alimento.setArtefato(artefato);
         alimentoRepository.save(alimento);
 
-        return new AlimentoResponse(
+        return new AlimentoArtefatoResponse(
                 alimento.getIdArtefato(),
                 alimento.getTipoAlimento(),
                 alimento.getMarcaAlimento(),
