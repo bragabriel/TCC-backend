@@ -50,18 +50,18 @@ VALUES(16, 'Estágio como Desenvolvedor C', 'Desenvolvedor estagiário; 5 vagas.
 INSERT INTO [Artefato] ([id_artefato], [titulo_artefato], [descricao_artefato], [ativo], [tipo_artefato], [data_cadastro], [id_usuario])
 VALUES(17, 'Programa de estágio T.I', 'Você poderá atuar como Dev Backend, Frontend, QA ou DevOps!', 1, 'EMPREGO', convert(datetime,'2023-11-12 10:34:09 PM'), 4)
 
---Insert Festa
+--Insert Evento
 INSERT INTO [Artefato] ([id_artefato], [titulo_artefato], [descricao_artefato], [ativo], [tipo_artefato], [data_cadastro], [id_usuario])
-VALUES(5, 'Festa muito top', 'Open bar, open food, idade minima: 18, venda dos ingressos em: www.festatop.com.br', 1, 'FESTA', convert(datetime,'2023-12-12 10:34:09 PM'), 1)
+VALUES(5, 'Festa muito top', 'Open bar, open food, idade minima: 18, venda dos ingressos em: www.festatop.com.br', 1, 'EVENTO', convert(datetime,'2023-12-12 10:34:09 PM'), 1)
 
 INSERT INTO [Artefato] ([id_artefato], [titulo_artefato], [descricao_artefato], [ativo], [tipo_artefato], [data_cadastro], [id_usuario])
-VALUES(18, 'Exposição de Arte Contemporânea', 'Venha explorar a criatividade contemporânea na nossa exposição de arte.', 1, 'FESTA', convert(datetime,'2023-12-12 10:34:09 PM'), 2)
+VALUES(18, 'Exposição de Arte Contemporânea', 'Venha explorar a criatividade contemporânea na nossa exposição de arte.', 1, 'EVENTO', convert(datetime,'2023-12-12 10:34:09 PM'), 2)
 
 INSERT INTO [Artefato] ([id_artefato], [titulo_artefato], [descricao_artefato], [ativo], [tipo_artefato], [data_cadastro], [id_usuario])
-VALUES(19, 'Curso de Fotografia', 'Curso intensivo de fotografia digital para iniciantes. Inscrições abertas!', 1, 'FESTA', convert(datetime,'2023-12-12 10:34:09 PM'), 3)
+VALUES(19, 'Curso de Fotografia', 'Curso intensivo de fotografia digital para iniciantes. Inscrições abertas!', 1, 'EVENTO', convert(datetime,'2023-12-12 10:34:09 PM'), 3)
 
 INSERT INTO [Artefato] ([id_artefato], [titulo_artefato], [descricao_artefato], [ativo], [tipo_artefato], [data_cadastro], [id_usuario])
-VALUES(20, 'Grupo de Estudos de Ciência Política', 'Junte-se a nós para discussões fascinantes sobre política e governança.', 1, 'FESTA', convert(datetime,'2023-12-12 10:34:09 PM'), 4)
+VALUES(20, 'Grupo de Estudos de Ciência Política', 'Junte-se a nós para discussões fascinantes sobre política e governança.', 1, 'EVENTO', convert(datetime,'2023-12-12 10:34:09 PM'), 4)
 
 --Insert Objeto
 INSERT INTO [Artefato] ([id_artefato], [titulo_artefato], [descricao_artefato], [ativo], [tipo_artefato], [data_cadastro], [id_usuario])

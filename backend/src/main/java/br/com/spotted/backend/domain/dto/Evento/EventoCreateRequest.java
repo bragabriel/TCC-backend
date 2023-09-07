@@ -1,4 +1,4 @@
-package br.com.spotted.backend.domain.dto.Festa;
+package br.com.spotted.backend.domain.dto.Evento;
 
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoCreateRequest;
 import lombok.Data;
@@ -6,9 +6,9 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class FestaCreateRequest {
+public class EventoCreateRequest {
 
-    private String localizacaoFesta;
+    private String localizacaoEvento;
 
     @NotNull
     private ArtefatoCreateRequest artefato;

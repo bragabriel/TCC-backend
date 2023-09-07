@@ -17,7 +17,7 @@ public interface ArtefatoRepository extends PagingAndSortingRepository<Artefato,
     @Query("SELECT a FROM Artefato a LEFT JOIN a.emprego em WHERE a.ativo = :ativo")
     Page<Artefato> findAllWithEmprego(Pageable pageable, @Param("ativo") Boolean ativo);
 
-    @Query("SELECT a FROM Artefato a LEFT JOIN a.festa fe WHERE a.ativo = :ativo")
+    @Query("SELECT a FROM Artefato a LEFT JOIN a.evento fe WHERE a.ativo = :ativo")
     Page<Artefato> findAllWithFesta(Pageable pageable, @Param("ativo") Boolean ativo);
 
     @Query("SELECT a FROM Artefato a LEFT JOIN a.moradia mo WHERE a.ativo = :ativo")

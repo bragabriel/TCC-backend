@@ -42,9 +42,9 @@
         <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_emprego.sql" relativeToChangelogFile="true" />
     </changeSet>
 
-    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-FESTA">
-        <comment>Insere Dados - Festa</comment>
-        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_festa.sql" relativeToChangelogFile="true" />
+    <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-EVENTO">
+        <comment>Insere Dados - Evento</comment>
+        <sqlFile splitStatements="false"  endDelimiter="" path="insert_data_evento.sql" relativeToChangelogFile="true" />
     </changeSet>
 
     <changeSet author="linkedin.com/in/gabriel-braga-da-silva" id="INSERE-DADOS-OBJETO">

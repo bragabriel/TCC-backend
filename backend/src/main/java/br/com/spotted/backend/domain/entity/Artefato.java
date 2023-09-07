@@ -59,8 +59,8 @@ public class Artefato {
     @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Emprego na tabela Artefato
     private Emprego emprego;
 
-    @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Festa na tabela Artefato
-    private Festa festa;
+    @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Evento na tabela Artefato
+    private Evento evento;
 
     @OneToOne(mappedBy = "artefato", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true) //Fk Moradia na tabela Artefato
     private Moradia moradia;

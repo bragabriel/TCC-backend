@@ -2,7 +2,7 @@ package br.com.spotted.backend.domain.dto.Artefato;
 
 import br.com.spotted.backend.domain.dto.Alimento.AlimentoResponse;
 import br.com.spotted.backend.domain.dto.Emprego.EmpregoResponse;
-import br.com.spotted.backend.domain.dto.Festa.FestaResponse;
+import br.com.spotted.backend.domain.dto.Evento.EventoResponse;
 import br.com.spotted.backend.domain.dto.Moradia.MoradiaResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoResponse;
 import br.com.spotted.backend.domain.dto.Transporte.TransporteResponse;
@@ -30,7 +30,7 @@ public class ArtefatoResponse {
     private Long idUsuario;
     private AlimentoResponse alimento;
     private EmpregoResponse emprego;
-    private FestaResponse festa;
+    private EventoResponse festa;
     private MoradiaResponse moradia;
     private ObjetoResponse objeto;
     private TransporteResponse transporte;
@@ -53,8 +53,8 @@ public class ArtefatoResponse {
         if (artefato.getEmprego() != null) {
             this.emprego = new EmpregoResponse(artefato.getEmprego());
         }
-        if (artefato.getFesta() != null) {
-            this.festa = new FestaResponse(artefato.getFesta());
+        if (artefato.getEvento() != null) {
+            this.festa = new EventoResponse(artefato.getEvento());
         }
         if (artefato.getMoradia() != null) {
             this.moradia = new MoradiaResponse(artefato.getMoradia());
