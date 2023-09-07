@@ -9,21 +9,21 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="Festa")
+@Table(name="Evento")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Festa {
+public class Evento {
 
     @Id
     @Column(name = "id_artefato")
     private Long idArtefato;
 
-    @Column(name = "localizacao_festa")
-    private String localizacaoFesta;
+    @Column(name = "localizacao_evento")
+    private String localizacaoEvento;
 
     @MapsId
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //Uma festa pode ter 1-1 artefato
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //Uma evento pode ter 1-1 artefato
     @JoinColumn(name = "id_artefato")
     private Artefato artefato;
 }

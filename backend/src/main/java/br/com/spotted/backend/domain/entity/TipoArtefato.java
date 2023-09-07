@@ -4,7 +4,7 @@ public enum TipoArtefato {
 
     ALIMENTO,
     EMPREGO,
-    FESTA,
+    EVENTO,
     MORADIA,
     OBJETO,
     TRANSPORTE

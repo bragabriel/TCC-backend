@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-public class FestaNotFoundException extends RuntimeException {
-    public FestaNotFoundException(String message) {
+public class EventoNotFoundException extends RuntimeException {
+    public EventoNotFoundException(String message) {
         super(message);
     }
 }
