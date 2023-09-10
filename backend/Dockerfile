@@ -15,4 +15,5 @@ WORKDIR /app
 COPY --from=build-env /app/target/*.jar ./app.jar
 
 # Define the entry point for the container
-CMD ["java", "-jar", "./app.jar"]
+#CMD ["java", "-jar", "./app.jar"]
+CMD ["java","jar", "./", "-app.jar"]
