@@ -19,12 +19,6 @@ import javax.validation.Valid;
 public class ArtefatoController {
     private final ArtefatoService artefatoService;
 
-//    @GetMapping("api/artefato")
-//    public ResponseEntity pesquisar(PaginatedSearchRequest searchRequest, Boolean ativo) {
-//        ResponseBase<Page<ArtefatoResponse>> retorno = artefatoService.pesquisar(searchRequest, ativo);
-//        return ResponseEntity.ok(retorno);
-//    }
-
     @GetMapping(value = "api/artefato/{idArtefato}")
     public ResponseEntity pesquisarPorId(@PathVariable Long idArtefato) {
         ResponseBase<ArtefatoResponse> retorno = artefatoService.pesquisarPorId(idArtefato);

@@ -64,11 +64,4 @@ public class AlimentoController {
         var alimento = alimentoService.inativarAlimento(idAlimento);
         return ResponseEntity.ok().build();
     }
-
-    //Deletar Alimento por Id
-//    @DeleteMapping(value = "api/alimento/{idAlimento}")
-//    public ResponseEntity<Void> deletar(@PathVariable Long idAlimento) {
-//        alimentoService.deletar(idAlimento);
-//        return ResponseEntity.ok().build();
-//    }
 }
