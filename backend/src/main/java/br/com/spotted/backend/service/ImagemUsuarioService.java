@@ -46,7 +46,7 @@ public class ImagemUsuarioService {
 
         var retorno = storageService.uploadFile(file, idItem);
 
-        String finalUrl = concatenarUrl(usuario.getUrl());
+        String finalUrl = concatenarUrl(usuario.getFileName());
 
         usuario.setFileName(retorno.get(0));
         usuario.setUrl(finalUrl);

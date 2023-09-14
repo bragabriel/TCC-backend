@@ -110,6 +110,7 @@ public class TransporteService {
         Artefato artefato = new Artefato(transporteEncontrado.get().getArtefato());
         artefato.setTituloArtefato(transporteUpdateRequest.getTituloArtefato());
         artefato.setDescricaoArtefato(transporteUpdateRequest.getDescricaoArtefato());
+        artefato.setListaImagens(transporteEncontrado.get().getArtefato().getListaImagens());
         artefato.setDataAtualizacao(dataAtual);
 
         var transporte = transporteEncontrado.get();

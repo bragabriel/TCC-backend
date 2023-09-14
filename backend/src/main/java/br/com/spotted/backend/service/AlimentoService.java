@@ -109,6 +109,7 @@ public class AlimentoService {
         Artefato artefato = new Artefato(alimentoEncontrada.get().getArtefato());
         artefato.setTituloArtefato(alimentoUpdateRequest.getTituloArtefato());
         artefato.setDescricaoArtefato(alimentoUpdateRequest.getDescricaoArtefato());
+        artefato.setListaImagens(alimentoEncontrada.get().getArtefato().getListaImagens());
         artefato.setDataAtualizacao(dataAtual);
 
         var alimento = alimentoEncontrada.get();

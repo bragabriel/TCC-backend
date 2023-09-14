@@ -115,6 +115,7 @@ public class EmpregoService {
         Artefato artefato = new Artefato(empregoEncontrado.get().getArtefato());
         artefato.setTituloArtefato(empregoUpdateRequest.getTituloArtefato());
         artefato.setDescricaoArtefato(empregoUpdateRequest.getDescricaoArtefato());
+        artefato.setListaImagens(empregoEncontrado.get().getArtefato().getListaImagens());
         artefato.setDataAtualizacao(dataAtual);
 
         var emprego = empregoEncontrado.get();
