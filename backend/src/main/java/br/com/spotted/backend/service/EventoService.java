@@ -104,6 +104,7 @@ public class EventoService {
         Artefato artefato = new Artefato(eventoEncontrado.get().getArtefato());
         artefato.setTituloArtefato(eventoUpdateRequest.getTituloArtefato());
         artefato.setDescricaoArtefato(eventoUpdateRequest.getDescricaoArtefato());
+        artefato.setListaImagens(eventoEncontrado.get().getArtefato().getListaImagens());
         artefato.setDataAtualizacao(dataAtual);
 
         var evento = eventoEncontrado.get();

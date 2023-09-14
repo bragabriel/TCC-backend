@@ -105,6 +105,7 @@ public class ObjetoService {
         Artefato artefato = new Artefato(objetoEncontrado.get().getArtefato());
         artefato.setTituloArtefato(objetoUpdateRequest.getTituloArtefato());
         artefato.setDescricaoArtefato(objetoUpdateRequest.getDescricaoArtefato());
+        artefato.setListaImagens(objetoEncontrado.get().getArtefato().getListaImagens());
         artefato.setDataAtualizacao(dataAtual);
 
         var objeto = objetoEncontrado.get();

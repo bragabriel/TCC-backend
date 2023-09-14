@@ -113,6 +113,7 @@ public class MoradiaService {
         Artefato artefato = new Artefato(moradiaEncontrado.get().getArtefato());
         artefato.setTituloArtefato(moradiaUpdateRequest.getTituloArtefato());
         artefato.setDescricaoArtefato(moradiaUpdateRequest.getDescricaoArtefato());
+        artefato.setListaImagens(moradiaEncontrado.get().getArtefato().getListaImagens());
         artefato.setDataAtualizacao(dataAtual);
 
         var moradia = moradiaEncontrado.get();
@@ -126,6 +127,7 @@ public class MoradiaService {
         moradia.setCidadeMoradia(moradiaUpdateRequest.getCidadeMoradia());
         moradia.setBairroMoradia(moradiaUpdateRequest.getBairroMoradia());
         moradia.setCepMoradia(moradiaUpdateRequest.getCepMoradia());
+
         moradia.setArtefato(artefato);
         moradiaRepository.save(moradia);
 
