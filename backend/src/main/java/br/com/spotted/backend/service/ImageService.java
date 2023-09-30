@@ -34,6 +34,8 @@ public class ImageService {
     @Autowired
     private AmazonS3 amazonS3;
 
+    private String prefixoUrl = "https://665e-45-172-240-169.ngrok-free.app/";
+
     public ResponseBase<List<ImageResponse>> createImage(MultipartFile[] file, Long idItem) throws IOException {
 
         artefatoService.pesquisarPorId(idItem);
@@ -134,7 +136,7 @@ public class ImageService {
     }
 
     public String concatenarUrl(String url) {
-        String urlFinal = "http://localhost:4566/tcc-imagens/" + url;
+        String urlFinal = this.prefixoUrl + "tcc-imagens/" + url;
         return urlFinal;
     }
 

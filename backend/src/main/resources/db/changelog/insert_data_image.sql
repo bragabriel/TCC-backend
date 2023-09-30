@@ -1,6 +1,6 @@
 --Alimento
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://vovopalmirinha.com.br/wp-content/uploads/2016/05/bolo-chocolate-simples-1.jpg', 2, 'teste1.jpg', 1)
+VALUES('https://uploads.metropoles.com/wp-content/uploads/2023/08/09145143/Pizza-31.jpg', 2, 'pizza.jpg', 1)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
 VALUES('https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express-1536x1007.jpg', 1, 'teste2.jpg', 7)
@@ -46,24 +46,24 @@ INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
 VALUES('https://i.pinimg.com/564x/5e/da/7c/5eda7cdaa0048723006df11cb8faa3ed.jpg', 1, 'emprego.jpg', 4)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://s3.amazonaws.com/gupy5/production/companies/22378/images/jobs/4709067/20230419092801976_picture.png', 1, 'estag.jpg', 16)
+VALUES('https://seuempregoonline.com/wp-content/uploads/2022/04/vagas_de_estagio1.jpg', 1, 'estag.jpg', 16)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
 VALUES('https://mudes.org.br/wp-content/uploads/2021/08/Capa-Blog-pcd-9.png', 1, 'estag1.jpg', 17)
 
 
---FESTA
+--EVENTOS
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://www.guiadasemana.com.br/contentFiles/image/opt_w1920h650/2018/06/FEA/38959_reveillon-2019-ao-redor-do-brasil.jpg', 1, 'festa.jpg', 5)
+VALUES('https://www.tribunadeituverava.com.br/wp-content/uploads/2023/04/image-168.png', 1, 'festa.jpg', 5)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://www.guiadasemana.com.br/contentFiles/image/opt_w1920h650/2018/06/FEA/38959_reveillon-2019-ao-redor-do-brasil.jpg', 1, 'festa.jpg', 18)
+VALUES('https://www.sescrio.org.br/wp-content/uploads/2021/10/arte-exposicao-nogueira-550x330.png', 1, 'exposicaoArte.jpg', 18)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://www.guiadasemana.com.br/contentFiles/image/opt_w1920h650/2018/06/FEA/38959_reveillon-2019-ao-redor-do-brasil.jpg', 1, 'festa.jpg', 19)
+VALUES('https://d3puay5pkxu9s4.cloudfront.net/curso/4300/800_imagen.jpg', 1, 'cursoFotografia.jpg', 19)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://www.guiadasemana.com.br/contentFiles/image/opt_w1920h650/2018/06/FEA/38959_reveillon-2019-ao-redor-do-brasil.jpg', 1, 'festa.jpg', 20)
+VALUES('https://6064052.fs1.hubspotusercontent-na1.net/hub/6064052/hubfs/Como%20organizar%20um%20grupo%20de%20estudos%20em%20sete%20passos.webp?width=900&height=600&name=Como%20organizar%20um%20grupo%20de%20estudos%20em%20sete%20passos.webp', 1, 'festa.jpg', 20)
 
 --OBJETO
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])

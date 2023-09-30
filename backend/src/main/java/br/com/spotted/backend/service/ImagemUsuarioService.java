@@ -34,6 +34,8 @@ public class ImagemUsuarioService {
     @Autowired
     private AmazonS3 amazonS3;
 
+    private String prefixoUrl = "https://665e-45-172-240-169.ngrok-free.app/";
+
     public ResponseBase<UsuarioResponse> createUsuarioImage(MultipartFile[] file, Long idItem) throws IOException {
 
         var usuarioEncontrado = usuarioRepository.findById(idItem);
@@ -81,7 +83,7 @@ public class ImagemUsuarioService {
     }
 
     public String concatenarUrl(String url) {
-        String urlFinal = "http://localhost:4566/tcc-imagens/" + url;
+        String urlFinal = this.prefixoUrl + "tcc-imagens/" + url;
         return urlFinal;
     }
 

@@ -1,5 +1,4 @@
 version: '3'
-
 services:
   localstack:
     image: localstack/localstack:0.14.5
@@ -7,45 +6,76 @@ services:
       - SERVICES=s3
       - DOCKER_HOST=unix:///var/run/docker.sock
       - DATA_DIR=/tmp/localstack/data
+
     ports:
       - "4566:4566" # s3
     volumes:
       - localstack:/tmp/localstack
-    networks:
-      - backend_application
+    container_name: aws_tcc
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server
     environment:
       - SA_PASSWORD=TCCgh100  #user: sa
       - ACCEPT_EULA=Y
-      - MYSQL_DATABASE=TCC
-      - MYSQL_USER=sa
     ports:
-      - "1433:1433" # banco
+      - "1433:1433"
     volumes:
       - sqlserver:/var/opt/mssql
-    networks:
-      - backend_application
-
-  backend:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080" # backend
-      - "5005:5005"
-    depends_on:
-      - sqlserver
-      - localstack
-    networks:
-      - backend_application
-
-networks:
-  backend_application:
-    driver: bridge
+    container_name: db_tcc
 
 volumes:
   sqlserver:
   localstack:
-  backend:
+
+#version: '3'
+#
+#services:
+#  localstack:
+#    image: localstack/localstack:0.14.5
+#    environment:
+#      - SERVICES=s3
+#      - DOCKER_HOST=unix:///var/run/docker.sock
+#      - DATA_DIR=/tmp/localstack/data
+#    ports:
+#      - "4566:4566" # s3
+#    volumes:
+#      - localstack:/tmp/localstack
+#    networks:
+#      - backend_application
+#
+#  sqlserver:
+#    image: mcr.microsoft.com/mssql/server
+#    environment:
+#      - SA_PASSWORD=TCCgh100  #user: sa
+#      - ACCEPT_EULA=Y
+#      - MYSQL_DATABASE=TCC
+#      - MYSQL_USER=sa
+#    ports:
+#      - "1433:1433" # banco
+#    volumes:
+#      - sqlserver:/var/opt/mssql
+#    networks:
+#      - backend_application
+#
+#  backend:
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8080:8080" # backend
+#      - "5005:5005"
+#    depends_on:
+#      - sqlserver
+#      - localstack
+#    networks:
+#      - backend_application
+#
+#networks:
+#  backend_application:
+#    driver: bridge
+#
+#volumes:
+#  sqlserver:
+#  localstack:
+#  backend:
