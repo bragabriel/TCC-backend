@@ -23,9 +23,6 @@ public class UsuarioCreateRequest {
 
     @NotEmpty
     private String telefone;
-
-    @NotNull
-    private Date dataNascimento;
 }
 
 

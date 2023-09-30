@@ -82,7 +82,6 @@ public class UsuarioService {
         modeloDb.setEmailUsuario(novo.getEmail());
         modeloDb.setSenhaUsuario(Criptografia.encriptografar(novo.getSenha()));
         modeloDb.setTelefoneUsuario(novo.getTelefone());
-        modeloDb.setDataNascimento(novo.getDataNascimento());
 
         Usuario usuarioSalvo = usuarioRepository.save(modeloDb);
 
