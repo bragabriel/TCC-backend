@@ -20,7 +20,6 @@ CREATE TABLE [dbo].[Usuario](
 	[email_usuario] [varchar](255) NOT NULL,
 	[senha_usuario] [varchar](255) NOT NULL,
 	[telefone_usuario] [varchar](255) NOT NULL,
-	[dataNascimento_usuario] [date] NOT NULL,
 	[url_imageUsuario] [varchar](255) NULL,
 	[fileName_imageUsuario] [varchar](255) NULL,
  CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED

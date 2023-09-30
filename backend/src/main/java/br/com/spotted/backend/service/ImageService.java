@@ -34,7 +34,7 @@ public class ImageService {
     @Autowired
     private AmazonS3 amazonS3;
 
-    private String prefixoUrl = "https://665e-45-172-240-169.ngrok-free.app/";
+    private String prefixoUrl = "https://7daf-45-172-240-199.ngrok-free.app/";
 
     public ResponseBase<List<ImageResponse>> createImage(MultipartFile[] file, Long idItem) throws IOException {
 

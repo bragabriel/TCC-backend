@@ -37,9 +37,6 @@ public class Usuario {
     @Column(name = "telefone_usuario", nullable = false)
     private String telefoneUsuario;
 
-    @Column(name = "dataNascimento_usuario", nullable = false)
-    private Date dataNascimento;
-
     @Column(name = "url_imageUsuario")
     private String url;
 
@@ -58,7 +55,6 @@ public class Usuario {
         this.emailUsuario = usuario.emailUsuario;
         this.senhaUsuario = usuario.senhaUsuario;
         this.telefoneUsuario = usuario.telefoneUsuario;
-        this.dataNascimento = usuario.dataNascimento;
         this.url = usuario.url;
         this.fileName = usuario.fileName;
         this.listaArtefatos = usuario.listaArtefatos;

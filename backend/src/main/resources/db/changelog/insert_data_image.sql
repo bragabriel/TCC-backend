@@ -67,7 +67,7 @@ VALUES('https://6064052.fs1.hubspotusercontent-na1.net/hub/6064052/hubfs/Como%20
 
 --OBJETO
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://static.ativaesportes.com.br/public/ativaesportes/imagens/produtos/media/moletom-nike-nsw-club-hoodie-masculino-bv2648-063-14085.jpg', 1, 'objeto.jpg', 6)
+VALUES('https://backwash.fbitsstatic.net/img/p/moletom-nike-sb-icon-cinza-84682/317059-4.jpg?w=800&h=800&v=no-change&qs=ignore', 1, 'objeto.jpg', 6)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
 VALUES('https://m.media-amazon.com/images/I/71+udIfG6YL._AC_UF1000,1000_QL80_.jpg', 1, 'livroFisicaQuantica.jpg', 21)
