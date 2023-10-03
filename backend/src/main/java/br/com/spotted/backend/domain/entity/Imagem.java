@@ -30,4 +30,15 @@ public class Imagem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_artefato", updatable = false, insertable = false) //FK
     private Artefato artefato;
+
+    @Override
+    public String toString() {
+        return "Imagem{" +
+                "idImage=" + idImage +
+                ", idArtefato=" + idArtefato +
+                ", sequence=" + sequence +
+                ", fileName='" + fileName + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

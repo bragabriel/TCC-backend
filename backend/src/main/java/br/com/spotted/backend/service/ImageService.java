@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
+import java.util.logging.Logger;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,33 +37,40 @@ public class ImageService {
     @Autowired
     private AmazonS3 amazonS3;
 
-    private String prefixoUrl = "https://7daf-45-172-240-199.ngrok-free.app/";
+    private String prefixoUrl = "https://c248-45-172-240-199.ngrok-free.app/";
 
-    public ResponseBase<List<ImageResponse>> createImage(MultipartFile[] file, Long idItem) throws IOException {
+    private static final Logger logger = Logger.getLogger(ImageService.class.getName());
 
-        artefatoService.pesquisarPorId(idItem);
+    public ResponseBase<ImageResponse> createImage(MultipartFile[] file, Long idItem) throws Exception {
+
+        var artefato = artefatoService.pesquisarPorId(idItem);
+        var listaImgs = artefato.getObjetoRetorno().getListaImagens();
+
+        for (Imagem img : listaImgs){
+            try{
+                deleteImage(img.getIdImage());
+            }catch (Exception e){
+                logger.severe("Erro ao excluir imagem: " + e.getMessage());
+                throw new Exception(e);
+            }
+        }
 
         var retorno = storageService.uploadFile(file, idItem);
 
-        List<ImageResponse> imageResponseList = new ArrayList<>();
+        String finalUrl = concatenarUrl(retorno.get(0));
 
-        for (int i = 0; i < retorno.size(); i++) {
-            Imagem imagem = new Imagem();
+        Imagem imagem = new Imagem();
+        imagem.setIdArtefato(idItem);
+        imagem.setSequence(1);
+        imagem.setFileName(retorno.get(0));
+        imagem.setUrl(finalUrl);
 
-            String finalUrl = concatenarUrl(retorno.get(i));
+        imageRepository.save(imagem);
+        ImageResponse imageResponse = new ImageResponse(imagem, retorno.get(0));
 
-            imagem.setIdArtefato(idItem);
-            imagem.setSequence(i);
-            imagem.setFileName(retorno.get(i));
-            imagem.setUrl(finalUrl);
-
-            imageResponseList.add(new ImageResponse(imagem, retorno.get(i)));
-
-            imageRepository.save(imagem);
-        }
-
-        return new ResponseBase<>(imageResponseList);
+        return new ResponseBase<>(imageResponse);
     }
+
 
     public ResponseBase<List<ImageResponse>> findImageByIdArtefato(Long idArtefato) {
 

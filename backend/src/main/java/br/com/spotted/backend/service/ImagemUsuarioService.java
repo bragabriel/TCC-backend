@@ -2,7 +2,6 @@ package br.com.spotted.backend.service;
 
 import br.com.spotted.backend.domain.dto.ResponseBase;
 import br.com.spotted.backend.domain.dto.Usuario.UsuarioResponse;
-import br.com.spotted.backend.domain.entity.Usuario;
 import br.com.spotted.backend.exception.UsuarioNotFoundException;
 import br.com.spotted.backend.repository.ImageRepository;
 import br.com.spotted.backend.repository.UsuarioRepository;
@@ -34,7 +33,7 @@ public class ImagemUsuarioService {
     @Autowired
     private AmazonS3 amazonS3;
 
-    private String prefixoUrl = "https://7daf-45-172-240-199.ngrok-free.app/";
+    private String prefixoUrl = "https://c248-45-172-240-199.ngrok-free.app/";
 
     public ResponseBase<UsuarioResponse> createUsuarioImage(MultipartFile[] file, Long idItem) throws IOException {
 
