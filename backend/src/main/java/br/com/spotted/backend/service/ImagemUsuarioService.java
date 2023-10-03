@@ -33,7 +33,7 @@ public class ImagemUsuarioService {
     @Autowired
     private AmazonS3 amazonS3;
 
-    private String prefixoUrl = "https://f749-45-172-240-199.ngrok-free.app/";
+    private String prefixoUrl = "https://c248-45-172-240-199.ngrok-free.app/";
 
     public ResponseBase<UsuarioResponse> createUsuarioImage(MultipartFile[] file, Long idItem) throws IOException {
 

@@ -72,7 +72,6 @@ public class Artefato {
     private Transporte transporte;
 
     @OneToMany(mappedBy = "idArtefato", targetEntity = Imagem.class, orphanRemoval = true)
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private List<Imagem> listaImagens = new ArrayList<Imagem>();;
 
     public Artefato(Artefato artefato) {
