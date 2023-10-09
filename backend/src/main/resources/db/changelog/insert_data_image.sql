@@ -1,9 +1,9 @@
 --Alimento
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://uploads.metropoles.com/wp-content/uploads/2023/08/09145143/Pizza-31.jpg', 2, 'pizza.jpg', 1)
+VALUES('https://www.garciasalgados.com.br/images/produtos/pizzafatia_frango/pizzafrango.jpg', 2, 'pizza.jpg', 1)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express-1536x1007.jpg', 1, 'teste2.jpg', 7)
+VALUES('https://www.montaencanta.com.br/wp-content/uploads/2014/09/trufa-de-chocolate-de-maracuja5.jpg', 1, 'trufa.jpg', 7)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
 VALUES('https://static.itdg.com.br/images/640-400/473e046f1847aceefa2a4ca4d86f6864/38681-original.jpg', 1, 'boloDeCenoura.jpg', 9)
