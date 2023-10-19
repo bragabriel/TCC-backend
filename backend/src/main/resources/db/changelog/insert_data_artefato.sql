@@ -9,7 +9,7 @@ INSERT INTO [Artefato] ([id_artefato], [titulo_artefato], [descricao_artefato], 
 VALUES(7, 'Trufa Maravilhosa', 'A melhor trufa de Nutella que você vai provar na vida!', 1, 'ALIMENTO', convert(datetime,'2023-12-12 10:34:09 PM'), 1)
 
 INSERT INTO [Artefato] ([id_artefato], [titulo_artefato], [descricao_artefato], [ativo], [tipo_artefato], [data_cadastro], [id_usuario])
-VALUES(9, 'Bolo de Cenoura', 'Bolo delicioso de cenoura!', 1, 'ALIMENTO', convert(datetime,'2023-12-12 10:34:09 PM'), 2)
+VALUES(9, 'Esfiha de Carne', 'Esfiha deliciosa de Carne!', 1, 'ALIMENTO', convert(datetime,'2023-12-12 10:34:09 PM'), 2)
 
 INSERT INTO [Artefato] ([id_artefato], [titulo_artefato], [descricao_artefato], [ativo], [tipo_artefato], [data_cadastro], [id_usuario])
 VALUES(10, 'Cone trufado', 'Cone trufado com diferentes sabores, venha experimentar', 1, 'ALIMENTO', convert(datetime,'2023-10-12 10:34:09 PM'), 3)
