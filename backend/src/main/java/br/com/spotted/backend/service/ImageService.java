@@ -35,7 +35,7 @@ public class ImageService {
     @Autowired
     private AmazonS3 amazonS3;
 
-    private String prefixoUrl = "https://6bfa-45-172-240-25.ngrok-free.app/";
+    private String prefixoUrl = "https://3e2b-45-172-240-25.ngrok-free.app/";
 
     private static final Logger logger = Logger.getLogger(ImageService.class.getName());
 

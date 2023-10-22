@@ -46,8 +46,8 @@ public class UsuarioController {
 
     @PostMapping("api/usuario")
     public ResponseEntity cadastrar(@Valid @RequestBody UsuarioCreateRequest postModel) {
-        ResponseBase<UsuarioResponse> retorno = usuarioService.cadastrar(postModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
+        Long idUsuario = usuarioService.cadastrar(postModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(idUsuario);
     }
 
     @PostMapping("api/usuarioLogar")

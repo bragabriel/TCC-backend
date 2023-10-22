@@ -72,7 +72,7 @@ public class UsuarioService {
         return new ResponseBase<>(usuarioResponse);
     }
 
-    public ResponseBase<UsuarioResponse> cadastrar(UsuarioCreateRequest novo) {
+    public Long cadastrar(UsuarioCreateRequest novo) {
         validateEmail(novo.getEmail());
         validateTelefone(novo.getTelefone());
 
@@ -85,8 +85,7 @@ public class UsuarioService {
 
         Usuario usuarioSalvo = usuarioRepository.save(modeloDb);
 
-        UsuarioResponse usuarioResponse = new UsuarioResponse(usuarioSalvo);
-        return new ResponseBase<>(usuarioResponse);
+        return usuarioSalvo.getIdUsuario();
     }
     public UsuarioResponse deletar(Long idUsuario) throws UsuarioNotFoundException {
         var usuarioEncontrado = usuarioRepository.findById(idUsuario);
