@@ -33,7 +33,7 @@ public class ImagemUsuarioService {
     @Autowired
     private AmazonS3 amazonS3;
 
-    private String prefixoUrl = "https://c248-45-172-240-199.ngrok-free.app/";
+    private String prefixoUrl = "https://3e2b-45-172-240-25.ngrok-free.app/";
 
     public ResponseBase<UsuarioResponse> createUsuarioImage(MultipartFile[] file, Long idItem) throws IOException {
 
@@ -47,7 +47,7 @@ public class ImagemUsuarioService {
 
         var retorno = storageService.uploadFile(file, idItem);
 
-        String finalUrl = concatenarUrl(usuario.getFileName());
+        String finalUrl = concatenarUrl(retorno.get(0));
 
         usuario.setFileName(retorno.get(0));
         usuario.setUrl(finalUrl);

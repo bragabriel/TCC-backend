@@ -13,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
 import java.util.logging.Logger;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,7 +35,7 @@ public class ImageService {
     @Autowired
     private AmazonS3 amazonS3;
 
-    private String prefixoUrl = "https://c248-45-172-240-199.ngrok-free.app/";
+    private String prefixoUrl = "https://3e2b-45-172-240-25.ngrok-free.app/";
 
     private static final Logger logger = Logger.getLogger(ImageService.class.getName());
 

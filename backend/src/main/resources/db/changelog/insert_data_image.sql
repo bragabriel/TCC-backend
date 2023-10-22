@@ -1,18 +1,18 @@
 --Alimento
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://uploads.metropoles.com/wp-content/uploads/2023/08/09145143/Pizza-31.jpg', 2, 'pizza.jpg', 1)
+VALUES('https://www.garciasalgados.com.br/images/produtos/pizzafatia_frango/pizzafrango.jpg', 2, 'pizza.jpg', 1)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express-1536x1007.jpg', 1, 'teste2.jpg', 7)
+VALUES('https://www.montaencanta.com.br/wp-content/uploads/2014/09/trufa-de-chocolate-de-maracuja5.jpg', 1, 'trufa.jpg', 7)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://static.itdg.com.br/images/640-400/473e046f1847aceefa2a4ca4d86f6864/38681-original.jpg', 1, 'boloDeCenoura.jpg', 9)
+VALUES('https://anamariabraga.globo.com/wp-content/uploads/2017/11/esfiha-de-carne-moida-1024x576.jpg', 1, 'esfihaCarne.jpg', 9)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
 VALUES('https://static.itdg.com.br/images/640-400/7d22deb9329c1e1297b0cb6f550c77bb/83856-original.jpg', 1, 'coneTrufado.jpg', 10)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://static.itdg.com.br/images/640-400/0905759e2388082609f88813f04b16e5/328303-original.jpg', 1, 'palhaItaliana.jpg', 11)
+VALUES('https://s2-receitas.glbimg.com/h37Ce0rPrVsRhBDbbWQvS2_QiDY=/0x0:1280x800/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_1f540e0b94d8437dbbc39d567a1dee68/internal_photos/bs/2022/r/m/UTxD4RSgyY5b7Y1L24WQ/palha-italiana-receita-2.jpg', 1, 'palhaItaliana.jpg', 11)
 
 --Moradia
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
