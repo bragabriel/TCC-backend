@@ -30,7 +30,7 @@ VALUES('https://www.fashionbubbles.com/wp-content/uploads/2020/10/quarto-pequeno
 
 --TRANSPORTE
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
-VALUES('https://bocamafrapremium.com.br/wp-content/uploads/2023/04/inovacoes-que-o-Lamborghini-Aventador.jpg', 1, 'carro.jpg', 3)
+VALUES('https://seminovosrj.com.br/fotos/421/1090315/10.jpg', 1, 'carro.jpg', 3)
 
 INSERT INTO [Imagem] ([url], [sequence], [fileName], [id_artefato])
 VALUES('https://cdn.motor1.com/images/mgl/MkJlME/s3/avaliacao-mercedes-benz-sprinter-van-517-20-1.jpg', 1, 'van.jpg', 14)
