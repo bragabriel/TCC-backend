@@ -69,19 +69,21 @@ public class ObjetoService {
 
     public Long cadastrar(ObjetoCreateRequest novo) {
 
-        ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
+        Calendar cal = Calendar.getInstance();
+        Date dataAtual = cal.getTime();
+
+        var artefatoData = novo.getArtefato();
 
         Artefato artefato = Artefato.builder()
-                .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
-                .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
-                .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
+                .tituloArtefato(artefatoData.getTituloArtefato())
+                .descricaoArtefato(artefatoData.getDescricaoArtefato())
+                .ativo(true)
                 .tipoArtefato(TipoArtefato.OBJETO)
-                .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
-                .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())
+                .dataCadastro(dataAtual)
+                .idUsuario(artefatoData.getIdUsuario())
                 .build();
 
         Objeto modeloDb = Objeto.builder()
-                .idArtefato(artefatoSalvo.getObjetoRetorno().getIdArtefato())
                 .localizacaoAtualObjeto(novo.getLocalizacaoAtualObjeto())
                 .localizacaoAchadoObjeto(novo.getLocalizacaoAchadoObjeto())
                 .artefato(artefato)
