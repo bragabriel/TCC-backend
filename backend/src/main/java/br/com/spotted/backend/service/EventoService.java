@@ -69,19 +69,21 @@ public class EventoService {
 
     public Long cadastrar(EventoCreateRequest novo) {
 
-        ResponseBase<ArtefatoResponse> artefatoSalvo = artefatoService.cadastrar(novo.getArtefato());
+        Calendar cal = Calendar.getInstance();
+        Date dataAtual = cal.getTime();
+
+        var artefatoData = novo.getArtefato();
 
         Artefato artefato = Artefato.builder()
-                .tituloArtefato(artefatoSalvo.getObjetoRetorno().getTituloArtefato())
-                .descricaoArtefato(artefatoSalvo.getObjetoRetorno().getDescricaoArtefato())
-                .ativo(artefatoSalvo.getObjetoRetorno().getAtivo())
+                .tituloArtefato(artefatoData.getTituloArtefato())
+                .descricaoArtefato(artefatoData.getDescricaoArtefato())
+                .ativo(true)
                 .tipoArtefato(TipoArtefato.EVENTO)
-                .dataCadastro(artefatoSalvo.getObjetoRetorno().getDataCadastro())
-                .idUsuario(artefatoSalvo.getObjetoRetorno().getIdUsuario())
+                .dataCadastro(dataAtual)
+                .idUsuario(artefatoData.getIdUsuario())
                 .build();
 
         Evento modeloDb = Evento.builder()
-                .idArtefato(artefatoSalvo.getObjetoRetorno().getIdArtefato())
                 .localizacaoEvento(novo.getLocalizacaoEvento())
                 .artefato(artefato)
                 .build();
