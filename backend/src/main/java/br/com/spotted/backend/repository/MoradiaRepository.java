@@ -1,6 +1,5 @@
 package br.com.spotted.backend.repository;
 
-import br.com.spotted.backend.domain.entity.Alimento;
 import br.com.spotted.backend.domain.entity.Moradia;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
