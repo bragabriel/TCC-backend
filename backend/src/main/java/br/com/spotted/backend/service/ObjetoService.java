@@ -1,7 +1,6 @@
 package br.com.spotted.backend.service;
 
 import br.com.spotted.backend.domain.dto.Artefato.ArtefatoInactiveRequest;
-import br.com.spotted.backend.domain.dto.Artefato.ArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoCreateRequest;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoArtefatoResponse;
 import br.com.spotted.backend.domain.dto.Objeto.ObjetoUpdateRequest;

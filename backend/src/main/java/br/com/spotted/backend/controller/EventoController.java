@@ -61,5 +61,4 @@ public class EventoController {
         var evento = eventoService.inativarEvento(idEvento);
         return ResponseEntity.ok().build();
     }
-
 }
